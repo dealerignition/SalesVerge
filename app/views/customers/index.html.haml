@@ -1,0 +1,9 @@
+%h1 Customers
+
+%p
+  = link_to "Create New Customer", new_customer_path
+
+- @customers.each do |customer|
+  = customer.email
+  = link_to "Details", customer
+  %br
