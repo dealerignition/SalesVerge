@@ -86,3 +86,15 @@ img.avatar.small {
   float: left;
   margin-right: 10px;
 }
+
+#errorExplanation, .field_with_errors {
+  color: #ffffff;
+  background-color: #B94A48;
+  text-shadow: none;
+  padding: 20px;
+  margin: 0 -25px;
+}
+
+#errorExplanation h2 {
+  margin-top: 0px;
+}

@@ -1,7 +1,8 @@
-= link_to "Back", customers_path, { "data-role" => "button", "data-rel" => "back", "data-icon" => "arrow-l", "data-iconpos" => "left", :class => "medium" }
+= link_to "Back", customers_path, { "data-role" => "button", "data-transition" => "flip", "data-direction" => "reverse", "data-icon" => "arrow-l", "data-iconpos" => "left", :class => "medium" }
 
 %h2 Profile
 %div.customer_top
+  = image_tag "http://placekitten.com/120/#{rand(100..120)}", :class => "avatar"
   %table
     %tr
       %td.category

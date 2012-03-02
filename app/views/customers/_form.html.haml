@@ -3,7 +3,7 @@
     %div#errorExplanation
       %h2
         = pluralize(@customer.errors.count, "error")
-        prohibited this customer from being saved:
+        prohibited this customer from being saved
       %ul
       - @customer.errors.full_messages.each do |msg|
         %li
