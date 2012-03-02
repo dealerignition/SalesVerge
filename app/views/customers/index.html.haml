@@ -1,9 +1,16 @@
 %h1 Customers
 
-%p
-  = link_to "Create New Customer", new_customer_path
+= link_to "Create New Customer", new_customer_path, { "data-role" => "button", "data-transition" => "flip", "data-theme" => "b", "data-icon" => "plus", "data-iconpos" => "left", :class => "medium" }
 
-- @customers.each do |customer|
-  = customer.email
-  = link_to "Details", customer
-  %br
+%table
+  - @customers.each do |customer|
+    %tr
+      %td
+        = customer.first_name if customer.first_name?
+        = customer.last_name if customer.last_name?
+      %td
+        = customer.email
+      %td
+        = link_to "Details", customer, { "data-role" => "button",  "data-transition" => "flip", "data-icon" => "arrow-r",  "data-iconpos" => "right" }
+
+

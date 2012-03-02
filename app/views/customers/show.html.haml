@@ -1,8 +1,49 @@
-= link_to "Back", customers_path
+= link_to "Back", customers_path, { "data-role" => "button", "data-rel" => "back", "data-icon" => "arrow-l", "data-iconpos" => "left", :class => "medium" }
 
-%h1 Profile
-= @customer.email
+%h2 Profile
+%div.customer_top
+  %table
+    %tr
+      %td.category
+        Name
+      %td
+        = @customer.first_name if @customer.first_name
+        = @customer.last_name if @customer.last_name
+      %td.category
+        Gender
+      %td
+        N/A
+    %tr
+      %td.category
+        Email
+      %td
+        = @customer.email
+      %td.category
+        Income
+      %td
+        N/A
+    %tr
+      %td.category
+        Phone
+      %td
+        = @customer.phone if @customer.phone
+      %td.category
+        Location
+      %td
+        N/A
 
-%h1 Quotes
+%h2 Quotes
+%table
+  %thead
+    %td Date In
+    %td ID#
+    %td Name
+    %td Price
 
-%h1 Measurements
+%h2 Measurements
+%table
+  %thead
+    %td Room Name
+    %td Width
+    %td Length
+    %td Area
