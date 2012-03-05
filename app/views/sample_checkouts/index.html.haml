@@ -16,9 +16,8 @@
       %td
         = checked_out_sample.sample.name
       %td
-        = checked_out_sample.created_at
+        = checked_out_sample.created_at.to_formatted_s(:short)
       %td
-        = checked_out_sample.customer.first_name if checked_out_sample.customer.first_name
-        = checked_out_sample.customer.last_name if checked_out_sample.customer.last_name
+        = link_to "#{checked_out_sample.customer.first_name if checked_out_sample.customer.first_name} #{checked_out_sample.customer.last_name if checked_out_sample.customer.last_name}", checked_out_sample.customer
       %td
         = link_to "Check-in", nil, { "data-role" => "button" }
