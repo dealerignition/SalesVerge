@@ -26,5 +26,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'rapleaf_api'
+
 gem 'jquery-rails'
 gem 'haml-rails'
