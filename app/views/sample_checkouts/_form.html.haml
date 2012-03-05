@@ -1,0 +1,21 @@
+= form_for(@sample_checkout) do |f|
+  - if @sample_checkout.errors.any?
+    %div#errorExplanation
+      %h2
+        = pluralize(@sample_checkout.errors.count, "error")
+        prohibited this customer from being saved
+      %ul
+      - @sample_checkout.errors.full_messages.each do |msg|
+        %li
+          = msg
+          
+  %h3 Who is checking out the sample(s)?   
+  = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
+  
+  %h3 Which samples are being checked out?
+  = f.select(:sample_id, options_from_collection_for_select(@samples, :id, :name), {:multiple => "true", "data-native-menu" => "false"})
+
+  = link_to "Create New Sample", new_sample_path, { "data-role" => "button", "data-transition" => "flip", "data-theme" => "b", "data-icon" => "plus", "data-iconpos" => "left", :class => "medium" }
+
+  %div.actions
+  = f.submit("Checkout", "data-theme" => "b")

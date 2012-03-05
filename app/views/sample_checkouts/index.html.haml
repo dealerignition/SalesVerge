@@ -1,0 +1,24 @@
+%h1 Samples Checked-out
+
+= link_to "Checkout Sample(s)", new_sample_checkout_path, { "data-role" => "button", "data-transition" => "flip", "data-theme" => "b", "data-icon" => "plus", "data-iconpos" => "left", :class => "medium" }
+  
+%table
+  %thead
+    %td ID
+    %td Name
+    %td Date Issued
+    %td Customer
+    %td
+  - @checked_out_samples.each do |checked_out_sample|
+    %tr
+      %td
+        = checked_out_sample.sample.sample_id if checked_out_sample.sample.sample_id
+      %td
+        = checked_out_sample.sample.name
+      %td
+        = checked_out_sample.created_at
+      %td
+        = checked_out_sample.customer.first_name if checked_out_sample.customer.first_name
+        = checked_out_sample.customer.last_name if checked_out_sample.customer.last_name
+      %td
+        = link_to "Check-in", nil, { "data-role" => "button" }

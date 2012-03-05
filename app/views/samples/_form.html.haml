@@ -1,0 +1,21 @@
+= form_for(@sample) do |f|
+  - if @sample.errors.any?
+    %div#errorExplanation
+      %h2
+        = pluralize(@sample.errors.count, "error")
+        prohibited this customer from being saved
+      %ul
+      - @sample.errors.full_messages.each do |msg|
+        %li
+          = msg
+  
+  %div.field{ "data-role" => "fieldcontain" }
+    %fieldset{ "data-role" => "controlgroup" }
+      = f.label :sample_id, "Sample ID"
+      = f.text_field :sample_id, :placeholder => "12345"
+    %fieldset{ "data-role" => "controlgroup" }
+      = f.label :name
+      = f.text_field :name, :placeholder => "Allondra"
+
+  %div.actions
+  = f.submit("data-theme" => "b")

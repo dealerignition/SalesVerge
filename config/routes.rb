@@ -1,6 +1,8 @@
 DealerOnTheGo::Application.routes.draw do
-
+  
   resources :customers
+  resources :samples
+  resources :sample_checkouts
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
