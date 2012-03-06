@@ -13,27 +13,25 @@
       %td.category
         Gender
       %td
-        N/A
+        = @api.query_by_email(@customer.email)["gender"]
     %tr
       %td.category
         Email
       %td
         = @customer.email
       %td.category
-        Income
+        Age
       %td
-        N/A
+        = @api.query_by_email(@customer.email)["age"]
     %tr
       %td.category
         Phone
       %td
         = @customer.phone if @customer.phone
       %td.category
-        Location
+        Income
       %td
-        N/A
-
-=debug(@api.query_by_email(@customer.email)) 
+        = @api.query_by_email(@customer.email)["household_income"]
 
 %h2 Quotes
 %table
