@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20120305194044) do
     t.string   "zip"
     t.string   "email"
     t.string   "phone"
+    t.text     "notes"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -37,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20120305194044) do
   end
 
   create_table "samples", :force => true do |t|
-    t.integer  "dealer_sample_id"
+    t.string   "dealer_sample_id"
     t.string   "name"
     t.string   "sample_type"
     t.datetime "created_at",       :null => false

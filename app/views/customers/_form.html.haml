@@ -45,6 +45,10 @@
     %fieldset{ "data-role" => "controlgroup" }
       = f.label :phone
       = f.text_field :phone, :placeholder => "555-123-4567"
+  %div.field{ "data-role" => "fieldcontain" }
+    %fieldset{ "data-role" => "controlgroup" }
+      = f.label :notes
+      = f.text_area :notes, :placeholder => "Write some notes here"
 
   %div.actions
   = f.submit("data-theme" => "b")

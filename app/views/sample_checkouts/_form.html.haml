@@ -19,3 +19,4 @@
 
   %div.actions
   = f.submit("Checkout", "data-theme" => "b")
+  = f.hidden_field :checkout_time, :value => Time.now
