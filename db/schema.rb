@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20120305194044) do
     t.string   "address_2"
     t.string   "city"
     t.string   "state"
-    t.integer  "zip"
+    t.string   "zip"
     t.string   "email"
     t.string   "phone"
     t.datetime "created_at", :null => false
@@ -31,17 +31,17 @@ ActiveRecord::Schema.define(:version => 20120305194044) do
     t.integer  "customer_id"
     t.integer  "sample_id"
     t.datetime "checkout_time"
-    t.boolean  "checked_in",    :default => false
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "checkin_time"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "samples", :force => true do |t|
-    t.integer  "sample_id"
+    t.integer  "dealer_sample_id"
     t.string   "name"
-    t.string   "type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "sample_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
 end

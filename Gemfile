@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.2'
+gem 'rake'
 
 group :development, :test do
   gem 'sqlite3'
@@ -8,6 +9,7 @@ group :development, :test do
   gem 'shoulda'
   gem 'autotest-rails'
   gem 'foreman'
+  gem 'factory_girl_rails'
 end
 
 group :production do

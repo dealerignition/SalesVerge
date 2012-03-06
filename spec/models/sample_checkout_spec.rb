@@ -1,5 +1,15 @@
 require 'spec_helper'
 
 describe SampleCheckout do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to :customer }
+  it { should belong_to :sample }
+  it { should validate_presence_of :checkout_time }
+end
+
+describe Customer do
+  it { should have_many :sample_checkouts }
+end
+
+describe Sample do
+  it { should have_many :sample_checkouts }
 end
