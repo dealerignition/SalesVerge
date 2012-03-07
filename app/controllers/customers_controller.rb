@@ -20,4 +20,17 @@ class CustomersController < ApplicationController
     end
   end
   
+  def edit
+    @customer = Customer.find(params[:id])
+  end
+  
+  def update
+    @customer = Customer.find(params[:id])
+    if @customer.update_attributes(params[:customer])
+      redirect_to(@customer, :notice => 'Post was successfully created.')
+    else
+      redirect_to edit_customer_path(@customer)
+    end
+  end
+  
 end

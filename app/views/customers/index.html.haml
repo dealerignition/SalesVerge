@@ -13,6 +13,7 @@
       %td
         = customer.email
       %td
-        = link_to "Details", customer, { "data-role" => "button",  "data-transition" => "flip", "data-icon" => "arrow-r",  "data-iconpos" => "right" }
-
-
+        %div{ "data-role" => "fieldcontain", "align" => "center" }
+          %fieldset{ "data-role" => "controlgroup", "data-type" => "horizontal" }
+            = link_to "Edit", edit_customer_path(customer), { "data-role" => "button",  "data-transition" => "flip" }
+            = link_to "Details", customer, { "data-role" => "button",  "data-transition" => "flip", "data-icon" => "arrow-r",  "data-iconpos" => "right" }
