@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :appointment do
     date "2012-03-07"
     time "2012-03-07 09:05:39"
-    appointment_type "MyString"
-    status "MyString"
+    customer_id 1
+    status "Pending"
   end
 end
