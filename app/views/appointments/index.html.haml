@@ -16,8 +16,8 @@
         = appointment.time.to_formatted_s(:time)
       %td= appointment.appointment_type
       %td
-        = appointment.customer.first_name
-        = appointment.customer.last_name
+        = link_to "#{appointment.customer.first_name} #{appointment.customer.last_name}", appointment.customer
+
       %td
         - if appointment.status == "Pending"
           = form_for(appointment) do |f|
