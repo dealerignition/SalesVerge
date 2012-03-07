@@ -1,0 +1,31 @@
+%h1 Appointments
+
+= link_to "New Appointment", new_appointment_path, { "data-role" => "button", "data-transition" => "flip", "data-theme" => "b", "data-icon" => "plus", "data-iconpos" => "left", :class => "medium" }
+
+%table
+  %thead
+    %td Time
+    %td Type
+    %td Customer
+    %td Status
+  - @appointments.each do |appointment|
+    %tr
+      %td
+        = appointment.date.to_formatted_s(:long)
+        @
+        = appointment.time.to_formatted_s(:time)
+      %td= appointment.appointment_type
+      %td
+        = appointment.customer.first_name
+        = appointment.customer.last_name
+      %td
+        - if appointment.status == "Pending"
+          = form_for(appointment) do |f|
+            = f.submit("Start")
+            = f.hidden_field :status, :value => "Started"
+        - elsif appointment.status == "Started"        
+          = form_for(appointment) do |f|
+            = f.submit "Finish", { "data-theme" => "e" }
+            = f.hidden_field :status, :value => "Completed"
+        -else
+          =button_to "Completed", nil, {"disabled" => "disabled"}

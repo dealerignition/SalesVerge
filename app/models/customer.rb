@@ -4,4 +4,5 @@ class Customer < ActiveRecord::Base
   validates_presence_of :last_name
 
   has_many :sample_checkouts
+  has_many :appointments
 end

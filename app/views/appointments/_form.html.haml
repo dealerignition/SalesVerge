@@ -1,0 +1,29 @@
+= form_for(@appointment) do |f|
+  - if @appointment.errors.any?
+    %div#errorExplanation
+      %h2
+        = pluralize(@appointment.errors.count, "error")
+        prohibited this customer from being saved
+      %ul
+      - @appointment.errors.full_messages.each do |msg|
+        %li
+          = msg
+          
+  %h3 With whom is the appointment?
+  = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
+  
+  %div.field{ "data-role" => "fieldcontain" }
+    %h3 Date
+    = f.text_field :date, { :placeholder => "2012-03-15", "type" => "date" }
+  
+  %div.field{ "data-role" => "fieldcontain" }
+    %h3 Time
+    = f.text_field :time, { :placeholder => "12:00 PM", "data-role" => "datebox", "data-options" => '{"mode": "timeflipbox", "timeFormatOverride": 12}' }
+    
+  %div.field{ "data-role" => "fieldcontain" }
+    %h3 Type
+    = f.select :appointment_type, options_for_select(["Measurement", "Quote", "Other"])
+
+  %div.actions
+  = f.submit("data-theme" => "b")
+  = f.hidden_field :status, :value => "Pending"

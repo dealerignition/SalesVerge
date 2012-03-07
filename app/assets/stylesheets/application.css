@@ -22,6 +22,10 @@
   max-width: 280px;
 }
 
+.ui-field-contain input.ui-input-text.hidden, .ui-field-contain textarea.ui-input-text.hidden {
+  display: none;
+}
+
 /************ APPLICATION ************/
 
 .logo {
