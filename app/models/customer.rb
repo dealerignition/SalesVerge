@@ -5,4 +5,5 @@ class Customer < ActiveRecord::Base
 
   has_many :sample_checkouts
   has_many :appointments
+  has_many :quotes
 end

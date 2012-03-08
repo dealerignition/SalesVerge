@@ -1,14 +1,8 @@
 require 'spec_helper'
 
 describe Quote do
-  it { should validate_presence_of :quote_type }
-  it { 
-    should allow_value("quote").for(:quote_type) 
-    should allow_value("estimate").for(:quote_type) 
-    should_not allow_value("baloney").for(:quote_type) 
-    should_not allow_value("crud").for(:quote_type) 
-  }
   it { should have_many :charges }
+  it { should belong_to :customer }
 
   context "money" do
     before do

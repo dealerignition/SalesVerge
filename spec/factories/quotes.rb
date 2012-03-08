@@ -2,10 +2,7 @@
 
 FactoryGirl.define do
   factory :quote do
-    quote_type "Quote"
+    customer_id 1
   end
 
-  factory :estimate, :class => Quote do
-    quote_type "Estimate"
-  end
 end

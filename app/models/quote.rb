@@ -1,12 +1,8 @@
 class Quote < ActiveRecord::Base
-  validates_presence_of :quote_type
-  validates :quote_type, :inclusion => {
-    :in => %w( quote estimate ),
-    :message => "must be either Quote or Estimate."
-  }
-
+  validates_presence_of :customer_id
+  
   has_many :charges
-  before_validation { |q| q.quote_type = q.quote_type.downcase if q.quote_type }
+  belongs_to :customer
 
   def total
     total = 0
