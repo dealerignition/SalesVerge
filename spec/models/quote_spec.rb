@@ -24,8 +24,4 @@ describe Quote do
       pending
     end
   end
-
-  it "should be printable" do
-    pending
-  end
 end
