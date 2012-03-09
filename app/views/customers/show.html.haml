@@ -34,7 +34,7 @@
   - @customer.quotes.each do |quote|
     %tr
       %td= quote.created_at.to_s(:long)
-      %td==$#{quote.charge_total}
+      %td= number_to_currency(quote.charge_total)
       %td
         = link_to "View Quote", edit_quote_path(quote), { "data-role" => "button",  "data-transition" => "slide", "data-icon" => "arrow-r",  "data-iconpos" => "right" }
 
