@@ -1,0 +1,8 @@
+= link_to "Back", quotes_path, { "data-role" => "button", "data-transition" => "flip", "data-direction" => "reverse", "data-icon" => "arrow-l", "data-iconpos" => "left", :class => "medium" }
+
+%h1 
+  Edit Quote for
+  =@quote.customer.first_name
+  =@quote.customer.last_name
+
+= render "form"

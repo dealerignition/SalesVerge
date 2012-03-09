@@ -1,0 +1,47 @@
+= form_for(@quote) do |f|
+  - if @quote.errors.any?
+    %div#errorExplanation
+      %h2
+        = pluralize(@quote.errors.count, "error")
+        prohibited this customer from being saved
+      %ul
+      - @quote.errors.full_messages.each do |msg|
+        %li
+          = msg
+  
+  %div.field{ "data-role" => "fieldcontain" }
+    = f.label :customer_id, "Who are you quoting?"
+    = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
+    
+  %div.field{ "data-role" => "fieldcontain" }
+    %label.ui-select Charges
+    %div{ :class => "ui-select" }
+      = link_to "Add a Charge", new_quote_charge_path(@quote), { "data-role" => "button", "data-icon" => "plus", "data-iconpos" => "left", "data-rel" => "dialog" }
+  
+  %table
+    %thead
+      %td Date
+      %td Service/Product
+      %td Price
+      %td Quantity
+      %td Total
+    - @quote.charges.each do |charge|
+      %tr
+        %td= charge.date
+        %td= charge.description
+        %td==$#{charge.price}
+        %td= charge.quantity
+        %td==$#{charge.total}
+    %tr
+      %td
+      %td
+      %td
+      %td
+        %strong
+          Total
+      %td
+        %strong
+          ==$#{@quote.charge_total}
+
+  %div.actions
+  = f.submit("data-theme" => "b")

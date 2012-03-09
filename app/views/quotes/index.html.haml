@@ -1,0 +1,20 @@
+%h1 Quotes
+
+= link_to "New Quote", new_quote_path, { "data-role" => "button", "data-transition" => "flip", "data-theme" => "b", "data-icon" => "plus", "data-iconpos" => "left", :class => "medium" }
+
+%table
+  %thead
+    %td Date
+    %td Customer
+    %td $
+    %td
+  - @quotes.each do |quote|
+    %tr
+      %td= quote.created_at.to_s(:short)
+      %td= link_to "#{quote.customer.first_name} #{quote.customer.last_name}", customer_path(quote.customer)
+      %td
+      %td
+        %div{ "data-role" => "fieldcontain", "align" => "center" }
+          %fieldset{ "data-role" => "controlgroup", "data-type" => "horizontal" }
+            = link_to "Email", nil, { "data-role" => "button",  "data-transition" => "flip" }
+            = link_to "Edit", edit_quote_path(quote), { "data-role" => "button",  "data-transition" => "flip" }

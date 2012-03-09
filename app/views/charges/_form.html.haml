@@ -1,0 +1,27 @@
+= form_for(@charge, :url => { :action => :create }) do |f|
+  - if @charge.errors.any?
+    %div#errorExplanation
+      %h2
+        = pluralize(@charge.errors.count, "error")
+        prohibited this customer from being saved
+      %ul
+      - @charge.errors.full_messages.each do |msg|
+        %li
+          = msg
+  
+  %div.field{ "data-role" => "fieldcontain" }
+    = f.label :description, "What is this charge for?"
+    = f.text_field :description, :placeholder => "Carpet installation"
+  
+  %div.field{ "data-role" => "fieldcontain" }
+    = f.label :price
+    = f.text_field :price, :placeholder => "500"
+  
+  %div.field{ "data-role" => "fieldcontain" }
+    = f.label :quantity
+    = f.text_field :quantity, :placeholder => "1"
+
+  %div.actions
+  = f.submit("data-theme" => "b")
+  = f.hidden_field :date, :value => Time.now
+  = f.hidden_field :quote_id, :value => @quote.id

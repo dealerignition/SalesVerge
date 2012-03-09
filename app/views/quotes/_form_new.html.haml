@@ -1,0 +1,17 @@
+= form_for(@quote) do |f|
+  - if @quote.errors.any?
+    %div#errorExplanation
+      %h2
+        = pluralize(@quote.errors.count, "error")
+        prohibited this customer from being saved
+      %ul
+      - @quote.errors.full_messages.each do |msg|
+        %li
+          = msg
+  
+  %div.field{ "data-role" => "fieldcontain" }
+    = f.label :customer_id, "Who are you quoting?"
+    = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
+
+  %div.actions
+  = f.submit("Next", "data-theme" => "b", "data-icon" => "arrow-r", "data-iconpos" => "right")

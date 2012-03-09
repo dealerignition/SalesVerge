@@ -1,7 +1,10 @@
 DealerOnTheGo::Application.routes.draw do
-  
+
   resources :appointments
   resources :customers
+  resources :quotes do
+    resources :charges
+  end
   resources :samples
   resources :sample_checkouts
 
