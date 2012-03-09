@@ -15,7 +15,7 @@
   %h3 Which samples are being checked out?
   = f.select(:sample_id, options_from_collection_for_select(@samples, :id, :name), {:multiple => "true", "data-native-menu" => "false"})
 
-  = link_to "Create New Sample", new_sample_path, { "data-role" => "button", "data-transition" => "flip", "data-theme" => "b", "data-icon" => "plus", "data-iconpos" => "left", :class => "medium" }
+  = link_to "Create New Sample", new_sample_path, { "data-role" => "button", "data-theme" => "b", "data-icon" => "plus", "data-iconpos" => "left", :class => "medium", "data-rel" => "dialog" }
 
   %div.actions
   = f.submit("Checkout", "data-theme" => "b")

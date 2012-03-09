@@ -1,4 +1,5 @@
 class SamplesController < ApplicationController
+  layout "basic"
   
   def index
     @samples = Sample.all
@@ -11,7 +12,8 @@ class SamplesController < ApplicationController
   def create
     @sample = Sample.new(params[:sample])
     if @sample.save
-      redirect_to(sample_checkouts_path, :notice => 'Sample was successfully created.')
+      redirect_to :back
+      flash[:notice] = "Sample was successfully created."
     else
       render :action => "new"
     end

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DealerOnTheGo</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+  
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
+  <%= stylesheet_link_tag "application", :media => "all" %>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <%= javascript_include_tag "application" %>
+  <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+  
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+  <div data-role="page">
+    <div data-role="content">
+
+      <%= yield %>
+    </div>
+  </div>
+
+</body>
+</html>

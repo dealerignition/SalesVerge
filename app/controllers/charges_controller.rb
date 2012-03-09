@@ -1,4 +1,6 @@
 class ChargesController < ApplicationController
+  layout "basic"
+  
   def new
     @quote = Quote.find(params[:quote_id])
     @charge = Charge.new
