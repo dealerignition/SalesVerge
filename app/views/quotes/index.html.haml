@@ -10,9 +10,9 @@
     %td
   - @quotes.each do |quote|
     %tr
-      %td= quote.created_at.to_s(:short)
+      %td= quote.created_at.to_s(:long)
       %td= link_to "#{quote.customer.first_name} #{quote.customer.last_name}", customer_path(quote.customer)
-      %td
+      %td==$#{quote.charge_total}
       %td
         %div{ "data-role" => "fieldcontain", "align" => "center" }
           %fieldset{ "data-role" => "controlgroup", "data-type" => "horizontal" }

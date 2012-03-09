@@ -13,7 +13,8 @@
       %td N/A
     %tr
       %td.category Email
-      %td= @customer.email
+      %td
+        = link_to @customer.email, "mailto:#{@customer.email}"
       %td.category Income
       %td N/A
     %tr
@@ -22,13 +23,20 @@
       %td.category Location
       %td N/A
 
-%h2 Quotes
+%h2
+  Quotes
+  ==(#{@customer.quotes.count})
 %table
   %thead
-    %td Date In
-    %td ID#
-    %td Name
+    %td Date Created
     %td Price
+    %td
+  - @customer.quotes.each do |quote|
+    %tr
+      %td= quote.created_at.to_s(:long)
+      %td==$#{quote.charge_total}
+      %td
+        = link_to "View Quote", edit_quote_path(quote), { "data-role" => "button",  "data-transition" => "slide", "data-icon" => "arrow-r",  "data-iconpos" => "right" }
 
 %h2 Measurements
 %table

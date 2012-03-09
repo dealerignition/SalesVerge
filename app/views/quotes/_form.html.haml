@@ -27,7 +27,7 @@
       %td Total
     - @quote.charges.each do |charge|
       %tr
-        %td= charge.date
+        %td= charge.date.to_s(:long)
         %td= charge.description
         %td==$#{charge.price}
         %td= charge.quantity
