@@ -26,6 +26,14 @@
   display: none;
 }
 
+.ui-block-e {
+  border-right: 1px solid #CCC;
+}
+
+.ui-block-e:active {
+  border-right: 1px solid #666;
+}
+
 /************ APPLICATION ************/
 
 .logo {
