@@ -1,10 +1,11 @@
 class CustomersController < ApplicationController
+
   def index
     @customers = Customer.all
   end
   
   def show
-    @customer = Customer.find_by_id(params[:id])
+    @customer = Customer.find params[:id]
   end
   
   def new
@@ -14,7 +15,7 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(params[:customer])
     if @customer.save
-      redirect_to(@customer, :notice => 'Post was successfully created.')
+      redirect_to(@customer, :notice => 'Customer was successfully created.')
     else
       render :action => "new"
     end
@@ -27,7 +28,7 @@ class CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     if @customer.update_attributes(params[:customer])
-      redirect_to(@customer, :notice => 'Post was successfully created.')
+      redirect_to(@customer, :notice => 'Customer was successfully created.')
     else
       redirect_to edit_customer_path(@customer)
     end

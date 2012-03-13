@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(:version => 20120308160403) do
     t.text     "description"
     t.float    "quantity"
     t.float    "price"
-    t.integer  "quote_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -56,9 +55,9 @@ ActiveRecord::Schema.define(:version => 20120308160403) do
   end
 
   create_table "quotes", :force => true do |t|
-    t.integer  "customer_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "quote_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "sample_checkouts", :force => true do |t|
