@@ -1,7 +1,18 @@
 class CustomersController < ApplicationController
 
   def index
-    @customers = Customer.all
+    if params[:search]
+      val = "%#{ params[:search] }%"
+      @customers = Customer.where("first_name LIKE ? OR last_name LIKE ? OR email LIKE ?",
+                val, val, val)
+    else
+      @customers = Customer.all
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => @customers }
+    end
   end
   
   def show

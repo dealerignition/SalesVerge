@@ -10,16 +10,15 @@
           = msg
           
   %div.field{ "data-role" => "fieldcontain" }      
-    = f.label :customer_id, "With whom is the appointment?"
-    = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
+    %input{ :placeholder => "Customer Name", :id => "customername" }
+    =f.hidden_field :customer_id, :value => -1, :id => :customerid
+    %div.customers
   
   %div.field{ "data-role" => "fieldcontain" }
-    = f.label :date
-    = f.text_field :date, { "type" => "date", :class => "hidden", :value => @appointment.try(:date).try(:strftime,'%Y-%m-%d') }
+    = f.text_field :date, { "type" => "date", "data-role" => "datebox", :value => Date.today, "data-options" => '{"useInline": true, "useInlineHideInput": true, "mode": "calbox"}' }
   
   %div.field{ "data-role" => "fieldcontain" }
-    = f.label :time
-    = f.text_field :time, { :placeholder => "12:00 PM", "data-role" => "datebox", "data-options" => "{'mode': 'timeflipbox', 'timeFormatOverride': 12}" }
+    = f.text_field :time, { :placeholder => "12:00 PM", "data-role" => "datebox", :readonly => "readonly", "data-options" => '{"focusMode": true, "mode": "timeflipbox", "timeFormatOverride": 12}' }
     
   %div.field{ "data-role" => "fieldcontain" }
     = f.label :appointment_type

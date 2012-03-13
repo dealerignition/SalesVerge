@@ -36,11 +36,11 @@
 
 /************ APPLICATION ************/
 
-.logo {
+#logo {
   text-align: center;
 }
 
-.logo img {
+#logo img {
   margin: 10px;
   border: 4px solid #ffffff;
 }
