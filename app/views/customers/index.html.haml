@@ -11,9 +11,10 @@
         = customer.first_name if customer.first_name?
         = customer.last_name if customer.last_name?
       %td
-        = link_to customer.email, "mailto:#{customer.email}"
+        %div.truncate-email
+          = link_to customer.email, "mailto:#{customer.email}"
       %td
-        %div{ "data-role" => "fieldcontain", "align" => "center" }
+        %div.controls{ "data-role" => "fieldcontain", "align" => "center" }
           %fieldset{ "data-role" => "controlgroup", "data-type" => "horizontal" }
             = link_to "Edit", edit_customer_path(customer), { "data-role" => "button",  "data-transition" => "flip" }
             = link_to "Details", customer, { "data-role" => "button",  "data-transition" => "flip", "data-icon" => "arrow-r",  "data-iconpos" => "right" }
