@@ -1,0 +1,12 @@
+-content_for :body do
+  %div#logo=image_tag "http://s3.amazonaws.com/dealer_ignition/dealer_ipad/sample_logo.png"
+  %div{ "data-role" => "navbar" }
+    %ul
+      %li= link_to "Dashboard", "#"
+      %li= link_to "Customers", customers_path
+      %li= link_to "Appointments", appointments_path
+      %li= link_to "Samples", sample_checkouts_path
+      %li= link_to "Quotes", quotes_path
+  = yield
+
+=render :template => "layouts/application"

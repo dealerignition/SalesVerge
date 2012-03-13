@@ -1,6 +1,6 @@
 class ChargesController < ApplicationController
-  layout "basic"
-  
+  layout "application"
+
   def new
     @quote = Quote.find(params[:quote_id])
     @charge = Charge.new
@@ -19,4 +19,5 @@ class ChargesController < ApplicationController
       render :action => "new"
     end
   end
+
 end
