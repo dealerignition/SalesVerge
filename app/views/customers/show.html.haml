@@ -1,9 +1,8 @@
-%div.hero-unit
+%div.page-header
+  %p= link_to "Back", customers_path, { :class => "btn" }
   %h1
     = @customer.first_name
     = @customer.last_name
-  %br
-  = link_to "Back", customers_path, { :class => "btn" }
   
 %div.customer_top
   = image_tag "http://placekitten.com/120/#{rand(100..120)}", :class => "avatar"

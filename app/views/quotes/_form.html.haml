@@ -1,4 +1,4 @@
-= form_for(@quote) do |f|
+= form_for(@quote, :html => { :class => "form-horizontal" }) do |f|
   - if @quote.errors.any?
     %div#errorExplanation
       %h2
@@ -9,22 +9,25 @@
         %li
           = msg
   
-  %div.field{ "data-role" => "fieldcontain" }
-    = f.label :customer_id, "Who are you quoting?"
-    = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
+  %fieldset
+    %div.control-group
+      = f.label :customer_id, "Who are you quoting?", { :class => "control-label" }
+      %div.controls
+        = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
     
-  %div.field{ "data-role" => "fieldcontain" }
-    %label.ui-select Charges
-    %div{ :class => "ui-select" }
-      = link_to "Add a Charge", new_quote_charge_path(@quote), { "data-role" => "button", "data-icon" => "plus", "data-iconpos" => "left", "data-rel" => "dialog" }
+  %div.control-group
+    = f.label "Charges", { :class => "control-label" }
+    %div.controls
+      %div{ :class => "ui-select" }
+        = link_to "Add a Charge", new_quote_charge_path(@quote), { :class => "btn" }
   
-  %table
+  %table{ :class => "table table-striped" }
     %thead
-      %td Date
-      %td Service/Product
-      %td Price
-      %td Quantity
-      %td Total
+      %th Date
+      %th Service/Product
+      %th Price
+      %th Quantity
+      %th Total
     - @quote.charges.each do |charge|
       %tr
         %td= charge.date.to_s(:long)
@@ -43,5 +46,6 @@
         %strong
           = number_to_currency(@quote.charge_total)
 
-  %div.actions
-  = f.submit("data-theme" => "b")
+  %div.form-actions
+    = f.submit(:class => "btn btn-primary btn-large")
+    = link_to "Cancel", :back, { :class => "btn btn-large" }

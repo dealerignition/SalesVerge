@@ -26,8 +26,10 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(params[:customer])
     if @customer.save
-      redirect_to(@customer, :notice => 'Customer was successfully created.')
+      redirect_to @customer
+      flash[:notice] = "Customer was successfully created."
     else
+      flash[:error] = "Customer was not successfully created."
       render :action => "new"
     end
   end
@@ -39,9 +41,11 @@ class CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     if @customer.update_attributes(params[:customer])
-      redirect_to(@customer, :notice => 'Customer was successfully created.')
+      redirect_to @customer
+      flash[:notice] = "Customer was successfully updated."
     else
       redirect_to edit_customer_path(@customer)
+      flash[:error] = "Update failed."
     end
   end
   

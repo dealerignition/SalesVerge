@@ -30,6 +30,12 @@
                 %i{ :class => "icon-shopping-cart icon-white" }
                 Quotes
   %div.container
+    - if flash[:notice]
+      %p{ :class => "alert alert-success"}
+        = flash[:notice]
+    - if flash[:error]
+      %p{ :class => "alert alert-error" }
+        = flash[:error]
     = yield
 
 =render :template => "layouts/application"

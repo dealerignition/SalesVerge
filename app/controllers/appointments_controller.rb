@@ -12,8 +12,10 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(params[:appointment])
     if @appointment.save
       redirect_to appointments_path
+      flash[:notice] = "Appointment was successfully created."
     else
       render 'new'
+      flash[:error] = "Appointment was not created."
     end
   end
   

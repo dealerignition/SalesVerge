@@ -1,8 +1,9 @@
-= link_to "Back", quotes_path, { "data-role" => "button", "data-transition" => "flip", "data-direction" => "reverse", "data-icon" => "arrow-l", "data-iconpos" => "left", :class => "medium" }
+%div.page-header
+  %p= link_to "Back", quotes_path, { :class => "btn" }
 
-%h1 
-  Edit Quote for
-  =@quote.customer.first_name
-  =@quote.customer.last_name
+  %h1 
+    Edit Quote for
+    =@quote.customer.first_name
+    =@quote.customer.last_name
 
 = render "form"
