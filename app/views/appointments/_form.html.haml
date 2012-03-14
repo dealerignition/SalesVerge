@@ -8,22 +8,24 @@
       - @appointment.errors.full_messages.each do |msg|
         %li
           = msg
-          
+
   %fieldset
     %div.control-group
       = f.label :customer_id, "With whom is the appointment?", { :class => "control-label" }
       %div.controls
-        = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
+        %input{ :placeholder => "Customer Name", :id => "customername" }
+        =f.hidden_field :customer_id, :value => -1, :id => :customerid
+        %div.customers
   
     %div.control-group
       = f.label :date, { :class => "control-label" }
       %div.controls
-        = f.text_field :date, { "type" => "date", :class => "hidden", :value => @appointment.try(:date).try(:strftime,'%Y-%m-%d') }
+        = f.text_field :date, { "type" => "date", "data-role" => "datebox", :value => Date.today, "data-options" => '{"useInline": true, "useInlineHideInput": true, "mode": "calbox"}' }
   
     %div.control-group
       = f.label :time, { :class => "control-label" }
       %div.controls
-        = f.text_field :time, { :placeholder => "12:00 PM", "data-role" => "datebox", "data-options" => "{'mode': 'timeflipbox', 'timeFormatOverride': 12}" }
+        = f.text_field :time, { :placeholder => "12:00 PM", "data-role" => "datebox", :readonly => "readonly", "data-options" => '{"focusMode": true, "mode": "timeflipbox", "timeFormatOverride": 12}' }
     
     %div.control-group
       = f.label :appointment_type, { :class => "control-label" }
