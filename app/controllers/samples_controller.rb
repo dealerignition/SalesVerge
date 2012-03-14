@@ -1,5 +1,4 @@
 class SamplesController < ApplicationController
-  layout "application"
   
   def index
     @samples = Sample.all

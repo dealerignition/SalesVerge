@@ -1,4 +1,4 @@
-= form_for(@quote) do |f|
+= form_for(@quote, :html => { :class => "form-horizontal" }) do |f|
   - if @quote.errors.any?
     %div#errorExplanation
       %h2
@@ -9,9 +9,12 @@
         %li
           = msg
   
-  %div.field{ "data-role" => "fieldcontain" }
-    = f.label :customer_id, "Who are you quoting?"
-    = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
+  %fieldset
+    %div.control-group
+      = f.label :customer_id, "Who are you quoting?", { :class => "control-label" }
+      %div.controls
+        = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
 
-  %div.actions
-  = f.submit("Next", "data-theme" => "b", "data-icon" => "arrow-r", "data-iconpos" => "right")
+  %div.form-actions
+    = f.submit("Next", :class => "btn btn-primary btn-large")
+    = link_to "Cancel", :back, { :class => "btn btn-large" }

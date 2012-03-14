@@ -1,14 +1,20 @@
-%h1 Samples Checked-out
-
-= link_to "Checkout Sample(s)", new_sample_checkout_path, { "data-role" => "button", "data-transition" => "flip", "data-theme" => "b", "data-icon" => "plus", "data-iconpos" => "left", :class => "medium" }
+%div.hero-unit
+  %h1 Samples Checked-out
+  %p
+    You currently have
+    = pluralize(@checked_out_samples.count, "checked-out sample")
+  %p
+    = link_to new_sample_checkout_path, { :class => "btn btn-primary btn-large" } do
+      %i{ :class => "icon-th icon-white" }
+      Checkout Sample(s)
   
-%table
+%table{ :class => "table table-striped" }
   %thead
-    %td ID
-    %td Name
-    %td Date Issued
-    %td Customer
-    %td
+    %th ID
+    %th Name
+    %th Date Issued
+    %th Customer
+    %th
   - @checked_out_samples.each do |checked_out_sample|
     %tr
       %td
@@ -21,5 +27,5 @@
         = link_to "#{checked_out_sample.customer.first_name if checked_out_sample.customer.first_name} #{checked_out_sample.customer.last_name if checked_out_sample.customer.last_name}", checked_out_sample.customer
       %td
         = form_for(checked_out_sample) do |f|
-          = f.submit("Check-in")
+          = f.submit("Check-in", :class => "btn")
           = f.hidden_field :checkin_time, :value => Time.now

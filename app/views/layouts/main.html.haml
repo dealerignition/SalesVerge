@@ -1,12 +1,35 @@
 -content_for :body do
-  %div#logo=image_tag "http://s3.amazonaws.com/dealer_ignition/dealer_ipad/sample_logo.png"
-  %div{ "data-role" => "navbar" }
-    %ul
-      %li= link_to "Dashboard", "#"
-      %li= link_to "Customers", customers_path
-      %li= link_to "Appointments", appointments_path
-      %li= link_to "Samples", sample_checkouts_path
-      %li= link_to "Quotes", quotes_path
-  = yield
+  %div{ :class => "navbar navbar-fixed-top" }
+    %div.navbar-inner
+      %div.container
+        %a{ :class => "btn btn-navbar", "data-toggle" => "collapse", "data-target" => ".nav-collapse" }
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        = link_to "Your Carpet Store", "#", { :class => "brand" }
+        %div.nav-collapse
+          %ul.nav
+            %li
+              = link_to "#" do
+                %i{ :class => "icon-home icon-white" }
+                Dashboard
+            %li
+              = link_to customers_path do
+                %i{ :class => "icon-user icon-white" }
+                Customers
+            %li
+              = link_to appointments_path do
+                %i{ :class => "icon-calendar icon-white" }
+                Appointments
+            %li
+              = link_to sample_checkouts_path do
+                %i{ :class => "icon-th icon-white" }
+                Samples
+            %li
+              = link_to quotes_path do
+                %i{ :class => "icon-shopping-cart icon-white" }
+                Quotes
+  %div.container
+    = yield
 
 =render :template => "layouts/application"

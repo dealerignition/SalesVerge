@@ -1,13 +1,19 @@
-%h1 Appointments
+%div.hero-unit
+  %h1 Appointments
+  %p
+    You currently have
+    = pluralize(@appointments.count, "appointment")
+  %p
+    = link_to new_appointment_path, { :class => "btn btn-primary btn-large" } do
+      %i{ :class => "icon-calendar icon-white" }
+      New Appointment
 
-= link_to "New Appointment", new_appointment_path, { "data-role" => "button", "data-transition" => "flip", "data-theme" => "b", "data-icon" => "plus", "data-iconpos" => "left", :class => "medium" }
-
-%table
+%table{ :class => "table table-striped" }
   %thead
-    %td Time
-    %td Type
-    %td Customer
-    %td Status
+    %th Time
+    %th Type
+    %th Customer
+    %th Status
   - @appointments.each do |appointment|
     %tr
       %td
@@ -21,11 +27,11 @@
       %td
         - if appointment.status == "Pending"
           = form_for(appointment) do |f|
-            = f.submit("Start")
+            = f.submit("Start", :class => "btn btn-success")
             = f.hidden_field :status, :value => "Started"
         - elsif appointment.status == "Started"        
           = form_for(appointment) do |f|
-            = f.submit "Finish", { "data-theme" => "e" }
+            = f.submit("Finish", :class => "btn btn-warning")
             = f.hidden_field :status, :value => "Completed"
         -else
-          =button_to "Completed", nil, {"disabled" => "disabled"}
+          =link_to "Completed", nil, { :class => "btn disabled" }

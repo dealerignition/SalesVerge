@@ -1,5 +1,6 @@
-= link_to "Back", sample_checkouts_path, { "data-role" => "button", "data-transition" => "flip", "data-direction" => "reverse", "data-icon" => "arrow-l", "data-iconpos" => "left", :class => "medium" }
-
-%h1 Checkout Sample(s)
+%div.hero-unit
+  %h1 Checkout Sample(s)
+  %br
+  %p= link_to "Back", sample_checkouts_path, { :class => "btn" }
 
 = render "form"

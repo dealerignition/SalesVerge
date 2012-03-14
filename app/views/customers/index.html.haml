@@ -1,20 +1,30 @@
-%h1 Customers
+%div.hero-unit
+  %h1 Customers
+  %p
+    You currently have
+    = pluralize(@customers.count, "customer")
+    on file
+  %p
+    = link_to new_customer_path, { :class => "btn btn-primary btn-large" } do
+      %i{ :class => "icon-user icon-white" }
+      Create New Customer
 
-= link_to "Create New Customer", new_customer_path, { "data-role" => "button", "data-transition" => "flip", "data-theme" => "b", "data-icon" => "plus", "data-iconpos" => "left", :class => "medium" }
-
-%table
-  - @customers.each do |customer|
-    %tr
-      %td
-        = image_tag "http://placekitten.com/120/#{rand(100..120)}", :class => "avatar"
-      %td
-        = customer.first_name if customer.first_name?
-        = customer.last_name if customer.last_name?
-      %td
-        %div.truncate-email
-          = link_to customer.email, "mailto:#{customer.email}"
-      %td
-        %div.controls{ "data-role" => "fieldcontain", "align" => "center" }
-          %fieldset{ "data-role" => "controlgroup", "data-type" => "horizontal" }
-            = link_to "Edit", edit_customer_path(customer), { "data-role" => "button",  "data-transition" => "flip" }
-            = link_to "Details", customer, { "data-role" => "button",  "data-transition" => "flip", "data-icon" => "arrow-r",  "data-iconpos" => "right" }
+%div.row
+  %table{ :class => "table table-striped" }
+    - @customers.each do |customer|
+      %tr
+        %td
+          = image_tag "http://placekitten.com/120/#{rand(100..120)}", :class => "avatar"
+        %td
+          = customer.first_name if customer.first_name?
+          = customer.last_name if customer.last_name?
+        %td
+          %div.truncate-email
+            = link_to customer.email, "mailto:#{customer.email}"
+        %td
+          = link_to edit_customer_path(customer), { :class => "btn" } do
+            %i.icon-cog
+            Edit
+          = link_to customer, { :class => "btn" } do
+            %i.icon-info-sign
+            Details

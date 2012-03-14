@@ -1,20 +1,33 @@
-%h1 Quotes
+%div.hero-unit
+  %h1 Quotes
+  %p
+    You currently have
+    %b
+      =pluralize(@quotes.count, "quote")
+    for a total of 
+    %b
+      $
+  %p
+    = link_to new_quote_path, { :class => "btn btn-primary btn-large" } do
+      %i{ :class => "icon-shopping-cart icon-white" }
+      New Quote
 
-= link_to "New Quote", new_quote_path, { "data-role" => "button", "data-transition" => "flip", "data-theme" => "b", "data-icon" => "plus", "data-iconpos" => "left", :class => "medium" }
-
-%table
+%table{ :class => "table table-striped" }
   %thead
-    %td Date
-    %td Customer
-    %td $
-    %td
+    %th Date
+    %th Customer
+    %th $
+    %th
   - @quotes.each do |quote|
     %tr
       %td= quote.created_at.to_s(:long)
       %td= link_to "#{quote.customer.first_name} #{quote.customer.last_name}", customer_path(quote.customer)
       %td= number_to_currency(quote.charge_total)
       %td
-        %div{ "data-role" => "fieldcontain", "align" => "center" }
-          %fieldset{ "data-role" => "controlgroup", "data-type" => "horizontal" }
-            = link_to "Email", nil, { "data-role" => "button",  "data-transition" => "flip" }
-            = link_to "Edit", edit_quote_path(quote), { "data-role" => "button",  "data-transition" => "flip" }
+        %div
+          = link_to nil, { :class => "btn" } do
+            %i{ :class => "icon-envelope" }
+            Email
+          = link_to edit_quote_path(quote), { :class => "btn" } do
+            %i{ :class => "icon-edit"}
+            Edit

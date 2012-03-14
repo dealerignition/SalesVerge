@@ -1,4 +1,4 @@
-= form_for(@sample_checkout) do |f|
+= form_for(@sample_checkout, :html => { :class => "form-horizontal" }) do |f|
   - if @sample_checkout.errors.any?
     %div#errorExplanation
       %h2
@@ -8,15 +8,20 @@
       - @sample_checkout.errors.full_messages.each do |msg|
         %li
           = msg
-          
-  %h3 Who is checking out the sample(s)?   
-  = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
   
-  %h3 Which samples are being checked out?
-  = f.select(:sample_id, options_from_collection_for_select(@samples, :id, :name), {:multiple => "true", "data-native-menu" => "false"})
+  %fieldset
+    %div.control-group
+      = f.label "Who is checking out the sample(s)?", { :class => "control-label" }
+      %div.controls
+        = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
+    %div.control-group
+      = f.label "Which samples are being checked out?", { :class => "control-label" }
+      %div.controls
+        = f.select(:sample_id, options_from_collection_for_select(@samples, :id, :name), {:multiple => "true", "data-native-menu" => "false"})
 
-  = link_to "Create New Sample", new_sample_path, { "data-role" => "button", "data-theme" => "b", "data-icon" => "plus", "data-iconpos" => "left", :class => "medium", "data-rel" => "dialog" }
+        = link_to "Create New Sample", new_sample_path, { :class => "btn" }
 
-  %div.actions
-  = f.submit("Checkout", "data-theme" => "b")
-  = f.hidden_field :checkout_time, :value => Time.now
+    %div.form-actions
+      = f.submit("Checkout", :class => "btn btn-primary btn-large")
+      = link_to "Cancel", :back, { :class => "btn btn-large" }
+      = f.hidden_field :checkout_time, :value => Time.now

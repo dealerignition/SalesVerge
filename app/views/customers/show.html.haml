@@ -1,9 +1,13 @@
-= link_to "Back", customers_path, { "data-role" => "button", "data-transition" => "flip", "data-direction" => "reverse", "data-icon" => "arrow-l", "data-iconpos" => "left", :class => "medium" }
-
-%h2 Profile
+%div.hero-unit
+  %h1
+    = @customer.first_name
+    = @customer.last_name
+  %br
+  = link_to "Back", customers_path, { :class => "btn" }
+  
 %div.customer_top
   = image_tag "http://placekitten.com/120/#{rand(100..120)}", :class => "avatar"
-  %table
+  %table.table
     %tr
       %td.category Name
       %td
@@ -26,25 +30,25 @@
 %h2
   Quotes
   ==(#{@customer.quotes.count})
-%table
+%table{ :class => "table table-striped" }
   %thead
-    %td Date Created
-    %td Price
-    %td
+    %th Date Created
+    %th Price
+    %th
   - @customer.quotes.each do |quote|
     %tr
       %td= quote.created_at.to_s(:long)
       %td= number_to_currency(quote.charge_total)
       %td
-        = link_to "View Quote", edit_quote_path(quote), { "data-role" => "button",  "data-transition" => "slide", "data-icon" => "arrow-r",  "data-iconpos" => "right" }
+        = link_to "View Quote", edit_quote_path(quote), { :class => "btn" }
 
 %h2 Measurements
 %table
   %thead
-    %td Room Name
-    %td Width
-    %td Length
-    %td Area
+    %th Room Name
+    %th Width
+    %th Length
+    %th Area
     
 %h2 Notes
-%p= @customer.notes
+%blockquote= @customer.notes
