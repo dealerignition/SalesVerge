@@ -1,8 +1,8 @@
 %div.hero-unit
   %h1 Appointments
   %p
-    You currently have
-    = pluralize(@appointments.count, "appointment")
+    You have
+    = pluralize(@pending_appointments, "pending appointment")
   %p
     = link_to new_appointment_path, { :class => "btn btn-primary btn-large" } do
       %i{ :class => "icon-calendar icon-white" }
