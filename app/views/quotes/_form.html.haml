@@ -33,7 +33,7 @@
         %td= charge.date.to_s(:long)
         %td= charge.description
         %td= number_to_currency(charge.price)
-        %td= charge.quantity
+        %td= "%g" % charge.quantity
         %td= number_to_currency(charge.total)
     %tr
       %td
