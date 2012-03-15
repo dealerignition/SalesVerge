@@ -1,7 +1,7 @@
 %div.hero-unit
   %h1 Customers
   %p
-    You currently have
+    You have
     = pluralize(@customers.count, "customer")
     on file
   %p
@@ -10,7 +10,7 @@
       Create New Customer
 
 %div.row
-  %table{ :class => "table table-striped" }
+  %table.table.table-striped
     - @customers.each do |customer|
       %tr
         %td

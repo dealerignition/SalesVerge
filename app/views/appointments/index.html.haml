@@ -10,15 +10,15 @@
 
 %table{ :class => "table table-striped" }
   %thead
-    %th Time
+    %th Date &amp; Time
     %th Type
     %th Customer
   - @appointments.each do |appointment|
     %tr
       %td
-        =appointment.time.to_formatted_s(:standard_time)
-        %i on
         = appointment.date.to_formatted_s(:long_ordinal)
+        %i at
+        =appointment.time.to_formatted_s(:standard_time)
       %td= appointment.appointment_type
       %td
         = link_to "#{appointment.customer.first_name} #{appointment.customer.last_name}", appointment.customer
