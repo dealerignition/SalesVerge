@@ -11,9 +11,9 @@
 
   %fieldset
     %div.control-group
-      = f.label :customer_id, "With whom is the appointment?", { :class => "control-label" }
+      = f.label :customer_id, "Customer", { :class => "control-label" }
       %div.controls
-        %input{ :placeholder => "Customer Name", :id => "customername" }
+        %input{ :placeholder => "Name", :id => "customername" }
         =f.hidden_field :customer_id, :value => -1, :id => :customerid
         %ul.customers.nav.nav-tabs.nav-stacked
           %li#keep
@@ -23,7 +23,7 @@
       = f.label :date, { :class => "control-label" }
       %div.controls
         = f.text_field :date, { :value => Date.today, 
-          :class => "datepicker", :readonly => true }
+          :id => "datepicker", :readonly => true, :type => "date" }
   
     %div.control-group
       = f.label :time, { :class => "control-label" }
@@ -31,7 +31,7 @@
         = f.text_field :time, { :placeholder => "12:00 PM" }
     
     %div.control-group
-      = f.label :appointment_type, { :class => "control-label" }
+      = f.label :appointment_type, "Appointment Type", { :class => "control-label" }
       %div.controls
         = f.select :appointment_type, options_for_select(["Measurement", "Quote", "Other"])
 
