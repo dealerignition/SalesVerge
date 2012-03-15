@@ -1,6 +1,7 @@
 class AppointmentsController < ApplicationController
   def index
     @appointments = Appointment.order("status DESC, date ASC").all
+    @pending_appointments = Appointment.where("status NOT LIKE ? ", "Completed").count
   end
   
   def new
