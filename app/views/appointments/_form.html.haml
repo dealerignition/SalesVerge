@@ -15,17 +15,19 @@
       %div.controls
         %input{ :placeholder => "Customer Name", :id => "customername" }
         =f.hidden_field :customer_id, :value => -1, :id => :customerid
-        %div.customers
+        %ul.customers.nav.nav-tabs.nav-stacked
+          %li#keep
+            =link_to "Not found? Add new person...", new_customer_path
   
     %div.control-group
       = f.label :date, { :class => "control-label" }
       %div.controls
-        = f.text_field :date, { "type" => "date", "data-role" => "datebox", :value => Date.today, "data-options" => '{"useInline": true, "useInlineHideInput": true, "mode": "calbox"}' }
+        = f.text_field :date, { :placeholder => "2012-3-15" }
   
     %div.control-group
       = f.label :time, { :class => "control-label" }
       %div.controls
-        = f.text_field :time, { :placeholder => "12:00 PM", "data-role" => "datebox", :readonly => "readonly", "data-options" => '{"focusMode": true, "mode": "timeflipbox", "timeFormatOverride": 12}' }
+        = f.text_field :time, { :placeholder => "12:00 PM" }
     
     %div.control-group
       = f.label :appointment_type, { :class => "control-label" }

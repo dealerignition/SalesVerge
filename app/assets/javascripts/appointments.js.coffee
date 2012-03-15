@@ -1,16 +1,50 @@
 $ ->
-    $('#customername').keypress ->
-        today = new Date()
-        now = today.getTime()
-        last = $('.customers').data('time')
-        # Monkeypatch
-        if now - 1000 > last or not last? or true
-            $('.customers').data('time', now)
-            $.getJSON("/customers.json?#{$.param({search: this.value})}", (customers) ->
-                $('.customers').empty()
-                $('.customers').append("<a href='#customer|#{c.id}'>#{ c.first_name } #{ c.last_name }</a>") for c in customers
-            )
-    $('a[href^="#customer"]').live('click', ->
-        $('#customername').val("#{this.text}")
-        $('#customerid').val("#{this.href.split('|')[1]}")
+    $('#customername').keyup ->
+        $('#customername').data('run', true)
+
+    $('.customers a [href="#"]').live('click', ->
+        $('#customername').val("#{this.text.split(' (')[0]}")
+        $('#customerid').val("#{ $(this).attr('value') }")
+        $('.customers').slideUp().empty()
     )
+
+    $('#keep').click((event) ->
+        event.preventDefault()
+    )
+
+    updateAutoFill = () ->
+        if $('#customername').data('run')
+            $('#customername').data('run', false)
+            search = $('#customername').val()
+            last = $('#customername').data('last')
+
+            if search and search != last
+                $('#customername').data('last', search)
+                $.getJSON("/customers.json?#{$.param({search: search})}", (customers) ->
+                    if customers.length == 0
+                        $('.customers').slideUp( () ->
+                            $(this).empty()
+                        )
+                        return
+
+                    $('.customers').slideDown()
+
+                    customerIDs = []
+                    for c in customers
+                        customerIDs.push(c.id)
+
+                    for c in $('.customers').children().not('#keep')
+                        id = Number($(c).children('a').last().attr('value'))
+                        $(c).slideUp( () ->
+                            $(this).remove()
+                        ) unless id in customerIDs
+                        i = customerIDs.indexOf(id)
+                        customerIDs.remove(i) unless i < 0
+
+                    for c in customers
+                        $('.customers').prepend(
+                            "<li><a href='#' value='#{ c.id }'>#{ c.first_name } #{ c.last_name } (#{ c.email })</a></li>"
+                        ).children().first().slideDown() if c.id in customerIDs
+                )
+
+    setInterval(updateAutoFill, 1000)

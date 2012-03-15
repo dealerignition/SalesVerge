@@ -10,8 +10,13 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+// Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+      var rest = this.slice((to || from) + 1 || this.length);
+        this.length = from < 0 ? this.length + from : from;
+          return this.push.apply(this, rest);
+};
 

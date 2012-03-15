@@ -2,3 +2,12 @@
     display: none;
 }
 
+.customers {
+    display: none;
+    li {
+        display: none;
+    }
+    #keep {
+        display: list-item;
+    }
+}
