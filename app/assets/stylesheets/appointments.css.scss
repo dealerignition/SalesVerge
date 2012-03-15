@@ -7,11 +7,12 @@
     li {
         display: none;
     }
+
     #keep {
         display: list-item;
     }
 }
 
-.datepicker .dropdown-menu {
-    display: block;
+#datepicker {
+    cursor: pointer;
 }

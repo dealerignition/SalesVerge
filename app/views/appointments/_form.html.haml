@@ -17,7 +17,7 @@
         =f.hidden_field :customer_id, :value => -1, :id => :customerid
         %ul.customers.nav.nav-tabs.nav-stacked
           %li#keep
-            =link_to "Not found? Add new person...", new_customer_path
+            =link_to "Not found? Add a new customer...", new_customer_path
   
     %div.control-group
       = f.label :date, { :class => "control-label" }
@@ -28,12 +28,13 @@
     %div.control-group
       = f.label :time, { :class => "control-label" }
       %div.controls
-        = f.text_field :time, { :placeholder => "12:00 PM" }
+        = f.text_field :time, { :placeholder => "12:00 PM",
+          :type => "time" }
     
     %div.control-group
       = f.label :appointment_type, "Appointment Type", { :class => "control-label" }
       %div.controls
-        = f.select :appointment_type, options_for_select(["Measurement", "Quote", "Other"])
+        = f.select :appointment_type, options_for_select(["Quote", "Measurement", "Other"])
 
     %div.form-actions
       = f.submit( :class => "btn btn-primary btn-large" )
