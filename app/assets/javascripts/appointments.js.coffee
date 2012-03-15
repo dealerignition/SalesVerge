@@ -2,7 +2,7 @@ $ ->
     $('#customername').keyup ->
         $('#customername').data('run', true)
 
-    $('.customers a [href="#"]').live('click', ->
+    $('.customers a[href="#"]').live('click', ->
         $('#customername').val("#{this.text.split(' (')[0]}")
         $('#customerid').val("#{ $(this).attr('value') }")
         $('.customers').slideUp().empty()
