@@ -1,4 +1,8 @@
 $ ->
+    $('.datepicker').datepicker({
+        format: "yyyy-mm-dd"
+    })
+
     $('#customername').keyup ->
         $('#customername').data('run', true)
 

@@ -22,7 +22,8 @@
     %div.control-group
       = f.label :date, { :class => "control-label" }
       %div.controls
-        = f.text_field :date, { :placeholder => "2012-3-15" }
+        = f.text_field :date, { :value => Date.today, 
+          :class => "datepicker", :readonly => true }
   
     %div.control-group
       = f.label :time, { :class => "control-label" }
