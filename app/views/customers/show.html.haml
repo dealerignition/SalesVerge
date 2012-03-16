@@ -42,15 +42,15 @@
       %tr
         %td
           %b Age
-        %td N/A
+        %td= @api.query_by_email(@customer.email)["age"]
       %tr
         %td
           %b Gender
-        %td N/A
+        %td= @api.query_by_email(@customer.email)["gender"]
       %tr
         %td
           %b Income
-        %td N/A
+        %td= @api.query_by_email(@customer.email)["household_income"]
       %tr
         %td
           %b Married?

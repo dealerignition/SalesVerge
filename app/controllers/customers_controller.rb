@@ -1,4 +1,5 @@
 class CustomersController < ApplicationController
+  require 'rapleaf_api'
 
   def index
     if params[:search]
@@ -16,7 +17,8 @@ class CustomersController < ApplicationController
   end
   
   def show
-    @customer = Customer.find params[:id]
+    @customer = Customer.find_by_id(params[:id])
+    @api = RapleafApi::Api.new('c7e2c4cbcb32f1bf6d86b20551d48186')
   end
   
   def new
