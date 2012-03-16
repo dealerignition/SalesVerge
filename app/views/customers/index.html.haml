@@ -14,7 +14,7 @@
     - @customers.each do |customer|
       %tr
         %td
-          = image_tag "http://placekitten.com/120/#{rand(100..120)}", :class => "avatar"
+          = link_to image_tag("http://placekitten.com/120/#{rand(100..120)}", :class => "avatar"), customer
         %td
           = customer.first_name if customer.first_name?
           = customer.last_name if customer.last_name?
@@ -22,9 +22,9 @@
           %div.truncate-email
             = link_to customer.email, "mailto:#{customer.email}"
         %td
-          = link_to edit_customer_path(customer), { :class => "btn" } do
+          = link_to edit_customer_path(customer), { :class => "btn btn-large" } do
             %i.icon-cog
             Edit
-          = link_to customer, { :class => "btn" } do
+          = link_to customer, { :class => "btn btn-large" } do
             %i.icon-info-sign
             Details

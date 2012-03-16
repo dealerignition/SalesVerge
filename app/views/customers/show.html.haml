@@ -42,15 +42,27 @@
       %tr
         %td
           %b Age
-        %td= @api.query_by_email(@customer.email)["age"]
+        %td
+          - if @rapleaf.query_by_email(@customer.email)["age"]
+            = @rapleaf.query_by_email(@customer.email)["age"]
+          - else
+            N/A
       %tr
         %td
           %b Gender
-        %td= @api.query_by_email(@customer.email)["gender"]
+        %td
+          - if @rapleaf.query_by_email(@customer.email)["gender"]
+            = @rapleaf.query_by_email(@customer.email)["gender"]
+          - else
+            N/A
       %tr
         %td
           %b Income
-        %td= @api.query_by_email(@customer.email)["household_income"]
+        %td
+          - if @rapleaf.query_by_email(@customer.email)["household_income"]
+            = @rapleaf.query_by_email(@customer.email)["household_income"]
+          - else
+            N/A
       %tr
         %td
           %b Married?

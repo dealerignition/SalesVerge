@@ -18,7 +18,7 @@ class CustomersController < ApplicationController
   
   def show
     @customer = Customer.find_by_id(params[:id])
-    @api = RapleafApi::Api.new('c7e2c4cbcb32f1bf6d86b20551d48186')
+    @rapleaf = RapleafApi::Api.new('c7e2c4cbcb32f1bf6d86b20551d48186')
   end
   
   def new
