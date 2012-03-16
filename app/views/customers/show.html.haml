@@ -4,50 +4,86 @@
     = @customer.first_name
     = @customer.last_name
   
-%div.customer_top
-  = image_tag "http://placekitten.com/120/#{rand(100..120)}", :class => "avatar"
-  %table.table
-    %tr
-      %td.category Name
-      %td
-        = @customer.first_name
-        = @customer.last_name
-      %td.category Gender
-      %td N/A
-    %tr
-      %td.category Email
-      %td
-        = link_to @customer.email, "mailto:#{@customer.email}"
-      %td.category Income
-      %td N/A
-    %tr
-      %td.category Phone
-      %td= @customer.phone
-      %td.category Location
-      %td N/A
+%div.row
+  %div.span2
+    = image_tag "http://placekitten.com/120/#{rand(100..120)}", :class => "avatar"
+    
+  %div.span5
+    %table.table.table-striped
+      %thead
+        %th Basic info
+      %tr
+        %td
+          %b Name
+        %td
+          = @customer.first_name
+          = @customer.last_name
+      %tr
+        %td
+          %b Email
+        %td
+          = link_to @customer.email, "mailto:#{@customer.email}"
+      %tr
+        %td
+          %b Phone
+        %td= @customer.phone
+      %tr
+        %td
+          %b Location
+        %td
+          = @customer.address_1
+          = @customer.city
+          = @customer.state
+          = @customer.zip
+  %div.span5
+    %table.table.table-striped
+      %thead
+        %th Extended info
+      %tr
+        %td
+          %b Age
+        %td N/A
+      %tr
+        %td
+          %b Gender
+        %td N/A
+      %tr
+        %td
+          %b Income
+        %td N/A
+      %tr
+        %td
+          %b Married?
+        %td N/A
 
-%h2
-  Quotes
-  ==(#{@customer.quotes.count})
-%table{ :class => "table table-striped" }
-  %thead
-    %th Date Created
-    %th Price
-    %th
-  - @customer.quotes.each do |quote|
-    %tr
-      %td= quote.created_at.to_s(:long)
-      %td= number_to_currency(quote.charge_total)
-      %td
-        = link_to "View Quote", edit_quote_path(quote), { :class => "btn" }
+%div.page-header
+  %h2
+    Quotes
+    %small==(#{@customer.quotes.count})
+- if @customer.quotes.present?
+  %table{ :class => "table table-striped" }
+    %thead
+      %th Date Created
+      %th Price
+      %th
+    - @customer.quotes.each do |quote|
+      %tr
+        %td= quote.created_at.to_s(:long)
+        %td= number_to_currency(quote.charge_total)
+        %td
+          = link_to "View Quote", edit_quote_path(quote), { :class => "btn" }
+- else
+  %p= link_to "Create a quote", new_quote_path, { :class => "btn" }
 
-%h2 Measurements
+%div.page-header
+  %h2 Measurements
 %table
   %thead
     %th Room Name
     %th Width
     %th Length
     %th Area
-    
-%h2 Notes
+  
+%div.page-header    
+  %h2 Notes
 %blockquote= @customer.notes
