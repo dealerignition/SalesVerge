@@ -30,7 +30,7 @@
             = f.hidden_field :status, :value => "Started"
         - elsif appointment.status == "Started"        
           = form_for(appointment) do |f|
-            = f.submit("Finish", :class => "btn btn-warning")
+            = f.submit("Finish", :class => "btn btn-danger")
             = f.hidden_field :status, :value => "Completed"
         -else
           =link_to "Completed", nil, { :class => "btn disabled" }
