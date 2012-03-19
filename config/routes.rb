@@ -1,5 +1,7 @@
 DealerOnTheGo::Application.routes.draw do
 
+  get "dashboard/index"
+
   resources :appointments
   resources :customers
   resources :quotes do
@@ -7,6 +9,8 @@ DealerOnTheGo::Application.routes.draw do
   end
   resources :samples
   resources :sample_checkouts
+  
+  root :to => 'dashboard#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

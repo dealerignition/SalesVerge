@@ -65,6 +65,7 @@
   %h2
     Quotes
     %small==(#{@customer.quotes.count})
+
 - if @customer.quotes.present?
   %table{ :class => "table table-striped" }
     %thead

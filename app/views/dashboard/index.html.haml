@@ -1,0 +1,78 @@
+%div.hero-unit
+  %h1 Dashboard
+  %p
+    An overview of your store activity
+    
+%div.row
+  %div.span6
+    %div.page-header
+      %h1 
+        New Customers
+    %table.table.table-striped
+      %thead
+        %th Name
+        %th Created
+        %th
+      - @customers.each do |customer|
+        %tr
+          %td
+            = link_to "#{customer.first_name} #{customer.last_name}", customer
+          %td
+            %i
+              = time_ago_in_words(customer.created_at)
+              ago
+          %td
+            = link_to customer, { :class => "btn btn-primary" } do
+              View
+  
+  %div.span6
+    %div.page-header
+      %h1 
+        Recent Quotes
+    %table.table.table-striped
+      %thead
+        %th Customer
+        %th Total
+      - @quotes.each do |quote|
+        %tr
+          %td= link_to "#{quote.customer.first_name} #{quote.customer.last_name}", customer_path(quote.customer)
+          %td= number_to_currency(quote.charge_total)
+          %td
+            = link_to "View", edit_quote_path(quote), { :class => "btn btn-primary" }
+        
+%div.row
+  %div.span6
+    %div.page-header
+      %h1 
+        Late Appointments
+        %small==(#{@late_appointments.count})
+    - if @late_appointments.count > 0
+      %table.table.table-striped
+        %thead
+          %th Type
+          %th Customer
+          %th
+        - @late_appointments.each do |appointment|
+          %td= appointment.appointment_type
+          %td
+            = link_to "#{appointment.customer.first_name} #{appointment.customer.last_name}", appointment.customer
+          %td
+            = link_to "View", appointments_path, { :class => "btn" }
+    - else
+      %span.label.label-success You have no late appointments.
+      
+  %div.span6
+    %div.page-header
+      %h1 
+        Checked-out Samples
+        %small==(#{@checked_out_samples.count})
+    %table{ :class => "table table-striped" }
+      %thead
+        %th Name
+        %th Customer
+      - @checked_out_samples.each do |checked_out_sample|
+        %tr
+          %td
+            = checked_out_sample.sample.name
+          %td
+            = link_to "#{checked_out_sample.customer.first_name if checked_out_sample.customer.first_name} #{checked_out_sample.customer.last_name if checked_out_sample.customer.last_name}", checked_out_sample.customer
