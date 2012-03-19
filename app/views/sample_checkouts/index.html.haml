@@ -27,5 +27,5 @@
         = link_to "#{checked_out_sample.customer.first_name if checked_out_sample.customer.first_name} #{checked_out_sample.customer.last_name if checked_out_sample.customer.last_name}", checked_out_sample.customer
       %td
         = form_for(checked_out_sample) do |f|
-          = f.submit("Check-in", :class => "btn")
+          = f.submit("Check-in", :class => "btn btn-large btn-primary")
           = f.hidden_field :checkin_time, :value => Time.now

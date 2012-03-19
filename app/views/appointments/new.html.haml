@@ -1,5 +1,8 @@
 %div.page-header
-  %p= link_to "Back", appointments_path, { :class => "btn" }
+  %p
+    = link_to appointments_path, { :class => "btn btn-large" } do
+      %i{ :class => "icon-arrow-left" }
+      Back
   %h1 New Appointment
 
 = render "form"

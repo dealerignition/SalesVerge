@@ -1,5 +1,8 @@
 %div.page-header
-  %p= link_to "Back", customers_path, { :class => "btn" }
+  %p
+    = link_to customers_path, { :class => "btn btn-large" } do
+      %i{ :class => "icon-arrow-left" }
+      Back
   %h1
     = @customer.first_name
     = @customer.last_name
@@ -9,9 +12,8 @@
     = image_tag "http://placekitten.com/120/#{rand(100..120)}", :class => "avatar"
     
   %div.span5
+    %h6 Basic Info
     %table.table.table-striped
-      %thead
-        %th Basic info
       %tr
         %td
           %b Name
@@ -22,7 +24,8 @@
         %td
           %b Email
         %td
-          = link_to @customer.email, "mailto:#{@customer.email}"
+          %div.truncate-email
+            = link_to @customer.email, "mailto:#{@customer.email}"
       %tr
         %td
           %b Phone
@@ -36,9 +39,8 @@
           = @customer.state
           = @customer.zip
   %div.span5
+    %h6 Extended Info
     %table.table.table-striped
-      %thead
-        %th Extended info
       %tr
         %td
           %b Age

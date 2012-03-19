@@ -26,11 +26,11 @@
       %td
         - if appointment.status == "Pending"
           = form_for(appointment) do |f|
-            = f.submit("Start", :class => "btn btn-success")
+            = f.submit("Start", :class => "btn btn-success btn-large")
             = f.hidden_field :status, :value => "Started"
         - elsif appointment.status == "Started"        
           = form_for(appointment) do |f|
-            = f.submit("Finish", :class => "btn btn-danger")
+            = f.submit("Finish", :class => "btn btn-danger btn-large")
             = f.hidden_field :status, :value => "Completed"
         -else
-          =link_to "Completed", nil, { :class => "btn disabled" }
+          =link_to "Completed", nil, { :class => "btn disabled btn-large" }

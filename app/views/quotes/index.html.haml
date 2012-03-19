@@ -23,10 +23,8 @@
       %td= link_to "#{quote.customer.first_name} #{quote.customer.last_name}", customer_path(quote.customer)
       %td= number_to_currency(quote.charge_total)
       %td
-        %div
-          = link_to nil, { :class => "btn" } do
-            %i{ :class => "icon-envelope" }
-            Email
-          = link_to edit_quote_path(quote), { :class => "btn" } do
+        %div.btn-group
+          = link_to edit_quote_path(quote), { :class => "btn btn-large" } do
             %i{ :class => "icon-edit"}
             Edit
+          = link_to "Email", nil, { :class => "btn btn-large btn-primary" }

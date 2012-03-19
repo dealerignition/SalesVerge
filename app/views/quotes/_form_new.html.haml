@@ -15,6 +15,6 @@
       %div.controls
         = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
 
-  %div.form-actions
+  %div.form-actions.btn-group
     = f.submit("Next", :class => "btn btn-primary btn-large")
     = link_to "Cancel", :back, { :class => "btn btn-large" }

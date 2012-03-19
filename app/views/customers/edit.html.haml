@@ -1,5 +1,8 @@
 %div.page-header
-  %p= link_to "Back", customers_path, { :class => "btn" }
+  %p
+    = link_to customers_path, { :class => "btn btn-large" } do
+      %i{ :class => "icon-arrow-left" }
+      Back
   %h2
     Edit
     = @customer.first_name

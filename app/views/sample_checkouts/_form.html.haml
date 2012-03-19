@@ -21,7 +21,7 @@
 
         = link_to "Create New Sample", new_sample_path, { :class => "btn" }
 
-    %div.form-actions
+    %div.form-actions.btn-group
       = f.submit("Checkout", :class => "btn btn-primary btn-large")
       = link_to "Cancel", :back, { :class => "btn btn-large" }
-      = f.hidden_field :checkout_time, :value => Time.now
+    = f.hidden_field :checkout_time, :value => Time.now

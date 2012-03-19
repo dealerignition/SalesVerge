@@ -37,6 +37,7 @@
         = f.select :appointment_type, options_for_select(["Quote", "Measurement", "Other"])
 
     %div.form-actions
-      = f.submit( :class => "btn btn-primary btn-large" )
-      = link_to "Cancel", :back, { :class => "btn btn-large" }
+      %div.btn-group
+        = f.submit( :class => "btn btn-primary btn-large" )
+        = link_to "Cancel", :back, { :class => "btn btn-large" }
       = f.hidden_field :status, :value => "Pending"

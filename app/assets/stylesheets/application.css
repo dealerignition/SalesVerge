@@ -58,14 +58,9 @@ img.avatar.small {
   margin-right: 10px;
 }
 
-#errorExplanation, .field_with_errors {
-  color: #ffffff;
-  background-color: #B94A48;
-  text-shadow: none;
-  padding: 20px;
-  margin: 0 -25px;
-}
-
-#errorExplanation h2 {
-  margin-top: 0px;
+.truncate-email {
+	width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

@@ -4,8 +4,7 @@ class CustomersController < ApplicationController
   def index
     if params[:search]
       val = "%#{ params[:search] }%"
-      @customers = Customer.where("first_name LIKE ? OR last_name LIKE ? OR email LIKE ?",
-                val, val, val)
+      @customers = Customer.where("first_name LIKE ? OR last_name LIKE ? OR email LIKE ?", val, val, val)
     else
       @customers = Customer.all
     end

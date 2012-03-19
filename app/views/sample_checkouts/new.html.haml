@@ -1,5 +1,8 @@
 %div.page-header
-  %p= link_to "Back", sample_checkouts_path, { :class => "btn" }
+  %p
+    = link_to sample_checkouts_path, { :class => "btn btn-large" } do
+      %i{ :class => "icon-arrow-left" }
+      Back
   %h1 Checkout Sample(s)
 
 = render "form"
