@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
+gem 'haml-rails'
+gem 'jquery-rails'
 gem 'rails', '3.2.2'
 gem 'rake', '>= 0.9.2.2'
+gem 'rapleaf_api'
+gem 'sorcery'
 gem 'twitter-bootstrap-rails'
 
 group :development, :test do
@@ -28,8 +32,3 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-gem 'rapleaf_api'
-
-gem 'jquery-rails'
-gem 'haml-rails'

@@ -1,6 +1,9 @@
 DealerOnTheGo::Application.routes.draw do
 
   get "dashboard/index"
+  get "logout" => "sessions#destroy", :as => "logout"
+  get "login" => "sessions#new", :as => "login"
+  get "signup" => "users#new", :as => "signup"
 
   resources :appointments
   resources :customers
@@ -9,6 +12,8 @@ DealerOnTheGo::Application.routes.draw do
   end
   resources :samples
   resources :sample_checkouts
+  resources :sessions
+  resources :users
   
   root :to => 'dashboard#index'
 

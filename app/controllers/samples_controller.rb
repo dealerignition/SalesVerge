@@ -1,4 +1,5 @@
 class SamplesController < ApplicationController
+  before_filter :require_login
   
   def index
     @samples = Sample.all

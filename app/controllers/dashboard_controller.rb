@@ -1,4 +1,6 @@
 class DashboardController < ApplicationController
+  before_filter :require_login
+  
   def index
     @customers = Customer.order("created_at ASC").last(5)
     @late_appointments = Appointment.where("date < ? AND status NOT LIKE ?", Date.today, "Completed").all

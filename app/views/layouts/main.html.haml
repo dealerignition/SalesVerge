@@ -29,6 +29,13 @@
               = link_to quotes_path do
                 %i{ :class => "icon-shopping-cart icon-white" }
                 Quotes
+          %ul.nav.pull-right
+            %li.divider-vertical
+            %li
+              - if current_user
+                = link_to "Log out", logout_path
+              - else
+                = link_to "Log in", login_path
   %div.container
     - if flash[:notice]
       %p{ :class => "alert alert-success"}

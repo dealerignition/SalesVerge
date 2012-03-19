@@ -1,4 +1,5 @@
 class SampleCheckoutsController < ApplicationController
+  before_filter :require_login
   
   def index
     @checked_out_samples = SampleCheckout.find_all_by_checkin_time(nil)

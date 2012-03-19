@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
-
+  before_filter :require_login
+  
   def index
     if params[:search]
       val = "%#{ params[:search] }%"

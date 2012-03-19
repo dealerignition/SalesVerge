@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120308160403) do
+ActiveRecord::Schema.define(:version => 20120319203639) do
 
   create_table "appointments", :force => true do |t|
     t.date     "date"
@@ -90,5 +90,20 @@ ActiveRecord::Schema.define(:version => 20120308160403) do
     t.datetime "updated_at", :null => false
     t.integer  "dealer_id"
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "crypted_password"
+    t.string   "salt"
+    t.integer  "dealer_id"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.string   "remember_me_token"
+    t.datetime "remember_me_token_expires_at"
+  end
+
+  add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
 
 end
