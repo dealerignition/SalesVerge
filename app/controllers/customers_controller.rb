@@ -1,5 +1,4 @@
 class CustomersController < ApplicationController
-  require 'rapleaf_api'
 
   def index
     if params[:search]
@@ -17,7 +16,8 @@ class CustomersController < ApplicationController
   
   def show
     @customer = Customer.find_by_id(params[:id])
-    @rapleaf = RapleafApi::Api.new('c7e2c4cbcb32f1bf6d86b20551d48186')
+    rapleaf = RapleafApi::Api.new('c7e2c4cbcb32f1bf6d86b20551d48186')
+    @rapleaf_info = rapleaf.query_by_email(@customer.email)
   end
   
   def new

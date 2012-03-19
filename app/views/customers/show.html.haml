@@ -45,26 +45,17 @@
         %td
           %b Age
         %td
-          - if @rapleaf.query_by_email(@customer.email)["age"]
-            = @rapleaf.query_by_email(@customer.email)["age"]
-          - else
-            N/A
+          = @rapleaf_info["age"] or "N/A"
       %tr
         %td
           %b Gender
         %td
-          - if @rapleaf.query_by_email(@customer.email)["gender"]
-            = @rapleaf.query_by_email(@customer.email)["gender"]
-          - else
-            N/A
+          = @rapleaf_info["gender"] or "N/A"
       %tr
         %td
           %b Income
         %td
-          - if @rapleaf.query_by_email(@customer.email)["household_income"]
-            = @rapleaf.query_by_email(@customer.email)["household_income"]
-          - else
-            N/A
+          = @rapleaf_info["household_income"] or "N/A"
       %tr
         %td
           %b Married?
