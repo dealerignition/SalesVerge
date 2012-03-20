@@ -38,10 +38,14 @@
                 = link_to "Log in", login_path
   %div.container
     - if flash[:notice]
-      %p{ :class => "alert alert-success"}
+      %div.alert.alert-success
+        %a.close{ "data-dismiss" => "alert" }
+          &times;
         = flash[:notice]
     - if flash[:error]
-      %p{ :class => "alert alert-error" }
+      %div.alert.alert-error
+        %a.close{ "data-dismiss" => "alert" }
+          &times;
         = flash[:error]
     = yield
 
