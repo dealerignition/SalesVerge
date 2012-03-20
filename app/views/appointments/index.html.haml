@@ -13,6 +13,7 @@
     %th Date &amp; Time
     %th Type
     %th Customer
+    %th
   - @appointments.each do |appointment|
     %tr
       %td
@@ -22,7 +23,6 @@
       %td= appointment.appointment_type
       %td
         = link_to "#{appointment.customer.first_name} #{appointment.customer.last_name}", appointment.customer
-
       %td
         - if appointment.status == "Pending"
           = form_for(appointment) do |f|

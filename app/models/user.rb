@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   authenticates_with_sorcery!
   
   belongs_to :dealer
+  has_many :appointments
   
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
 

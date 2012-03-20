@@ -35,3 +35,4 @@
         = f.submit( :class => "btn btn-primary btn-large" )
         = link_to "Cancel", :back, { :class => "btn btn-large" }
       = f.hidden_field :status, :value => "Pending"
+      = f.hidden_field :user_id, :value => current_user.id

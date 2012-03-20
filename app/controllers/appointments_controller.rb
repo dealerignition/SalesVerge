@@ -14,8 +14,8 @@ class AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.new(params[:appointment])
     if @appointment.save
-      redirect_to appointments_path
       flash[:notice] = "Appointment was successfully created."
+      redirect_to appointments_path
     else
       render 'new'
     end
@@ -25,11 +25,11 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find(params[:id])
     
     if @appointment.update_attributes(params[:appointment])
-      redirect_to(appointments_path)
       flash[:notice] = "Appointment was successfully updated."
-    else
       redirect_to(appointments_path)
+    else
       flash[:error] = "There was a problem updating the appointment."
+      redirect_to(appointments_path)
     end
   end
   
