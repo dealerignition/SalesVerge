@@ -6,6 +6,12 @@
     :message => "",
     :header_tag => :h3
   %div.field
+    = f.label :first_name
+    = f.text_field :first_name, :placeholder => "Joe"
+  %div.field
+    = f.label :last_name
+    = f.text_field :last_name, :placeholder => "Smith"
+  %div.field
     = f.label :email
     = f.text_field :email, :placeholder => "joe@mycarpet.com"
   %div.field

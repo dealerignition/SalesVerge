@@ -3,8 +3,10 @@ class User < ActiveRecord::Base
   
   belongs_to :dealer
   
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
 
+  validates_presence_of :first_name
+  validates_presence_of :last_name
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
   validates_presence_of :email
