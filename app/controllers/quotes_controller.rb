@@ -13,8 +13,8 @@ class QuotesController < ApplicationController
   def create
     @quote = Quote.new(params[:quote])
     if @quote.save
+      flash[:notice] = "Quote was successfully created."
       redirect_to edit_quote_path(@quote)
-      flash[:notice] = "Post was successfully created."
     else
       render :action => "new"
     end
@@ -28,8 +28,8 @@ class QuotesController < ApplicationController
   def update
     @quote = Quote.find(params[:id])
     if @quote.update_attributes(params[:quote])
+      flash[:notice] = "Quote was successfully updated."
       redirect_to quotes_path
-      flash[:notice] = "Quote was successfully update."
     else
       redirect_to edit_customer_path(@quote)
     end

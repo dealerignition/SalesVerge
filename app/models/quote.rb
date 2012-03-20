@@ -1,6 +1,9 @@
 class Quote < ActiveRecord::Base
   has_many :charges
   belongs_to :customer
+  belongs_to :user
+  
+  validates_presence_of :user_id
 
   def total
     total = 0

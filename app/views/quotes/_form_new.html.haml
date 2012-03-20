@@ -18,3 +18,4 @@
   %div.form-actions.btn-group
     = f.submit("Next", :class => "btn btn-primary btn-large")
     = link_to "Cancel", :back, { :class => "btn btn-large" }
+    = f.hidden_field :user_id, :value => current_user.id

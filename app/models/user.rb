@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   
   belongs_to :dealer
   has_many :appointments
+  has_many :quotes
   
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
 

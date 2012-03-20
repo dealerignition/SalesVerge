@@ -15,12 +15,16 @@
   %thead
     %th Date
     %th Customer
+    %th Rep
     %th Total
   - @quotes.each do |quote|
     %tr
       %td
         =quote.created_at.to_date.to_s(:long_ordinal)
       %td= link_to "#{quote.customer.first_name} #{quote.customer.last_name}", customer_path(quote.customer)
+      %td
+        =quote.user.first_name
+        =quote.user.last_name[0]
       %td= number_to_currency(quote.charge_total)
       %td
         %div.btn-group
