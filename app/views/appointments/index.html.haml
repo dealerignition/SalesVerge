@@ -13,16 +13,27 @@
     %th Date &amp; Time
     %th Type
     %th Customer
+    %th Rep
     %th
   - @appointments.each do |appointment|
     %tr
       %td
         = appointment.date.to_formatted_s(:long_ordinal)
-        %i at
-        =appointment.time.to_formatted_s(:standard_time)
-      %td= appointment.appointment_type
+        %br
+        - if appointment.late?
+          %span.label.label-important
+            =appointment.time.to_formatted_s(:standard_time)
+            %i.icon-time.icon-white
+        - else    
+          %span.label
+            =appointment.time.to_formatted_s(:standard_time)
+      %td
+        %span.label.label-info= appointment.appointment_type[0]
       %td
         = link_to "#{appointment.customer.first_name} #{appointment.customer.last_name}", appointment.customer
+      %td
+        = appointment.user.first_name
+        = appointment.user.last_name[0]
       %td
         - if appointment.status == "Pending"
           = form_for(appointment) do |f|

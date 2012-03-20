@@ -7,4 +7,9 @@ class Appointment < ActiveRecord::Base
   
   belongs_to :customer
   belongs_to :user
+  
+  def late?
+    self.date < Date.today && self.status != "Completed"
+  end
+  
 end
