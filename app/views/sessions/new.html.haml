@@ -2,6 +2,7 @@
   %h1 Log in
 
 = form_tag sessions_path do
+  =error_messages_for :session
   %div.field
     = label_tag :email
     = text_field_tag :email, params[:email]

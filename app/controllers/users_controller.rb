@@ -11,7 +11,6 @@ class UsersController < ApplicationController
       flash[:notice] = "Signed up! You can now log in."
     else
       render :new
-      flash[:error] = "There were some errors"
     end
   end
 end

@@ -1,13 +1,7 @@
 = form_for(@appointment, :html => { :class => "form-horizontal" }) do |f|
-  - if @appointment.errors.any?
-    %div#errorExplanation
-      %h2
-        = pluralize(@appointment.errors.count, "error")
-        prohibited this customer from being saved
-      %ul
-      - @appointment.errors.full_messages.each do |msg|
-        %li
-          = msg
+  = f.error_messages :header_message => "There were problems with the following fields:",
+    :message => "",
+    :header_tag => :h3
 
   %fieldset
     %div.control-group

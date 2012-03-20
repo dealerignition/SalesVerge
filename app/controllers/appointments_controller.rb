@@ -18,7 +18,6 @@ class AppointmentsController < ApplicationController
       flash[:notice] = "Appointment was successfully created."
     else
       render 'new'
-      flash[:error] = "Appointment was not created."
     end
   end
   

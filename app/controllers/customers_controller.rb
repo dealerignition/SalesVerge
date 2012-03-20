@@ -31,7 +31,6 @@ class CustomersController < ApplicationController
       redirect_to @customer
       flash[:notice] = "Customer was successfully created."
     else
-      flash[:error] = "Customer was not successfully created."
       render :action => "new"
     end
   end
@@ -47,7 +46,6 @@ class CustomersController < ApplicationController
       flash[:notice] = "Customer was successfully updated."
     else
       redirect_to edit_customer_path(@customer)
-      flash[:error] = "Update failed."
     end
   end
   
