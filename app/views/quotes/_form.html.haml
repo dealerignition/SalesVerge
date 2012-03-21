@@ -28,6 +28,7 @@
       %th Price
       %th Quantity
       %th Total
+      %th
     - @quote.charges.each do |charge|
       %tr
         %td= charge.date.to_s(:long)
@@ -35,6 +36,8 @@
         %td= number_to_currency(charge.price)
         %td= "%g" % charge.quantity
         %td= number_to_currency(charge.total)
+        %td
+          = link_to '×', [@quote, charge], :confirm => "Are you sure you want to delete '#{charge.description}' from this quote?", :method => :delete, :class => "close"
     %tr
       %td
       %td
@@ -45,6 +48,7 @@
       %td
         %strong
           = number_to_currency(@quote.charge_total)
+      %td
 
   %div.form-actions.btn-group
     = f.submit(:class => "btn btn-primary btn-large")

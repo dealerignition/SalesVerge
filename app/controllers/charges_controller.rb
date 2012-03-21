@@ -19,5 +19,14 @@ class ChargesController < ApplicationController
       render :action => "new"
     end
   end
+  
+  def destroy
+    @charge = Charge.find(params[:id])
+    @quote = Quote.find(params[:quote_id])
+    @charge.destroy
+
+    flash[:notice] = "Charge delete."
+    redirect_to edit_quote_path(@quote)
+  end
 
 end
