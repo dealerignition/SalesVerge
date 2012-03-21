@@ -70,9 +70,12 @@
       %thead
         %th Name
         %th Customer
+        %th Out for
       - @checked_out_samples.each do |checked_out_sample|
         %tr
           %td
             = checked_out_sample.sample.name
           %td
             = link_to "#{checked_out_sample.customer.first_name if checked_out_sample.customer.first_name} #{checked_out_sample.customer.last_name if checked_out_sample.customer.last_name}", checked_out_sample.customer
+          %td
+            = distance_of_time_in_words(checked_out_sample.checkout_time, Time.now)
