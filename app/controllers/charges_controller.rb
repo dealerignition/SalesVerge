@@ -14,7 +14,7 @@ class ChargesController < ApplicationController
     @quote = Quote.find(params[:quote_id])
     @charge = Charge.new(params[:charge], :date => Time.now)
     if @charge.save
-      redirect_to(edit_quote_path(@quote), :notice => 'Charge was successfully created.')
+      redirect_to(quote_path(@quote), :notice => 'Charge was successfully created.')
     else
       render :action => "new"
     end
@@ -26,7 +26,7 @@ class ChargesController < ApplicationController
     @charge.destroy
 
     flash[:notice] = "Charge delete."
-    redirect_to edit_quote_path(@quote)
+    redirect_to quote_path(@quote)
   end
 
 end

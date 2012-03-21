@@ -1,0 +1,42 @@
+%div.page-header
+  %h1 
+    Quote for
+    =@quote.customer.first_name
+    =@quote.customer.last_name
+    
+  %div.form-actions
+    = link_to quotes_path, { :class => "btn btn-large" } do
+      %i{ :class => "icon-arrow-left" }
+      Back
+    = link_to "Add a Charge", new_quote_charge_path(@quote), { :class => "btn btn-large btn-success" }
+    %div.pull-right
+      = link_to "Change Customer", edit_quote_path(@quote), { :class => "btn btn-large" }
+
+%table{ :class => "table table-striped" }
+  %thead
+    %th Date
+    %th Service/Product
+    %th Price
+    %th Quantity
+    %th Total
+    %th
+  - @quote.charges.each do |charge|
+    %tr
+      %td= charge.date.to_date.to_s(:long_ordinal)
+      %td= charge.description
+      %td= number_to_currency(charge.price)
+      %td= "%g" % charge.quantity
+      %td= number_to_currency(charge.total)
+      %td
+        = link_to '×', [@quote, charge], :confirm => "Are you sure you want to delete '#{charge.description}' from this quote?", :method => :delete, :class => "close"
+  %tr
+    %td
+    %td
+    %td
+    %td
+      %strong
+        Total
+    %td
+      %strong
+        = number_to_currency(@quote.charge_total)
+    %td

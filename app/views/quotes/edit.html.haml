@@ -1,12 +1,19 @@
 %div.page-header
-  %p
-    = link_to quotes_path, { :class => "btn btn-large" } do
-      %i{ :class => "icon-arrow-left" }
-      Back
-
   %h1 
     Edit Quote for
     =@quote.customer.first_name
     =@quote.customer.last_name
 
-= render "form"
+= form_for(@quote) do |f|
+  = f.error_messages :header_message => "There were problems with the following fields:",
+    :message => "",
+    :header_tag => :h3
+
+  %div.form-actions
+    = link_to quote_path(@quote), { :class => "btn btn-large" } do
+      %i{ :class => "icon-arrow-left" }
+      Back
+    = f.submit(:class => "btn btn-primary btn-large")
+
+  = f.label :customer_id, "Who is this quote for?"
+  = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
