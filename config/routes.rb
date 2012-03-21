@@ -1,5 +1,7 @@
 DealerOnTheGo::Application.routes.draw do
 
+  get "about/index"
+
   get "dashboard/index"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
