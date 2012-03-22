@@ -6,17 +6,20 @@ FactoryGirl.define do
     last_name "Doe"
     email { "#{first_name}.#{last_name}@example.com".downcase }
     password "test"
+    role "salesrep"
 
     dealer
 
     factory :owner do
       first_name "Owner"
+      role "owner"
     end
 
-    factory :salesman do
-      first_name "Salesman"
+    factory :salesrep do
+      first_name "Salesrep"
+      role "salesrep"
 
-      factory :salesman_with_customers do
+      factory :salesrep_with_customers do
         ignore do
           customer_count 15
         end
@@ -29,6 +32,7 @@ FactoryGirl.define do
 
     factory :admin do
       first_name "Admin"
+      role "admin"
     end
   end
 end
