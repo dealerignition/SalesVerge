@@ -1,19 +1,13 @@
 DealerOnTheGo::Application.routes.draw do
 
   get "about/index"
-
-  get "dealers/new"
-
-  get "dealers/edit"
-
   get "account_settings/account"
   get "account_settings/dealer"
   get "account_settings/users"
   get "dashboard/index"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
-  get "signup" => "users#new", :as => "signup"
-  
+  get "signup" => "users#new", :as => "signup" 
   get "users/admin_create"
 
   resources :appointments
