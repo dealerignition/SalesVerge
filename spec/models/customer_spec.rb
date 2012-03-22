@@ -6,6 +6,7 @@ describe Customer do
   it { should validate_presence_of :last_name }
   it { should have_many :appointments }
   it { should have_many :quotes }
+  it { should belong_to :user }
 end
 
 describe Appointment do

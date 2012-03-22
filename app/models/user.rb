@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :appointments
   has_many :quotes
   has_many :sample_checkouts
+  has_many :customers
   
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
 
