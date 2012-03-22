@@ -53,11 +53,12 @@
           %th Customer
           %th
         - @late_appointments.each do |appointment|
-          %td= appointment.appointment_type
-          %td
-            = link_to "#{appointment.customer.first_name} #{appointment.customer.last_name}", appointment.customer
-          %td
-            = link_to "View", appointments_path, { :class => "btn" }
+          %tr
+            %td= appointment.appointment_type
+            %td
+              = link_to "#{appointment.customer.first_name} #{appointment.customer.last_name}", appointment.customer
+            %td
+              = link_to "View", appointments_path, { :class => "btn" }
     - else
       %span.label.label-success You have no late appointments.
       
