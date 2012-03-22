@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :dealer do
-    name "MyString"
-    logo "MyString"
+    name "Test Dealer"
+    logo "http://dealerignition.com/images/dealer_ignition_logo.png"
   end
 end
