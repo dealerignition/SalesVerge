@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120322155225) do
+ActiveRecord::Schema.define(:version => 20120322202428) do
 
   create_table "appointments", :force => true do |t|
     t.date     "date"
@@ -102,10 +102,11 @@ ActiveRecord::Schema.define(:version => 20120322155225) do
     t.string   "crypted_password"
     t.string   "salt"
     t.integer  "dealer_id"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
+    t.boolean  "active",                       :default => true
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

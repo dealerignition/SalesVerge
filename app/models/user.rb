@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :sample_checkouts
   has_many :customers
   
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :dealer_id
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :dealer_id, :active
 
   validates_presence_of :first_name
   validates_presence_of :last_name
@@ -15,4 +15,5 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   validates_presence_of :email
   validates_uniqueness_of :email
+  
 end
