@@ -3,7 +3,3 @@ class Store < ActiveRecord::Base
   belongs_to :dealer
   has_many :samples
 end
-
-class Dealer
-  has_many :stores
-end
