@@ -1,3 +1,24 @@
 // Place all the styles related to the About controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div#about{
+  .hero-unit {
+    background: #333;
+    h1, h2 {
+      color: #fff;}
+  }
+  .well {
+    border: 1px solid #46a546;
+  }
+}
+
+@media (max-width: 979px) and (min-width: 768px) {
+  div#about {
+    input.span3, textarea.span3, .uneditable-input.span3 {
+    width:152px;
+    }
+  }
+}
+
+
