@@ -10,9 +10,19 @@
       - @dealer.users.each do |user|
         %tr
           %td
-            = user.first_name
-            = user.last_name
-          %td= user.email
-          %td= link_to "Deactivate", "#", { :class => "btn btn-danger", :confirm => "Are you sure you want to deactivate #{user.first_name}?" }
+            %span{ :class => !user.active? && "help-block" }
+              = user.first_name
+              = user.last_name
+          %td
+            %span{ :class => !user.active? && "help-block" }
+              = user.email
+          %td
+            = form_for user do |f|
+              - if user.active?
+                = f.submit( "Deactivate", :class => "btn btn-danger", :confirm => "Are you sure you want to deactivate #{user.first_name}?")
+                = f.hidden_field :active, :value => false
+              - else
+                = f.submit( "Reactivate", :class => "btn", :confirm => "Are you sure you want to reactivate #{user.first_name}?")
+                = f.hidden_field :active, :value => true
     %h3 Create new user
     = render 'users/admin_form'
