@@ -8,6 +8,7 @@ gem 'rake', '>= 0.9.2.2'
 gem 'rapleaf_api'
 gem 'sorcery'
 gem 'twitter-bootstrap-rails'
+gem 'mailcatcher'
 
 group :development, :test do
   gem 'sqlite3'
