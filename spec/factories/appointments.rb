@@ -6,5 +6,6 @@ FactoryGirl.define do
     time "2012-03-07 09:05:39"
     customer_id 1
     status "Pending"
+    user_id 1
   end
 end

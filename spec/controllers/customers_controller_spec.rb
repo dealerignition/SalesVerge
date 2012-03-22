@@ -4,6 +4,7 @@ describe CustomersController do
 
   describe "GET 'index'" do
     before do
+      login_user FactoryGirl.create(:user)
       @customers = FactoryGirl.create_list :customer, 25
       get :index
     end
@@ -15,6 +16,7 @@ describe CustomersController do
 
   describe "GET '/:customerid'" do
     before do
+      login_user FactoryGirl.create(:user)
       @customer = FactoryGirl.create :customer
       get :show, :id => @customer.id
     end
@@ -26,6 +28,7 @@ describe CustomersController do
 
   describe "GET '/new'" do
     before do
+      login_user FactoryGirl.create(:user)
       get :new
     end
 
