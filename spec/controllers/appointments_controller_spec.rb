@@ -4,6 +4,7 @@ describe AppointmentsController do
 
   describe "GET 'index'" do
     before do
+      login_user FactoryGirl.create(:user)
       FactoryGirl.create_list :appointment, 25
       @appointments = Appointment.order("status DESC, date ASC").all
       get :index
@@ -15,6 +16,7 @@ describe AppointmentsController do
 
   describe "GET '/new'" do
     before do
+      login_user FactoryGirl.create(:user)
       @customers = FactoryGirl.create_list :customer, 25
       get :new
     end

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :quotes
   has_many :sample_checkouts
   
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :dealer_id
 
   validates_presence_of :first_name
   validates_presence_of :last_name
