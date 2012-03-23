@@ -47,6 +47,11 @@
         %a.close{ "data-dismiss" => "alert" }
           &times;
         = flash[:notice]
+    - if flash[:alert]
+      %div.alert.alert-info
+        %a.close{ "data-dismiss" => "alert" }
+          &times;
+        = flash[:alert]
     - if flash[:error]
       %div.alert.alert-error
         %a.close{ "data-dismiss" => "alert" }

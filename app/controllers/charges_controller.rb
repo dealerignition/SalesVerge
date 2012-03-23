@@ -1,5 +1,6 @@
 class ChargesController < ApplicationController
   before_filter :require_login
+  before_filter :confirm_active
 
   def new
     @quote = Quote.find(params[:quote_id])

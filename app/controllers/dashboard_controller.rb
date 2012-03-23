@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   before_filter :require_login
+  before_filter :confirm_active
   
   def index
     @customers = Customer.order("created_at ASC").last(5)
