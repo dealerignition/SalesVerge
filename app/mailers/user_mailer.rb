@@ -4,7 +4,7 @@ class UserMailer < ActionMailer::Base
   def welcome_email(user)
       @user = user
       @url  = "http://floorstoreonthego.com"
-      mail(:to => user.email, :subject => "Welcome to DealerOnTheGo")
+      mail(:to => @user.email, :subject => "Welcome to DealerOnTheGo")
   end
   
 end
