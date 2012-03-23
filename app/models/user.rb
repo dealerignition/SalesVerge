@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  before_save :downcase_email
+  
   authenticates_with_sorcery!
   
   belongs_to :dealer
@@ -16,4 +18,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
   
+  def downcase_email
+    self.email.downcase! if self.email
+  end
 end
