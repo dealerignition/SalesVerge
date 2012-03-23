@@ -6,10 +6,10 @@ class DealersController < ApplicationController
   def create
     @dealer = Dealer.new(params[:dealer])
     if @dealer.save
-      redirect_to root_url
-      flash[:notice] = "Dealer created!"
+      flash[:notice] = "Account was successfully created! You may now login with the email address #{@dealer.users.first.email}."
+      redirect_to login_path
     else
-      redirect_to root_url
+      render :new
     end
   end
 
