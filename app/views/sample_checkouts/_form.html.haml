@@ -11,36 +11,15 @@
   
   %fieldset
     %div.control-group
-      = f.label "Who is checking out the sample(s)?", { :class => "control-label" }
+      = f.label "Choose Customer", { :class => "control-label" }
       %div.controls
         = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
     %div.control-group
-      = f.label "Which samples are being checked out?", { :class => "control-label" }
+      = f.label "Choose Sample(s)", { :class => "control-label" }
       %div.controls
         = f.select(:sample_id, options_from_collection_for_select(@samples, :id, :name), {:multiple => "true", "data-native-menu" => "false"})
 
-        = link_to "Create New Sample", new_sample_path, { :class => "btn" }
-        %a.btn{ "data-toggle" => "modal", :href => "#myModal", :show => "false" } Launch Modal
-
-    %div.form-actions.btn-group
+    %div.form-actions
       = f.submit("Checkout", :class => "btn btn-primary btn-large")
-      = link_to "Cancel", :back, { :class => "btn btn-large" }
-    = f.hidden_field :checkout_time, :value => Time.now
-    = f.hidden_field :user_id, :value => current_user.id
-
-
-%div.modal.hide.fade#myModal
-  %div.modal-header
-    %a.close{ "data-dismiss" => "modal" }
-      ×
-    %h3 Modal header
-  %div.modal-body
-    %p One fine body
-  %div.modal-footer
-    %a.btn{ "data-dismiss" => "modal" }
-      Cancel
-    %a.btn.btn-primary{ :href => "#" }
-      Save changes
-      
-:javascript
-  $('#myModal').modal('hide')
+      = f.hidden_field :checkout_time, :value => Time.now
+      = f.hidden_field :user_id, :value => current_user.id

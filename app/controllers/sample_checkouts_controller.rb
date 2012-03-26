@@ -10,6 +10,7 @@ class SampleCheckoutsController < ApplicationController
     @sample_checkout = SampleCheckout.new
     @samples = Sample.all
     @customers = Customer.all
+    @sample = Sample.new
   end
   
   def create
