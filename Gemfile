@@ -19,6 +19,10 @@ group :development, :test do
   gem 'mailcatcher'
 end
 
+group :production, :test do
+  gem 'thin'  
+end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
