@@ -17,10 +17,11 @@ class UsersController < ApplicationController
   def admin_create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to :back
       flash[:notice] = "User created!"
+      redirect_to :back
     else
-      render :new
+      flash[:error] = "There were errors creating your new user."
+      redirect_to :back
     end
   end
   

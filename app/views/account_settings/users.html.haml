@@ -24,5 +24,8 @@
               - else
                 = f.submit( "Reactivate", :class => "btn", :confirm => "Are you sure you want to reactivate #{user.first_name}?")
                 = f.hidden_field :active, :value => true
-    %h3 Create new user
-    = render 'users/admin_form'
+    
+    = link_to "#myModal", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-primary" } do
+      %i.icon-plus-sign.icon-white
+      Create New User
+= render 'users/admin_form'
