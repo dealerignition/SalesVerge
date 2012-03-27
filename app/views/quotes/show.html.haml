@@ -29,7 +29,7 @@
       %td= "%g" % charge.quantity
       %td= number_to_currency(charge.total)
       %td
-        = link_to '×', [@quote, charge], :confirm => "Are you sure you want to delete '#{charge.description}' from this quote?", :method => :delete, :class => "close"
+        = button_to 'Remove', [@quote, charge], :confirm => "Are you sure you want to remove '#{charge.description}' from this quote?", :method => :delete, :class => "btn btn-danger"
   %tr
     %td
     %td
