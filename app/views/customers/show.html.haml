@@ -9,7 +9,8 @@
   
 %div.row
   %div.span2
-    = image_tag "http://placekitten.com/120/#{rand(100..120)}", :class => "avatar"
+    - r = Random.new
+    = image_tag "http://placekitten.com/120/#{r.rand(100..120)}", :class => "avatar"
     
   %div.span5
     %h6 Basic Info
