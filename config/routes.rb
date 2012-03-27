@@ -5,7 +5,7 @@ DealerOnTheGo::Application.routes.draw do
   get "account_settings/account"
   get "account_settings/dealer"
   get "account_settings/users"
-  get "dashboard/index"
+  get "dashboard" => "dashboard#index", :as => "dashboard"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "dealers#new", :as => "signup" 

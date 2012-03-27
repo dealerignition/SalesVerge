@@ -14,6 +14,9 @@ class DealersController < ApplicationController
       @user.dealer = @dealer
       @user.save
 
+      flash[:notice] = "Account was successfully created! Welcome to your dashboard."
+      auto_login(@user)
+      redirect_to dashboard_path
     else
       render :new
     end
