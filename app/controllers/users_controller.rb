@@ -1,21 +1,7 @@
 class UsersController < ApplicationController
-  def new
-    @user = User.new
-    @dealers = Dealer.all
-  end
-
   def create
     @user = User.new(params[:user])
-    if @user.save
-      redirect_to login_path
-      flash[:notice] = "Signed up! You can now log in."
-    else
-      render :new
-    end
-  end
-  
-  def admin_create
-    @user = User.new(params[:user])
+
     if @user.save
       flash[:notice] = "User created!"
       redirect_to :back
@@ -24,7 +10,7 @@ class UsersController < ApplicationController
       redirect_to :back
     end
   end
-  
+
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])

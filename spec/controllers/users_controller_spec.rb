@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe UsersController do
 
-  describe "GET 'new'" do
-    it "returns http success" do
-      get 'new'
-      response.should be_success
+  describe "GET 'new' should render an empty User form" do
+    before do
+      get :create
     end
+
+    it { should respond_with :missing }
   end
 
 end

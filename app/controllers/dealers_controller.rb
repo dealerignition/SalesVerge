@@ -1,13 +1,19 @@
 class DealersController < ApplicationController
   def new
     @dealer = Dealer.new
+    @user = User.new
   end
 
   def create
     @dealer = Dealer.new(params[:dealer])
-    if @dealer.save
-      flash[:notice] = "Account was successfully created! You may now login with the email address #{@dealer.users.first.email}."
-      redirect_to login_path
+    @user = User.new(params[:user])
+    @user.role = "owner"
+
+    if @user.valid? and @dealer.valid?
+      @dealer.save
+      @user.dealer = @dealer
+      @user.save
+
     else
       render :new
     end

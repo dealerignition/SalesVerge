@@ -1,8 +1,11 @@
-- @dealer.users.build
 = form_for @dealer, :html => { :class => "form-horizontal" } do |f|
-  = f.error_messages :header_message => "There were problems with the following fields:",
-    :message => "",
-    :header_tag => :h3
+  - unless @dealer.errors.empty? and @user.errors.empty?
+    #errorExplanation.errorExplanation
+      %h3 There were problems with the following fields:
+      %ul
+        - (@user.errors.to_a + @dealer.errors.to_a).each do |error|
+          %li
+            = error
   %fieldset
     %h3 Store info
     %div.control-group
@@ -11,27 +14,26 @@
         = f.text_field :name, :placeholder => "Your Carpet Store"
   %fieldset
     %h3 Personal info
-    = f.fields_for :users do |builder|
-      %div.control-group
-        = builder.label :first_name, { :class => "control-label" }
-        %div.controls
-          = builder.text_field :first_name, :placeholder => "Joe"
-      %div.control-group
-        = builder.label :last_name, { :class => "control-label" }
-        %div.controls
-          = builder.text_field :last_name, :placeholder => "Smith"
-      %div.control-group
-        = builder.label :email, { :class => "control-label" }
-        %div.controls
-          = builder.text_field :email, :placeholder => "joe@mycarpet.com"
-      %div.control-group
-        = builder.label :password, { :class => "control-label" }
-        %div.controls
-          = builder.password_field :password
-      %div.control-group
-        = builder.label :password_confirmation, { :class => "control-label" }
-        %div.controls
-          = builder.password_field :password_confirmation
+    %div.control-group
+      = label :user, :first_name, { :class => "control-label" }
+      %div.controls
+        = text_field :user, :first_name, :placeholder => "Joe"
+    %div.control-group
+      = label :user, :last_name, { :class => "control-label" }
+      %div.controls
+        = text_field :user, :last_name, :placeholder => "Smith"
+    %div.control-group
+      = label :user, :email, { :class => "control-label" }
+      %div.controls
+        = text_field :user, :email, :placeholder => "joe@mycarpet.com"
+    %div.control-group
+      = label :user, :password, { :class => "control-label" }
+      %div.controls
+        = password_field :user, :password
+    %div.control-group
+      = label :user, :password_confirmation, { :class => "control-label" }
+      %div.controls
+        = password_field :user, :password_confirmation
         
     %div.form-actions
       = f.submit( "Create Account", :class => "btn btn-primary btn-large" )
