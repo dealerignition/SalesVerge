@@ -1,5 +1,6 @@
 class QuotesController < ApplicationController
   before_filter :require_login
+  before_filter :confirm_active
   
   def index
     @quotes = Quote.order("created_at DESC").all

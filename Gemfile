@@ -9,18 +9,19 @@ gem 'rapleaf_api'
 gem 'sorcery'
 gem 'twitter-bootstrap-rails'
 gem 'cancan'
+gem 'pg'
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'shoulda'
   gem 'autotest-rails'
   gem 'foreman'
   gem 'factory_girl_rails'
+  gem 'mailcatcher'
 end
 
-group :production do
-  gem 'mysql'
+group :production, :test do
+  gem 'thin'  
 end
 
 # Gems used only for assets and not required

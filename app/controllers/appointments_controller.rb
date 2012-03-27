@@ -1,5 +1,6 @@
 class AppointmentsController < ApplicationController
   before_filter :require_login
+  before_filter :confirm_active
   
   def index
     @appointments = Appointment.order("status DESC, date ASC").all

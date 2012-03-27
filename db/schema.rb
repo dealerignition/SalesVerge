@@ -102,10 +102,11 @@ ActiveRecord::Schema.define(:version => 20120322202905) do
     t.string   "crypted_password"
     t.string   "salt"
     t.integer  "dealer_id"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
+    t.boolean  "active",                       :default => true
     t.string   "role"
   end
 

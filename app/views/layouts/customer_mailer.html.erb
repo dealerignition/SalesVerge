@@ -1,0 +1,167 @@
+<html lang="en">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<style type="text/css">
+	body {
+		font-family: Helvetica, Arial, sans-serif;
+		background: #f5f5f5;
+	}
+	a:hover { 
+		text-decoration: none !important; 
+	}
+	h1 {
+		color: #fff !important; 
+		font: normal 33px Helvetica, Arial, sans-serif; 
+		margin: 0; 
+		padding: 0; 
+		line-height: 33px;
+	}
+	h2 {
+		color:#444444 !important;
+		font-weight: normal;
+		margin: 5px 0; 
+		padding: 0;
+		line-height: 30px; 
+		font-size: 30px;
+		font-family: Helvetica, Arial, sans-serif;
+	}
+	h3 {
+		
+	}
+	.header p {
+		color: #dfa575; 
+		font: normal 11px Helvetica, Arial, sans-serif; 
+		margin: 0; 
+		padding: 0; 
+		line-height: 11px; 
+		letter-spacing: 2px
+	}
+	.main {
+		border: 1px solid #d0d0d0;
+		padding: 30px;
+	}
+	.sidebar ul { 
+		color: # 333333; 
+		margin: 0 0 0 10px; 
+		padding: 0 0 0 5px; 
+		font-size: 12px;
+		font-family: Helvetica, Arial, sans-serif
+	}
+	.sidebar ul li {
+		padding: 0 0 5px;
+		margin: 0;
+	}
+	.sidebar p {
+		line-height: 16px;
+		font-size: 14px;
+		font-family: Helvetica, Arial, sans-serif;
+		margin: 5px 0;
+	}
+	.sidebar p a {
+		color: #1F33B2;
+		text-decoration: none;
+	}
+	div.hr {
+		border-top: 1px solid #E5E5E5;
+	}
+	.content {
+		padding: 0 0 0 40px;
+	}
+	.content p {
+		color:#444;
+		font-weight: normal;
+		margin: 5px 0;
+		padding: 0;
+		line-height: 20px;
+		font-size: 14px;
+		font-family: Helvetica, Arial, sans-serif;
+	}
+	.content a {
+		color: #1F33B2;
+		text-decoration: none;
+	}
+	.footer {
+		padding: 5px 0;
+	}
+	.footer p {
+		padding: 0;
+		font-size: 11px;
+		color:#999;
+		margin: 0;
+		font-family: Helvetica, Arial, sans-serif;
+	}
+	.footer a {
+		color: #3b2ab0;
+		text-decoration: none;
+	}
+	</style>
+<head>
+<body>
+<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" style="background: #f5f5f5;">
+	  <tr>
+	  	<td align="center">
+		    <table cellpadding="0" cellspacing="0" border="0" align="center" width="650">
+		      <tr>
+		        <td bgcolor="#d9d9d9" align="center" height="15"></td>
+		      </tr>
+			</table><!-- header-->
+			
+			<table cellpadding="0" cellspacing="0" border="0" align="center" width="650" bgcolor="#ffffff" class="main">
+		      <tr>
+		        <td width="14">&nbsp;</td>
+				<td width="150" valign="top" align="left" bgcolor="#ffffff" class="sidebar">
+					<table cellpadding="0" cellspacing="0" border="0" width="150" bgcolor="#ffffff">
+					<tr>
+						<td>			
+							<img src="#" width="150" height="100px" />
+								<p><strong>
+									For the Home Inc.
+								</strong></p>
+							<div class="hr"></div>
+								<p>
+									123 Bonniville St.
+								<br>
+									Mayberry, SD
+								<br>
+									78965
+								</p>
+							<div class="hr"></div>
+								<p>
+									785-545-8952
+								</p>
+							<div class="hr"></div>
+								<p>
+									<a href="#">website.com</a>
+								</p>
+						</td>
+					</tr>
+					</table>
+				</td>
+				
+				<td width="390" valign="top" align="left" bgcolor="#ffffff" class="content">
+					<table cellpadding="0" cellspacing="0" border="0" width="390">
+					<tr>
+					
+					 <%= yield %>
+
+					</tr>
+					</table>	
+				</td><!-- content-->
+				
+				<td width="16" bgcolor="#ffffff">&nbsp;</td>
+		      </tr>
+			</table><!-- body -->
+			
+			<table cellpadding="0" cellspacing="0" border="0" align="center" width="650" class="footer">
+		      <tr>
+		        <td align="center" valign="top">
+					<p>You are recieving this email</p>
+				</td>
+		      </tr> 
+			</table><!-- footer-->
+			
+	  	</td>
+	</tr>
+</table>
+</body>
+</html>

@@ -1,5 +1,6 @@
 class SampleCheckoutsController < ApplicationController
   before_filter :require_login
+  before_filter :confirm_active
   
   def index
     @checked_out_samples = SampleCheckout.find_all_by_checkin_time(nil)
@@ -9,6 +10,7 @@ class SampleCheckoutsController < ApplicationController
     @sample_checkout = SampleCheckout.new
     @samples = Sample.all
     @customers = Customer.all
+    @sample = Sample.new
   end
   
   def create

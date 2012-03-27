@@ -1,5 +1,6 @@
 class SamplesController < ApplicationController
   before_filter :require_login
+  before_filter :confirm_active
   
   def index
     @samples = Sample.all
@@ -12,10 +13,11 @@ class SamplesController < ApplicationController
   def create
     @sample = Sample.new(params[:sample])
     if @sample.save
+      flash[:notice] = "#{@sample.name} was successfully created."
       redirect_to :back
-      flash[:notice] = "Sample was successfully created."
     else
-      render :action => "new"
+      flash[:error] = "Sample was not successfully created."
+      redirect_to :back
     end
   end
   

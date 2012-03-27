@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  before_save :downcase_email
+  
   authenticates_with_sorcery!
   
   belongs_to :dealer
@@ -7,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :sample_checkouts
   has_many :customers
   
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :dealer_id
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :dealer_id, :active
 
   validates_presence_of :first_name
   validates_presence_of :last_name
@@ -28,5 +30,9 @@ class User < ActiveRecord::Base
 
   def salesrep?
     role == "salesrep"
+  end
+  
+  def downcase_email
+    self.email.downcase! if self.email
   end
 end

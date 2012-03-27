@@ -31,5 +31,5 @@
         = checked_out_sample.user.last_name[0]
       %td
         = form_for(checked_out_sample) do |f|
-          = f.submit("Check-in", :class => "btn btn-large btn-primary")
+          = f.submit("Check-in", :class => "btn btn-large btn-primary", :confirm => "Are you sure #{checked_out_sample.sample.name} has been returned to the store?")
           = f.hidden_field :checkin_time, :value => Time.now
