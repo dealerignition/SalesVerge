@@ -1,0 +1,2 @@
+web: rails server
+mail: mailcatcher -f
