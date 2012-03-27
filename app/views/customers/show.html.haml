@@ -1,6 +1,6 @@
 %div.page-header
   %p
-    = link_to customers_path, { :class => "btn btn-large" } do
+    = link_to :back, { :class => "btn btn-large" } do
       %i{ :class => "icon-arrow-left" }
       Back
   %h1
@@ -78,18 +78,9 @@
         %td= quote.created_at.to_s(:long)
         %td= number_to_currency(quote.charge_total)
         %td
-          = link_to "View Quote", edit_quote_path(quote), { :class => "btn" }
+          = link_to "View Quote", quote_path(quote), { :class => "btn" }
 - else
   %p= link_to "Create a quote", new_quote_path, { :class => "btn" }
-
-%div.page-header
-  %h2 Measurements
-%table
-  %thead
-    %th Room Name
-    %th Width
-    %th Length
-    %th Area
   
 %div.page-header    
   %h2 Notes

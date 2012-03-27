@@ -2,14 +2,12 @@
   %h1 Checkout Sample(s)
 
 %div.form-actions
-  = link_to sample_checkouts_path, { :class => "btn btn-large" } do
+  = link_to :back, { :class => "btn btn-large" } do
     %i{ :class => "icon-arrow-left" }
     Back
-  %div.pull-right  
-    = link_to "#myModal", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
-      %i.icon-plus-sign.icon-white
-      Create New Sample
+  = link_to "#myModal", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
+    %i.icon-plus-sign.icon-white
+    Create New Sample
 
 = render "form"
-
 = render 'samples/form'

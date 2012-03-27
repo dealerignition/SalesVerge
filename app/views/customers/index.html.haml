@@ -8,8 +8,6 @@
     = link_to new_customer_path, { :class => "btn btn-primary btn-large" } do
       %i{ :class => "icon-user icon-white" }
       Create New Customer
-
 %div.row
   %table.table.table-striped
-    - @customers.each do |customer|
-      = render customer
+    = render @customers
