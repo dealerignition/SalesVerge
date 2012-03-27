@@ -3,11 +3,11 @@
 development:
   adapter: postgresql
   encoding: unicode
-  host: localhost
-  database: Dealer-on-the-Go_development
+  host: 10.0.1.43
+  database: dotg_development
   pool: 5
   username: postgres
-  password: flyers1
+  password: kudzu123
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -15,17 +15,17 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  host: localhost
-  database: Dealer-on-the-Go_test
+  host: 10.0.1.43
+  database: dotg_test
   pool: 5
   username: postgres
-  password: flyers1
+  password: kudzu123
 
 production:
   adapter: postgresql
   encoding: unicode
   host: localhost
-  database: Dealer-on-the-Go_production
+  database: dotg_production
   pool: 5
   username: postgres
   password: flyers1
