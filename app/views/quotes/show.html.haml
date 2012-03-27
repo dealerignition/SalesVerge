@@ -5,10 +5,9 @@
     =@quote.customer.last_name
     
   %div.form-actions
-    = link_to quotes_path, { :class => "btn btn-large" } do
+    = link_to :back, { :class => "btn btn-large" } do
       %i{ :class => "icon-arrow-left" }
       Back
-    /= link_to "Add a Charge", new_quote_charge_path(@quote), { :class => "btn btn-large btn-success" }
     = link_to "#myModal", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
       %i.icon-plus-sign.icon-white
       Add a Charge

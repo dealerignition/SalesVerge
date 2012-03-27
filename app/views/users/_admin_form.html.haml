@@ -31,7 +31,7 @@
             = f.password_field :password_confirmation    
     %div.modal-footer
       %a.btn.btn-large{ "data-dismiss" => "modal" }
-        Close
+        Cancel
       = f.submit( :class => "btn btn-primary btn-large" )
       = f.hidden_field :dealer_id, :value => current_user.dealer_id
 
