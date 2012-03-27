@@ -1,26 +1,35 @@
-= form_for(@charge, :url => { :action => :create }, :html => { :class => "form-horizontal" }) do |f|
-  = f.error_messages :header_message => "There were problems with the following fields:",
-    :message => "",
-    :header_tag => :h3
+%div.modal.hide.fade#myModal
+  %div.modal-header
+    %a.close{ "data-dismiss" => "modal" }
+      ×
+    %h3 Add a Charge
+  = form_for @charge, :url => { :action => "create", :controller => "charges" }, :html => { :class => "form-horizontal" } do |f|
+    %div.modal-body
+      = f.error_messages :header_message => "There were problems with the following fields:",
+        :message => "",
+        :header_tag => :h3
   
-  %fieldset
-    %div.control-group
-      = f.label :description, "What is this charge for?", { :class => "control-label" }
-      %div.controls
-        = f.text_field :description, :placeholder => "Carpet installation"
+      %fieldset
+        %div.control-group
+          = f.label :description, "Description", { :class => "control-label" }
+          %div.controls
+            = f.text_field :description, :placeholder => "Carpet installation"
   
-    %div.control-group
-      = f.label :price, { :class => "control-label" }
-      %div.controls
-        = f.text_field :price, :placeholder => "500"
+        %div.control-group
+          = f.label :price, { :class => "control-label" }
+          %div.controls
+            = f.text_field :price, :placeholder => "500"
   
-  %div.control-group
-    = f.label :quantity, { :class => "control-label" }
-    %div.controls
-      = f.text_field :quantity, :placeholder => "1"
+      %div.control-group
+        = f.label :quantity, { :class => "control-label" }
+        %div.controls
+          = f.text_field :quantity, :placeholder => "1"
 
-  %div.form-actions
-    = f.submit(:class => "btn btn-primary btn-large")
-    = link_to "Cancel", :back, { :class => "btn btn-large" }
-    = f.hidden_field :date, :value => Time.now
-    = f.hidden_field :quote_id, :value => @quote.id
+    %div.modal-footer
+      = f.submit(:class => "btn btn-primary btn-large")
+      = link_to "Cancel", :back, { :class => "btn btn-large" }
+      = f.hidden_field :date, :value => Time.now
+      = f.hidden_field :quote_id, :value => @quote.id
+      
+:javascript
+  $('#myModal').modal('hide')

@@ -8,6 +8,7 @@ class QuotesController < ApplicationController
   
   def show
     @quote = Quote.find(params[:id])
+    @charge = Charge.new
   end
   
   def new
