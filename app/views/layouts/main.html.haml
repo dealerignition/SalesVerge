@@ -44,17 +44,17 @@
   %div.container
     - if flash[:notice]
       %div.alert.alert-success
-        %a.close{ "data-dismiss" => "alert" }
+        %a.close{ :href => "#", "data-dismiss" => "alert" }
           &times;
         = flash[:notice]
     - if flash[:alert]
       %div.alert.alert-info
-        %a.close{ "data-dismiss" => "alert" }
+        %a.close{ :href => "#", "data-dismiss" => "alert" }
           &times;
         = flash[:alert]
     - if flash[:error]
       %div.alert.alert-error
-        %a.close{ "data-dismiss" => "alert" }
+        %a.close{ :href => "#", "data-dismiss" => "alert" }
           &times;
         = flash[:error]
     = yield
