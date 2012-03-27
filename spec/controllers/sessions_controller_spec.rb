@@ -12,7 +12,7 @@ describe SessionsController do
 
   describe "POST 'create' should login and redirect to root with valid credentials" do
     before do
-      @user = Factory.create :user
+      @user = FactoryGirl.create :user
       post :create, {
         :email => @user.email,
         :password => "test"
@@ -26,7 +26,7 @@ describe SessionsController do
 
   describe "POST 'create' should not login with invalid credentials" do
     before do
-      @user = Factory.create :user, :password => "test"
+      @user = FactoryGirl.create :user, :password => "test"
       post :create, {
         :email => @user.email,
         :password => "thisisnotmypassword"
