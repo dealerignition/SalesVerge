@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_email(params[:email])
     if user
       flash[:notice] = "You are now logged in!"
-      redirect_back_or_to root_url
+      redirect_back_or_to dashboard_path
     else
       flash[:error] = "Email or password was invalid."
       render :new

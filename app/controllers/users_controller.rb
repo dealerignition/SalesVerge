@@ -1,13 +1,34 @@
 class UsersController < ApplicationController
+  layout false
+
+  def new
+    @user = User.new
+  end
+
   def create
     @user = User.new(params[:user])
+    @user.role = "salesrep"
+    @user.dealer = current_user.dealer
 
     if @user.save
-      flash[:notice] = "User created!"
-      redirect_to :back
+      data = {
+        :success => true,
+        :data => render_to_string(:partial => "users/user", 
+                                  :locals => { :user => @user })
+      }
+
+      @user = User.new
+      data.merge!({ 
+        :form => render_to_string(:partial => "users/form")
+      })
+
+      render :json => data
     else
-      flash[:error] = "There were errors creating your new user."
-      redirect_to :back
+      render :json => {
+        :success => false,
+        :form => render_to_string(:partial => "users/form", 
+                                  :locals => { :user => @user })
+      }
     end
   end
 

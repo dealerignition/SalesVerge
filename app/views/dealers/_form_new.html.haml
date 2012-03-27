@@ -1,5 +1,7 @@
 = form_for @dealer, :html => { :class => "form-horizontal" } do |f|
   - unless @dealer.errors.empty? and @user.errors.empty?
+    - @dealer.valid?
+    - @user.valid?
     #errorExplanation.errorExplanation
       %h3 There were problems with the following fields:
       %ul

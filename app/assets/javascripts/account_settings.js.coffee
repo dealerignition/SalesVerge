@@ -1,3 +1,14 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$ -> 
+    $('#createUser').modal('hide')
+    $(document).on("submit", '#createUser form', (event) ->
+      event.preventDefault()
+      $.post("/account_settings/users/create", $(this).serialize(), (data) ->
+        if data.success
+          $('#createUser').one('hidden', ->
+            $('#users').append(data.data).hide().slideDown()
+          )
+          $('#createUser').modal('hide')
+
+        $('#createUser').html(data.form)
+      )
+    )

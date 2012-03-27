@@ -1,8 +1,3 @@
-%div.modal.hide.fade#myModal
-  %div.modal-header
-    %a.close{ "data-dismiss" => "modal" }
-      ×
-    %h3 Create new user
   = form_for @user, :url => { :action => "admin_create", :controller => "users" }, :html => { :class => "form-horizontal" } do |f|
     %div.modal-body
       = f.error_messages :header_message => "There were problems with the following fields:",
@@ -34,6 +29,3 @@
         Close
       = f.submit( :class => "btn btn-primary btn-large" )
       = f.hidden_field :dealer_id, :value => current_user.dealer_id
-
-:javascript
-  $('#myModal').modal('hide')

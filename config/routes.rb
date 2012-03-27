@@ -1,15 +1,15 @@
 DealerOnTheGo::Application.routes.draw do
-  root :to => 'dashboard#index'
+  root :to => 'dashboard#index', :as => "dashboard"
 
   get "about/index"
   get "account_settings/account"
   get "account_settings/dealer"
   get "account_settings/users"
-  get "dashboard" => "dashboard#index", :as => "dashboard"
+  get "account_settings/users/create" => "users#new"
+  post "account_settings/users/create" => "users#create", :as => "create_user"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "dealers#new", :as => "signup" 
-  get "users/admin_create"
 
   resources :appointments
   resources :customers
@@ -20,6 +20,4 @@ DealerOnTheGo::Application.routes.draw do
   resources :samples
   resources :sample_checkouts
   resources :sessions
-
-  match ':controller(/:action(/:id))(.:format)'
 end

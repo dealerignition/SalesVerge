@@ -19,7 +19,7 @@ describe SessionsController do
       }
     end
 
-    it { should redirect_to root_url }
+    it { should redirect_to dashboard_path }
     it { controller.should be_logged_in }
     it { should set_the_flash }
   end
