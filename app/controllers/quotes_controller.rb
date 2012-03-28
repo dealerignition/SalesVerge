@@ -3,7 +3,8 @@ class QuotesController < ApplicationController
   before_filter :confirm_active
   
   def index
-    @quotes = Quote.order("created_at DESC").all
+    @quotes = Quote.order("created_at DESC").find_all_by_status(nil)
+    @ended_quotes = Quote.order("created_at DESC").where("status IS NOT null").all
   end
   
   def show
@@ -35,7 +36,7 @@ class QuotesController < ApplicationController
     @quote = Quote.find(params[:id])
     if @quote.update_attributes(params[:quote])
       flash[:notice] = "Quote was successfully updated."
-      redirect_to quote_path(@quote)
+      redirect_to :back
     else
       redirect_to :back
     end
