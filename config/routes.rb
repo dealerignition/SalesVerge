@@ -1,7 +1,7 @@
 DealerOnTheGo::Application.routes.draw do
   root :to => 'dashboard#index', :as => "dashboard"
 
-  get "about/index"
+  get "about" => "about#index"
   get "account_settings/account"
   get "account_settings/dealer"
   get "account_settings/users"
