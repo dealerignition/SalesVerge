@@ -27,7 +27,6 @@
         =quote.user.last_name[0]
       %td= number_to_currency(quote.charge_total)
       %td
-        %div.btn-group
-          = link_to quote_path(quote), { :class => "btn btn-large" } do
-            Add/Remove Charges
-          = link_to "Email", nil, { :class => "btn btn-large btn-primary" }
+        = link_to quote_path(quote), { :class => "btn btn-large" } do
+          Add/Remove Charges
+        = link_to "Email", quote_deliver_customer_mailer_path(quote), { :confirm => "All you sure you want to email this estimate to #{quote.customer.first_name} #{quote.customer.last_name} (#{quote.customer.email}).", :class => "btn btn-large btn-primary" }

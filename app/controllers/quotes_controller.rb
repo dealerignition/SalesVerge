@@ -40,4 +40,12 @@ class QuotesController < ApplicationController
       redirect_to :back
     end
   end
+  
+  def deliver_customer_mailer
+    @estimate = Quote.find(params[:quote_id])
+    CustomerMailer.estimate(@estimate).deliver
+    flash[:notice] = "Estimate was sucessfully sent."
+    redirect_to :back
+  end
+  
 end

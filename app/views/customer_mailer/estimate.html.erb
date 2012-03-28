@@ -1,0 +1,38 @@
+<h2>Dear <%= @customer.first_name %>,</h2>
+<div class="hr"></div>
+<h3>Here is the estimate we created for you:</h3>
+
+<p>
+<table cellpadding="4" border="1" width="100%">
+  <thead>
+    <th>Service/Product</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Total</th>
+  </thead>
+  <%- @estimate.charges.each do |charge| %>
+    <tr>
+      <td><%= charge.description %></td>
+      <td><%= number_to_currency(charge.price) %></td>
+      <td><%= "%g" % charge.quantity %></td>
+      <td><%= number_to_currency(charge.total) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>
+      <strong>Total</strong>
+    </td>
+    <td>
+      <strong><%= number_to_currency(@estimate.charge_total) %></strong>
+    </td>
+  </tr>
+</table>
+</p>
+<p>Please contact me at any time if you have any questions.</p>
+<div class="hr"></div>
+<p>
+	<%= @estimate.user.first_name %> <%= @estimate.user.last_name %><br />
+	<%= mail_to @estimate.user.email %>
+</p>
