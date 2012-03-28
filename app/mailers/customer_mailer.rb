@@ -16,4 +16,11 @@ class CustomerMailer < ActionMailer::Base
       @dealer = estimate.user.dealer
       mail(:to => @customer.email, :subject => "Here is your estimate")
   end
+  
+  def estimate_won(estimate)
+    @estimate = estimate
+    @customer = estimate.customer
+    @dealer = estimate.user.dealer
+    mail(:to => @customer.email, :subject => "Thank you for your purchase")
+  end
 end

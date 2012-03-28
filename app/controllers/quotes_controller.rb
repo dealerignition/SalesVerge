@@ -42,6 +42,29 @@ class QuotesController < ApplicationController
     end
   end
   
+  def won
+    @quote = Quote.find(params[:quote_id])
+    @quote.status = "won"
+    if @quote.save
+      CustomerMailer.estimate_won(@quote).deliver
+      flash[:notice] = "Quote was successfully updated."
+      redirect_to :back
+    else
+      redirect_to :back
+    end
+  end
+  
+  def lost
+    @quote = Quote.find(params[:quote_id])
+    @quote.status = "lost"
+    if @quote.save
+      flash[:notice] = "Quote was successfully updated."
+      redirect_to :back
+    else
+      redirect_to :back
+    end
+  end
+  
   def deliver_customer_mailer
     @estimate = Quote.find(params[:quote_id])
     CustomerMailer.estimate(@estimate).deliver

@@ -17,6 +17,8 @@ DealerOnTheGo::Application.routes.draw do
   resources :quotes do
     resources :charges
     get :deliver_customer_mailer
+    get :won
+    get :lost
   end
   resources :samples
   resources :sample_checkouts
