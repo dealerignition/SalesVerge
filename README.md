@@ -3,3 +3,6 @@
   - U: admin
   - P: dealer123
   
+# START THE SERVER WITH THIS COMMAND
+    foreman start -f Procfile.dev
+  
