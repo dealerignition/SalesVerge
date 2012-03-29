@@ -7,8 +7,7 @@
   .span9
     %h3 Users
     %table.table.table-striped#users
-      - @dealer.users.each do |user|
-        = render user
+      = render @dealer.users
     
     = link_to "#createUser", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
       %i.icon-plus-sign.icon-white
