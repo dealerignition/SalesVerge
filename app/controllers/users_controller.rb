@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
   layout false
+  load_and_authorize_resource
 
   def new
     @user = User.new
   end
 
+  # This will always be AJAX
   def create
     @user = User.new(params[:user])
     @user.role = "salesrep"
@@ -26,8 +28,7 @@ class UsersController < ApplicationController
     else
       render :json => {
         :success => false,
-        :form => render_to_string(:partial => "users/form", 
-                                  :locals => { :user => @user })
+        :form => render_to_string(:partial => "users/form")
       }
     end
   end

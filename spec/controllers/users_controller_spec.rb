@@ -6,10 +6,12 @@ describe UsersController do
       get :new
     end
 
-    it { should respond_with :success }
-    it { should assign_to(:user).with_kind_of(User) }
-
+    it do
+      should respond_with :success
+      should assign_to(:user).with_kind_of(User)
+    end
   end
+
   describe "POST users/create" do
     context "with valid data" do
       before do
