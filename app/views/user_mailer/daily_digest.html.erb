@@ -1,0 +1,68 @@
+<h1>Here is your digest <%= @user.first_name %></h1>
+
+<p>
+  <table width="100%" border="0" cellpadding="4">
+    <tr align="left">
+      <td>Samples Today</td>
+      <td>Estimates Today</td>
+    </tr>
+    <tr>
+      <td>
+        <h1><%= @samples.count %></h1>
+      </td>
+      <td>
+        <h1><%= @estimates.count %></h1>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p>
+  <%- if @samples && @samples.count > 0 %>
+    <p>
+      <h3>Samples Today | <%= link_to "View All Samples", url_for(:controller => "sample_checkouts", :action => "index", :only_path => false) %> &rarr;</h3>
+      <table width="100%" border="1" cellpadding="4">
+        <thead>
+          <th>Name</th>
+          <th>Customer</th>
+          <th>Rep</th>
+        </thead>
+        <%- @samples.each do |checked_out_sample| %>
+          <tr>
+            <td><%= checked_out_sample.sample.name %></td>
+            <td><%= link_to "#{checked_out_sample.customer.first_name if checked_out_sample.customer.first_name} #{checked_out_sample.customer.last_name if checked_out_sample.customer.last_name}", customer_url(checked_out_sample.customer, :only_path => false) %></td>
+            <td>
+              <%= checked_out_sample.user.first_name %>
+              <%= checked_out_sample.user.last_name[0] %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </p>
+  <% end %>
+
+  <%- if @estimates && @estimates.count > 0 %>
+    <p>
+      <h3>Estimates Today | <%= link_to "View All Estimates", url_for(:controller => "quotes", :action => "index", :only_path => false) %> &rarr;</h3>
+      <table width="100%" border="1" cellpadding="4">
+        <thead>
+          <th>Customer</th>
+          <th>Rep</th>
+          <th>Total</th>
+        </thead>
+        <%- @estimates.each do |estimate| %>
+          <tr>
+            <td><%= estimate.customer.first_name %> <%= estimate.customer.last_name %></td>
+            <td>
+              <%= estimate.user.first_name %>
+              <%= estimate.user.last_name[0] %>
+            </td>
+            <td><%= number_to_currency(estimate.charge_total) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </p>
+  <% end %>
+</p>
+
+<h3><%= link_to "Log in here", url_for(:controller => "sessions", :action => "new", :only_path => false) %> &rarr;</h3>

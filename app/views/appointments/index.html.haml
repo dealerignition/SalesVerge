@@ -28,7 +28,15 @@
           %span.label
             =appointment.time.to_formatted_s(:standard_time)
       %td
-        %span.label.label-info= appointment.appointment_type[0]
+        - if appointment.appointment_type == "Measurement"
+          %span.label.label-inverse= appointment.appointment_type[0..6]
+        - elsif appointment.appointment_type == "Quote"
+          %span.label.label-success= appointment.appointment_type
+        - elsif appointment.appointment_type == "Other"
+          %span.label.label-info= appointment.appointment_type
+        -else
+          %span.label.label-info= appointment.appointment_type
+          
       %td
         = link_to "#{appointment.customer.first_name} #{appointment.customer.last_name}", appointment.customer
       %td

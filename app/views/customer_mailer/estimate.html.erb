@@ -3,35 +3,38 @@
 <h3>Here is the estimate we created for you:</h3>
 
 <p>
-<table cellpadding="4" border="1" width="100%">
+<table cellspacing="0" cellpadding="0" width="100%" class="tablebordered">
   <thead>
-    <th>Service/Product</th>
+    <th class="left">Service/Product</th>
     <th>Price</th>
     <th>Quantity</th>
     <th>Total</th>
   </thead>
+  <tbody>
   <%- @estimate.charges.each do |charge| %>
     <tr>
-      <td><%= charge.description %></td>
-      <td><%= number_to_currency(charge.price) %></td>
+      <td class="left"><%= charge.description %></td>
+      <td class="price"><%= number_to_currency(charge.price) %></td>
       <td><%= "%g" % charge.quantity %></td>
       <td><%= number_to_currency(charge.total) %></td>
     </tr>
   <% end %>
-  <tr>
-    <td></td>
-    <td></td>
-    <td>
-      <strong>Total</strong>
-    </td>
-    <td>
-      <strong><%= number_to_currency(@estimate.charge_total) %></strong>
-    </td>
-  </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>
+        <strong>Total</strong>
+      </td>
+      <td>
+        <strong><%= number_to_currency(@estimate.charge_total) %></strong>
+      </td>
+    </tr>
+  </tfoot>
 </table>
 </p>
 <p>Please contact me at any time if you have any questions.</p>
-<div class="hr"></div>
 <p>
 	<%= @estimate.user.first_name %> <%= @estimate.user.last_name %><br />
 	<%= mail_to @estimate.user.email %>

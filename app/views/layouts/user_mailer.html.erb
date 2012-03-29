@@ -114,7 +114,7 @@ a {
                   <table border="0" cellpadding="10" cellspacing="0" width="600" id="footer">
                     <tr>
                       <td valign="top" class="footerContent" style="border-collapse: collapse;">                    
-                      	<a href="#">update account settings</a>
+                      	<%= link_to "Update account settings", url_for(:controller => "account_settings", :action => "account", :only_path => false) %>
                       </td>
                     </tr>
                   </table>
