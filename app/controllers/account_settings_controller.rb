@@ -1,5 +1,6 @@
 class AccountSettingsController < ApplicationController
   before_filter :require_login
+  skip_authorization_check
   
   def account
     @user = current_user
