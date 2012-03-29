@@ -6,8 +6,8 @@ DealerOnTheGo::Application.configure do
     :address              => "smtp.gmail.com",
     :port                 => 587,
     :domain               => 'floorstoreonthego.com',
-    :user_name            => 'admin@floorstoreonthego.com',
-    :password             => 'dealer123',
+    :user_name            => ENV['EMAIL_USERNAME'],
+    :password             => ENV['EMAIL_PASSWORD'],
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
 
