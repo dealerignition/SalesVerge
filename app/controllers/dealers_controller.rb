@@ -1,9 +1,12 @@
 class DealersController < ApplicationController
+  load_and_authorize_resource
+
   def new
     @dealer = Dealer.new
     @user = User.new
   end
 
+  # Signing Up
   def create
     @dealer = Dealer.new(params[:dealer])
     @user = User.new(params[:user])
