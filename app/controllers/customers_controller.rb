@@ -5,8 +5,8 @@ class CustomersController < ApplicationController
   
   def index
     if params[:search]
-      val = "%#{ params[:search] }%"
-      @customers = Customer.accessible_by(current_ability).where("first_name LIKE ? OR last_name LIKE ? OR email LIKE ?", val, val, val)
+      val = "#{ params[:search].downcase }"
+      @customers = Customer.accessible_by(current_ability).where("(customers.first_name ~* ?) OR (customers.last_name ~* ?) OR (customers.email ~* ?)", val, val, val)
     else
         @customers = Customer.accessible_by(current_ability)
     end
