@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
+  ROLES = ["owner", "admin", "salesrep"]
   before_save :downcase_email
+
   
   authenticates_with_sorcery!
   
@@ -18,7 +20,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
   validates_presence_of :role
-  validates_inclusion_of :role, :in => ["owner", "admin", "salesrep"]
+  validates_inclusion_of :role, :in => ROLES
 
   def admin?
     role == "admin"

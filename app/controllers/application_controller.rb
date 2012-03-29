@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  check_authorization
+
   layout "main"
 
   protect_from_forgery
