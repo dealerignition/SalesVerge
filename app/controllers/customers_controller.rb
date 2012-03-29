@@ -1,13 +1,14 @@
 class CustomersController < ApplicationController
   before_filter :require_login
   before_filter :confirm_active
+  load_and_authorize_resource
   
   def index
     if params[:search]
       val = "%#{ params[:search] }%"
-      @customers = Customer.where("first_name LIKE ? OR last_name LIKE ? OR email LIKE ?", val, val, val)
+      @customers = Customer.accessible_by(current_ability).where("first_name LIKE ? OR last_name LIKE ? OR email LIKE ?", val, val, val)
     else
-      @customers = Customer.all
+        @customers = Customer.accessible_by(current_ability)
     end
 
     respond_to do |format|
