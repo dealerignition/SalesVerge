@@ -16,7 +16,8 @@ class SampleCheckoutsController < ApplicationController
   def create
     @sample_checkout = SampleCheckout.new(params[:sample_checkout])
     if @sample_checkout.save
-      flash[:notice] = "Sample was successfully checked-out."
+      CustomerMailer.sample_checkout(@sample_checkout).deliver
+      flash[:notice] = "Sample was successfully checked-out. An email was sent to #{@sample_checkout.customer.email}."
       redirect_to sample_checkouts_path
     else
       flash[:error] = "Sample was not checked-out."
