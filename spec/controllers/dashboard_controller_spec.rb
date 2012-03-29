@@ -4,7 +4,7 @@ describe DashboardController do
 
   describe "GET 'index'" do
     before do
-      login_user FactoryGirl.create(:user)
+      login_user FactoryGirl.create(:owner)
 
       @customers = FactoryGirl.create_list :customer, 5
       @appointments = FactoryGirl.create_list :appointment, 5
