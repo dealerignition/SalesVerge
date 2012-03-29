@@ -7,9 +7,9 @@ describe CustomersController do
       before do
         @user = FactoryGirl.create :salesrep
         login_user @user
-        @customers = FactoryGirl.create_list :customer, 25, 
+        @customers = FactoryGirl.create_list :customer, 5, 
           :user => @user
-        @others = FactoryGirl.create_list :customer, 25,
+        @others = FactoryGirl.create_list :customer, 5,
           :user => FactoryGirl.create(:salesrep)
 
         get :index
@@ -23,12 +23,13 @@ describe CustomersController do
       before do
         @user = FactoryGirl.create :owner
         login_user @user
-        @customers = FactoryGirl.create_list :customer, 25, 
+        @customers = FactoryGirl.create_list :customer, 5, 
           :user => FactoryGirl.create(:salesrep, :dealer => @user.dealer)
-        @others = FactoryGirl.create_list :customer, 25,
+        @more_customers = FactoryGirl.create_list :customer, 5,
           :user => FactoryGirl.create(:salesrep, :dealer => @user.dealer)
+        @others = FactoryGirl.create_list :customer, 5
 
-        @all = @customers + @others
+        @all = @customers + @more_customers
 
         get :index
       end
