@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 	<style type="text/css">
 	body {
 		font-family: Helvetica, Arial, sans-serif;
@@ -80,12 +80,41 @@
 		color: #1F33B2;
 		text-decoration: none;
 	}
+  table.tablebordered {
+    border: 1px solid #dddddd;
+    border-collapse: separate;
+    border-collapse: collapsed;
+    font-size:14px;
+    text-align: right;
+	}
+	table.tablebordered td.left, table.tablebordered th.left {
+    text-align: left;
+	}
+	table.tablebordered td.price {
+	  width:70px;
+	}
+  table.tablebordered tr {
+    border-bottom: 1px solid #dddddd;
+	}
+	table.tablebordered thead th, table.tablebordered tbody td, table.tablebordered tfoot td {
+	  padding:8px;
+	}
+  table.tablebordered thead th {
+	  background: #cfcfcf;
+	  border-bottom: 1px solid #dddddd;
+	}
+	table.tablebordered tbody td {
+	  border-bottom: 1px solid #dddddd;
+	}
+	table.tablebordered tfoot td {
+  	background: #f5f5f5;
+	}
 	.footer {
 		padding: 5px 0;
 	}
 	.footer p {
 		padding: 0;
-		font-size: 11px;
+    font-size: 11px;
 		color:#999;
 		margin: 0;
 		font-family: Helvetica, Arial, sans-serif;
@@ -141,15 +170,15 @@
 				
 				<td width="390" valign="top" align="left" bgcolor="#ffffff" class="content">
 					<table cellpadding="0" cellspacing="0" border="0" width="390">
-					<tr>
-					
-					 <%= yield %>
-
+					<tr id="yield">
+					  
+					  <%= yield %>
+					  
 					</tr>
 					</table>	
 				</td><!-- content-->
 				
-				<td width="16" bgcolor="#ffffff">&nbsp;</td>
+				<td width="16">&nbsp;</td>
 		      </tr>
 			</table><!-- body -->
 			
