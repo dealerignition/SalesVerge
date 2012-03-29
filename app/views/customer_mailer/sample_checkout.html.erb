@@ -1,0 +1,10 @@
+<h2>Dear <%= @customer.first_name %>,</h2>
+<div class="hr"></div>
+<h3>Thank you for checking out <%= @sample_checkout.sample.name %>.</h3>
+
+<p>Please contact me at any time if you have any questions.</p>
+<div class="hr"></div>
+<p>
+	<%= @sample_checkout.user.first_name %> <%= @sample_checkout.user.last_name %><br />
+	<%= mail_to @sample_checkout.user.email %>
+</p>
