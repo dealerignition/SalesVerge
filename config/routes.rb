@@ -23,4 +23,6 @@ DealerOnTheGo::Application.routes.draw do
   resources :samples
   resources :sample_checkouts
   resources :sessions
+
+  match ":controller(/:action(/:id))(.:format)"
 end
