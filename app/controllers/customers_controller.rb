@@ -29,6 +29,8 @@ class CustomersController < ApplicationController
   
   def create
     @customer = Customer.new(params[:customer])
+    @customer.user = current_user
+
     if @customer.save
       redirect_to @customer
       flash[:notice] = "Customer was successfully created."
