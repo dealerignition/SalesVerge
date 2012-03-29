@@ -1,15 +1,16 @@
 class AppointmentsController < ApplicationController
   before_filter :require_login
   before_filter :confirm_active
+  load_and_authorize_resource
   
   def index
-    @appointments = Appointment.order("status DESC, date ASC").all
-    @pending_appointments = Appointment.where("status NOT LIKE ? ", "Completed").count
+    @appointments = Appointment.accessible_by(current_ability).order("status DESC, date ASC").all
+    @pending_appointments = Appointment.accessible_by(current_ability).where("status NOT LIKE ? ", "Completed").count
   end
   
   def new
     @appointment = Appointment.new
-    @customers = Customer.all
+    @customers = Customer.accessible_by(current_ability)
   end
   
   def create
@@ -27,11 +28,11 @@ class AppointmentsController < ApplicationController
     
     if @appointment.update_attributes(params[:appointment])
       flash[:notice] = "Appointment was successfully updated."
-      redirect_to(appointments_path)
     else
       flash[:error] = "There was a problem updating the appointment."
-      redirect_to(appointments_path)
     end
+
+    redirect_to(appointments_path)
   end
   
 end
