@@ -8,7 +8,7 @@ class AccountSettingsController < ApplicationController
   
   def dealer
     @user = current_user
-    @dealer = Dealer.find(@user.dealer_id)
+    @dealer = current_user.dealer
   end
   
   def users

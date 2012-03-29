@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
     role == "salesrep"
   end
   
+  private
+
   def downcase_email
     self.email.downcase! if self.email
   end
