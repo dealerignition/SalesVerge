@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'dynamic_form'
 gem 'haml-rails'
-gem 'jquery-rails'
+gem 'jquery-rails', :git => "git@github.com:lukeseelenbinder/jquery-rails.git"
 gem 'rails', '3.2.2'
 gem 'rake', '>= 0.9.2.2'
 gem 'rapleaf_api'
