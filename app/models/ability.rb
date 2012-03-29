@@ -13,7 +13,7 @@ class Ability
       can :manage, Charge, :quote => { :user => { :dealer_id => user.dealer.id } }
       can :manage, @models, :user => { :dealer_id => user.dealer.id }
       can :manage, Sample, :store => { :dealer_id => user.dealer.id }
-      can :create, [User] + @models
+      can :create, [User, Sample] + @models
     elsif user and user.salesrep?
       cannot :manage, :all
 
@@ -21,7 +21,7 @@ class Ability
       can :manage, Charge, :quote => { :user_id => user.id }
       can :manage, Sample, :store => { :dealer_id => user.dealer.id }
       can :manage, @models, :user_id => user.id
-      can :create, @models
+      can :create, [Sample], @models
     else
       cannot :manage, :all
 
