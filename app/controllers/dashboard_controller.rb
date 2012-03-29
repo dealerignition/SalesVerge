@@ -1,6 +1,8 @@
 class DashboardController < ApplicationController
   before_filter :require_login
   before_filter :confirm_active
+  # TODO: Change this when dashboard is finished.
+  skip_authorization_check
   
   def index
     @customers = Customer.order("created_at ASC").last(5)

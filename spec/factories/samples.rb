@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :sample do
-    dealer_sample_id 1
-    name "SuperDuper Sample"
+    sequence(:dealer_sample_id) { |n| "#{n}" }
+    sequence(:name) { |n| "SuperDuper Sample #{n}" }
     sample_type "The Usual"
   end
 end
