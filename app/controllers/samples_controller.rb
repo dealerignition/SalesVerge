@@ -1,9 +1,10 @@
 class SamplesController < ApplicationController
   before_filter :require_login
   before_filter :confirm_active
+  load_and_authorize_resource
   
   def index
-    @samples = Sample.all
+    @samples = Sample.accessible_by(current_ability)
   end
   
   def new
