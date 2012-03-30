@@ -7,5 +7,26 @@
       = f.label "Store name", { :class => "control-label" }
       %div.controls
         = f.text_field :name, :placeholder => "Your Carpet Store"
+    = f.fields_for :stores do |builder|
+      %div.control-group
+        = builder.label "Address", { :class => "control-label" }
+        %div.controls.docs-input-sizes
+          = builder.text_field :address_1, { :placeholder => "100 Happy St." }
+          = builder.text_field :city, :placeholder => "City"
+          = builder.text_field :state, :placeholder => "State"
+          = builder.text_field :zip, :placeholder => "Zip"
+      %div.control-group
+        = builder.label "Phone Number", { :class => "control-label" }
+        %div.controls
+          = builder.text_field :phone, :placeholder => "(555) 123-4567"
+      %div.control-group
+        = builder.label "website", { :class => "control-label" }
+        %div.controls
+          = builder.text_field :website, :placeholder => "awesomeproducts.com"
+    %div.alert.alert-info
+      %h4.alert-heading
+        Please note
+      Entered information will be used in various automated emails that go out to your customers.
+
     %div.form-actions
       = f.submit( :class => "btn btn-primary btn-large" )

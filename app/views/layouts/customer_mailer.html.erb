@@ -148,21 +148,23 @@
 								<%= @dealer.name %>
 							</strong></p>
 							<div class="hr"></div>
-								<p>
-									123 Bonniville St.
-								<br>
-									Mayberry, SD
-								<br>
-									78965
-								</p>
+							<p>
+								<%= @dealer.stores.first.address_1 %><br>
+								<% if @dealer.stores.first.city.present? %>
+								  <%= @dealer.stores.first.city %>, 
+								<% end %>
+								<%= @dealer.stores.first.state %>
+							  <br>
+								<%= @dealer.stores.first.zip %>
+							</p>
 							<div class="hr"></div>
-								<p>
-									785-545-8952
-								</p>
+							<p>
+							  <%= @dealer.stores.first.phone %>
+							</p>
 							<div class="hr"></div>
-								<p>
-									<a href="#">website.com</a>
-								</p>
+							<p>
+								<%= link_to "Visit our website", @dealer.stores.first.website %>
+							</p>
 						</td>
 					</tr>
 					</table>
