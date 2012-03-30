@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_presence_of :role
   validates_inclusion_of :role, :in => ROLES
+  
+  scope :is_owner, where(:role => 'owner')
 
   def admin?
     role == "admin"
@@ -39,4 +41,11 @@ class User < ActiveRecord::Base
   def downcase_email
     self.email.downcase! if self.email
   end
+  
+  def self.send_daily_digest
+    User.is_owner.all.each do |user|
+      UserMailer.daily_digest(user).deliver
+    end
+  end
+  
 end
