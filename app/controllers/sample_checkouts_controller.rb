@@ -13,6 +13,7 @@ class SampleCheckoutsController < ApplicationController
     @samples = Sample.accessible_by(current_ability)
     @customers = Customer.accessible_by(current_ability)
     @sample = Sample.new
+    @store = current_user.dealer.stores.first
   end
   
   def create

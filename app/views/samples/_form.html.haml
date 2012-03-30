@@ -23,6 +23,7 @@
       %a.btn.btn-large{ "data-dismiss" => "modal" }
         Cancel
       = f.submit(:class => "btn btn-primary btn-large")
+      = f.hidden_field :store_id, :value => @store.id
 
 :javascript
   $('#myModal').modal('hide')
