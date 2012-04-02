@@ -21,15 +21,15 @@
   <%- if @samples && @samples.count > 0 %>
     <p>
       <h3>Samples Today | <%= link_to "View All Samples", url_for(:controller => "sample_checkouts", :action => "index", :only_path => false) %> &rarr;</h3>
-      <table width="100%" border="1" cellpadding="4">
+      <table cellspacing="0" cellpadding="0" width="100%" class="tablebordered">
         <thead>
-          <th>Name</th>
+          <th class="left">Name</th>
           <th>Customer</th>
           <th>Rep</th>
         </thead>
         <%- @samples.each do |checked_out_sample| %>
           <tr>
-            <td><%= checked_out_sample.sample.name %></td>
+            <td class="left"><%= checked_out_sample.sample.name %></td>
             <td><%= link_to "#{checked_out_sample.customer.first_name if checked_out_sample.customer.first_name} #{checked_out_sample.customer.last_name if checked_out_sample.customer.last_name}", customer_url(checked_out_sample.customer, :only_path => false) %></td>
             <td>
               <%= checked_out_sample.user.first_name %>
@@ -42,17 +42,18 @@
   <% end %>
 
   <%- if @estimates && @estimates.count > 0 %>
+    <br />
     <p>
       <h3>Estimates Today | <%= link_to "View All Estimates", url_for(:controller => "quotes", :action => "index", :only_path => false) %> &rarr;</h3>
-      <table width="100%" border="1" cellpadding="4">
+      <table cellspacing="0" cellpadding="0" width="100%" class="tablebordered">
         <thead>
-          <th>Customer</th>
+          <th class="left">Customer</th>
           <th>Rep</th>
           <th>Total</th>
         </thead>
         <%- @estimates.each do |estimate| %>
           <tr>
-            <td><%= estimate.customer.first_name %> <%= estimate.customer.last_name %></td>
+            <td class="left"><%= estimate.customer.first_name %> <%= estimate.customer.last_name %></td>
             <td>
               <%= estimate.user.first_name %>
               <%= estimate.user.last_name[0] %>
