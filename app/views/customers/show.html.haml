@@ -30,37 +30,94 @@
       %tr
         %td
           %b Phone
-        %td= @customer.phone
+        %td
+          = number_to_phone(@customer.phone)
+          
+    %a.btn{ "data-toggle" => "modal", :href => "#myModal" }
+      View Extended Information
+    
+  %div.span5
+    %h6 Location
+    %table.table.table-striped
       %tr
         %td
-          %b Location
+          %b Address
         %td
           = @customer.address_1
+      %tr
+        %td
+          %b City
+        %td
           = @customer.city
+      %tr
+        %td
+          %b State &amp; Zip
+        %td
           = @customer.state
           = @customer.zip
-  %div.span5
-    %h6 Extended Info
+    
+       
+%div.modal#myModal.fade{ :style => "display: none;"}
+  %div.modal-header
+    %a.close{  :href => "#", "data-dismiss" => "modal"}
+      ×
+    %h3 Extended Info
+  %div.modal-body
     %table.table.table-striped
       %tr
         %td
           %b Age
         %td
-          = @rapleaf_info["age"] or "N/A"
+          - if @rapleaf_info["age"]
+            = @rapleaf_info["age"]
+          - else
+            %span.help-block N/A
       %tr
         %td
           %b Gender
         %td
-          = @rapleaf_info["gender"] or "N/A"
+          - if @rapleaf_info["gender"]
+            = @rapleaf_info["gender"]
+          - else
+            %span.help-block N/A
       %tr
         %td
           %b Income
         %td
-          = @rapleaf_info["household_income"] or "N/A"
+          - if @rapleaf_info["household_income"]
+            = @rapleaf_info["household_income"]
+          - else
+            %span.help-block N/A
       %tr
         %td
           %b Married?
-        %td N/A
+        %td
+          - if @rapleaf_info["marital_status"]
+            = @rapleaf_info["marital_status"]
+          - else
+            %span.help-block N/A
+      %tr
+        %td
+          %b Home Owner?
+        %td
+          - if @rapleaf_info["home_owner_status"]
+            = @rapleaf_info["home_owner_status"]
+          - else
+            %span.help-block N/A
+      %tr
+        %td 
+          %b Home Market Value
+        %td
+          - if @rapleaf_info["home_market_value"]
+            = @rapleaf_info["home_market_value"]
+          - else
+            %span.help-block N/A
+            
+          
+          
+  %div.modal-footer
+    %a.btn{ :href => "#",  "data-dismiss" => "modal" }
+      Close
 
 %div.page-header
   %h2
@@ -85,3 +142,16 @@
 %div.page-header    
   %h2 Notes
 %blockquote= @customer.notes
+
+      
+:javascript
+  $('#myModal').modal('hide')
+
+
+
+
+
+
+
+
+
