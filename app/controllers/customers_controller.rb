@@ -20,8 +20,16 @@ class CustomersController < ApplicationController
   def show
     @customer = Customer.find_by_id(params[:id])
     rapleaf = RapleafApi::Api.new('c7e2c4cbcb32f1bf6d86b20551d48186')
-    @rapleaf_info = rapleaf.query_by_email(@customer.email) unless Rails.env.eql? "test"
-  end
+    # query_by_nap(first, last, street, city, state, options)
+    @rapleaf_info = rapleaf.query_by_nap(
+      @customer.first_name,
+      @customer.last_name,
+      @customer.address_1,
+      @customer.city,
+      @customer.state,
+      :email => @customer.email,
+      :show_availble => true )    
+  end                            
   
   def new
     @customer = Customer.new
