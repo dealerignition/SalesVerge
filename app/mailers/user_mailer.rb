@@ -1,4 +1,5 @@
 class UserMailer < ActionMailer::Base
+  include CanCan::Ability
   default from: "support@dealerignition.com"
   
   def welcome_email(user)
@@ -9,8 +10,9 @@ class UserMailer < ActionMailer::Base
   
   def daily_digest(user)
     @user      = user
-    @samples   = SampleCheckout.where("created_at > ?", 1.day.ago).all
-    @estimates = Quote.where("created_at > ?", 1.day.ago).all
+    current_ability = Ability.new(@user)
+    @samples   = SampleCheckout.accessible_by(current_ability).where("sample_checkouts.created_at > ?", 1.day.ago).all
+    @estimates = Quote.accessible_by(current_ability).where("quotes.created_at > ?", 1.day.ago).all
     @url       = login_path
     mail(:to => @user.email, :subject => "Your daily digest")
   end
