@@ -1,5 +1,5 @@
 class Quote < ActiveRecord::Base
-  has_many :charges
+  has_many :charges, :dependent => :destroy
   belongs_to :customer
   belongs_to :user
   
