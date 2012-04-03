@@ -20,4 +20,15 @@ class ApplicationController < ActionController::Base
     redirect_to login_url
     flash[:error] = "You must login to access this page."
   end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    request.env["HTTP_REFERER"] ||= dashboard_path
+    begin
+      msg = exception.subject.class.model_name.downcase! 
+    rescue
+      msg = "page"
+    end
+
+    redirect_to :back, :flash => { :error => "You are not authorized to access this #{msg}." }
+  end
 end
