@@ -29,5 +29,13 @@
         = f.label :password_confirmation, { :class => "control-label" }
         .controls
           = f.password_field :password_confirmation
+      .control-group
+        = f.label :phone, { :class => "control-label" }
+        .controls
+          = f.text_field :phone, { :placeholder => "(555) 123-4567" }
+      .control-group
+        = f.label :message, { :class => "control-label" }
+        .controls
+          = f.text_area :message, { :rows => 8 }
   .modal-footer
     = f.submit(:class => "btn btn-primary btn-large" )

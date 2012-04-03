@@ -3,7 +3,6 @@
   %p
     You have
     = pluralize(@customers.count, "customer")
-    on file
   %p
     = link_to new_customer_path, { :class => "btn btn-primary btn-large" } do
       %i{ :class => "icon-user icon-white" }
