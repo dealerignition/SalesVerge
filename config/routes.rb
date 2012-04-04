@@ -3,6 +3,7 @@ DealerOnTheGo::Application.routes.draw do
 
   get "about" => "about#index"
   get "account_settings/account"
+  get "account_settings/general"
   get "account_settings/dealer"
   get "account_settings/users"
   get "account_settings/users/create" => "users#new"

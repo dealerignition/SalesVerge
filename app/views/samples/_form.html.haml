@@ -2,7 +2,9 @@
   %div.modal-header
     %a.close{ "data-dismiss" => "modal" }
       ×
-    %h3 Create New Sample
+    %h3
+      Create New
+      =@sample_name
   = form_for @sample, :url => { :action => "create", :controller => "samples" }, :html => { :class => "form-horizontal" } do |f|
     %div.modal-body
       = f.error_messages :header_message => "There were problems with the following fields:",
@@ -22,7 +24,7 @@
     %div.modal-footer
       %a.btn.btn-large{ "data-dismiss" => "modal" }
         Cancel
-      = f.submit(:class => "btn btn-primary btn-large")
+      = f.submit("Create #{@sample_name}", :class => "btn btn-primary btn-large")
       = f.hidden_field :store_id, :value => @store.id
 
 :javascript

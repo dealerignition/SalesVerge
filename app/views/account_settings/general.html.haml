@@ -1,0 +1,25 @@
+%div.page-header
+  %h1 Account Settings
+
+%div.row
+  = render 'navigation'
+  
+  %div.span9
+    %h3 General
+    = form_for @dealer, :html => { :class => "form-horizontal" } do |f|
+      = f.error_messages :header_message => "There were problems with the following fields:",
+        :message => "",
+        :header_tag => :h3
+      %fieldset
+        %div.control-group
+          = f.label "Sample Name", { :class => "control-label" }
+          %div.controls
+            = f.text_field :sample_name, :placeholder => "Sample"
+            %p
+              %div.alert.alert-info
+                %h4.alert-heading
+                  Sample Name?
+                This term describes objects that can be checked in and out of your store. Some other examples are "Demo", "Bike", "Trial".
+
+        %div.form-actions
+          = f.submit("Save", :class => "btn btn-primary btn-large")

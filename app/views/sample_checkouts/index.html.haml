@@ -1,12 +1,13 @@
 %div.hero-unit
-  %h1 Checked-out Samples
+  %h1= @sample_name.pluralize
   %p
     You currently have
-    = pluralize(@checked_out_samples.count, "checked-out sample")
+    = pluralize(@checked_out_samples.count, "checked-out #{@sample_name}")
   %p
     = link_to new_sample_checkout_path, { :class => "btn btn-primary btn-large" } do
       %i{ :class => "icon-th icon-white" }
-      Checkout Sample(s)
+      Checkout
+      = @sample_name.pluralize
   
 %table{ :class => "table table-striped" }
   %thead
