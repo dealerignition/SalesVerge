@@ -1,4 +1,4 @@
-%div.page-header
+.page-header
   %p
     = link_to :back, { :class => "btn btn-large" } do
       %i{ :class => "icon-arrow-left" }
@@ -7,12 +7,12 @@
     = @customer.first_name
     = @customer.last_name
   
-%div.row
-  %div.span2
+.row
+  .span2
     - r = Random.new
     = image_tag "http://placekitten.com/120/#{r.rand(100..120)}", :class => "avatar"
     
-  %div.span5
+  .span5
     %h6 Basic Info
     %table.table.table-striped
       %tr
@@ -25,7 +25,7 @@
         %td
           %b Email
         %td
-          %div.truncate-email
+          .truncate-email
             = link_to @customer.email, "mailto:#{@customer.email}"
       %tr
         %td
@@ -33,36 +33,71 @@
         %td
           = number_to_phone(@customer.phone)
           
-    %a.btn{ "data-toggle" => "modal", :href => "#myModal" }
+    %a.btn{ "data-toggle" => "modal", :href => "#extendedInfo" }
       View Extended Information
     
-  %div.span5
+  .span5
     %h6 Location
     %table.table.table-striped
       %tr
         %td
-          %b Address
+          %strong Address
         %td
           = @customer.address_1
       %tr
         %td
-          %b City
+          %strong City
         %td
           = @customer.city
       %tr
         %td
-          %b State &amp; Zip
+          %strong State &amp; Zip
         %td
           = @customer.state
           = @customer.zip
     
-       
-%div.modal#myModal.fade{ :style => "display: none;"}
-  %div.modal-header
+%hr
+.row
+  .span12.btn-group
+    =link_to "Add a Estimate", new_estimate_path, { :class => "btn btn-primary btn-large" }
+    =link_to "Add a Note", new_estimate_path, { :class => "btn btn-primary btn-large" }
+    =link_to "Add a Demo", new_sample_checkout_path, { :class => "btn btn-primary btn-large" }
+%hr
+
+.row
+  %h2.span12
+    Timeline
+
+- @interaction_stream.each do |item|
+  .row
+    .interaction.span12
+      %i
+        =time_ago_in_words(item.updated_at).capitalize
+        ago
+        ==(#{item.updated_at.strftime("%x @ %l:%M %P")}),
+      - if item.class.eql? Estimate
+        - if item.user.eql? current_user
+          you
+        - else
+          item.user.full_name
+        == gave #{ @customer.first_name } an estimate for #{ number_to_currency(item.total) }.
+        - unless item.charges.count.eql? 0
+          (Click for details.)
+          .charges.hide.toggle.well
+            - item.charges.each do |c|
+              .charge
+                = c.description
+                = c.quantity
+                = number_to_currency(c.total)
+      - elsif item.class.eql? SampleCheckout
+        == #{ @customer.first_name } demoed #{ item.sample.name }.
+
+#extendedInfo.modal.fade
+  .modal-header
     %a.close{  :href => "#", "data-dismiss" => "modal"}
       ×
     %h3 Extended Info
-  %div.modal-body
+  .modal-body
     %table.table.table-striped
       %tr
         %td
@@ -112,46 +147,7 @@
             = @rapleaf_info["home_market_value"]
           - else
             %span.help-block N/A
-            
           
-          
-  %div.modal-footer
+  .modal-footer
     %a.btn{ :href => "#",  "data-dismiss" => "modal" }
       Close
-
-%div.page-header
-  %h2
-    Estimates
-    %small==(#{@customer.estimates.count})
-
-- if @customer.estimates.present?
-  %table{ :class => "table table-striped" }
-    %thead
-      %th Date Created
-      %th Price
-      %th
-    - @customer.estimates.each do |estimate|
-      %tr
-        %td= estimate.created_at.to_s(:long)
-        %td= number_to_currency(estimate.charge_total)
-        %td
-          = link_to "View Estimate", estimate_path(estimate), { :class => "btn" }
-- else
-  %p= link_to "Create an estimate", new_estimate_path, { :class => "btn" }
-  
-%div.page-header    
-  %h2 Notes
-%blockquote= @customer.notes
-
-      
-:javascript
-  $('#myModal').modal('hide')
-
-
-
-
-
-
-
-
-

@@ -29,6 +29,11 @@ class CustomersController < ApplicationController
       @customer.state,
       :email => @customer.email,
       :show_availble => true )    
+
+    @interaction_stream = @customer.estimates + @customer.sample_checkouts
+    @interaction_stream.sort! do |a,b|
+      -(a.updated_at <=> b.updated_at)
+    end
   end                            
   
   def new

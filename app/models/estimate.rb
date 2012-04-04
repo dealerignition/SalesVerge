@@ -23,4 +23,5 @@ class Estimate < ActiveRecord::Base
     end
     charge_total
   end
+
 end

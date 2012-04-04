@@ -10,4 +10,7 @@ class Customer < ActiveRecord::Base
   has_many :appointments, :dependent => :destroy
   has_many :estimates, :dependent => :destroy
 
+  def full_name
+    "#{ first_name } #{ last_name }"
+  end
 end
