@@ -46,7 +46,7 @@ class EstimatesController < ApplicationController
   
   def won
     @estimate = Estimate.find(params[:estimate_id])
-    @estiamte.status = "won"
+    @estimate.status = "won"
 
     if @estimate.save
       CustomerMailer.estimate_won(@estimate).deliver
