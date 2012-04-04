@@ -30,7 +30,7 @@
         .btn-group
           = link_to estimate_path(estimate), { :class => "btn btn-large" } do
             Edit
-          = link_to "Email", estimate_deliver_customer_mailer_path(estimate), { :confirm => "All you sure you want to email this estimate to #{estimate.customer.first_name} #{estimate.customer.last_name} (#{estimate.customer.email}).", :class => "btn btn-large btn-primary" }
+          = link_to "Email", estimate_deliver_customer_mailer_path(estimate), { :confirm => "Are you sure you want to email this estimate to #{estimate.customer.first_name} #{estimate.customer.last_name} (#{estimate.customer.email}).", :class => "btn btn-large btn-primary" }
       %td
         .btn-group
           %a.btn.btn-large.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
