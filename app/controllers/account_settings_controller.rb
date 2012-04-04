@@ -11,6 +11,11 @@ class AccountSettingsController < ApplicationController
     @dealer = current_user.dealer
   end
   
+  def general
+    @user = current_user
+    @dealer = current_user.dealer
+  end
+  
   def users
     @user = User.new
     @dealer = current_user.dealer

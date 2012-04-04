@@ -9,6 +9,7 @@ class SamplesController < ApplicationController
   
   def new
     @sample = Sample.new
+    @sample_name = current_user.dealer.sample_name
   end
   
   def create

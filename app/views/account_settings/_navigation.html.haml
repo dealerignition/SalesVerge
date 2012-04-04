@@ -2,6 +2,6 @@
   .well
     %ul.nav.nav-pills.nav-stacked
       -# TODO: Add "Modules" after implementation
-      - ["Account", "Dealer", "Users"].each do |tab|
+      - ["Account", "Dealer", "General", "Users"].each do |tab|
         %li{ :class => "#{ "active" if tab.downcase.eql? request.path.split("/").last }" }
           = link_to tab, eval("account_settings_#{ tab.downcase }_path")

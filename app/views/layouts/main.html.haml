@@ -24,7 +24,10 @@
             %li
               = link_to sample_checkouts_path do
                 %i{ :class => "icon-th icon-white" }
-                Samples
+                -if current_user
+                  =current_user.dealer.sample_name.pluralize
+                -else
+                  Samples
             %li
               = link_to estimates_path do
                 %i{ :class => "icon-shopping-cart icon-white" }

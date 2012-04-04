@@ -15,7 +15,7 @@
       %div.controls
         = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)
     %div.control-group
-      = f.label "Choose Sample(s)", { :class => "control-label" }
+      = f.label "Choose #{current_user.dealer.sample_name.pluralize}", { :class => "control-label" }
       %div.controls
         = f.select(:sample_id, options_from_collection_for_select(@samples, :id, :name), {:multiple => "true", "data-native-menu" => "false"})
 
