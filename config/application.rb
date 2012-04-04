@@ -57,5 +57,8 @@ module DealerOnTheGo
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    config.action_mailer.raise_delivery_errors = true
+    
   end
 end
