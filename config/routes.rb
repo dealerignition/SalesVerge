@@ -15,7 +15,7 @@ DealerOnTheGo::Application.routes.draw do
   resources :appointments
   resources :customers
   resources :dealers
-  resources :quotes do
+  resources :estimates do
     resources :charges
     get :deliver_customer_mailer
     get :won

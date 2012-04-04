@@ -6,7 +6,8 @@ class Customer < ActiveRecord::Base
   validates_presence_of :last_name
   validates_presence_of :user_id
 
-  has_many :sample_checkouts
-  has_many :appointments
-  has_many :quotes
+  has_many :sample_checkouts, :dependent => :destroy
+  has_many :appointments, :dependent => :destroy
+  has_many :estimates, :dependent => :destroy
+
 end

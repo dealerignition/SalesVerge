@@ -28,17 +28,17 @@
   %div.span6
     %div.page-header
       %h1 
-        Recent Quotes
+        Recent Estimate
     %table.table.table-striped
       %thead
         %th Customer
         %th Total
-      - @quotes.each do |quote|
+      - @estimates.each do |estimate|
         %tr
-          %td= link_to "#{quote.customer.first_name} #{quote.customer.last_name}", customer_path(quote.customer)
-          %td= number_to_currency(quote.charge_total)
+          %td= link_to "#{estimate.customer.first_name} #{estimate.customer.last_name}", customer_path(estimate.customer)
+          %td= number_to_currency(estimate.charge_total)
           %td
-            = link_to "View", quote_path(quote), { :class => "btn btn-primary" }
+            = link_to "View", estimate_path(estimate), { :class => "btn btn-primary" }
         
 %div.row
   %div.span6

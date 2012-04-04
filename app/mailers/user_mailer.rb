@@ -12,7 +12,7 @@ class UserMailer < ActionMailer::Base
     @user      = user
     current_ability = Ability.new(@user)
     @samples   = SampleCheckout.accessible_by(current_ability).where("sample_checkouts.created_at > ?", 1.day.ago).all
-    @estimates = Quote.accessible_by(current_ability).where("quotes.created_at > ?", 1.day.ago).all
+    @estimates = Estimate.accessible_by(current_ability).where("estimates.created_at > ?", 1.day.ago).all
     @url       = login_path
     mail(:to => @user.email, :subject => "Your daily digest")
   end

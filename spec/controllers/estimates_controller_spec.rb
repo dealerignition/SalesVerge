@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe QuotesController do
+describe EstimatesController do
 
   describe "GET 'index'" do
     before do
@@ -24,7 +24,7 @@ describe QuotesController do
 
     it do
       should respond_with :success
-      should assign_to :quote
+      should assign_to :estimate
       should assign_to :customers
     end
   end
@@ -33,15 +33,15 @@ describe QuotesController do
     before do
       @user = FactoryGirl.create(:salesrep)
       login_user @user
-      @quote = FactoryGirl.create :quote,
+      @estimate = FactoryGirl.create :estimate,
         :user => @user
 
-      get :edit, :id => @quote.id
+      get :edit, :id => @estimate.id
     end
 
     it do
       should respond_with :success
-      should assign_to(:quote).with(@quote)
+      should assign_to(:estimate).with(@estimate)
     end
   end
 end

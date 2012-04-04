@@ -6,10 +6,11 @@ class User < ActiveRecord::Base
   authenticates_with_sorcery!
   
   belongs_to :dealer
-  has_many :appointments
-  has_many :quotes
-  has_many :sample_checkouts
-  has_many :customers
+  
+  has_many :appointments, :dependent => :destroy
+  has_many :estimates, :dependent => :destroy
+  has_many :sample_checkouts, :dependent => :destroy
+  has_many :customers, :dependent => :destroy
   
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :dealer_id, :active
 

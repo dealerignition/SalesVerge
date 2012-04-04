@@ -1,8 +1,8 @@
 %div.page-header
   %h1 
-    Quote for
-    =@quote.customer.first_name
-    =@quote.customer.last_name
+    Estimate for
+    =@estimate.customer.first_name
+    =@estimate.customer.last_name
     
   %div.form-actions
     = link_to :back, { :class => "btn btn-large" } do
@@ -12,7 +12,7 @@
       %i.icon-plus-sign.icon-white
       Add a Charge
     %div.pull-right
-      = link_to "Change Customer", edit_quote_path(@quote), { :class => "btn btn-large" }
+      = link_to "Change Customer", edit_estimate_path(@estimate), { :class => "btn btn-large" }
 
 %table{ :class => "table table-striped" }
   %thead
@@ -21,14 +21,14 @@
     %th Quantity
     %th Total
     %th
-  - @quote.charges.each do |charge|
+  - @estimate.charges.each do |charge|
     %tr
       %td= charge.description
       %td= number_to_currency(charge.price)
       %td= "%g" % charge.quantity
       %td= number_to_currency(charge.total)
       %td
-        = button_to 'Remove', [@quote, charge], :confirm => "Are you sure you want to remove '#{charge.description}' from this quote?", :method => :delete, :class => "btn btn-danger"
+        = button_to 'Remove', [@estimate, charge], :confirm => "Are you sure you want to remove '#{charge.description}' from this estimate?", :method => :delete, :class => "btn btn-danger"
   %tr
     %td
     %td
@@ -37,7 +37,7 @@
         Total
     %td
       %strong
-        = number_to_currency(@quote.charge_total)
+        = number_to_currency(@estimate.charge_total)
     %td
     
 = render 'charges/form'

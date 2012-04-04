@@ -121,23 +121,23 @@
 
 %div.page-header
   %h2
-    Quotes
-    %small==(#{@customer.quotes.count})
+    Estimates
+    %small==(#{@customer.estimates.count})
 
-- if @customer.quotes.present?
+- if @customer.estimates.present?
   %table{ :class => "table table-striped" }
     %thead
       %th Date Created
       %th Price
       %th
-    - @customer.quotes.each do |quote|
+    - @customer.estimates.each do |estimate|
       %tr
-        %td= quote.created_at.to_s(:long)
-        %td= number_to_currency(quote.charge_total)
+        %td= estimate.created_at.to_s(:long)
+        %td= number_to_currency(estimate.charge_total)
         %td
-          = link_to "View Quote", quote_path(quote), { :class => "btn" }
+          = link_to "View Estimate", estimate_path(estimate), { :class => "btn" }
 - else
-  %p= link_to "Create a quote", new_quote_path, { :class => "btn" }
+  %p= link_to "Create an estimate", new_estimate_path, { :class => "btn" }
   
 %div.page-header    
   %h2 Notes

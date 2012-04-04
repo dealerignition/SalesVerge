@@ -30,7 +30,7 @@
         Cancel
       = f.submit(:class => "btn btn-primary btn-large")
       = f.hidden_field :date, :value => Time.now
-      = f.hidden_field :quote_id, :value => @quote.id
+      = f.hidden_field :estimate_id, :value => @estimate.id
       
 :javascript
   $('#myModal').modal('hide')

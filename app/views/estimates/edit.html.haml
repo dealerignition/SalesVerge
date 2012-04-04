@@ -1,10 +1,10 @@
 %div.page-header
   %h1 
-    Edit Quote for
-    =@quote.customer.first_name
-    =@quote.customer.last_name
+    Edit Estimate for
+    =@estimate.customer.first_name
+    =@estimate.customer.last_name
 
-= form_for(@quote) do |f|
+= form_for(@estimate) do |f|
   = f.error_messages :header_message => "There were problems with the following fields:",
     :message => "",
     :header_tag => :h3
@@ -15,5 +15,5 @@
       Back
     = f.submit(:class => "btn btn-primary btn-large")
 
-  = f.label :customer_id, "Who is this quote for?"
+  = f.label :customer_id, "Who is this estimate for?"
   = f.select :customer_id, options_from_collection_for_select(@customers, :id, :email)

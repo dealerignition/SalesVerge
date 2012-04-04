@@ -1,4 +1,4 @@
-class Quote < ActiveRecord::Base
+class Estimate < ActiveRecord::Base
   has_many :charges
   belongs_to :customer
   belongs_to :user
