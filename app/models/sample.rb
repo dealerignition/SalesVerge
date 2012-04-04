@@ -3,5 +3,5 @@ class Sample < ActiveRecord::Base
   validates_uniqueness_of :dealer_sample_id
   
   belongs_to :store
-  has_many :sample_checkouts
+  has_many :sample_checkouts, :dependent => :destroy
 end

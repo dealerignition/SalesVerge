@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   authenticates_with_sorcery!
   
   belongs_to :dealer
-  
+
   has_many :appointments, :dependent => :destroy
   has_many :estimates, :dependent => :destroy
   has_many :sample_checkouts, :dependent => :destroy
