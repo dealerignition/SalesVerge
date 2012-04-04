@@ -4,7 +4,7 @@ class ChargesController < ApplicationController
   load_and_authorize_resource
 
   def new
-    @quote = Quote.find(params[:quote_id])
+    @estimate = Estimate.find(params[:estimate_id])
     @charge = Charge.new
   end
   
@@ -26,11 +26,11 @@ class ChargesController < ApplicationController
   
   def destroy
     @charge = Charge.find(params[:id])
-    @quote = Quote.find(params[:quote_id])
+    @estimate = Estimate.find(params[:estimate_id])
     @charge.destroy
 
     flash[:notice] = "Charge deleted."
-    redirect_to quote_path(@quote)
+    redirect_to estimate_path(@estimate)
   end
 
 end

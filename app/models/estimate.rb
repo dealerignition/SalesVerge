@@ -1,7 +1,8 @@
-class Quote < ActiveRecord::Base
-  has_many :charges, :dependent => :destroy
+class Estimate < ActiveRecord::Base
   belongs_to :customer
   belongs_to :user
+
+  has_many :charges, :dependent => :destroy
   
   validates_presence_of :user_id
 

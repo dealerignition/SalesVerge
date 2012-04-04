@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-describe Quote do
+describe Estimate do
   it { should have_many :charges }
   it { should belong_to :customer }
 
   context "money" do
     before do
-      @q = FactoryGirl.create :quote
-      FactoryGirl.create_list :charge, 25, :quote => @q
+      @e = FactoryGirl.create :estimate
+      FactoryGirl.create_list :charge, 25, :estimate => @e
     end
 
     it "should total the charges" do
-      @q.total.should == 37.5
+      @e.total.should == 37.5
     end
   end
 
