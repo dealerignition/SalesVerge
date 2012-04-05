@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :sample_checkouts, :dependent => :destroy
   has_many :customers, :dependent => :destroy
   
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :phone, :message
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :active, :phone, :message
 
   validates_presence_of :first_name
   validates_presence_of :last_name

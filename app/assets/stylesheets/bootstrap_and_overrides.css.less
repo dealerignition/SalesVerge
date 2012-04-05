@@ -1,7 +1,7 @@
 @import "twitter/bootstrap/bootstrap";
 
 body {
-  padding-top: 60px;
+  margin-top: 70px;
 }
 
 @import "twitter/bootstrap/responsive";
@@ -60,12 +60,50 @@ form {
     float:left;margin-left:5px;
   }
 }
-.navbar .nav.simple {
-  width: 200px;
-  margin: 0 auto;
-  float: none;
+
+.remember_check {
+  float:left
+}
+.remember_check_label {
+  float:left;margin-left:5px;
 }
 
-.navbar .nav.simple > li > a {
-  padding: 10px 24px 11px;
+.navbar-fixed-top {
+  position: fixed;
+}
+
+.navbar-simple {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  color: #ffffff;
+  z-index: 1030;
+  margin-bottom: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #2C2C2C;
+  background-image: -moz-linear-gradient(top, #333, #222);
+  background-image: -ms-linear-gradient(top, #333, #222);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#333), to(#222));
+  background-image: -webkit-linear-gradient(top, #333, #222);
+  background-image: -o-linear-gradient(top, #333, #222);
+  background-image: linear-gradient(top, #333, #222);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333', endColorstr='#222', GradientType=0);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  zoom: 1.5;
+  .nav {
+    margin: 2px auto;
+    width: 144px;
+  }
+  .nav-tabs > li > a, .nav-pills > li > a {
+    padding: 6px 16px;
+  }
+  .nav > li > a:hover {
+    text-decoration: none;
+    background-color: #000000;
+  }
 }

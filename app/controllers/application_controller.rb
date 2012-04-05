@@ -12,6 +12,14 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def require_owner
+    @user = current_user if current_user
+    if @user.role != "owner"
+      flash[:error] = "Only account owners can access that."
+      redirect_to account_settings_account_path
+    end
+  end
+  
   private
   
   def not_authenticated
