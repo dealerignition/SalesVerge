@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_authorization_check
+  layout "session"
   
   def new
   end
