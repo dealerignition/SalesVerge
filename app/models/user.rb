@@ -1,12 +1,11 @@
 class User < ActiveRecord::Base
   ROLES = ["owner", "admin", "salesrep"]
   before_save :downcase_email
-
   
   authenticates_with_sorcery!
   
   belongs_to :dealer
-  
+
   has_many :appointments, :dependent => :destroy
   has_many :estimates, :dependent => :destroy
   has_many :sample_checkouts, :dependent => :destroy
