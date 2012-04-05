@@ -14,6 +14,7 @@ DealerOnTheGo::Application.routes.draw do
   get "signup" => "dealers#new", :as => "signup" 
 
   resources :appointments
+  get "customers/search"
   resources :customers
   resources :dealers
   resources :estimates do

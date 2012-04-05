@@ -7,6 +7,8 @@
     = link_to new_customer_path, { :class => "btn btn-primary btn-large" } do
       %i{ :class => "icon-user icon-white" }
       Create New Customer
+  %p
+    %input.customersearch{ :placeholder => "Find a customer" }
 %div
-  %table.table.table-striped
+  %table.table.table-striped.customertable
     = render @customers

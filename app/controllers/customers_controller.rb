@@ -66,5 +66,22 @@ class CustomersController < ApplicationController
       redirect_to edit_customer_path(@customer)
     end
   end
+
+  def search
+    @query = params[:q].split().join(" | ")
+
+    @customers = Customer.accessible_by(current_ability)
+      .find_by_sql(%/
+        SELECT *, ts_rank_cd(to_tsvector(customers.first_name || ' ' || customers.last_name || ' ' || customers.email), query) AS rank
+        FROM customers, to_tsquery(#{Customer.quote_value(@query)}) query
+        WHERE query @@ to_tsvector(customers.first_name || ' ' || customers.last_name || ' ' || customers.email) AND customers.user_id = #{current_user.id}
+        ORDER BY rank DESC
+        /)
+
+    respond_to do |format|
+      format.html { render :layout => false }
+      format.json { render :json => @customers }
+    end
+  end
   
 end
