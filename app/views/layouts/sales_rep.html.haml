@@ -1,0 +1,41 @@
+-content_for :body do
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container
+        %ul.nav.simple
+          %li
+            = link_to dashboard_path do
+              %i.icon-home.icon-white
+          %li.active
+            = link_to customers_path do
+              %i.icon-user.icon-white
+          - if current_user
+            %li.dropdown
+              = link_to "#", :class => "dropdown-toggle", "data-toggle" => "dropdown" do
+                %i.icon-cog.icon-white
+                %b.caret
+              %ul.dropdown-menu
+                %li= link_to "Account Settings", account_settings_account_path
+                %li= link_to "Log out", logout_path
+          - else
+            %li= link_to "Log in", login_path
+              
+  %div.container
+    - if flash[:notice]
+      %div.alert.alert-success
+        %a.close{ :href => "#", "data-dismiss" => "alert" }
+          &times;
+        = flash[:notice]
+    - if flash[:alert]
+      %div.alert.alert-info
+        %a.close{ :href => "#", "data-dismiss" => "alert" }
+          &times;
+        = flash[:alert]
+    - if flash[:error]
+      %div.alert.alert-error
+        %a.close{ :href => "#", "data-dismiss" => "alert" }
+          &times;
+        = flash[:error]
+    = yield
+
+=render :template => "layouts/application"

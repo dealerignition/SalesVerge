@@ -58,7 +58,7 @@
               <%= estimate.user.first_name %>
               <%= estimate.user.last_name[0] %>
             </td>
-            <td><%= number_to_currency(estimate.charge_total) %></td>
+            <td><%= number_to_currency(estimate.total) %></td>
           </tr>
         <% end %>
       </table>

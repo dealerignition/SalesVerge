@@ -25,7 +25,7 @@
       %td
         =estimate.user.first_name
         =estimate.user.last_name[0]
-      %td= number_to_currency(estimate.charge_total)
+      %td= number_to_currency(estimate.total)
       %td
         .btn-group
           = link_to estimate_path(estimate), { :class => "btn btn-large" } do
@@ -56,7 +56,7 @@
         %td
           =estimate.user.first_name
           =estimate.user.last_name[0]
-        %td= number_to_currency(estimate.charge_total)
+        %td= number_to_currency(estimate.total)
         %td
           - if estimate.status == "won"
             %span.label.label-success Won

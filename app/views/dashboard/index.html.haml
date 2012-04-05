@@ -36,9 +36,9 @@
       - @estimates.each do |estimate|
         %tr
           %td= link_to "#{estimate.customer.first_name} #{estimate.customer.last_name}", customer_path(estimate.customer)
-          %td= number_to_currency(estimate.charge_total)
+          %td= number_to_currency(estimate.total)
           %td
-            = link_to "View", estimate_path(estimate), { :class => "btn btn-primary" }
+            = link_to "View", estimate, { :class => "btn btn-primary" }
         
 %div.row
   %div.span6

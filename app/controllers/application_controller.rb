@@ -1,9 +1,7 @@
 class ApplicationController < ActionController::Base
   check_authorization
-
-  layout "main"
-
   protect_from_forgery
+  layout :setup_layout
   
   def confirm_active
     @user = current_user if current_user
@@ -30,5 +28,10 @@ class ApplicationController < ActionController::Base
     end
 
     redirect_to :back, :flash => { :error => "You are not authorized to access this #{msg}." }
+  end
+  
+  def setup_layout
+    return "main" unless current_user
+    current_user.salesrep? ? "sales_rep" : "main"
   end
 end
