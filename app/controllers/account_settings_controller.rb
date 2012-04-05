@@ -1,5 +1,7 @@
 class AccountSettingsController < ApplicationController
   before_filter :require_login
+  before_filter :require_owner, :except => "account"
+  
   skip_authorization_check
   
   def account
