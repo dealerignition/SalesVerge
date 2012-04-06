@@ -7,13 +7,9 @@
       %li.active
         = link_to customers_path do
           %i.icon-user.icon-white
-      - if current_user
-        %li.dropdown
-          = link_to "#", :class => "dropdown-toggle", "data-toggle" => "dropdown" do
-            %i.icon-cog.icon-white
-          %ul.dropdown-menu
-            %li= link_to "Account Settings", account_settings_account_path
-            %li= link_to "Log out", logout_path
+      %li
+        = link_to account_settings_account_path do
+          %i.icon-cog.icon-white
               
   %div.container
     - if flash[:notice]

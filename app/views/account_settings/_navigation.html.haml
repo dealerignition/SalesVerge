@@ -9,3 +9,5 @@
         - ["Account"].each do |tab|
           %li{ :class => "#{ "active" if tab.downcase.eql? request.path.split("/").last }" }
             = link_to tab, eval("account_settings_#{ tab.downcase }_path")
+      %li
+        = link_to "Log Out", logout_path, :confirm => "Are you sure you want to log out?"
