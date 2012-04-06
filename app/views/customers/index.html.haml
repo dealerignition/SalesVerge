@@ -1,14 +1,27 @@
-%div.hero-unit
-  %h1 Customers
-  %p
-    You have
-    = pluralize(@customers.count, "customer")
-  %p
-    = link_to new_customer_path, { :class => "btn btn-primary btn-large" } do
-      %i{ :class => "icon-user icon-white" }
-      Create New Customer
-  %p
-    %input.customersearch{ :placeholder => "Find a customer" }
-%div
-  %table.table.table-striped.customertable
-    = render @customers
+- if current_user.salesrep?
+  .well
+    .center
+      %p
+        = link_to new_customer_path, { :class => "btn btn-success btn-large" } do
+          %i{ :class => "icon-user icon-white" }
+          New Customer
+      %p
+        %input.customersearch.big-input{ :placeholder => "Find a customer...", :style => "font-size: 20px" }
+  %div
+    %table.table.table-striped.customertable
+      = render @customers
+- else
+  .hero-unit
+    %h1 Customers
+    %p
+      You have
+      = pluralize(@customers.count, "customer")
+    %p
+      = link_to new_customer_path, { :class => "btn btn-success btn-large" } do
+        %i{ :class => "icon-user icon-white" }
+        New Customer
+    %p
+      %input.customersearch.big-input{ :placeholder => "Find a customer" }
+  %div
+    %table.table.table-striped.customertable
+      = render @customers

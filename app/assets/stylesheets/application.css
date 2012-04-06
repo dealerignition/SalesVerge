@@ -59,7 +59,7 @@ img.avatar.small {
 }
 
 .truncate-email {
-	width: 200px;
+	width: 180px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -80,4 +80,8 @@ img.avatar.small {
 .field_with_errors input {
   color: #B94A48;
   border: 1px solid #B94A48;
+}
+
+.center {
+  text-align: center;
 }

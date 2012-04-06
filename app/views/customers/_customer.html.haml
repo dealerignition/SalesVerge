@@ -1,17 +1,13 @@
 %tr
   %td
-    - r = Random.new
-    = link_to image_tag("http://placekitten.com/120/#{r.rand(100..120)}", :class => "avatar"), customer
-  %td
     = customer.first_name
     = customer.last_name
-  %td
-    %div.truncate-email
+    %br
+    .truncate-email
       = mail_to customer.email
   %td
-    %div.btn-group
-      = link_to edit_customer_path(customer), { :class => "btn btn-large" } do
-        %i.icon-edit
-        Edit
-      = link_to customer, { :class => "btn btn-large btn-primary" } do
-        View
+    /= link_to edit_customer_path(customer), { :class => "btn btn-large" } do
+    /  %i.icon-edit
+    /  Edit
+    = link_to customer, { :class => "btn btn-large" } do
+      %i.icon-arrow-right
