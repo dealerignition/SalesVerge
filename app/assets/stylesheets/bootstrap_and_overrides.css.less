@@ -1,8 +1,6 @@
 @import "twitter/bootstrap/bootstrap";
 
-body {
-  margin-top: 70px;
-}
+body { margin-top: 70px; }
 
 @import "twitter/bootstrap/responsive";
 
@@ -49,23 +47,19 @@ form {
   margin-bottom: 0;
 }
 
-#login {
-  .98width {
-    width: 98%;
-  }
-  .remember_check {
-    float:left
-  }
-  .remember_check_label {
-    float:left;margin-left:5px;
-  }
-}
-
 .remember_check {
   float:left
 }
 .remember_check_label {
   float:left;margin-left:5px;
+}
+
+.modal {
+  display: none;
+}
+
+.modal-body {
+  max-height: 480px;
 }
 
 .navbar-fixed-top {
@@ -111,9 +105,4 @@ form {
 input.full, textarea.full {
   font-size: 20px;
   padding: 8px;
-}
-
-/* This will break the modal window. Temporary workaround. */
-.fade {
-  display: none;
 }
