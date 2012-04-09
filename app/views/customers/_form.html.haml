@@ -3,47 +3,62 @@
     :message => "",
     :header_tag => :h3
   %fieldset
-    %div.control-group
-      = f.label :first_name, { :class => "control-label" }
-      %div.controls
-        = f.text_field :first_name, :placeholder => "Jane"
-    %div.control-group
-      = f.label :last_name, { :class => "control-label" }
-      %div.controls
-        = f.text_field :last_name, :placeholder => "Doe"
-    %div.control-group
-      = f.label :email, { :class => "control-label" }
-      %div.controls
-        = f.text_field :email, :placeholder => "janedoe@gmail.com"
-    %div.control-group
-      = f.label :address_1, { :class => "control-label" }
-      %div.controls
-        = f.text_field :address_1, :placeholder => "123 Main St."
-    %div.control-group
-      = f.label :address_2, { :class => "control-label" }
-      %div.controls
-        = f.text_field :address_2, :placeholder => "Suite 11"
-    %div.control-group
-      = f.label :city, { :class => "control-label" }
-      %div.controls
-        = f.text_field :city, :placeholder => "Denver"
-    %div.control-group
-      = f.label :state, { :class => "control-label" }
-      %div.controls
-        = f.text_field :state, :placeholder => "CO"
-    %div.control-group
-      = f.label :zip, { :class => "control-label" }
-      %div.controls
-        = f.text_field :zip, :placeholder => "12345"
-    %div.control-group
-      = f.label :phone, { :class => "control-label" }
-      %div.controls
-        = f.text_field :phone, :placeholder => "555-123-4567"
-    %div.control-group
-      = f.label :notes, { :class => "control-label" }
-      %div.controls
-        = f.text_area :notes, :placeholder => "Write some notes here"
+    .accordion{ :id => "accordion" }
+      .accordion-group
+        .accordion-heading
+          = link_to "#collapseOne", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#accordion" } do
+            %i.icon-exclamation-sign
+            Required
+        #collapseOne{ :class => "accordion-body in" }
+          .accordion-inner
+            .control-group
+              = f.label :first_name, { :class => "control-label" }
+              .controls
+                = f.text_field :first_name, :placeholder => "Jane"
+            .control-group
+              = f.label :last_name, { :class => "control-label" }
+              .controls
+                = f.text_field :last_name, :placeholder => "Doe"
+            .control-group
+              = f.label :email, { :class => "control-label" }
+              .controls
+                = f.text_field :email, :placeholder => "janedoe@gmail.com"
+      .accordion-group
+        .accordion-heading
+          = link_to "#collapseTwo", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#accordion" } do
+            %i.icon-plus-sign
+            Additional
+        #collapseTwo{ :class => "accordion-body collapse" }
+          .accordion-inner
+            .control-group
+              = f.label :address_1, { :class => "control-label" }
+              .controls
+                = f.text_field :address_1, :placeholder => "123 Main St."
+            .control-group
+              = f.label :address_2, { :class => "control-label" }
+              .controls
+                = f.text_field :address_2, :placeholder => "Suite 11"
+            .control-group
+              = f.label :city, { :class => "control-label" }
+              .controls
+                = f.text_field :city, :placeholder => "Denver"
+            .control-group
+              = f.label :state, { :class => "control-label" }
+              .controls
+                = f.text_field :state, :placeholder => "CO"
+            .control-group
+              = f.label :zip, { :class => "control-label" }
+              %div.controls
+                = f.text_field :zip, :placeholder => "12345"
+            .control-group
+              = f.label :phone, { :class => "control-label" }
+              .controls
+                = f.text_field :phone, :placeholder => "555-123-4567"
+            .control-group
+              = f.label :notes, { :class => "control-label" }
+              .controls
+                = f.text_area :notes, :placeholder => "Write some notes here", :rows => 3
 
-    %div.form-actions.btn-group
+    .form-actions
       = f.submit(:class => "btn btn-primary btn-large")
       = link_to "Cancel", :back, { :class => "btn btn-large" }

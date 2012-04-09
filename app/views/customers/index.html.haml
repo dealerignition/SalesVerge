@@ -6,7 +6,7 @@
           %i{ :class => "icon-user icon-white" }
           New Customer
       %p
-        %input.customersearch.big-input{ :placeholder => "Find a customer...", :style => "font-size: 20px" }
+        %input.customersearch.full{ :placeholder => "Find a customer..." }
   %div
     %table.table.table-striped.customertable
       = render @customers
@@ -21,7 +21,7 @@
         %i{ :class => "icon-user icon-white" }
         New Customer
     %p
-      %input.customersearch.big-input{ :placeholder => "Find a customer" }
+      %input.customersearch.full{ :placeholder => "Find a customer..." }
   %div
     %table.table.table-striped.customertable
       = render @customers

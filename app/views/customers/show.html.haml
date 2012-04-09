@@ -1,20 +1,71 @@
+.btn-group
+  = link_to customers_path, { :class => "btn btn-large" } do
+    %i{ :class => "icon-arrow-left" }
+  %a.btn.btn-large{ "data-toggle" => "modal", :href => "#extendedInfo" }
+    Info
+  =link_to new_estimate_path, { :class => "btn btn-large" } do
+    %i.icon-comment
+    Note
+  = link_to edit_customer_path, { :class => "btn btn-large" } do
+    %i.icon-pencil
+    Edit
+  
 .page-header
-  %p
-    = link_to :back, { :class => "btn btn-large" } do
-      %i{ :class => "icon-arrow-left" }
-      Back
   %h1
     = @customer.first_name
     = @customer.last_name
-  
-.row
-  .span2
-    - r = Random.new
-    = image_tag "http://placekitten.com/120/#{r.rand(100..120)}", :class => "avatar"
-    
-  .span5
-    %h6 Basic Info
-    %table.table.table-striped
+    %small
+      = @customer.email
+  .form-actions
+    =link_to new_estimate_path, { :class => "btn btn-success btn-large" } do
+      %i.icon-plus-sign.icon-white
+      Estimate
+    =link_to new_sample_checkout_path, { :class => "btn btn-success btn-large" } do
+      %i.icon-plus-sign.icon-white
+      = current_user.dealer.sample_name
+
+%h2 
+  Timeline
+  %small Press for more info
+
+- if @interaction_stream.count > 0
+  .accordion{ :id => "accordion" }
+    - @interaction_stream.each do |item|
+      .accordion-group
+        .accordion-heading
+          = link_to "#collapse#{item.id}", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#accordion" } do
+            %strong
+              =time_ago_in_words(item.updated_at).capitalize
+              ago
+            - if item.class.eql? Estimate
+              - if item.user.eql? current_user
+                you
+              - else
+                = item.user.full_name
+              == gave #{ @customer.first_name } an estimate for #{ number_to_currency(item.total) }.
+            - elsif item.class.eql? SampleCheckout
+              == #{ @customer.first_name } checked-out #{ item.sample.name }.
+        %div{ :class => "accordion-body collapse", :id => "collapse#{item.id}" }
+          .accordion-inner
+            .control-group
+              %h3==#{item.updated_at.to_formatted_s(:long_ordinal)}
+              - if item.class.eql? Estimate
+                - item.charges.each do |c|
+                  .charge
+                    = c.description
+                    = c.quantity
+                    = number_to_currency(c.total)
+- else
+  .alert
+    ==There are no events in #{@customer.first_name}'s stream.
+
+#extendedInfo.modal.fade
+  .modal-header
+    %a.close{  :href => "#", "data-dismiss" => "modal"}
+      ×
+    %h3 Extended Info
+  .modal-body
+    %table.table.table-striped  
       %tr
         %td
           %b Name
@@ -32,13 +83,6 @@
           %b Phone
         %td
           = number_to_phone(@customer.phone)
-          
-    %a.btn{ "data-toggle" => "modal", :href => "#extendedInfo" }
-      View Extended Information
-    
-  .span5
-    %h6 Location
-    %table.table.table-striped
       %tr
         %td
           %strong Address
@@ -54,51 +98,7 @@
           %strong State &amp; Zip
         %td
           = @customer.state
-          = @customer.zip
-    
-%hr
-.row
-  .span12.btn-group
-    =link_to "Add a Estimate", new_estimate_path, { :class => "btn btn-primary btn-large" }
-    =link_to "Add a Note", new_estimate_path, { :class => "btn btn-primary btn-large" }
-    =link_to "Add a Demo", new_sample_checkout_path, { :class => "btn btn-primary btn-large" }
-%hr
-
-.row
-  %h2.span12
-    Timeline
-
-- @interaction_stream.each do |item|
-  .row
-    .interaction.span12
-      %i
-        =time_ago_in_words(item.updated_at).capitalize
-        ago
-        ==(#{item.updated_at.strftime("%x @ %l:%M %P")}),
-      - if item.class.eql? Estimate
-        - if item.user.eql? current_user
-          you
-        - else
-          item.user.full_name
-        == gave #{ @customer.first_name } an estimate for #{ number_to_currency(item.total) }.
-        - unless item.charges.count.eql? 0
-          (Click for details.)
-          .charges.hide.toggle.well
-            - item.charges.each do |c|
-              .charge
-                = c.description
-                = c.quantity
-                = number_to_currency(c.total)
-      - elsif item.class.eql? SampleCheckout
-        == #{ @customer.first_name } demoed #{ item.sample.name }.
-
-#extendedInfo.modal.fade
-  .modal-header
-    %a.close{  :href => "#", "data-dismiss" => "modal"}
-      ×
-    %h3 Extended Info
-  .modal-body
-    %table.table.table-striped
+          = @customer.zip    
       %tr
         %td
           %b Age
