@@ -16,7 +16,7 @@ class EstimatesController < ApplicationController
   def new
     @estimate = Estimate.new
 
-    if @customer = Customer.find(params[:customer_id]) and can? :read, @customer
+    if params[:customer_id] and @customer = Customer.find(params[:customer_id]) and can? :read, @customer
       @estimate.customer = @customer
       @estimate.user = current_user
       @estimate.save
