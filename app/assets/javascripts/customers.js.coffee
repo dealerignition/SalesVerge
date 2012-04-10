@@ -1,5 +1,7 @@
 $ ->
-    $('#extendedInfo').modal('hide')
+    $('#expandInfo').click ->
+        $("#customerinformation").slideToggle()
+        $("#edit").toggle()
 
     search = false
     $('.customersearch').keyup ->

@@ -17,9 +17,10 @@
       %div{ :class => "accordion-body collapse", :id => "collapse#{item.id}" }
         .accordion-inner
           .control-group
-            %h4
-              = item.customer.first_name
-              = item.customer.last_name
+            - unless @customer
+              %h4
+                = item.customer.first_name
+                = item.customer.last_name
             %i.help-block==#{item.updated_at.to_formatted_s(:long_ordinal)}
             %br
             - if item.class.eql? Estimate
@@ -31,9 +32,10 @@
                       = charge.description
                     %td= number_to_currency(charge.total)
               .btn-group
-                = link_to customer_path(item.customer), :class => "btn btn-large" do
-                  = item.customer.first_name
-                  %i.icon-arrow-right
+                - unless @customer
+                  = link_to customer_path(item.customer), :class => "btn btn-large" do
+                    = item.customer.first_name
+                    %i.icon-arrow-right
                 = link_to estimate_path(item), :class => "btn btn-large" do
                   Estimate
                   %i.icon-arrow-right

@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
   before_filter :confirm_active
   # TODO: Change this when dashboard is finished.
   skip_authorization_check
-  
+
   def index
     @customers = Customer.accessible_by(current_ability).order("created_at ASC").last(5)
     @late_appointments = Appointment.accessible_by(current_ability).where("date < ? AND status NOT LIKE ?", Date.today, "Completed").all
@@ -16,14 +16,15 @@ class DashboardController < ApplicationController
       @new_checked_out_samples = SampleCheckout.where("created_at > ?", Date.today.beginning_of_day).accessible_by(current_ability).count
       @new_estimates = Estimate.where("created_at > ?", Date.today.beginning_of_day).accessible_by(current_ability).count
     end
-    
+
     @timeline_stream = []
-    @customers.each do |customer|
+    Customer.accessible_by(current_ability).each do |customer|
       @timeline_stream += customer.estimates + customer.sample_checkouts
-      @timeline_stream.sort! do |a,b|
-        -(a.updated_at <=> b.updated_at)
-      end
+    end
+
+    @timeline_stream.sort! do |a,b|
+      -(a.updated_at <=> b.updated_at)
     end
   end
-  
+
 end
