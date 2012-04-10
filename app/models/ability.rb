@@ -21,7 +21,7 @@ class Ability
       can :manage, Charge, :estimate => { :user_id => user.id }
       can :manage, Sample, :store => { :dealer_id => user.dealer.id }
       can :manage, @models, :user_id => user.id
-      can :create, [Sample], @models
+      can :create, [Sample] + @models
     else
       cannot :manage, :all
 
