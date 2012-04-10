@@ -2,7 +2,7 @@
   - @timeline_stream.each do |item|
     .accordion-group
       .accordion-heading
-        = link_to "#collapse#{item.id}", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#accordion" } do
+        = link_to "#collapse#{item.class}#{item.id}", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#accordion" } do
           %strong
             =time_ago_in_words(item.updated_at).capitalize
             ago
@@ -14,16 +14,12 @@
             == gave #{item.customer.first_name} an estimate for #{ number_to_currency(item.total) }.
           - elsif item.class.eql? SampleCheckout
             == #{item.customer.first_name} checked-out #{ item.sample.name }.
-      %div{ :class => "accordion-body collapse", :id => "collapse#{item.id}" }
+      %div{ :class => "accordion-body collapse", :id => "collapse#{item.class}#{item.id}" }
         .accordion-inner
           .control-group
-            - unless @customer
-              %h4
-                = item.customer.first_name
-                = item.customer.last_name
             %i.help-block==#{item.updated_at.to_formatted_s(:long_ordinal)}
             %br
-            - if item.class.eql? Estimate
+            - if item.class == Estimate
               %table{ :class => "table table-striped" }
                 - item.charges.each do |charge|
                   %tr
@@ -35,7 +31,15 @@
                 - unless @customer
                   = link_to customer_path(item.customer), :class => "btn btn-large" do
                     = item.customer.first_name
+                    = item.customer.last_name
                     %i.icon-arrow-right
                 = link_to estimate_path(item), :class => "btn btn-large" do
                   Estimate
                   %i.icon-arrow-right
+            - else
+              .btn-group
+                - unless @customer
+                  = link_to customer_path(item.customer), :class => "btn btn-large" do
+                    = item.customer.first_name
+                    = item.customer.last_name
+                    %i.icon-arrow-right

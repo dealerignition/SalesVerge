@@ -31,12 +31,11 @@
         %a{ :href => "#" }
           %h4
             New Estimates
-            %span.badge= @new_estimates    
-  %h2 
-    Timeline
-    %small Tap for more info
-  
+            %span.badge= @new_estimates
   - if @timeline_stream.count > 0
+    %h2 
+      Timeline
+      %small Tap for more info
     = render 'shared/timeline'
     
 - else
