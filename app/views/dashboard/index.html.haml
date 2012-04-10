@@ -1,82 +1,161 @@
-%div.hero-unit
-  %h1 Dashboard
-  %p
-    An overview of your store activity
-    
-%div.row
-  %div.span6
-    %div.page-header
-      %h1 
-        New Customers
-    %table.table.table-striped
-      %thead
-        %th Name
-        %th Created
-        %th
-      - @customers.each do |customer|
-        %tr
-          %td
-            = link_to "#{customer.first_name} #{customer.last_name}", customer
-          %td
-            %i
-              = time_ago_in_words(customer.created_at)
-              ago
-          %td
-            = link_to customer, { :class => "btn btn-primary" } do
-              View
+- if current_user.salesrep?
+  .well.dashboard
+    %ul.nav.nav-pills
+      %li.dropdown
+        %a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
+          %h2
+            Today
+            %b.caret
+        %ul.dropdown-menu
+          %li
+            = link_to "Today", "#"
+          %li
+            = link_to "Yesterday", "#"
+          %li
+            = link_to "Last Week", "#"
+          %li
+            = link_to "All", "#"
+    %ul.nav.nav-pills
+      %li
+        %a{ :href => "#" }
+          %h4
+            New Customers
+            %span.badge= @new_customers
+      %li
+        %a{ :href => "#" }
+          %h4
+            Checked-Out
+            = current_user.dealer.sample_name.pluralize
+            %span.badge= @new_checked_out_samples
+      %li
+        %a{ :href => "#" }
+          %h4
+            New Estimates
+            %span.badge= @new_estimates    
+  %h2 
+    Timeline
+    %small Tap for more info
   
-  %div.span6
-    %div.page-header
-      %h1 
-        Recent Estimate
-    %table.table.table-striped
-      %thead
-        %th Customer
-        %th Total
-      - @estimates.each do |estimate|
-        %tr
-          %td= link_to "#{estimate.customer.first_name} #{estimate.customer.last_name}", customer_path(estimate.customer)
-          %td= number_to_currency(estimate.total)
-          %td
-            = link_to "View", estimate, { :class => "btn btn-primary" }
-        
-%div.row
-  %div.span6
-    %div.page-header
-      %h1 
-        Late Appointments
-        %small==(#{@late_appointments.count})
-    - if @late_appointments.count > 0
+  - if @timeline_stream.count > 0
+    .accordion{ :id => "accordion" }
+      - @timeline_stream.each do |item|
+        .accordion-group
+          .accordion-heading
+            = link_to "#collapse#{item.id}", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#accordion" } do
+              %strong
+                =time_ago_in_words(item.updated_at).capitalize
+                ago
+              - if item.class.eql? Estimate
+                - if item.user.eql? current_user
+                  you
+                - else
+                  = item.user.full_name
+                == gave #{item.customer.first_name} an estimate for #{ number_to_currency(item.total) }.
+              - elsif item.class.eql? SampleCheckout
+                == #{item.customer.first_name} checked-out #{ item.sample.name }.
+          %div{ :class => "accordion-body collapse", :id => "collapse#{item.id}" }
+            .accordion-inner
+              .control-group
+                %h4
+                  = item.customer.first_name
+                  = item.customer.last_name
+                %i.help-block==#{item.updated_at.to_formatted_s(:long_ordinal)}
+                %br
+                - if item.class.eql? Estimate
+                  %table{ :class => "table table-striped" }
+                    - item.charges.each do |charge|
+                      %tr
+                        %td
+                          ==#{"%g" % charge.quantity}x
+                          = charge.description
+                        %td= number_to_currency(charge.total)
+                  .btn-group
+                    = link_to customer_path(item.customer), :class => "btn btn-large" do
+                      = item.customer.first_name
+                      %i.icon-arrow-right
+                    = link_to estimate_path(item), :class => "btn btn-large" do
+                      Estimate
+                      %i.icon-arrow-right
+- else
+  %div.hero-unit
+    %h1 Dashboard
+    %p
+      An overview of your store activity
+    
+  %div.row
+    %div.span6
+      %div.page-header
+        %h1 
+          New Customers
       %table.table.table-striped
         %thead
-          %th Type
-          %th Customer
+          %th Name
+          %th Created
           %th
-        - @late_appointments.each do |appointment|
+        - @customers.each do |customer|
           %tr
-            %td= appointment.appointment_type
             %td
-              = link_to "#{appointment.customer.first_name} #{appointment.customer.last_name}", appointment.customer
+              = link_to "#{customer.first_name} #{customer.last_name}", customer
             %td
-              = link_to "View", appointments_path, { :class => "btn" }
-    - else
-      %span.label.label-success You have no late appointments.
+              %i
+                = time_ago_in_words(customer.created_at)
+                ago
+            %td
+              = link_to customer, { :class => "btn btn-primary" } do
+                View
+  
+    %div.span6
+      %div.page-header
+        %h1 
+          Recent Estimate
+      %table.table.table-striped
+        %thead
+          %th Customer
+          %th Total
+        - @estimates.each do |estimate|
+          %tr
+            %td= link_to "#{estimate.customer.first_name} #{estimate.customer.last_name}", customer_path(estimate.customer)
+            %td= number_to_currency(estimate.total)
+            %td
+              = link_to "View", estimate, { :class => "btn btn-primary" }
+        
+  %div.row
+    %div.span6
+      %div.page-header
+        %h1 
+          Late Appointments
+          %small==(#{@late_appointments.count})
+      - if @late_appointments.count > 0
+        %table.table.table-striped
+          %thead
+            %th Type
+            %th Customer
+            %th
+          - @late_appointments.each do |appointment|
+            %tr
+              %td= appointment.appointment_type
+              %td
+                = link_to "#{appointment.customer.first_name} #{appointment.customer.last_name}", appointment.customer
+              %td
+                = link_to "View", appointments_path, { :class => "btn" }
+      - else
+        %span.label.label-success You have no late appointments.
       
-  %div.span6
-    %div.page-header
-      %h1 
-        Checked-out Samples
-        %small==(#{@checked_out_samples.count})
-    %table{ :class => "table table-striped" }
-      %thead
-        %th Name
-        %th Customer
-        %th Out for
-      - @checked_out_samples.each do |checked_out_sample|
-        %tr
-          %td
-            = checked_out_sample.sample.name
-          %td
-            = link_to "#{checked_out_sample.customer.first_name if checked_out_sample.customer.first_name} #{checked_out_sample.customer.last_name if checked_out_sample.customer.last_name}", checked_out_sample.customer
-          %td
-            = distance_of_time_in_words(checked_out_sample.checkout_time, Time.now)
+    %div.span6
+      %div.page-header
+        %h1 
+          Checked-out Samples
+          %small==(#{@checked_out_samples.count})
+      %table{ :class => "table table-striped" }
+        %thead
+          %th Name
+          %th Customer
+          %th Out for
+        - @checked_out_samples.each do |checked_out_sample|
+          %tr
+            %td
+              = checked_out_sample.sample.name
+            %td
+              = link_to "#{checked_out_sample.customer.first_name if checked_out_sample.customer.first_name} #{checked_out_sample.customer.last_name if checked_out_sample.customer.last_name}", checked_out_sample.customer
+            %td
+              = distance_of_time_in_words(checked_out_sample.checkout_time, Time.now)

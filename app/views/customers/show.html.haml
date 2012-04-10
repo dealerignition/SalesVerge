@@ -26,7 +26,7 @@
 
 %h2 
   Timeline
-  %small Press for more info
+  %small Tap for more info
 
 - if @interaction_stream.count > 0
   .accordion{ :id => "accordion" }
@@ -48,7 +48,10 @@
         %div{ :class => "accordion-body collapse", :id => "collapse#{item.id}" }
           .accordion-inner
             .control-group
-              %h3==#{item.updated_at.to_formatted_s(:long_ordinal)}
+              %h4
+                = item.customer.first_name
+                = item.customer.last_name
+              %i.help-block==#{item.updated_at.to_formatted_s(:long_ordinal)}
               - if item.class.eql? Estimate
                 - item.charges.each do |c|
                   .charge
