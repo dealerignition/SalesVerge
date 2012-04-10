@@ -11,10 +11,9 @@ DealerOnTheGo::Application.routes.draw do
   match "account_settings/users/:id/update" => "users#update", :as => "update_user"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
-  get "signup" => "dealers#new", :as => "signup" 
+  get "signup" => "dealers#new", :as => "signup"
 
   resources :appointments
-  get "customers/search"
   resources :customers
   resources :dealers
   resources :estimates do
