@@ -1,7 +1,4 @@
 $ ->
-    $('.interaction').click () ->
-        $(this).children('.toggle').slideToggle()
-
     $('#extendedInfo').modal('hide')
 
     search = false
@@ -23,3 +20,6 @@ $ ->
             search = false
 
     setInterval(getResults, 500)
+
+    $(".customertable tr").click ->
+        window.location = $(this).find('a.btn:last')[0].href
