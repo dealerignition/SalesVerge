@@ -1,13 +1,13 @@
 -content_for :body do
   .navbar-simple
     %ul.nav.nav-pills
-      %li
+      %li{ :class => "#{"active" if request.path.eql? "/"}" }
         = link_to dashboard_path do
           %i.icon-home.icon-white
-      %li.active
+      %li{ :class => "#{"active" if request.path.include? "customers"}" }
         = link_to customers_path do
           %i.icon-user.icon-white
-      %li
+      %li{ :class => "#{"active" if request.path.include? "settings"}" }
         = link_to account_settings_account_path do
           %i.icon-cog.icon-white
               
