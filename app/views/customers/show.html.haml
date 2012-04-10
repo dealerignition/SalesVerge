@@ -28,38 +28,7 @@
   Timeline
   %small Tap for more info
 
-- if @interaction_stream.count > 0
-  .accordion{ :id => "accordion" }
-    - @interaction_stream.each do |item|
-      .accordion-group
-        .accordion-heading
-          = link_to "#collapse#{item.id}", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#accordion" } do
-            %strong
-              =time_ago_in_words(item.updated_at).capitalize
-              ago
-            - if item.class.eql? Estimate
-              - if item.user.eql? current_user
-                you
-              - else
-                = item.user.full_name
-              == gave #{ @customer.first_name } an estimate for #{ number_to_currency(item.total) }.
-            - elsif item.class.eql? SampleCheckout
-              == #{ @customer.first_name } checked-out #{ item.sample.name }.
-        %div{ :class => "accordion-body collapse", :id => "collapse#{item.id}" }
-          .accordion-inner
-            .control-group
-              %h4
-                = item.customer.first_name
-                = item.customer.last_name
-              %i.help-block==#{item.updated_at.to_formatted_s(:long_ordinal)}
-              - if item.class.eql? Estimate
-                - item.charges.each do |c|
-                  .charge
-                    = c.description
-                    = c.quantity
-                    = number_to_currency(c.total)
-- else
-  .alert
-    ==There are no events in #{@customer.first_name}'s stream.
+- if @timeline_stream.count > 0
+  = render 'shared/timeline'
 
 = render 'info_modal'
