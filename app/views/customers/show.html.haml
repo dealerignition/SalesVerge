@@ -17,7 +17,7 @@
     %small
       = @customer.email
   .form-actions
-    =link_to new_estimate_path, { :class => "btn btn-success btn-large" } do
+    =link_to new_customer_estimate_path(@customer), { :class => "btn btn-success btn-large" } do
       %i.icon-plus-sign.icon-white
       Estimate
     =link_to new_sample_checkout_path, { :class => "btn btn-success btn-large" } do
