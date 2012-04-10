@@ -15,6 +15,48 @@
 
 /************ APPLICATION ************/
 
+.icon_home_opt {
+  background: url(<%= asset_path "moble-home.png" %>);
+  width: 20px;
+  height: 18px;
+}
+
+.icon_user_opt {
+  background: url(<%= asset_path "moble-user.png" %>);
+  width: 19px;
+  height: 17px;
+}
+
+.icon_gear_opt {
+  background: url(<%= asset_path "moble-gear.png" %>);
+  width: 18px;
+  height: 18px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
+  .icon_home_opt {
+    display: inline-block;
+    background: url( <%= asset_path "moble-home@2x.png" %> );
+    background-size:20px 18px;
+  }
+  .icon_user_opt {
+    display: inline-block;
+    background: url( <%= asset_path "moble-user@2x.png" %> );
+    background-size:19px 17px;
+  }
+  .icon_gear_opt {
+    display: inline-block;
+    background: url( <%= asset_path "moble-gear@2x.png" %> );
+    background-size:18px 18px;
+  }
+}
+
+.icon_home_opt, .icon_user_opt, .icon_gear_opt {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding:10px 0;
+}
 
 #logo {
   text-align: center;

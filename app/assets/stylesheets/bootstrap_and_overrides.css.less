@@ -100,10 +100,9 @@ form {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-  zoom: 1.5;
   .nav {
-    margin: 2px auto;
-    width: 144px;
+    margin: -1px auto;
+    width: 160px;
   }
   .nav-tabs > li > a, .nav-pills > li > a {
     padding: 6px 16px;
@@ -112,6 +111,22 @@ form {
     text-decoration: none;
     background-color: #000000;
   }
+}
+
+.navbar-simple .nav-pills .active a, .navbar-simple .nav-pills .active a:hover {
+  background-color: #232323;
+  -webkit-box-shadow: inset 0px 0px 20px 2px #000;
+  -moz-box-shadow: inset 0px 0px 20px 2px #000;
+  box-shadow: inset 0px 0px 20px 2px #000;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+.navbar-simple .nav-pills li a {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
 }
 
 input.full, textarea.full {
