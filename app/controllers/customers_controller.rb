@@ -10,7 +10,7 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       format.html do
-        render @customers, :layout => false if params[:query] and request.xhr?
+        render @customers, :layout => false if request.xhr?
       end
       format.json { render :json => @customers }
     end

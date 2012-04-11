@@ -18,13 +18,15 @@ $ ->
                 "margin-left": "-15px"
             )
         $(window).scrollTop($(this).offset().top-5)
+        $(".navbar-simple").hide()
 
     $('#customersearch').blur ->
+        $(".navbar-simple").fadeIn()
         if not $(this).val() and $(this).data("big")
             $(this).data("big", false)
             setTimeout( =>
                 $(this).animate(
-                    "margin-left": "0px"
+                    "margin-left": "0px",
                     width: $(this).width() / 1.2,
                 )
             , 300)
@@ -36,10 +38,11 @@ $ ->
             if q != ""
                 url = "/customers?query=#{q}" 
             else
-                url = "/customers?query=."
+                url = "/customers"
 
             $.get(url, (data) ->
                 $('#customertable').html(data)
+                $(window).scrollTop($("#customersearch").offset().top-5)
             )
             search = false
 
