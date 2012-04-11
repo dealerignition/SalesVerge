@@ -19,7 +19,7 @@ class DashboardController < ApplicationController
 
     @timeline_stream = []
     Customer.accessible_by(current_ability).each do |customer|
-      @timeline_stream += customer.estimates + customer.sample_checkouts
+      @timeline_stream += customer.estimates + customer.sample_checkouts + customer.notes
     end
 
     @timeline_stream.sort! do |a,b|

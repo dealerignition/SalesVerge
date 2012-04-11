@@ -18,6 +18,7 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find_by_id(params[:id])
+    @note = Note.new
     rapleaf = RapleafApi::Api.new('c7e2c4cbcb32f1bf6d86b20551d48186')
     # query_by_nap(first, last, street, city, state, options)
     @rapleaf_info = rapleaf.query_by_nap(
@@ -29,7 +30,7 @@ class CustomersController < ApplicationController
       :email => @customer.email,
       :show_availble => true )
 
-    @timeline_stream = @customer.estimates + @customer.sample_checkouts
+    @timeline_stream = @customer.estimates + @customer.sample_checkouts + @customer.notes
     @timeline_stream.sort! do |a,b|
       -(a.updated_at <=> b.updated_at)
     end

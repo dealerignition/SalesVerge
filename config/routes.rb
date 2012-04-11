@@ -16,6 +16,7 @@ DealerOnTheGo::Application.routes.draw do
   resources :appointments
   resources :customers do
     resources :estimates
+    resources :notes
   end
   resources :dealers
   resources :estimates do

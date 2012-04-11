@@ -2,6 +2,9 @@ $ ->
     $('#expandInfo').click ->
         $("#customerinformation").slideToggle()
         $("#edit").toggle()
+        
+    $('#expandNote').click ->
+        $("#notearea").slideToggle()
 
     search = false
     $('#customersearch').keyup ->

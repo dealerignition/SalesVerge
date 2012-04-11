@@ -14,6 +14,12 @@
             == gave #{item.customer.first_name} an estimate for #{ number_to_currency(item.total) }.
           - elsif item.class == SampleCheckout
             == #{item.customer.first_name} checked-out #{ item.sample.name }.
+          - elsif item.class == Note
+            - if item.user == current_user
+              you
+            - else
+              = item.user.full_name
+            == created a note about #{ item.customer.first_name }.
       %div{ :class => "accordion-body collapse", :id => "collapse#{item.class}#{item.id}" }
         .accordion-inner
           .control-group
@@ -36,6 +42,17 @@
                 = link_to estimate_path(item), :class => "btn btn-large" do
                   Estimate
                   %i.icon-arrow-right
+            - elsif item.class == Note
+              %p= item.content
+              .btn-group
+                - unless @customer
+                  = link_to customer_path(item.customer), :class => "btn btn-large" do
+                    = item.customer.first_name
+                    = item.customer.last_name
+                    %i.icon-arrow-right
+                = link_to customer_note_path(item.customer, item.id), :class => "btn btn-large", :confirm => "Are you sure you want to delete this note?", :method => :delete do
+                  %i.icon-remove-circle
+                  Delete
             - else
               .btn-group
                 - unless @customer

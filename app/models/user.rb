@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :estimates, :dependent => :destroy
   has_many :sample_checkouts, :dependent => :destroy
   has_many :customers, :dependent => :destroy
+  has_many :notes, :dependent => :destroy
   
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :active, :phone, :message
 

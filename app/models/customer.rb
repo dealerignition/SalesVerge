@@ -9,6 +9,7 @@ class Customer < ActiveRecord::Base
   has_many :sample_checkouts, :dependent => :destroy
   has_many :appointments, :dependent => :destroy
   has_many :estimates, :dependent => :destroy
+  has_many :notes, :dependent => :destroy
 
   def full_name
     "#{ first_name } #{ last_name }"
