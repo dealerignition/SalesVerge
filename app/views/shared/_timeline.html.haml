@@ -6,13 +6,13 @@
           %strong
             =time_ago_in_words(item.updated_at).capitalize
             ago
-          - if item.class.eql? Estimate
-            - if item.user.eql? current_user
+          - if item.class == Estimate
+            - if item.user == current_user
               you
             - else
               = item.user.full_name
             == gave #{item.customer.first_name} an estimate for #{ number_to_currency(item.total) }.
-          - elsif item.class.eql? SampleCheckout
+          - elsif item.class == SampleCheckout
             == #{item.customer.first_name} checked-out #{ item.sample.name }.
       %div{ :class => "accordion-body collapse", :id => "collapse#{item.class}#{item.id}" }
         .accordion-inner
