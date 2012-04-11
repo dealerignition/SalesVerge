@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   include CanCan::Ability
-  default from: "support@dealerignition.com"
+  default from: "notifications@dealerbookapp.com"
   
   def welcome_email(user)
       @user = user
