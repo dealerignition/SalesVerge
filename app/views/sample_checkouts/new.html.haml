@@ -1,16 +1,26 @@
-%div.page-header
-  %h1
-    Checkout
-    =@sample_name.pluralize
+- if current_user.salesrep?
+  %div.page-header
+    %h1
+      Checkout
+      =@sample_name.pluralize
+      %small
+        for customer name
+  .well
+    .center
+      = render "sales_rep_form"
+  = render 'samples/form'
+- else
+  %div.page-header
+    %h1
+      Checkout
+      =@sample_name.pluralize
+  
+  .well
+    %p
+      = link_to "#myModal", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
+        %i.icon-plus-sign.icon-white
+        New
+        =@sample_name
 
-%div.form-actions
-  = link_to :back, { :class => "btn btn-large" } do
-    %i{ :class => "icon-arrow-left" }
-    Back
-  = link_to "#myModal", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
-    %i.icon-plus-sign.icon-white
-    Create New
-    =@sample_name
-
-= render "form"
-= render 'samples/form'
+    = render "form"
+  = render 'samples/form'

@@ -19,7 +19,7 @@
       %div.controls
         = f.select(:sample_id, options_from_collection_for_select(@samples, :id, :name), {:multiple => "true", "data-native-menu" => "false"})
 
-    %div.form-actions
-      = f.submit("Checkout", :class => "btn btn-primary btn-large")
-      = f.hidden_field :checkout_time, :value => Time.now
-      = f.hidden_field :user_id, :value => current_user.id
+    = f.submit("Checkout", :class => "btn btn-primary btn-large")
+    = f.hidden_field :checkout_time, :value => Time.now
+    = f.hidden_field :user_id, :value => current_user.id
+    = link_to "Cancel", :back, :class => "btn btn-large"

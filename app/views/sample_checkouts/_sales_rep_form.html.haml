@@ -1,0 +1,23 @@
+= form_for(@sample_checkout, :html => { :class => "form-horizontal" }) do |f|
+  - if @sample_checkout.errors.any?
+    %div#errorExplanation
+      %h2
+        = pluralize(@sample_checkout.errors.count, "error")
+        prohibited this customer from being saved
+      %ul
+      - @sample_checkout.errors.full_messages.each do |msg|
+        %li
+          = msg
+
+  %fieldset
+    %p
+      %input#customersearch.full{ :placeholder => "Search for a Sample..." }
+      
+    = link_to "#myModal", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
+      %i.icon-plus-sign.icon-white
+      New
+      =@sample_name
+      
+    = f.submit("Done", :class => "btn btn-primary btn-large")
+    = f.hidden_field :checkout_time, :value => Time.now
+    = f.hidden_field :user_id, :value => current_user.id
