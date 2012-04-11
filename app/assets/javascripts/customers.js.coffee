@@ -4,12 +4,31 @@ $ ->
         $("#edit").toggle()
 
     search = false
-    $('.customersearch').keyup ->
+    $('#customersearch').keyup ->
         search = true
+
+    $('#customersearch').focus ->
+        unless $(this).data("big")
+            $(this).data("big", true)
+            $(this).animate(
+                width: $(this).width() * 1.2,
+                "margin-left": "-15px"
+            )
+        $(window).scrollTop($(this).offset().top-5)
+
+    $('#customersearch').blur ->
+        if not $(this).val() and $(this).data("big")
+            $(this).data("big", false)
+            setTimeout( =>
+                $(this).animate(
+                    "margin-left": "0px"
+                    width: $(this).width() / 1.2,
+                )
+            , 300)
 
     getResults = ->
         if search
-            q = $('.customersearch').val()
+            q = $('#customersearch').val()
 
             if q != ""
                 url = "/customers?query=#{q}" 
@@ -17,11 +36,11 @@ $ ->
                 url = "/customers?query=."
 
             $.get(url, (data) ->
-                $('.customertable').html(data)
+                $('#customertable').html(data)
             )
             search = false
 
     setInterval(getResults, 500)
 
-    $(".customertable tr").click ->
+    $("#customertable tr").click ->
         window.location = $(this).find('a.btn:last')[0].href

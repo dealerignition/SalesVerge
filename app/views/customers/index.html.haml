@@ -2,14 +2,12 @@
   .well
     .center
       %p
-        = link_to new_customer_path, { :class => "btn btn-success btn-large" } do
+        = link_to new_customer_path, { :id => "newCustomer", :class => "btn btn-success btn-large" } do
           %i{ :class => "icon-user icon-white" }
           New Customer
       %p
-        %input.customersearch.full{ :value => params[:query], :placeholder => "Find a customer..." }
-  %div
-    %table.table.table-striped.customertable
-      = render @customers
+        %input#customersearch.full{ :value => params[:query], :placeholder => "Find a customer..." }
+
 - else
   .hero-unit
     %h1 Customers
@@ -22,6 +20,7 @@
         New Customer
     %p
       %input.customersearch.full{ :placeholder => "Find a customer..." }
-  %div
-    %table.table.table-striped.customertable
-      = render @customers
+
+%div
+  %table.table.table-striped#customertable
+    = render @customers
