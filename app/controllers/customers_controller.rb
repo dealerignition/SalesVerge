@@ -77,12 +77,21 @@ class CustomersController < ApplicationController
                   .where("(#{query_fields.join("||")}) ~* ?", @query)
 
     query = Regexp.compile("(#{@query})", Regexp::IGNORECASE)
+    starts_with_query = Regexp.compile("^(#{@query}).*", Regexp::IGNORECASE)
+    is_query = Regexp.compile("^(#{@query})$", Regexp::IGNORECASE)
+
     @customers.sort_by! do |customer|
       count = 0
+
       query_fields.each do |field|
-        count += 1 if customer.send(field) =~ query
+        if customer.send(field) =~ is_query
+          count += 0.5
+        elsif customer.send(field) =~ starts_with_query
+          count += 0.3
+        elsif customer.send(field) =~ query
+          count += 0.2
+        end
       end
-      puts customer.first_name, count
 
       -count
     end
