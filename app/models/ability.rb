@@ -3,6 +3,7 @@ class Ability
 
   def initialize(user)
     @models = [Customer, Estimate, SampleCheckout, Appointment, Note]
+
     if user and user.admin?
       can :manage, :all
     elsif user and user.owner?
@@ -11,10 +12,9 @@ class Ability
       can :update, Dealer, :id => user.dealer.id
       can :manage, User, :dealer_id => user.dealer.id
       can :manage, Charge, :estimate => { :user => { :dealer_id => user.dealer.id } }
-      can :manage, @models, :user => { :dealer_id => user.dealer.id }
       can :manage, Sample, :store => { :dealer_id => user.dealer.id }
-      can :manage, Note, :note => { :dealer_id => user.dealer.id }
-      can :create, [User, Sample, Note] + @models
+      can :manage, @models, :user => { :dealer_id => user.dealer.id }
+      can :create, [User, Sample] + @models
     elsif user and user.salesrep?
       cannot :manage, :all
 
@@ -22,8 +22,7 @@ class Ability
       can :manage, Charge, :estimate => { :user_id => user.id }
       can :manage, Sample, :store => { :dealer_id => user.dealer.id }
       can :manage, @models, :user_id => user.id
-      can :manage, Note, :note => { :dealer_id => user.dealer.id }
-      can :create, [Sample, Note] + @models
+      can :create, [Sample] + @models
     else
       cannot :manage, :all
 

@@ -1,13 +1,13 @@
 class NotesController < ApplicationController
   load_and_authorize_resource
-  
+
   def new
     @note = Note.new
-    
+
     @customer = Customer.find(params[:customer_id])
     @user = current_user
   end
-  
+
   def create
     @note = Note.new(params[:note])
     if @note.save
@@ -17,9 +17,9 @@ class NotesController < ApplicationController
     end
     redirect_to :back
   end
-  
+
   def destroy
-    @note = Note.find(params[:note_id])
+    @note = Note.find(params[:id])
     @note.destroy
     flash[:notice] = "Note deleted."
     redirect_to :back
