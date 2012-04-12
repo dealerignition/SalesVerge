@@ -3,6 +3,9 @@ $ ->
         $("#customerinformation").slideToggle()
         $("#edit").toggle()
         
+    $('#expandSampleCheckout').click ->
+        $("#samplearea").slideToggle()
+    
     $('#expandNote').click ->
         $("#notearea").slideToggle()
 

@@ -96,21 +96,16 @@
   =link_to new_customer_estimate_path(@customer), { :class => "btn btn-success btn-large" } do
     %i.icon-plus-sign.icon-white
     Estimate
-  =link_to new_sample_checkout_path, { :class => "btn btn-success btn-large" } do
+  =link_to "#", { :class => "btn btn-success btn-large", :id => "expandSampleCheckout" } do
     %i.icon-plus-sign.icon-white
     = current_user.dealer.sample_name
   =link_to "#", { :class => "btn btn-success btn-large", :id => "expandNote" } do
     %i.icon-edit.icon-white
 
+#samplearea.hide
+  = render "sample_checkout_form"
 #notearea.hide
-  %p
-    = form_for @note, :url => { :controller => "notes", :action => "create" } do |f|
-      %fieldset
-        %div.control-group
-          = f.text_area :content, :placeholder => "Enter note...", :rows => 3
-        = f.submit("Save", :class => "btn btn-primary btn-large")
-        = f.hidden_field :customer_id, :value => @customer.id
-        = f.hidden_field :user_id, :value => current_user.id
+  = render "note_form"
 
 %hr
 
