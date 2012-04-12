@@ -6,7 +6,7 @@
           %i{ :class => "icon-user icon-white" }
           New Customer
       %p
-        %input#customersearch.full{ :value => params[:query], :placeholder => "Find a customer..." }
+        %input#customersearch.full{ :value => params[:query], :placeholder => "Find a customer...", :autocorrect => "off" }
 
 - else
   .hero-unit
