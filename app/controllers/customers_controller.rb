@@ -20,15 +20,19 @@ class CustomersController < ApplicationController
     @customer = Customer.find_by_id(params[:id])
     @note = Note.new
     rapleaf = RapleafApi::Api.new('c7e2c4cbcb32f1bf6d86b20551d48186')
-    # query_by_nap(first, last, street, city, state, options)
-    @rapleaf_info = rapleaf.query_by_nap(
-      @customer.first_name,
-      @customer.last_name,
-      @customer.address_1,
-      @customer.city,
-      @customer.state,
-      :email => @customer.email,
-      :show_availble => true )
+    begin
+      # query_by_nap(first, last, street, city, state, options)
+      @rapleaf_info = rapleaf.query_by_nap(
+        @customer.first_name,
+        @customer.last_name,
+        @customer.address_1,
+        @customer.city,
+        @customer.state,
+        :email => @customer.email,
+        :show_availble => true )
+    rescue
+      @rapleaf_info = {}
+    end
 
     @timeline_stream = @customer.estimates + @customer.sample_checkouts + @customer.notes
     @timeline_stream.sort! do |a,b|
