@@ -5,14 +5,24 @@
 }
 
 .customer {
-    padding: 10px;
-    min-height: 50px;
-    .border-radius(5px);
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  height: 47px;
+  position: relative;
+  .border-radius(4px);
+  background-color: #f8f8f8;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  &:hover {
     background-color: @grayLighter;
-    &:hover {
-        background-color: @grayLight;
-        small {
-            color: @white;
-        }
-    }
+  }
+}
+
+.link-override {
+  position:absolute; 
+  width:100%;
+  height:100%;
+  top:0;
+  left: 0;
+  z-index: 1 
 }

@@ -1,13 +1,14 @@
 .row
   - if current_user.salesrep?
-    .well
-      .center
-        %p
-          = link_to new_customer_path, { :id => "newCustomer", :class => "btn btn-success btn-large" } do
-            %i{ :class => "icon-user icon-white" }
-            New Customer
-        %p
-          %input#customersearch.full{ :value => params[:query], :placeholder => "Find a customer..." }
+    .span12
+      .well
+        .center
+          %p
+            = link_to new_customer_path, { :id => "newCustomer", :class => "btn btn-success btn-large" } do
+              %i{ :class => "icon-user icon-white" }
+              New Customer
+          %p
+            %input#customersearch.full{ :value => params[:query], :placeholder => "Find a customer..." }
 
   - else
     .hero-unit
@@ -22,6 +23,6 @@
       %p
         %input.customersearch.full{ :placeholder => "Find a customer&hellip;" }
 
-.row
-  #customers.span12
+#customers
+  .row
     = render @customers
