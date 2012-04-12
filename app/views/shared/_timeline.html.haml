@@ -1,62 +1,41 @@
 .accordion{ :id => "accordion" }
-  - @timeline_stream.each do |item|
-    .accordion-group
+  - @timeline_stream.each do |story|
+    .accordion-group.story{ :class => story.class.to_s.downcase }
       .accordion-heading
-        = link_to "#collapse#{item.class}#{item.id}", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#accordion" } do
+        - id = "#{story.class}#{story.id}"
+        = link_to "#collapse#{id}", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#accordion" } do
           %strong
-            =time_ago_in_words(item.updated_at).capitalize
+            =time_ago_in_words(story.updated_at).capitalize
             ago
-          - if item.class == Estimate
-            - if item.user == current_user
-              you
-            - else
-              = item.user.full_name
-            == gave #{item.customer.first_name} an estimate for #{ number_to_currency(item.total) }.
-          - elsif item.class == SampleCheckout
-            == #{item.customer.first_name} checked-out #{ item.sample.name }.
-          - elsif item.class == Note
-            - if item.user == current_user
-              you
-            - else
-              = item.user.full_name
-            == created a note about #{ item.customer.first_name }.
-      %div{ :class => "accordion-body collapse", :id => "collapse#{item.class}#{item.id}" }
+          = to_sentence(story)
+      %div{ :class => "accordion-body collapse", :id => "collapse#{id}" }
         .accordion-inner
           .control-group
-            %i.help-block==#{item.updated_at.to_formatted_s(:long_ordinal)}
-            %br
-            - if item.class == Estimate
+            %p
+              %i.help-block==#{story.updated_at.to_formatted_s(:long_ordinal)}
+            - if story.instance_of?(Estimate) and story.charges.count.nonzero?
               %table{ :class => "table table-striped" }
-                - item.charges.each do |charge|
+                - story.charges.each do |charge|
                   %tr
                     %td
-                      ==#{"%g" % charge.quantity}x
+                      ==#{"%g" % charge.quantity} &times;
                       = charge.description
                     %td= number_to_currency(charge.total)
-              .btn-group
-                - unless @customer
-                  = link_to customer_path(item.customer), :class => "btn btn-large" do
-                    = item.customer.first_name
-                    = item.customer.last_name
-                    %i.icon-arrow-right
-                = link_to estimate_path(item), :class => "btn btn-large" do
-                  Estimate
+            - elsif story.instance_of? Note
+              %p= story.content
+
+            .btn-group
+              - unless @customer
+                - customer = story.instance_of?(Customer) ? story : story.customer
+                = link_to customer_path(customer), :class => "btn btn-large" do
+                  = customer.full_name
                   %i.icon-arrow-right
-            - elsif item.class == Note
-              %p= item.content
-              .btn-group
-                - unless @customer
-                  = link_to customer_path(item.customer), :class => "btn btn-large" do
-                    = item.customer.first_name
-                    = item.customer.last_name
-                    %i.icon-arrow-right
-                = link_to customer_note_path(item.customer, item.id), :class => "btn btn-large", :confirm => "Are you sure you want to delete this note?", :method => :delete do
+
+              - if story.instance_of? Note
+                = link_to customer_note_path(story.customer, story.id), :class => "btn btn-large", :confirm => "Are you sure you want to delete this note?", :method => :delete do
                   %i.icon-remove-circle
                   Delete
-            - else
-              .btn-group
-                - unless @customer
-                  = link_to customer_path(item.customer), :class => "btn btn-large" do
-                    = item.customer.first_name
-                    = item.customer.last_name
-                    %i.icon-arrow-right
+              - elsif story.instance_of? Estimate
+                = link_to estimate_path(story), :class => "btn btn-large" do
+                  Estimate
+                  %i.icon-arrow-right

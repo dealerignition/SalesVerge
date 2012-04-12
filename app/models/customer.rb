@@ -14,4 +14,8 @@ class Customer < ActiveRecord::Base
   def full_name
     "#{ first_name } #{ last_name }"
   end
+
+  def timeline_stream
+    estimates + sample_checkouts + notes
+  end
 end

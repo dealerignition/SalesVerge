@@ -3,7 +3,7 @@ class Estimate < ActiveRecord::Base
   belongs_to :user
 
   has_many :charges, :dependent => :destroy
-  
+
   validates_presence_of :user_id
 
   def total
@@ -15,5 +15,5 @@ class Estimate < ActiveRecord::Base
 
     total.round 2
   end
-  
+
 end

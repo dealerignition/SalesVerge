@@ -1,54 +1,52 @@
 - if current_user.salesrep?
-  .well.dashboard
-    %ul.nav.nav-pills
-      %li.dropdown
-        %a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
-          %h2
-            Today
-            %b.caret
-        %ul.dropdown-menu
-          %li
-            = link_to "Today", "#"
-          %li
-            = link_to "Yesterday", "#"
-          %li
-            = link_to "Last Week", "#"
-          %li
-            = link_to "All", "#"
-    %ul.nav.nav-pills
-      %li
-        %a{ :href => "#" }
-          %h4
-            New Customers
-            %span.badge= @new_customers
-      %li
-        %a{ :href => "#" }
-          %h4
-            Checked-Out
-            = current_user.dealer.sample_name.pluralize
-            %span.badge= @new_checked_out_samples
-      %li
-        %a{ :href => "#" }
-          %h4
-            New Estimates
-            %span.badge= @new_estimates
-  - if @timeline_stream.count > 0
-    %h2 
+  .well#dashboard
+    %h2
       Timeline
-      %small Tap for more info
-    = render 'shared/timeline'
+      %small
+        for
+        %select
+          - @date_options.each do |o|
+            - if @date_range == o
+              %option{ :value => o, :selected => "selected" }= o.to_s.titleize
+            - else
+              %option{ :value => o}= o.to_s.titleize
+
+      .visible-phone
+        %p.btn-group{ "data-toggle" => "buttons-radio" }
+          %button.btn.btn-mini.btn-info#customer Customers
+          %button.btn.btn-mini.btn-info#samplecheckout
+            =current_user.dealer.sample_name.pluralize
+          %button.btn.btn-mini.btn-info#estimate Estimates
+          %button.btn.btn-mini.btn-info#note Notes
+
+      .hidden-phone
+        %p.btn-group{ "data-toggle" => "buttons-radio" }
+          %button.btn.btn-large.btn-info#customer Customers
+          %button.btn.btn-large.btn-info#samplecheckout
+            =current_user.dealer.sample_name.pluralize
+          %button.btn.btn-large.btn-info#estimate Estimates
+          %button.btn.btn-large.btn-info#note Notes
+
+  .row
+    #timelineStream.span12
+      - if @timeline_stream
+        %h3
+          = @timeline_stream.count
+          = "Story".pluralize(@timeline_stream.count)
+        = render 'shared/timeline'
+      - else
+        %h3 No stories!
+        %p Why don't you go sell to some customers?
     
 - else
-  %div.hero-unit
+  .hero-unit
     %h1 Dashboard
-    %p
-      An overview of your store activity
+    %p An overview of your store activity
     
-  %div.row
-    %div.span6
-      %div.page-header
-        %h1 
-          New Customers
+  .row
+    .span6
+      .page-header
+        %h1 New Customers
       %table.table.table-striped
         %thead
           %th Name
@@ -66,8 +64,8 @@
               = link_to customer, { :class => "btn btn-primary" } do
                 View
   
-    %div.span6
-      %div.page-header
+    .span6
+      .page-header
         %h1 
           Recent Estimate
       %table.table.table-striped
@@ -81,9 +79,9 @@
             %td
               = link_to "View", estimate, { :class => "btn btn-primary" }
         
-  %div.row
-    %div.span6
-      %div.page-header
+  .row
+    .span6
+      .page-header
         %h1 
           Late Appointments
           %small==(#{@late_appointments.count})
@@ -103,8 +101,8 @@
       - else
         %span.label.label-success You have no late appointments.
       
-    %div.span6
-      %div.page-header
+    .span6
+      .page-header
         %h1 
           Checked-out Samples
           %small==(#{@checked_out_samples.count})

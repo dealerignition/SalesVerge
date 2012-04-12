@@ -5,21 +5,36 @@ class DashboardController < ApplicationController
   skip_authorization_check
 
   def index
-    @customers = Customer.accessible_by(current_ability).order("created_at ASC").last(5)
-    @late_appointments = Appointment.accessible_by(current_ability).where("date < ? AND status NOT LIKE ?", Date.today, "Completed").all
-    @checked_out_samples = SampleCheckout.accessible_by(current_ability).find_all_by_checkin_time(nil)
-    @estimates = Estimate.accessible_by(current_ability).order("created_at DESC").last(5)
 
-    # For SalesRep view
-    if current_user.salesrep?
-      @new_customers = Customer.where("created_at > ?", Date.today.beginning_of_day).accessible_by(current_ability).count
-      @new_checked_out_samples = SampleCheckout.where("created_at > ?", Date.today.beginning_of_day).accessible_by(current_ability).count
-      @new_estimates = Estimate.where("created_at > ?", Date.today.beginning_of_day).accessible_by(current_ability).count
-    end
+    dates = {
+      :today => "> TIMESTAMP 'today'",
+      :yesterday => "> TIMESTAMP 'yesterday' AND updated_at < TIMESTAMP 'today'",
+      :this_month => " > CURRENT_DATE - INTERVAL '1 month'",
+      :all_time => "> TIMESTAMP '-infinity'"
+    }
 
-    @timeline_stream = []
+    @date_options = dates.keys
+    @date_range = params[:date_range].to_s.to_sym
+    date_query = "updated_at #{dates[@date_range] || dates[:all_time]}"
+
+    @customers = Customer.accessible_by(current_ability)
+                        .order("created_at ASC")
+                        .where(date_query)
+    @late_appointments = Appointment.accessible_by(current_ability)
+                        .where("date < ? AND status NOT LIKE ?", Date.today, "Completed")
+                        .all
+    @checked_out_samples = SampleCheckout.accessible_by(current_ability)
+                        .find_all_by_checkin_time(nil)
+    @estimates = Estimate.accessible_by(current_ability)
+                        .order("created_at DESC")
+                        .last(5)
+
+    @timeline_stream = @customers
     Customer.accessible_by(current_ability).each do |customer|
-      @timeline_stream += customer.estimates + customer.sample_checkouts + customer.notes
+      [:estimates, :sample_checkouts, :notes].each do |field|
+        @timeline_stream += customer.send(field)
+                              .where(date_query)
+      end
     end
 
     @timeline_stream.sort! do |a,b|
