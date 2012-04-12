@@ -4,14 +4,14 @@ $ ->
             setTimeout(removeActive, 10)
             count = 0
             $(this).siblings().each ->
-                $(".#{this.id}").show()
-                count += $(".#{this.id}").length
-            count += $(".#{this.id}").length
+                $(".#{this.id}accordion").show()
+                count += $(".#{this.id}accordion").length
+            count += $(".#{this.id}accordion").length
         else
             $(this).siblings().each ->
-                $(".#{this.id}").hide()
-            $(".#{this.id}").show()
-            count = $(".#{this.id}").length
+                $(".#{this.id}accordion").hide()
+            $(".#{this.id}accordion").show()
+            count = $(".#{this.id}accordion").length
 
         word = if count > 1 then "Stories" else "Story"
         $("#timelineStream h3").text("#{count} #{word}")
