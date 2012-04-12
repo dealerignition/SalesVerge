@@ -1,0 +1,17 @@
+@import "bootstrap_and_overrides.css.less";
+
+.controls {
+  min-width: 200px;
+}
+.customer {
+    padding: 10px;
+    min-height: 50px;
+    .border-radius(5px);
+    background-color: @grayLighter;
+    &:hover {
+        background-color: @grayLight;
+        small {
+            color: @white;
+        }
+    }
+}

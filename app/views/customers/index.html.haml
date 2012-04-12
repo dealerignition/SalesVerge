@@ -21,6 +21,5 @@
     %p
       %input.customersearch.full{ :placeholder => "Find a customer..." }
 
-%div
-  %table.table.table-striped#customertable
-    = render @customers
+#customers
+  = render @customers
