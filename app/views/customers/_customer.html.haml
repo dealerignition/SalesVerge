@@ -1,13 +1,5 @@
-%tr
-  %td
-    = customer.first_name
-    = customer.last_name
-    %br
-    .truncate-email
-      = mail_to customer.email
-  %td
-    /= link_to edit_customer_path(customer), { :class => "btn btn-large" } do
-    /  %i.icon-edit
-    /  Edit
-    = link_to customer, { :class => "btn btn-large" } do
-      %i.icon-arrow-right
+%p.customer.span3
+  = customer.full_name
+  %br
+  %small.truncate-email= customer.email
+  = link_to "Go", customer, { :class => :hide }

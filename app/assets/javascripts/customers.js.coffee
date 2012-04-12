@@ -44,7 +44,7 @@ $ ->
                 url = "/customers"
 
             $.get(url, (data) ->
-                $('#customertable').html(data)
+                $('#customers').html(data)
                 $(window).scrollTop($("#customersearch").offset().top-5)
             )
             search = false
