@@ -11,15 +11,15 @@
               you
             - else
               = item.user.full_name
-            == gave #{item.customer.first_name} an estimate for #{ number_to_currency(item.total) }.
+            == gave #{item.customer.first_name} an <span class="estimate">estimate</span> for #{ number_to_currency(item.total) }.
           - elsif item.class == SampleCheckout
-            == #{item.customer.first_name} checked-out #{ item.sample.name }.
+            == #{item.customer.first_name} <span class="sample">checked-out</span> #{ item.sample.name }.
           - elsif item.class == Note
             - if item.user == current_user
               you
             - else
               = item.user.full_name
-            == created a note about #{ item.customer.first_name }.
+            == created a <span class="note">note</span> about #{ item.customer.first_name }.
       %div{ :class => "accordion-body collapse", :id => "collapse#{item.class}#{item.id}" }
         .accordion-inner
           .control-group
