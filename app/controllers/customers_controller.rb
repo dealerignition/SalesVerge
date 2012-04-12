@@ -18,6 +18,9 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find_by_id(params[:id])
+    @sample_checkout = SampleCheckout.new
+    @sample = Sample.new
+    @store = current_user.dealer.stores.first
     @note = Note.new
     rapleaf = RapleafApi::Api.new('c7e2c4cbcb32f1bf6d86b20551d48186')
     begin

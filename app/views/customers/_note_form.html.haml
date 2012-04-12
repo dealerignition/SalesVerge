@@ -1,0 +1,9 @@
+%p
+  .well
+    = form_for @note, :url => { :controller => "notes", :action => "create" } do |f|
+      %fieldset
+        %div.control-group
+          = f.text_area :content, :placeholder => "Enter note...", :rows => 3
+        = f.submit("Save", :class => "btn btn-primary btn-large")
+        = f.hidden_field :customer_id, :value => @customer.id
+        = f.hidden_field :user_id, :value => current_user.id
