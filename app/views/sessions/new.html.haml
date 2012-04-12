@@ -6,7 +6,7 @@
         %h1 Log-in
         %hr
         %fieldset
-          = text_field_tag :email, params[:email], :placeholder => "Email", :style => "width:98%"
+          = text_field_tag :email, params[:email], :placeholder => "Email", :style => "width:98%", :autocapitalize => "off", :autocorrect => "off"
           %br
           = password_field_tag :password, nil, :placeholder => "Password", :style => "width:98%"
           %br
