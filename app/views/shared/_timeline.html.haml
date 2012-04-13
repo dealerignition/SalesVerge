@@ -13,14 +13,23 @@
           .control-group
             %p
               %i.help-block==#{story.updated_at.to_formatted_s(:long_ordinal)}
-            - if story.instance_of?(Estimate) and story.charges.count.nonzero?
-              %table{ :class => "table table-striped" }
-                - story.charges.each do |charge|
-                  %tr
-                    %td
-                      ==#{"%g" % charge.quantity} &times;
-                      = charge.description
-                    %td= number_to_currency(charge.total)
+            - if story.instance_of?(Estimate)
+              %p
+                = link_to "#", { :class => "btn btn-success" } do
+                  %i.icon-plus-sign.icon-white
+                  Add a Charge
+              - if story.charges.count.nonzero?
+                %table{ :class => "table table-striped" }
+                  - story.charges.each do |charge|
+                    %tr
+                      %td
+                        ==#{"%g" % charge.quantity} &times;
+                        = charge.description
+                      %td= number_to_currency(charge.total)
+                      %td
+                        %h2
+                          = link_to "#", :confirm => "Are you sure you want to delete this charge?" do
+                            &times;
             - elsif story.instance_of? Note
               %p= story.content
             - elsif story.instance_of? SampleCheckout
@@ -37,9 +46,7 @@
                   %i.icon-remove-circle
                   Delete
               - elsif story.instance_of? Estimate
-                = link_to estimate_path(story), :class => "btn" do
-                  Estimate
-                  %i.icon-arrow-right
+                = link_to "Email", estimate_deliver_customer_mailer_path(story), { :confirm => "Are you sure you want to email this estimate to #{story.customer.full_name} (#{story.customer.email})?", :class => "btn btn-primary" }
               - elsif story.instance_of? SampleCheckout
                 - if story.checkin_time.blank?
                   = link_to sample_checkout_check_in_path(story), :class => "btn btn-primary", :confirm => "Are you sure #{story.sample.name} has been returned to your store?" do

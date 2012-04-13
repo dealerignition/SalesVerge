@@ -75,7 +75,7 @@ class EstimatesController < ApplicationController
   def deliver_customer_mailer
     @estimate = Estimate.find(params[:estimate_id])
     CustomerMailer.estimate(@estimate).deliver
-    flash[:notice] = "Estimate was sucessfully sent."
+    flash[:notice] = "Estimate was sucessfully sent to #{@estimate.customer.email}."
 
     redirect_to :back
   end
