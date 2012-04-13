@@ -11,7 +11,7 @@ module ApplicationHelper
     elsif model.instance_of? Note
       "#{ you_or_they(model.user) } created a <span class='note'>note</span> about #{ model.customer.first_name }.".html_safe
     elsif model.instance_of? Customer
-      "#{ you_or_they(model.user) } added #{ model.full_name } as a customer.".html_safe
+      "#{ you_or_they(model.user) } added #{ model.full_name } as a <span class='customer'>customer</span>.".html_safe
     else
     end
   end
