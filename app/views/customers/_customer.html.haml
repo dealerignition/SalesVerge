@@ -5,5 +5,4 @@
     %p.help-block
       %span.truncate-email= customer.email
       = link_to "Go", customer, { :class => :hide }
-    %a{ :href => "#{customer_path(customer)}" }
-      %span.link-override
+    %a{ :href => "#{customer_path(customer)}", :class => "link-override" }
