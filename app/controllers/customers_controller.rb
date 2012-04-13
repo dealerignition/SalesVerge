@@ -23,6 +23,8 @@ class CustomersController < ApplicationController
     @store = current_user.dealer.stores.first
     @note = Note.new
     rapleaf = RapleafApi::Api.new('c7e2c4cbcb32f1bf6d86b20551d48186')
+      # Justin's trial API key:       c7e2c4cbcb32f1bf6d86b20551d48186
+      # Steven's production API key:  22045e6e52abd5fd2ecaa0829be2217c
     begin
       # query_by_nap(first, last, street, city, state, options)
       @rapleaf_info = rapleaf.query_by_nap(
