@@ -31,6 +31,5 @@
         = checked_out_sample.user.first_name
         = checked_out_sample.user.last_name[0]
       %td
-        = form_for(checked_out_sample) do |f|
-          = f.submit("Check-in", :class => "btn btn-large btn-primary", :confirm => "Are you sure #{checked_out_sample.sample.name} has been returned to the store?")
-          = f.hidden_field :checkin_time, :value => Time.now
+        = link_to sample_checkout_check_in_path(checked_out_sample), :class => "btn btn-primary", :confirm => "Are you sure #{checked_out_sample.sample.name} has been returned to your store?" do
+          Check-in

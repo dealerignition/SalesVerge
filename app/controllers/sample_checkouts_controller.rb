@@ -45,4 +45,15 @@ class SampleCheckoutsController < ApplicationController
     redirect_to sample_checkouts_path
   end
   
+  def check_in
+    @sample_checkout = SampleCheckout.find(params[:sample_checkout_id])
+    @sample_checkout.checkin_time = Time.now
+    if @sample_checkout.save
+      flash[:notice] = "Sample has been checked-in."
+    else
+      flash[:error] = "Sample has not been checked-in."
+    end
+    redirect_to :back
+  end
+  
 end
