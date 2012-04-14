@@ -6,10 +6,11 @@
         for
         %select
           - @date_options.each do |o|
+            - name = o == :this_month ? Date.today.strftime("%B") : o.to_s.titleize
             - if @date_range == o
-              %option{ :value => o, :selected => "selected" }= o.to_s.titleize
+              %option{ :value => o, :selected => "selected" }=name
             - else
-              %option{ :value => o}= o.to_s.titleize
+              %option{ :value => o}=name
 
       .visible-phone
         %p.btn-group{ "data-toggle" => "buttons-radio" }
@@ -37,12 +38,12 @@
       - else
         %h3 No stories!
         %p Why don't you go sell to some customers?
-    
+
 - else
   .hero-unit
     %h1 Dashboard
     %p An overview of your store activity
-    
+
   .row
     .span6
       .page-header
@@ -63,10 +64,10 @@
             %td
               = link_to customer, { :class => "btn btn-primary" } do
                 View
-  
+
     .span6
       .page-header
-        %h1 
+        %h1
           Recent Estimate
       %table.table.table-striped
         %thead
@@ -78,11 +79,11 @@
             %td= number_to_currency(estimate.total)
             %td
               = link_to "View", estimate, { :class => "btn btn-primary" }
-        
+
   .row
     .span6
       .page-header
-        %h1 
+        %h1
           Late Appointments
           %small==(#{@late_appointments.count})
       - if @late_appointments.count > 0
@@ -100,10 +101,10 @@
                 = link_to "View", appointments_path, { :class => "btn" }
       - else
         %span.label.label-success You have no late appointments.
-      
+
     .span6
       .page-header
-        %h1 
+        %h1
           Checked-out Samples
           %small==(#{@checked_out_samples.count})
       %table{ :class => "table table-striped" }
