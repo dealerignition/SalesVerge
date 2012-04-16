@@ -50,19 +50,31 @@ a {
 	margin-bottom: 5px;
 }
 #header {
-	background: #ffffff;
+	background-color: #ffffff;
 	padding: 20px;
 	padding-bottom: 0;
 	border: 1px solid #DDDDDD;
 	border-bottom: none;
 	text-align: center;
 }
-#header #logo, #header #name, #header #address, #header #phoneweb {
+#header #name, #header #address, #header #phoneweb {
 	text-align: left;
 	padding: 0;
 }
 #header #logo {
   width:180px;
+}
+#logo {
+  background-color: green;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 12px;
+  margin-top: -20px;
+  margin-left: -20px;
 }
 #header #name td.border-bottom {
   padding-bottom:7px;
@@ -136,8 +148,11 @@ table.tablebordered tfoot td {
                   	
                   	<table border="0" cellpadding="20" cellspacing="0" width="100%" id="header">
                       <tr>
-                        <td valign="top" id="logo">
-                          <img src="http://s3.amazonaws.com/dealer_ignition/dealer_ipad/sample_logo.png" width="150" height="46px" />
+                        <td valign="top">
+                          <div id="logo">
+                            <%= @dealer.name %>
+                            <!--<img src="http://s3.amazonaws.com/dealer_ignition/dealer_ipad/sample_logo.png" width="150" height="46px" />-->
+                          </div>
                         </td>
                         <td valign="top" id="name">
                           <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -172,7 +187,6 @@ table.tablebordered tfoot td {
                   	</table>
                     <table border="0" cellpadding="0" cellspacing="0" width="100%"  id="content">
                       <tr>
-                        <!-- content-->
                         <td valign="top">
                           <table cellpadding="0" cellspacing="0" border="0" width="555">
                             <tr id="yield">
@@ -184,8 +198,7 @@ table.tablebordered tfoot td {
                             </tr>
                           </table>	
                          </td>
-                         <!-- content-->
-
+                         
                       </tr>
                    </table>
                   </td>
