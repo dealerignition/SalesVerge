@@ -30,7 +30,7 @@ class ChargesController < ApplicationController
     @charge.destroy
 
     flash[:notice] = "Charge deleted."
-    redirect_to estimate_path(@estimate)
+    redirect_to :back
   end
 
 end

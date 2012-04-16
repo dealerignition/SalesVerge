@@ -54,7 +54,7 @@
                       - if story.status.blank?
                         %td
                           %h2
-                            = link_to "#", :confirm => "Are you sure you want to delete this charge?", :class => "close" do
+                            = link_to [story, charge], :confirm => "Are you sure you want to delete this charge?", :class => "close", :method => :delete do
                               &times;
             - elsif story.instance_of? Note
               %p= story.content
