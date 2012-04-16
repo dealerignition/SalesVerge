@@ -23,8 +23,8 @@ class UsersController < ApplicationController
       data.merge!({ 
         :form => render_to_string(:partial => "users/form")
       })
-
-      render :json => data
+      flash[:notice] = "User was successfully created."
+      redirect_to :back
     else
       render :json => {
         :success => false,

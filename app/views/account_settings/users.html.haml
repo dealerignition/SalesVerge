@@ -9,9 +9,12 @@
     %table.table.table-striped#users
       = render @dealer.users
     
-    = link_to "#createUser", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
-      %i.icon-plus-sign.icon-white
-      Create New User
-      
-.modal.hide.fade#createUser
-  = render 'users/form'
+    .button-group
+      = link_to "#newUserArea", { :class => "btn btn-large btn-success", :id => "expandNewUser", "data-toggle" => "button" } do
+        %i.icon-plus-sign.icon-white
+        Create New User
+    %p
+      &nbsp;
+    #newUserArea.hide
+      .well
+        = render 'users/form'

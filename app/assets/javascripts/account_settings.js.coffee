@@ -1,4 +1,7 @@
 $ -> 
+  $('#expandNewUser').click ->
+      $("#newUserArea").slideToggle()
+
     $('#createUser').modal('hide')
     $(document).on("submit", '#createUser form', (event) ->
       event.preventDefault()
