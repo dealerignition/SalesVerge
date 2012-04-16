@@ -1,9 +1,4 @@
 -content_for :body do
-  %div{ :class => "navbar navbar-fixed-top" }
-    %div.navbar-inner
-      %div.container
-        = link_to "Your Carpet Store", "#", { :class => "brand" }
-
   %div.container
     %div.row
       %div.span6.offset3
@@ -21,8 +16,7 @@
           %div.alert.alert-error
             %a.close{ :href => "#", "data-dismiss" => "alert" }
               &times;
-            = flash[:error]
-          
+            = flash[:error]          
     = content_for?(:body) ? yield(:body) : yield
   
 =render :template => "layouts/application"

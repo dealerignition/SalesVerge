@@ -3,7 +3,7 @@
     %div.span6.offset3#login        
       = form_tag sessions_path, :class => "well" do
         = error_messages_for :session
-        %h1 Log-in
+        %h1 Log in
         %hr
         %fieldset
           = text_field_tag :email, params[:email], :placeholder => "Email", :style => "width:98%", :autocapitalize => "off", :autocorrect => "off"
