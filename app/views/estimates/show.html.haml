@@ -5,11 +5,15 @@
     =@estimate.customer.last_name
     
   %div.form-actions
-    = link_to :back, { :class => "btn btn-large" } do
-      %i{ :class => "icon-arrow-left" }
-    = link_to "#myModal", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
-      %i.icon-plus-sign.icon-white
-      Add a Charge
+    .btn-group  
+      = link_to :back, { :class => "btn btn-large" } do
+        %i{ :class => "icon-arrow-left" }
+      = link_to "#", { :class => "btn btn-large btn-success", :id => "expandCharge", "data-toggle" => "button" } do
+        %i.icon-plus-sign.icon-white
+        Add a Charge
+    #chargearea.hide
+      = render 'charges/form'
+    
 
 %table{ :class => "table table-striped" }
   %thead
@@ -36,5 +40,3 @@
       %strong
         = number_to_currency(@estimate.total)
     %td
-
-= render 'charges/form'
