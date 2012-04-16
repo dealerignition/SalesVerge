@@ -18,6 +18,7 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find_by_id(params[:id])
+    @charge = Charge.new
     @sample_checkout = SampleCheckout.new
     @sample = Sample.new
     @store = current_user.dealer.stores.first

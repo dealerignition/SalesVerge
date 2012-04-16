@@ -5,7 +5,13 @@ module ApplicationHelper
 
   def to_sentence(model)
     if model.instance_of? Estimate
-      "#{ you_or_they(model.user) } gave #{model.customer.first_name} an <span class='estimate'>estimate</span> for #{ number_to_currency(model.total) }.".html_safe
+      if model.status == "won"
+        "#{model.customer.first_name} purchased an <span class='estimate'>estimate</span> for #{ number_to_currency(model.total) }.".html_safe
+      elsif model.status == "lost"
+        "#{model.customer.first_name} declined an <span class='estimate'>estimate</span> for #{ number_to_currency(model.total) }.".html_safe
+      else
+        "#{ you_or_they(model.user) } gave #{model.customer.first_name} an <span class='estimate'>estimate</span> for #{ number_to_currency(model.total) }.".html_safe
+      end
     elsif model.instance_of? SampleCheckout
       if model.checkin_time?
         "#{model.customer.first_name} <span class='sample'>checked-<span class='sample_in'>in</span></span> #{ model.sample.name }.".html_safe

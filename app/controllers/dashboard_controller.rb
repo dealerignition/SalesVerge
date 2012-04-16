@@ -26,6 +26,8 @@ class DashboardController < ApplicationController
         @timeline_stream += customer.send(field).where(@date_range_string)
       end
     end
+    
+    @charge = Charge.new
 
     @timeline_stream.sort! { |a,b| -(a.updated_at <=> b.updated_at) }
  end

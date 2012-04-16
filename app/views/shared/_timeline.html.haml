@@ -14,10 +14,35 @@
             %p
               %i.help-block==#{story.updated_at.to_formatted_s(:long_ordinal)}
             - if story.instance_of?(Estimate)
-              %p
-                = link_to "#", { :class => "btn btn-success" } do
-                  %i.icon-plus-sign.icon-white
-                  Add a Charge
+              - if story.status.blank?
+                %p   
+                  .btn-group{ "data-toggle" => "buttons-checkbox" }
+                    = link_to "#", { :class => "btn btn-success expandAddCharge" } do
+                      %i.icon-plus-sign.icon-white
+                      Add a Charge
+                  .addChargeArea.hide
+                    / NOTE this needs to go into a partial
+                    = form_for @charge, :url => { :action => "create", :controller => "charges" }, :html => { :class => "form-horizontal" } do |f|
+                      = f.error_messages :header_message => "There were problems with the following fields:",
+                        :message => "",
+                        :header_tag => :h3
+                      %fieldset
+                        %div.control-group
+                          = f.label :description, "Description", { :class => "control-label" }
+                          %div.controls
+                            = f.text_field :description, :placeholder => "Carpet installation"
+                        %div.control-group
+                          = f.label :price, { :class => "control-label" }
+                          %div.controls
+                            = f.text_field :price, :placeholder => "500"
+                      %div.control-group
+                        = f.label :quantity, { :class => "control-label" }
+                        %div.controls
+                          = f.text_field :quantity, :placeholder => "1"
+                      = f.submit(:class => "btn btn-primary")
+                      = f.hidden_field :date, :value => Time.now
+                      = f.hidden_field :estimate_id, :value => story.id
+
               - if story.charges.count.nonzero?
                 %table{ :class => "table table-striped" }
                   - story.charges.each do |charge|
@@ -26,10 +51,11 @@
                         ==#{"%g" % charge.quantity} &times;
                         = charge.description
                       %td= number_to_currency(charge.total)
-                      %td
-                        %h2
-                          = link_to "#", :confirm => "Are you sure you want to delete this charge?" do
-                            &times;
+                      - if story.status.blank?
+                        %td
+                          %h2
+                            = link_to "#", :confirm => "Are you sure you want to delete this charge?", :class => "close" do
+                              &times;
             - elsif story.instance_of? Note
               %p= story.content
             - elsif story.instance_of? SampleCheckout
@@ -45,9 +71,13 @@
                 = link_to customer_note_path(story.customer, story.id), :class => "btn", :confirm => "Are you sure you want to delete this note?", :method => :delete do
                   %i.icon-remove-circle
                   Delete
-              - elsif story.instance_of? Estimate
-                = link_to "Email", estimate_deliver_customer_mailer_path(story), { :confirm => "Are you sure you want to email this estimate to #{story.customer.full_name} (#{story.customer.email})?", :class => "btn btn-primary" }
               - elsif story.instance_of? SampleCheckout
                 - if story.checkin_time.blank?
                   = link_to sample_checkout_check_in_path(story), :class => "btn btn-primary", :confirm => "Are you sure #{story.sample.name} has been returned to your store?" do
                     Check-in
+            - if (story.instance_of? Estimate) && (story.status.blank?)
+              %p
+                .btn-group
+                  = link_to "Email", estimate_deliver_customer_mailer_path(story), { :confirm => "Are you sure you want to email this estimate to #{story.customer.full_name} (#{story.customer.email})?", :class => "btn btn-primary" }
+                  = link_to "Won", estimate_won_path(story), :confirm => "Are you sure you want to mark this estimate as 'Won'?", :class => "btn"
+                  = link_to "Lost", estimate_lost_path(story), :confirm => "Are you sure you want to mark this estimate as 'Lost'?", :class => "btn"
