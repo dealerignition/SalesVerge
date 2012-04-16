@@ -6,4 +6,42 @@
     
   %div.span9
     %h3 Account
-    = render 'users/form'
+    = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id }, :html => { :class => "form-horizontal" } do |f|
+      = f.error_messages :header_message => "There were problems with the following fields:",
+        :message => "",
+        :header_tag => :h3
+      %fieldset
+        .control-group
+          = f.label :first_name, { :class => "control-label" }
+          .controls
+            = f.text_field :first_name, :placeholder => "Joe"
+        .control-group
+          = f.label :last_name, { :class => "control-label" }
+          .controls
+            = f.text_field :last_name, :placeholder => "Smith"
+        .control-group
+          = f.label :email, { :class => "control-label" }
+          .controls
+            = f.text_field :email, :placeholder => "joe@mycarpet.com"
+        .control-group
+          = f.label :password, { :class => "control-label" }
+          .controls
+            = f.password_field :password
+        .control-group
+          = f.label :password_confirmation, { :class => "control-label" }
+          .controls
+            = f.password_field :password_confirmation
+        .control-group
+          = f.label :phone, { :class => "control-label" }
+          .controls
+            = f.text_field :phone, { :placeholder => "(555) 123-4567" }
+        .control-group
+          = f.label "Signature message", { :class => "control-label" }
+          .controls
+            = f.text_area :message, { :rows => 8 }
+            %p
+            .alert.alert-info
+              This message will appear above your signature in emails sent to your customers.
+        .control-group
+          .controls
+            = f.submit(:class => "btn btn-primary btn-large" )
