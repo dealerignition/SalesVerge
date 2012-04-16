@@ -6,9 +6,9 @@ module ApplicationHelper
   def to_sentence(model)
     if model.instance_of? Estimate
       if model.status == "won"
-        "#{model.customer.first_name} purchased an <span class='estimate'>estimate</span> for #{ number_to_currency(model.total) }.".html_safe
+        "#{model.customer.first_name} <span class='estimate-won'>purchased an estimate</span> for #{ number_to_currency(model.total) }.".html_safe
       elsif model.status == "lost"
-        "#{model.customer.first_name} declined an <span class='estimate'>estimate</span> for #{ number_to_currency(model.total) }.".html_safe
+        "#{model.customer.first_name} <span class='danger'>declined an estimate</span> for #{ number_to_currency(model.total) }.".html_safe
       else
         "#{ you_or_they(model.user) } gave #{model.customer.first_name} an <span class='estimate'>estimate</span> for #{ number_to_currency(model.total) }.".html_safe
       end

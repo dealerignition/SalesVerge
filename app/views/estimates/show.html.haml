@@ -7,16 +7,13 @@
   %div.form-actions
     = link_to :back, { :class => "btn btn-large" } do
       %i{ :class => "icon-arrow-left" }
-      Back
     = link_to "#myModal", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
       %i.icon-plus-sign.icon-white
       Add a Charge
-    %div.pull-right
-      = link_to "Change Customer", edit_estimate_path(@estimate), { :class => "btn btn-large" }
 
 %table{ :class => "table table-striped" }
   %thead
-    %th Service/Product
+    %th Description
     %th Price
     %th Quantity
     %th Total
@@ -39,5 +36,5 @@
       %strong
         = number_to_currency(@estimate.total)
     %td
-    
+
 = render 'charges/form'
