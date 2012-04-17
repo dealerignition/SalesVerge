@@ -3,7 +3,7 @@
     %div.span6.offset3#login        
       = form_tag sessions_path, :class => "well" do
         = error_messages_for :session
-        %h1 Log in
+        %h1 Sign in
         %hr
         %fieldset
           = text_field_tag :email, params[:email], :placeholder => "Email", :style => "width:98%", :autocapitalize => "off", :autocorrect => "off"
@@ -14,7 +14,7 @@
           = label_tag :remember_me, "Remember Me", { :class => "remember_check_label" }
           %br
           %hr
-          = submit_tag "Log in", {:class => "btn btn-large btn-primary"}
+          = submit_tag "Sign in", {:class => "btn btn-large btn-primary"}
           %span.pull-right
             = link_to signup_path, :class => "btn btn-large" do
-              Signup
+              Register
