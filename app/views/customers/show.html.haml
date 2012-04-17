@@ -9,7 +9,7 @@
       = link_to "Edit", edit_customer_path, { :id => "edit", :class => "btn btn-mini hide" }
   #customerinformation.hide
     %hr
-    %table.table.table-striped  
+    %table.table.table-striped
       %tr
         %td
           %b Name
@@ -42,7 +42,7 @@
           %strong State &amp; Zip
         %td
           = @customer.state
-          = @customer.zip    
+          = @customer.zip
       %tr
         %td
           %b Age
@@ -84,7 +84,7 @@
           - else
             %span.help-block N/A
       %tr
-        %td 
+        %td
           %b Home Market Value
         %td
           - if @rapleaf_info["home_market_value"]
@@ -102,15 +102,15 @@
   =link_to "#", { :class => "btn btn-success btn-large", :id => "expandNote" } do
     %i.icon-edit.icon-white
 
-#samplearea.hide
+#samplearea.js-areas
   = render "sample_checkout_form"
-#notearea.hide
+#notearea.hide.js-areas
   = render "note_form"
 
 %hr
 
 - if @timeline_stream.count > 0
-  %h2 
+  %h2
     Timeline
     %small Tap for more info
   = render 'shared/timeline'

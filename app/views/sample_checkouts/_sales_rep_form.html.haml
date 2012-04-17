@@ -11,13 +11,13 @@
 
   %fieldset
     %p
-      %input#customersearch.full{ :placeholder => "Search for a Sample..." }
-      
+      %input#samplesearch.full{ :placeholder => "Search for a Sample&hellip;" }
+
     = link_to "#myModal", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
       %i.icon-plus-sign.icon-white
       New
       =@sample_name
-      
+
     = f.submit("Done", :class => "btn btn-primary btn-large")
     = f.hidden_field :checkout_time, :value => Time.now
     = f.hidden_field :user_id, :value => current_user.id

@@ -3,13 +3,15 @@
     = form_for(@sample_checkout, :url => { :controller => "sample_checkouts", :action => "create" }) do |f|
       %fieldset
         %p
-          %input#customersearch.full{ :placeholder => "Search for a Sample..." }
-      
+          %input#samplesearch.full{ :placeholder => "Search for a Sample..." }
+        #js-samples
+        #js-selected-samples
+
         = link_to "#myModal", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
           %i.icon-plus-sign.icon-white
           New
           = current_user.dealer.sample_name
-      
+
         = f.submit("Done", :class => "btn btn-primary btn-large")
         = f.hidden_field :checkout_time, :value => Time.now
         = f.hidden_field :user_id, :value => current_user.id
