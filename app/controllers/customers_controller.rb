@@ -5,15 +5,7 @@ class CustomersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @customers = params[:query] ? search(params[:query]) :
-      Customer.accessible_by(current_ability)
-
-    respond_to do |format|
-      format.html do
-        render @customers, :layout => false if request.xhr?
-      end
-      format.json { render :json => @customers }
-    end
+    searchable_index(Customer, [:first_name, :last_name, :email])
   end
 
   def show
@@ -74,39 +66,6 @@ class CustomersController < ApplicationController
     else
       redirect_to edit_customer_path(@customer)
     end
-  end
-
-  private
-
-  def search(query)
-    @query = query.split().join("|")
-    query_fields = [:first_name, :last_name, :email]
-
-    @customers = Customer.accessible_by(current_ability)
-                  .select(query_fields.push(:id))
-                  .where("(#{query_fields.join("||")}) ~* ?", @query)
-
-    query = Regexp.compile("(#{@query})", Regexp::IGNORECASE)
-    starts_with_query = Regexp.compile("^(#{@query}).*", Regexp::IGNORECASE)
-    is_query = Regexp.compile("^(#{@query})$", Regexp::IGNORECASE)
-
-    @customers.sort_by! do |customer|
-      count = 0
-
-      query_fields.each do |field|
-        if customer.send(field) =~ is_query
-          count += 0.5
-        elsif customer.send(field) =~ starts_with_query
-          count += 0.3
-        elsif customer.send(field) =~ query
-          count += 0.2
-        end
-      end
-
-      -count
-    end
-
-    @customers
   end
 
 end

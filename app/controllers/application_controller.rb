@@ -26,6 +26,57 @@ class ApplicationController < ActionController::Base
     :all_time => "updated_at > TIMESTAMP '-infinity'"
   }
 
+  def searchable_index(model, query_fields)
+    if params[:query]
+      @records = search(model, params[:query], query_fields)
+    else
+      @records = model.accessible_by(current_ability)
+    end
+
+    respond_to do |format|
+      format.html do
+        render @records, :layout => false if request.xhr?
+      end
+      format.json { render :json => @records }
+    end
+  end
+
+  def search(model, query, query_fields)
+    @query = query.split().join("|")
+
+    select_fields = query_fields.push(:id).collect do |field|
+      "#{model.table_name}.#{field}"
+    end
+
+    where_fields = select_fields[0..-1]
+
+    @records = model.accessible_by(current_ability)
+                  .select(select_fields)
+                  .where("(#{where_fields.join("||")}) ~* ?", @query)
+
+    query = Regexp.compile("(#{@query})", Regexp::IGNORECASE)
+    starts_with_query = Regexp.compile("^(#{@query}).*", Regexp::IGNORECASE)
+    is_query = Regexp.compile("^(#{@query})$", Regexp::IGNORECASE)
+
+    @records.sort_by! do |record|
+      count = 0
+
+      query_fields.each do |field|
+        if record.send(field) =~ is_query
+          count += 0.5
+        elsif record.send(field) =~ starts_with_query
+          count += 0.3
+        elsif record.send(field) =~ query
+          count += 0.2
+        end
+      end
+
+      -count
+    end
+
+    @records
+  end
+
   private
 
   def not_authenticated
