@@ -1,5 +1,6 @@
 class DealersController < ApplicationController
   load_and_authorize_resource
+  layout "session"
 
   def new
     @dealer = Dealer.new
