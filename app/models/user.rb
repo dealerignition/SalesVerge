@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   ROLES = ["owner", "admin", "salesrep"]
-  before_save :downcase_email
+  before_validation :downcase_email
 
   authenticates_with_sorcery!
-  
+
   belongs_to :dealer
 
   has_many :appointments, :dependent => :destroy
@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :sample_checkouts, :dependent => :destroy
   has_many :customers, :dependent => :destroy
   has_many :notes, :dependent => :destroy
-  
+
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :active, :phone, :message
 
   validates_presence_of :first_name
@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_presence_of :role
   validates_inclusion_of :role, :in => ROLES
-  
+
   scope :is_owner, where(:role => 'owner')
 
   def admin?
@@ -40,17 +40,17 @@ class User < ActiveRecord::Base
   def full_name
     "#{ first_name } #{ last_name }"
   end
-  
+
   private
 
   def downcase_email
     self.email.downcase! if self.email
   end
-  
+
   def self.send_daily_digest
     User.is_owner.all.each do |user|
       UserMailer.daily_digest(user).deliver
     end
   end
-  
+
 end
