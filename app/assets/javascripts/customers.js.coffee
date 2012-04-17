@@ -11,9 +11,13 @@ $ ->
         $(".js-areas:not(#notearea)").slideUp()
         $("#notearea").slideToggle()
 
-    search = false
+    customer_search = false
     $('#customersearch').keyup ->
-        search = true
+        customer_search = true
+
+    sample_search = false
+    $('#samplesearch').keyup ->
+        sample_search = true
 
     # Only use this if we are on a phone.
     if (navigator.userAgent.toLowerCase().indexOf("iphone") > -1 ||
@@ -39,8 +43,8 @@ $ ->
                   )
               , 300)
 
-    getResults = ->
-        if search
+    getCustomerResults = ->
+        if customer_search
             q = $('#customersearch').val()
 
             if q != ""
@@ -52,9 +56,36 @@ $ ->
                 $('#customers').html(data)
                 $(window).scrollTop($("#customersearch").offset().top-5)
             )
-            search = false
+            customer_search = false
 
-    setInterval(getResults, 500)
+    getSampleResults = ->
+        if sample_search
+            q = $('#samplesearch').val()
+
+            if q
+              $.getJSON("/samples.json?query=#{q}", (samples) ->
+                  $("#js-samples").empty()
+                  for sample in samples
+                    unless sample.id in $("#js-selected-samples").data("selected")
+                      $("#js-samples")
+                        .append("<p><a href='##{sample.id}'>#{sample.name}</a></p>")
+                      $("#js-samples a:last").data("id", sample.id)
+              )
+            else
+              $("#js-samples").empty()
+
+            sample_search = false
+
+    $("#js-selected-samples").data("selected", [])
+    $("#js-samples").on('click', "a", ->
+      selected = $("#js-selected-samples").data("selected")
+      selected.push($(this).data("id"))
+      $(this).parent().remove().appendTo("#js-selected-samples")
+      $("#js-selected-samples").data("selected", selected)
+    )
+
+    setInterval(getCustomerResults, 500)
+    setInterval(getSampleResults, 500)
 
     $("#customertable tr").click ->
         window.location = $(this).find('a.btn:last')[0].href
