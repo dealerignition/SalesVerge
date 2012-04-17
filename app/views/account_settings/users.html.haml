@@ -3,18 +3,17 @@
 
 .row
   = render 'navigation'
-    
+
   .span9
     %h3 Users
     %table.table.table-striped#users
       = render @dealer.users
-    
+
     .button-group
       = link_to "#newUserArea", { :class => "btn btn-large btn-success", :id => "expandNewUser", "data-toggle" => "button" } do
         %i.icon-plus-sign.icon-white
         Create New User
-    %p
-      &nbsp;
+    %br
     #newUserArea.hide
       .well
         = render 'users/form'
