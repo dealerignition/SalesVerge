@@ -3,9 +3,8 @@
 
 %div.row
   = render 'navigation'
-    
+
   %div.span9
-    %h3 Account
     = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id }, :html => { :class => "form-horizontal" } do |f|
       = f.error_messages :header_message => "There were problems with the following fields:",
         :message => "",
