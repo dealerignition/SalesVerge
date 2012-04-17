@@ -4,9 +4,11 @@ $ ->
         $("#edit").toggle()
 
     $('#expandSampleCheckout').click ->
+        $(".js-areas:not(#samplearea)").slideUp()
         $("#samplearea").slideToggle()
 
     $('#expandNote').click ->
+        $(".js-areas:not(#notearea)").slideUp()
         $("#notearea").slideToggle()
 
     search = false
