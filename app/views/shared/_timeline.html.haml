@@ -68,8 +68,8 @@
                   %i.icon-user
                   = customer.full_name
               - if story.instance_of? Note
-                = link_to customer_note_path(story.customer, story.id), :class => "btn", :confirm => "Are you sure you want to delete this note?", :method => :delete do
-                  %i.icon-remove-circle
+                = link_to customer_note_path(story.customer, story.id), :class => "btn btn-danger", :confirm => "Are you sure you want to delete this note?", :method => :delete do
+                  %i.icon-remove-circle.icon-white
                   Delete
               - elsif story.instance_of? SampleCheckout
                 - if story.checkin_time.blank?
