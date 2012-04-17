@@ -3,7 +3,10 @@
     %div.span8.offset2.well
       %h1 
         Register
-        %small Setup your account to get started
-        %hr
+        %small.hidden-phone Setup your account to get started
+      %p 
+        Already Registered?
+        = link_to "Sign in", login_path, :class => "btn"
+      %hr
 
       = render 'form_new'

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>We're sorry, but something went wrong (500)</title>
   <style type="text/css">
     body { background-color: #fff; color: #666; text-align: center; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif }
@@ -95,6 +96,17 @@
       -ms-transition: background-position 0.1s linear;
       -o-transition: background-position 0.1s linear;
       transition: background-position 0.1s linear;
+    }
+    @media  only screen and (device-width: 320px) and (-webkit-min-device-pixel-ratio: 2), 
+            only screen and (device-width: 320px) and (-webkit-max-device-pixel-ratio: 1),
+            only screen and (max-width: 515px) {
+      div.dialog {
+        width:85%;
+      }
+      h1 { 
+        font-size: 18px;
+        line-height: 22px;
+      }
     }
   </style>
 </head>
