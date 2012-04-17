@@ -15,22 +15,21 @@ class UsersController < ApplicationController
     if @user.save
       data = {
         :success => true,
-        :data => render_to_string(:partial => "users/user", 
+        :data => render_to_string(:partial => "users/user",
                                   :locals => { :user => @user })
       }
 
       @user = User.new
-      data.merge!({ 
-        :form => render_to_string(:partial => "users/form")
-      })
-      flash[:notice] = "User was successfully created."
-      redirect_to :back
     else
-      render :json => {
-        :success => false,
-        :form => render_to_string(:partial => "users/form")
+      data = {
+        :success => false
       }
     end
+
+    data.merge!({
+      :form => render_to_string(:partial => "users/form")
+    })
+    render :json => data
   end
 
   def update

@@ -1,17 +1,14 @@
-$ -> 
+$ ->
   $('#expandNewUser').click ->
       $("#newUserArea").slideToggle()
 
-    $('#createUser').modal('hide')
-    $(document).on("submit", '#createUser form', (event) ->
+    $(document).on("submit", '#newUserArea form', (event) ->
       event.preventDefault()
       $.post("/account_settings/users/create", $(this).serialize(), (data) ->
         if data.success
-          $('#createUser').one('hidden', ->
-            $('#users').append(data.data).hide().slideDown()
-          )
-          $('#createUser').modal('hide')
-
-        $('#createUser').html(data.form)
+          $('#users').append(data.data).hide().slideDown()
+          $('#newUserArea').slideUp()
+          $('#expandNewUser').removeClass('active')
+        $('#newUserArea form').replaceWith(data.form)
       )
     )
