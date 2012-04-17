@@ -6,8 +6,7 @@
         %small.hidden-phone Setup your account to get started
       %p 
         Already Registered?
-        %a.btn
-          Sign-in
+        = link_to "Sign in", login_path, :class => "btn"
       %hr
 
       = render 'form_new'
