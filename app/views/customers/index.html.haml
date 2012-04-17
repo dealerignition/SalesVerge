@@ -23,6 +23,6 @@
       %p
         %input#customersearch.full{ :value => params[:query], :placeholder => "Find a customer&hellip;", :autocorrect => "off" }
 
-#customers
-  .row
+.row
+  #customers
     = render @customers
