@@ -1,42 +1,33 @@
-%div.page-header
+=link_to :back, { :class => "btn" } do
+  %i.icon-arrow-left
+.page-header
   %h1 
     Estimate for
     =@estimate.customer.first_name
     =@estimate.customer.last_name
     
-  %div.form-actions
-    .btn-group  
-      = link_to :back, { :class => "btn btn-large" } do
-        %i{ :class => "icon-arrow-left" }
-      = link_to "#", { :class => "btn btn-large btn-success", :id => "expandCharge", "data-toggle" => "button" } do
-        %i.icon-plus-sign.icon-white
-        Add a Charge
-    #chargearea.hide
-      = render 'charges/form'
+= link_to "#", { :class => "btn btn-large btn-success", :id => "expandCharge", "data-toggle" => "button" } do
+  %i.icon-plus-sign.icon-white
+  Add a Charge
+#chargearea.hide
+  = render 'charges/form'
 
-%table{ :class => "table table-striped" }
-  %thead
-    %th Description
-    %th Price
-    %th Quantity
-    %th Total
-    %th
-  - @estimate.charges.each do |charge|
+%p
+  %table{ :class => "table table-striped" }
+    - @estimate.charges.each do |charge|
+      %tr
+        %td= charge.description
+        %td
+          %span.badge==#{"%g" % charge.quantity}&times;
+          = number_to_currency(charge.price)
+        %td
+          = link_to [@estimate, charge], :confirm => "Are you sure you want to remove '#{charge.description}' from this estimate?", :method => :delete, :class => "close" do
+            &times;
     %tr
-      %td= charge.description
-      %td= number_to_currency(charge.price)
-      %td= "%g" % charge.quantity
-      %td= number_to_currency(charge.total)
+      %td{ :style => "text-align: right;"}
+        %strong
+          Total
       %td
-        = link_to [@estimate, charge], :confirm => "Are you sure you want to remove '#{charge.description}' from this estimate?", :method => :delete, :class => "close" do
-          &times;
-  %tr
-    %td
-    %td
-    %td
-      %strong
-        Total
-    %td
-      %strong
-        = number_to_currency(@estimate.total)
-    %td
+        %strong
+          %span.badge.badge-success= number_to_currency(@estimate.total)
+      %td

@@ -1,3 +1,5 @@
+=link_to :back, { :class => "btn" } do
+  %i.icon-arrow-left
 .page-header
   %h1
     = @customer.first_name
@@ -105,8 +107,7 @@
 #notearea.hide.js-areas
   = render "note_form"
 
-%hr
-
+%br
 - if @timeline_stream.count > 0
   %h2
     Timeline
