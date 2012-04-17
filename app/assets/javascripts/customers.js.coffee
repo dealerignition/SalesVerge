@@ -64,7 +64,7 @@ $ ->
 
             if q
               $.getJSON("/samples.json?query=#{q}", (samples) ->
-                  $("#js-samples").empty()
+                  $("#js-samples p").remove()
                   for sample in samples
                     unless sample.id in $("#js-selected-samples").data("selected")
                       $("#js-samples")
@@ -72,7 +72,7 @@ $ ->
                       $("#js-samples a:last").data("id", sample.id)
               )
             else
-              $("#js-samples").empty()
+              $("#js-samples p").remove()
 
             sample_search = false
 
@@ -89,3 +89,10 @@ $ ->
 
     $("#customertable tr").click ->
         window.location = $(this).find('a.btn:last')[0].href
+
+    $("#samplearea input[type=submit]").click (event) ->
+      event.preventDefault()
+      sample_ids = $("#js-selected-samples").data("selected").join("|")
+      $("#samplearea input[name='sample_ids']").val(sample_ids)
+      $(this).closest("form").submit()
+

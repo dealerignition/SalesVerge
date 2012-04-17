@@ -13,15 +13,13 @@
       %tr
         %td
           %b Name
-        %td
-          = @customer.first_name
-          = @customer.last_name
+        %td= @customer.full_name
       %tr
         %td
           %b Email
         %td
           .truncate-email
-            = link_to @customer.email, "mailto:#{@customer.email}"
+            = mail_to @customer.email
       %tr
         %td
           %b Phone

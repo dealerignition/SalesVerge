@@ -1,18 +1,22 @@
 %p
   .well
-    = form_for(@sample_checkout, :url => { :controller => "sample_checkouts", :action => "create" }) do |f|
+    .row
+      .span2
+        %input#samplesearch.full{ :placeholder => "Search for a Sample..." }
+    .row
+      #js-samples.span2
+        %h5 Results
+      #js-selected-samples.span2
+        %h5 Selected
+    = form_for(@sample_checkout, :url => customer_sample_checkouts_path(@customer)) do |f|
       %fieldset
-        %p
-          %input#samplesearch.full{ :placeholder => "Search for a Sample..." }
-        #js-samples
-        #js-selected-samples
-
-        = link_to "#myModal", { "data-toggle" => "modal", :show => "false", :class => "btn btn-large btn-success" } do
-          %i.icon-plus-sign.icon-white
-          New
-          = current_user.dealer.sample_name
-
-        = f.submit("Done", :class => "btn btn-primary btn-large")
-        = f.hidden_field :checkout_time, :value => Time.now
-        = f.hidden_field :user_id, :value => current_user.id
-  = render 'samples/form'
+        .row
+          .span2
+            %p
+              %input{ :name => :sample_ids, :type => :hidden }
+              = f.submit("Checkout Sample(s)", :class => "btn btn-primary btn-large")
+          .span3
+            %p
+              %a.btn.btn-large
+                %i.icon.icon-plus-sign
+                Create New Sample

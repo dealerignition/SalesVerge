@@ -2,12 +2,12 @@ class SampleCheckoutsController < ApplicationController
   before_filter :require_login
   before_filter :confirm_active
   load_and_authorize_resource
-  
+
   def index
     @checked_out_samples = SampleCheckout.accessible_by(current_ability).find_all_by_checkin_time(nil)
     @sample_name = current_user.dealer.sample_name
   end
-  
+
   def new
     @sample_checkout = SampleCheckout.new
     @samples = Sample.accessible_by(current_ability)
@@ -16,26 +16,43 @@ class SampleCheckoutsController < ApplicationController
     @store = current_user.dealer.stores.first
     @sample_name = current_user.dealer.sample_name
   end
-  
+
   def create
-    @sample_checkout = SampleCheckout.new(params[:sample_checkout])
-    if @sample_checkout.save
-      CustomerMailer.sample_checkout(@sample_checkout).deliver
-      flash[:notice] = "#{@sample_checkout.sample.name} was successfully checked-out. An email was sent to #{@sample_checkout.customer.email}."
-      redirect_to sample_checkouts_path
+    if params[:customer_id] && params[:sample_ids]
+      @customer = Customer.find(params[:customer_id])
+
+      params[:sample_ids].split("|").each do |id|
+        sc = SampleCheckout.new :customer => @customer,
+                                  :user => current_user,
+                                  :sample => Sample.find(id),
+                                  :checkout_time => Time.now
+        CustomerMailer.sample_checkout(sc).deliver if sc.save
+      end
+
+      flash[:notice] = "Samples were successfully checked-out. An email was sent to #{@customer.email}."
+      redirect_to :back
     else
-      flash[:error] = "Sample was not checked-out."
-      render "new"
+      @sample_checkout = SampleCheckout.new(params[:sample_checkout])
+
+      if @sample_checkout.save
+        CustomerMailer.sample_checkout(@sample_checkout).deliver
+        flash[:notice] = "#{@sample_checkout.sample.name} was successfully checked-out. An email was sent to #{@sample_checkout.customer.email}."
+        redirect_to sample_checkouts_path
+      else
+        flash[:error] = "Sample was not checked-out."
+        render "new"
+      end
+
     end
   end
-  
+
   def edit
     @sample_checkout = SampleCheckout.find(params[:id])
   end
-  
+
   def update
     @sample_checkout = SampleCheckout.find(params[:id])
-    
+
     if @sample_checkout.update_attributes(params[:sample_checkout])
       flash[:notice] = "#{@sample_checkout.sample.name} was successfully checked-in."
     else
@@ -44,7 +61,7 @@ class SampleCheckoutsController < ApplicationController
 
     redirect_to sample_checkouts_path
   end
-  
+
   def check_in
     @sample_checkout = SampleCheckout.find(params[:sample_checkout_id])
     @sample_checkout.checkin_time = Time.now
@@ -55,5 +72,5 @@ class SampleCheckoutsController < ApplicationController
     end
     redirect_to :back
   end
-  
+
 end
