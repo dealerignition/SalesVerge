@@ -40,9 +40,9 @@
                   %b.caret
                 %ul.dropdown-menu
                   %li= link_to "Account Settings", account_settings_account_path
-                  %li= link_to "Log out", logout_path
+                  %li= link_to "Sign out", logout_path
             - else
-              %li= link_to "Log in", login_path
+              %li= link_to "Sign in", login_path
   %div.container
     - if flash[:notice]
       %div.alert.alert-success
