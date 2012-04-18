@@ -44,48 +44,68 @@ $ ->
               , 300)
 
     getCustomerResults = ->
-        if customer_search
-            q = $('#customersearch').val()
+      if customer_search
+        q = $('#customersearch').val()
 
-            if q != ""
-                url = "/customers?query=#{q}"
-            else
-                url = "/customers"
+        if q
+          url = "/customers?query=#{q}"
+        else
+          url = "/customers"
 
-            $.get(url, (data) ->
-                $('#customers').html(data)
-                $(window).scrollTop($("#customersearch").offset().top-5)
-            )
-            customer_search = false
+        $.get(url, (data) ->
+          $('#customers').html(data)
+          $(window).scrollTop($("#customersearch").offset().top-5)
+        )
+        customer_search = false
+    setInterval(getCustomerResults, 500)
 
     getSampleResults = ->
-        if sample_search
-            q = $('#samplesearch').val()
+      if sample_search
+        q = $('#samplesearch').val()
 
-            if q
-              $.getJSON("/samples.json?query=#{q}", (samples) ->
-                  $("#js-samples p").remove()
-                  for sample in samples
-                    unless sample.id in $("#js-selected-samples").data("selected")
-                      $("#js-samples")
-                        .append("<p><a href='##{sample.id}'>#{sample.name}</a></p>")
-                      $("#js-samples a:last").data("id", sample.id)
-              )
-            else
-              $("#js-samples p").remove()
+        if q
+          $.getJSON("/samples.json?query=#{q}", (samples) ->
+              $("#js-samples li").remove()
+              for sample in samples
+                unless sample.id in $("#js-selected-samples").data("selected")
+                  $("#js-samples")
+                    .append("<li><a href='##{sample.id}'>#{sample.name} <span class='help-block'>#{sample.dealer_sample_id}</span><span class='close'>&times;</span></a></li>")
+                  $("#js-samples a:last").data("id", sample.id)
+          )
+        else
+          $("#js-samples li").remove()
+          $("#js-samples").show()
 
-            sample_search = false
+        checkCheckoutButton()
+        sample_search = false
+    setInterval(getSampleResults, 500)
+
+    checkCheckoutButton = ->
+      button = $("#checkoutButton")
+      if $("#js-selected-samples").data("selected").length > 0
+        button.show()
+      else
+        button.hide()
 
     $("#js-selected-samples").data("selected", [])
+
     $("#js-samples").on('click', "a", ->
       selected = $("#js-selected-samples").data("selected")
       selected.push($(this).data("id"))
-      $(this).parent().remove().appendTo("#js-selected-samples")
+      $(this).parent().detach().appendTo("#js-selected-samples")
       $("#js-selected-samples").data("selected", selected)
+
+      checkCheckoutButton()
     )
 
-    setInterval(getCustomerResults, 500)
-    setInterval(getSampleResults, 500)
+    $("#js-selected-samples").on('click', "a", ->
+      selected = $("#js-selected-samples").data("selected")
+      selected.splice(selected.indexOf($(this).data("id")), 1)
+      $(this).parent().detach().appendTo("#js-samples")
+      $("#js-selected-samples").data("selected", selected)
+
+      checkCheckoutButton()
+    )
 
     $("#customertable tr").click ->
         window.location = $(this).find('a.btn:last')[0].href

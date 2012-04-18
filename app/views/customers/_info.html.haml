@@ -1,0 +1,81 @@
+%br
+%table.table.table-striped
+  %tr
+    %td
+      %b Name
+    %td= @customer.full_name
+  %tr
+    %td
+      %b Email
+    %td
+      .truncate-email
+        = mail_to @customer.email
+  %tr
+    %td
+      %b Phone
+    %td
+      = number_to_phone(@customer.phone)
+  %tr
+    %td
+      %strong Address
+    %td
+      = @customer.address_1
+  %tr
+    %td
+      %strong City
+    %td
+      = @customer.city
+  %tr
+    %td
+      %strong State &amp; Zip
+    %td
+      = @customer.state
+      = @customer.zip
+  %tr
+    %td
+      %b Age
+    %td
+      - if @rapleaf_info["age"]
+        = @rapleaf_info["age"]
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Gender
+    %td
+      - if @rapleaf_info["gender"]
+        = @rapleaf_info["gender"]
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Income
+    %td
+      - if @rapleaf_info["household_income"]
+        = @rapleaf_info["household_income"]
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Married?
+    %td
+      - if @rapleaf_info["marital_status"]
+        = @rapleaf_info["marital_status"]
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Home Owner?
+    %td
+      - if @rapleaf_info["home_owner_status"]
+        = @rapleaf_info["home_owner_status"]
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Home Market Value
+    %td
+      - if @rapleaf_info["home_market_value"]
+        = @rapleaf_info["home_market_value"]
+      - else
+        %span.help-block N/A

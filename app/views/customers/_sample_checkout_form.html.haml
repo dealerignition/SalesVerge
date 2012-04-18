@@ -1,22 +1,18 @@
 %p
   .well
+    %p
+      %a.btn.btn-large
+        %i.icon.icon-plus-sign
+        Create New Sample
+    %input#samplesearch.full{ :placeholder => "Search for a Sample..." }
     .row
-      .span2
-        %input#samplesearch.full{ :placeholder => "Search for a Sample..." }
+      .span4
+        %ul.nav.nav-tabs.nav-stacked#js-samples
     .row
-      #js-samples.span2
-        %h5 Results
-      #js-selected-samples.span2
-        %h5 Selected
+      .span4
+        %ul.nav.nav-tabs.nav-stacked#js-selected-samples
+
     = form_for(@sample_checkout, :url => customer_sample_checkouts_path(@customer)) do |f|
       %fieldset
-        .row
-          .span2
-            %p
-              %input{ :name => :sample_ids, :type => :hidden }
-              = f.submit("Checkout Sample(s)", :class => "btn btn-primary btn-large")
-          .span3
-            %p
-              %a.btn.btn-large
-                %i.icon.icon-plus-sign
-                Create New Sample
+        %input{ :name => :sample_ids, :type => :hidden }
+        = f.submit("Checkout Sample(s)", :class => "btn btn-primary btn-large hide", :id => "checkoutButton")
