@@ -33,10 +33,10 @@
       - if @timeline_stream
         %h3
           = @timeline_stream.count
-          = "Story".pluralize(@timeline_stream.count)
+          = "Activity".pluralize(@timeline_stream.count)
         = render 'shared/timeline'
       - else
-        %h3 No stories!
+        %h3 No activities!
         %p Why don't you go sell to some customers?
 
 - else
