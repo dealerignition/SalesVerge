@@ -140,9 +140,39 @@ input.full, textarea.full {
 h1 small.hidden-phone {
   display: inline;
 }
+
 @media (max-width: 767px) {
   h1 small.hidden-phone {
     display: none;
   }
 }
+
+.shown {
+  -webkit-box-shadow: 0px 0px 12px 0px #999;
+  -moz-box-shadow:    0px 0px 12px 0px #999;
+  box-shadow:         0px 0px 12px 0px #999;
+  position: relative;
+  z-index: 100;
+  border: 1px solid #bbb;
+  border-radius: 0px;
+  .accordion-toggle {
+    background-color: #fff;
+  }
+}
+.accordion-inner {
+  background-color: #FFF5D6;
+  .help-block {
+    color: #CFAB3F;
+  }
+  blockquote {
+    border-left: 5px solid #CFAB3F;
+  }
+  .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
+    background-color: #FFEBAD;
+  }
+  .table th, .table td {
+    border-top: 1px solid #cfcfcf;
+  }
+}
+
 
