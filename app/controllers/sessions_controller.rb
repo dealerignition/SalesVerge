@@ -1,15 +1,15 @@
 class SessionsController < ApplicationController
   skip_authorization_check
   layout "session"
-  
+
   def new
   end
-  
+
   def create
     user = login(params[:email], params[:password], params[:remember_me])
     @user = User.find_by_email(params[:email])
     if user
-      flash[:notice] = "You are now logged in!"
+      flash[:notice] = "Welcome, #{@user.first_name}!"
       redirect_back_or_to dashboard_path
     else
       flash[:error] = "Email or password was invalid."
@@ -19,8 +19,8 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    flash[:alert] = "You have been logged out."
+    flash[:alert] = "Come back soon!"
     redirect_to login_path
   end
-  
+
 end

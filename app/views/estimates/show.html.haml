@@ -24,8 +24,8 @@
           = link_to [@estimate, charge], :confirm => "Are you sure you want to remove '#{charge.description}' from this estimate?", :method => :delete, :class => "close" do
             &times;
     %tr
-      %td{ :style => "text-align: right;"}
-        %strong
+      %td
+        %strong.pull-right
           Total
       %td
         %strong
