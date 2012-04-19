@@ -29,6 +29,13 @@
                       %td
                         %span.badge==#{"%g" % charge.quantity}&times;
                         = number_to_currency(charge.total)
+                  %tr
+                    %td
+                      %strong.pull-right
+                        Total
+                    %td
+                      %strong
+                        %span.badge.badge-success= number_to_currency(activity.total)
             - elsif activity.instance_of? Note
               %blockquote= activity.content
             - elsif activity.instance_of? SampleCheckout
