@@ -1,16 +1,15 @@
 %p
   .well
     %p
-      %a.btn.btn-large
-        %i.icon.icon-plus-sign
-        Create New Sample
-    %input#samplesearch.full{ :placeholder => "Search for a Sample..." }
-    .row
-      .span4
-        %ul.nav.nav-tabs.nav-stacked#js-samples
-    .row
-      .span4
-        %ul.nav.nav-tabs.nav-stacked#js-selected-samples
+      %input#samplesearch.full{ :type => :text, :name => :sample_name, :placeholder => "Search for a Sample..." }
+      %a#js-addsample.btn.hide Create
+
+    %p.hide#js-newSampleForm
+      %input#js-sampleid.full{ :type => :text, :name => :sample_id, :placeholder => "Sample id" }
+      %a#js-createsample.btn.btn-primary Save
+
+    %ul.nav.nav-tabs.nav-stacked#js-samples
+    %ul.nav.nav-tabs.nav-stacked#js-selected-samples
 
     = form_for(@sample_checkout, :url => customer_sample_checkouts_path(@customer)) do |f|
       %fieldset

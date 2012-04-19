@@ -13,13 +13,24 @@ class SamplesController < ApplicationController
   end
 
   def create
-    @sample = Sample.new(params[:sample])
-    if @sample.save
-      flash[:notice] = "#{@sample.name} was successfully created."
-      redirect_to :back
+    if request.xhr?
+      @sample = Sample.new({
+        :name => params[:sample_name],
+        :dealer_sample_id => params[:sample_id],
+        :store => current_user.dealer.stores.first
+      })
+      render :json => { :success => @sample.save ? true : false,
+                        :id => @sample.id
+                      }
     else
-      flash[:error] = "Sample was not successfully created."
-      redirect_to :back
+      @sample = Sample.new(params[:sample])
+      if @sample.save
+        flash[:notice] = "#{@sample.name} was successfully created."
+        redirect_to :back
+      else
+        flash[:error] = "Sample was not successfully created."
+        redirect_to :back
+      end
     end
   end
 

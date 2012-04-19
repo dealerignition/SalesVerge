@@ -1,7 +1,7 @@
 $ ->
     $('#expandInfo').click ->
-        $("#customerinformation").slideToggle()
         $("#edit").toggle()
+        $("#customerinformation").slideToggle()
 
     $('#expandSampleCheckout').click ->
         $(".js-areas:not(#samplearea)").slideUp()
@@ -11,6 +11,8 @@ $ ->
         $(".js-areas:not(#notearea)").slideUp()
         $("#notearea").slideToggle()
 
+
+    # Search
     customer_search = false
     $('#customersearch').keyup ->
         customer_search = true
@@ -59,50 +61,41 @@ $ ->
         customer_search = false
     setInterval(getCustomerResults, 500)
 
+    selectedSamples = []
+
     getSampleResults = ->
       if sample_search
         q = $('#samplesearch').val()
 
         if q
           $.getJSON("/samples.json?query=#{q}", (samples) ->
-              $("#js-samples li").remove()
-              for sample in samples
-                unless sample.id in $("#js-selected-samples").data("selected")
-                  $("#js-samples")
-                    .append("<li><a href='##{sample.id}'>#{sample.name} <span class='help-block'>#{sample.dealer_sample_id}</span><span class='close'>&times;</span></a></li>")
-                  $("#js-samples a:last").data("id", sample.id)
+            $("#js-samples li").remove()
+            for sample in samples
+              unless sample.id in selectedSamples
+                $("#js-samples")
+                  .append(createSampleSearchItem(sample.id,
+                                        sample.name, sample.dealer_sample_id))
+                $("#js-samples a:last").data("id", sample.id)
           )
         else
           $("#js-samples li").remove()
-          $("#js-samples").show()
 
+        checkCreateSampleButton()
         checkCheckoutButton()
         sample_search = false
+
     setInterval(getSampleResults, 500)
 
-    checkCheckoutButton = ->
-      button = $("#checkoutButton")
-      if $("#js-selected-samples").data("selected").length > 0
-        button.show()
-      else
-        button.hide()
-
-    $("#js-selected-samples").data("selected", [])
-
     $("#js-samples").on('click', "a", ->
-      selected = $("#js-selected-samples").data("selected")
-      selected.push($(this).data("id"))
+      selectedSamples.push($(this).data("id"))
       $(this).parent().detach().appendTo("#js-selected-samples")
-      $("#js-selected-samples").data("selected", selected)
 
       checkCheckoutButton()
     )
 
     $("#js-selected-samples").on('click', "a", ->
-      selected = $("#js-selected-samples").data("selected")
-      selected.splice(selected.indexOf($(this).data("id")), 1)
+      selectedSamples.splice(selectedSamples.indexOf($(this).data("id")), 1)
       $(this).parent().detach().appendTo("#js-samples")
-      $("#js-selected-samples").data("selected", selected)
 
       checkCheckoutButton()
     )
@@ -112,7 +105,65 @@ $ ->
 
     $("#samplearea input[type=submit]").click (event) ->
       event.preventDefault()
-      sample_ids = $("#js-selected-samples").data("selected").join("|")
+      sample_ids = selectedSamples.join("|")
       $("#samplearea input[name='sample_ids']").val(sample_ids)
       $(this).closest("form").submit()
 
+    $("#js-addsample").click ->
+      checkCreateSampleButton(true)
+
+    $("#js-createsample").click ->
+      sample_name = $("#samplesearch").val()
+      sample_id = $("#js-sampleid").val()
+      $.post "/samples/create", {
+        sample_name: sample_name,
+        sample_id: sample_id
+      }, (data) ->
+        if data.success
+          $("#js-selected-samples")
+            .append(createSampleSearchItem(data.id, sample_name, sample_id))
+          $("#js-selected-samples a:last").data("id", data.id)
+
+          selectedSamples.push(data.id)
+          $("#samplesearch").val("")
+          checkCreateSampleButton()
+          checkCheckoutButton()
+        else
+          alert("Unable to create sample.")
+
+    # Utilities
+
+    checkCheckoutButton = ->
+      button = $("#checkoutButton")
+      if selectedSamples.length > 0
+        button.show()
+      else
+        button.hide()
+
+    checkCreateSampleButton = (click = false) ->
+      button = $("#js-addsample")
+      q = $("#samplesearch").val()
+
+      if q
+        button.show()
+        button.html("Create &ldquo;#{q}&rdquo;")
+
+        if button.hasClass("js-cancel") && click
+          button.parent().siblings("p.hide").hide()
+          button.removeClass("js-cancel")
+        else if click
+          button.html("Cancel")
+          button.parent().siblings("p.hide").show()
+          button.addClass("js-cancel")
+      else
+        button.hide()
+        button.parent().siblings("p.hide").hide()
+        button.removeClass("js-cancel")
+
+    createSampleSearchItem = (id, name, dealer_sample_id) ->
+      return """<li>
+        <a href='##{id}'>#{name}
+          <span class='help-block'>#{dealer_sample_id}</span>
+          <span class='close'>&times;</span>
+        </a>
+      </li>"""
