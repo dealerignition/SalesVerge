@@ -1,5 +1,10 @@
 .span4
   .customer_unit
+    %p{:style => "float:right;font-size:4px;postition:absolute;"}
+      %span.badge.badge-success{:style => "font-size:4px;padding:2px;margin-right:2px"}
+        %i &nbsp;
+      %span.badge.badge-info{:style => "font-size:4px;padding:2px;"}
+        %i &nbsp;
     %h3
       = customer.full_name
     %p.help-block
