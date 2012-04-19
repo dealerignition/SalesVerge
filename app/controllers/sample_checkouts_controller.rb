@@ -20,14 +20,15 @@ class SampleCheckoutsController < ApplicationController
   def create
     if params[:customer_id] && params[:sample_ids]
       @customer = Customer.find(params[:customer_id])
-
+      sample_checkouts = []
       params[:sample_ids].split("|").each do |id|
-        sc = SampleCheckout.new :customer => @customer,
+        sample_checkouts.push(SampleCheckout.create :customer => @customer,
                                   :user => current_user,
                                   :sample => Sample.find(id),
                                   :checkout_time => Time.now
-        CustomerMailer.sample_checkout(sc).deliver if sc.save
+                              )
       end
+      CustomerMailer.sample_checkout(sample_checkouts).deliver
 
       flash[:notice] = "Samples were successfully checked-out. An email was sent to #{@customer.email}."
       redirect_to :back

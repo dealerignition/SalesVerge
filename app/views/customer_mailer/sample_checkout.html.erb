@@ -1,9 +1,14 @@
-<h2>Dear <%= @customer.first_name %>,</h2>
-<h3>Thank you for checking out <%= @sample_checkout.sample.name %>.</h3>
+<h1>Dear <%= @customer.first_name %>,</h1>
+<h3>Thank you for checking out the following:</h3>
+<ul>
+  <% @sample_checkouts.each do |sc| %>
+    <li><%= sc.sample.name %></li>
+  <% end %>
+</ul>
 <div class="hr"></div>
-<p><%= @sample_checkout.user.message %></p>
+<p><%= @salesrep.message %></p>
 <div class="hr"></div>
 <p>
-	<%= @sample_checkout.user.first_name %> <%= @sample_checkout.user.last_name %><br />
-	<%= mail_to @sample_checkout.user.email %>
+	<%= @salesrep.first_name %> <%= @salesrep.last_name %><br />
+	<%= mail_to @salesrep.email %>
 </p>
