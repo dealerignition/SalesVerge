@@ -1,5 +1,5 @@
 $ ->
-  $("#dashboard .btn").click ->
+  $("#dashboard .btn-info").click ->
       if $(this).hasClass("active")
           setTimeout(removeActive, 10)
           count = 0
@@ -22,6 +22,6 @@ $ ->
 
   $("#dashboard select").change ->
       window.location = "?date_range=#{$(this).val()}"
-
+      
   $('.expandAddCharge').click ->
       $(".addChargeArea").slideToggle()

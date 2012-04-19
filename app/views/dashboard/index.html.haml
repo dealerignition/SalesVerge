@@ -12,21 +12,21 @@
             - else
               %option{ :value => o}=name
 
-    .visible-phone
-      %p.btn-group{ "data-toggle" => "buttons-radio" }
-        %button.btn.btn-mini.btn-warning#customer Customers
-        %button.btn.btn-mini.btn-primary#samplecheckout
-          =current_user.dealer.sample_name.pluralize
-        %button.btn.btn-mini.btn-success#estimate Estimates
-        %button.btn.btn-mini#note Notes
+      .visible-phone
+        %p.btn-group{ "data-toggle" => "buttons-radio" }
+          %button.btn.btn-mini.btn-info#customer Customers
+          %button.btn.btn-mini.btn-info#samplecheckout
+            =current_user.dealer.sample_name.pluralize
+          %button.btn.btn-mini.btn-info#estimate Estimates
+          %button.btn.btn-mini.btn-info#note Notes
 
-    .hidden-phone
-      %p.btn-group{ "data-toggle" => "buttons-radio" }
-        %button.btn.btn-large.btn-warning#customer Customers
-        %button.btn.btn-large.btn-primary#samplecheckout
-          =current_user.dealer.sample_name.pluralize
-        %button.btn.btn-large.btn-success#estimate Estimates
-        %button.btn.btn-large#note Notes
+      .hidden-phone
+        %p.btn-group{ "data-toggle" => "buttons-radio" }
+          %button.btn.btn-large.btn-info#customer Customers
+          %button.btn.btn-large.btn-info#samplecheckout
+            =current_user.dealer.sample_name.pluralize
+          %button.btn.btn-large.btn-info#estimate Estimates
+          %button.btn.btn-large.btn-info#note Notes
 
   .row
     #timelineStream.span12
