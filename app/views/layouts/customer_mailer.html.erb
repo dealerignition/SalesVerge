@@ -177,9 +177,11 @@ table.tablebordered tfoot td {
                               <%= @dealer.stores.first.zip %>
                           	</td>
                           	<td valign="top" id="phoneweb">
-                          	  <%= number_to_phone(@dealer.stores.first.phone) %>
-                          	  <br />
-                          	  <%= link_to "Visit our website", @dealer.stores.first.website %>
+                          	  <% if @dealer.stores.first.phone? %>
+                          	    <%= number_to_phone(@dealer.stores.first.phone) %>
+                          	    <br />
+                          	  <% end %>
+                          	  <%= link_to "Visit our website", "#{@dealer.stores.first.website}" if @dealer.stores.first.website? %>
                           	</td>
                           </table>
                         </td>
