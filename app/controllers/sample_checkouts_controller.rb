@@ -30,7 +30,7 @@ class SampleCheckoutsController < ApplicationController
       end
       CustomerMailer.sample_checkout(sample_checkouts).deliver
 
-      flash[:notice] = "Samples were successfully checked-out. An email was sent to #{@customer.email}."
+      flash[:notice] = "#{current_user.dealer.sample_name.pluralize} were successfully checked-out. An email was sent to #{@customer.email}."
       redirect_to :back
     else
       @sample_checkout = SampleCheckout.new(params[:sample_checkout])

@@ -51,6 +51,7 @@ $ ->
 
     getSampleResults = ->
       if sample_search
+
         q = $('#samplesearch').val()
 
         if q
@@ -148,7 +149,8 @@ $ ->
 
     createSampleSearchItem = (id, name, dealer_sample_id) ->
       return """<li>
-        <a href='##{id}'>#{name}
+        <a href='##{id}'>
+          #{name}
           <span class='help-block'>#{dealer_sample_id}</span>
           <span class='close'>&times;</span>
         </a>

@@ -1,12 +1,12 @@
 %p
   .well
     %p
-      %input#samplesearch.full{ :type => :text, :name => :sample_name, :placeholder => "Search for a Sample..." }
+      %input#samplesearch.full{ :type => :text, :name => :sample_name, :placeholder => "Search for a #{current_user.dealer.sample_name}..." }
       %a#js-addsample.btn.hide Create
 
     %p.hide#js-newSampleForm
       %input#js-sampleid.full{ :type => :text, :name => :sample_id, :placeholder => "Sample id" }
-      %a#js-createsample.btn.btn-primary Save
+      %a#js-createsample.btn.btn-primary Save & Add
 
     %ul.nav.nav-tabs.nav-stacked#js-samples
     %ul.nav.nav-tabs.nav-stacked#js-selected-samples
@@ -14,4 +14,4 @@
     = form_for(@sample_checkout, :url => customer_sample_checkouts_path(@customer)) do |f|
       %fieldset
         %input{ :name => :sample_ids, :type => :hidden }
-        = f.submit("Checkout Sample(s)", :class => "btn btn-primary btn-large hide", :id => "checkoutButton")
+        = f.submit("Checkout #{current_user.dealer.sample_name}(s)", :class => "btn btn-primary btn-large hide", :id => "checkoutButton")
