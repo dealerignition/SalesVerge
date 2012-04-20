@@ -1,5 +1,10 @@
 .span4
   .customer_unit
+    %div#activity_badges
+      -if customer.estimates.present?
+        %div.badge#estimate_present
+      -if customer.sample_checkouts.present?
+        %div.badge#sample_present
     %h3
       = customer.full_name
     %p.help-block
