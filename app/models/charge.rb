@@ -4,7 +4,7 @@ class Charge < ActiveRecord::Base
   validates_presence_of :quantity
   validates_presence_of :price
 
-  belongs_to :estimate
+  belongs_to :quote
 
   def total
     (quantity * price).round 2

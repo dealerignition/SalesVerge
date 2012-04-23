@@ -1,6 +1,6 @@
 <div class="hr"></div>
 <h2>Dear <%= @customer.first_name %>,</h2>
-<h3>Here is the estimate we created for you:</h3>
+<h3>Here is the quote we created for you:</h3>
 
 <p>
 <table cellspacing="0" cellpadding="0" width="100%" class="tablebordered">
@@ -11,7 +11,7 @@
     <th>Total</th>
   </thead>
   <tbody>
-  <%- @estimate.charges.each do |charge| %>
+  <%- @quote.charges.each do |charge| %>
     <tr>
       <td class="left"><%= charge.description %></td>
       <td class="price"><%= number_to_currency(charge.price) %></td>
@@ -28,16 +28,16 @@
         <strong>Total</strong>
       </td>
       <td>
-        <strong><%= number_to_currency(@estimate.total) %></strong>
+        <strong><%= number_to_currency(@quote.total) %></strong>
       </td>
     </tr>
   </tfoot>
 </table>
 </p>
 <br />
-<p><%= @estimate.user.message %></p>
+<p><%= @quote.user.message %></p>
 <div class="hr"></div>
 <p>
-	<%= @estimate.user.first_name %> <%= @estimate.user.last_name %><br />
-	<%= mail_to @estimate.user.email %>
+	<%= @quote.user.first_name %> <%= @quote.user.last_name %><br />
+	<%= mail_to @quote.user.email %>
 </p>

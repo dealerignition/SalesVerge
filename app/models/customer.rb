@@ -8,7 +8,7 @@ class Customer < ActiveRecord::Base
 
   has_many :sample_checkouts, :dependent => :destroy
   has_many :appointments, :dependent => :destroy
-  has_many :estimates, :dependent => :destroy
+  has_many :quotes, :dependent => :destroy
   has_many :notes, :dependent => :destroy
 
   def full_name
@@ -16,6 +16,6 @@ class Customer < ActiveRecord::Base
   end
 
   def timeline_stream
-    estimates + sample_checkouts + notes
+    quotes + sample_checkouts + notes
   end
 end

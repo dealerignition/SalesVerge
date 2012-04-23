@@ -18,7 +18,7 @@ describe DashboardController do
       should assign_to(:customers)
       should assign_to(:late_appointments)
       should assign_to(:checked_out_samples)
-      should assign_to(:estimates)
+      should assign_to(:quotes)
     end
   end
 

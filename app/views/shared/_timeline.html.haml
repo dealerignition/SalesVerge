@@ -19,7 +19,7 @@
                 = link_to customer_path(customer), :class => "btn" do
                   %i.icon-user
                   = customer.full_name
-            - if activity.instance_of?(Estimate)
+            - if activity.instance_of?(Quote)
               - if activity.charges.count.nonzero?
                 %table{ :class => "table table-striped" }
                   - activity.charges.each do |charge|
@@ -50,12 +50,12 @@
                 - if activity.checkin_time.blank?
                   = link_to sample_checkout_check_in_path(activity), :class => "btn btn-primary", :confirm => "Are you sure #{activity.sample.name} has been returned to your store?" do
                     Check-in
-            - if (activity.instance_of? Estimate) && (activity.status.blank?)
+            - if (activity.instance_of? Quote) && (activity.status.blank?)
               %p
                 .btn-group
-                  = link_to estimate_path(activity), :class => "btn" do
+                  = link_to quote_path(activity), :class => "btn" do
                     %i.icon-pencil
-                    Modify Estimate
-                  = link_to "Email", estimate_deliver_customer_mailer_path(activity), { :confirm => "Are you sure you want to email this estimate to #{activity.customer.full_name} (#{activity.customer.email})?", :class => "btn btn-primary" }
-                  /= link_to "Won", estimate_won_path(activity), :confirm => "Are you sure you want to mark this estimate as 'Won'?", :class => "btn"
-                  /= link_to "Lost", estimate_lost_path(activity), :confirm => "Are you sure you want to mark this estimate as 'Lost'?", :class => "btn"
+                    Modify Quote
+                  = link_to "Email", quote_deliver_customer_mailer_path(activity), { :confirm => "Are you sure you want to email this quote to #{activity.customer.full_name} (#{activity.customer.email})?", :class => "btn btn-primary" }
+                  /= link_to "Won", quote_won_path(activity), :confirm => "Are you sure you want to mark this quote as 'Won'?", :class => "btn"
+                  /= link_to "Lost", quote_lost_path(activity), :confirm => "Are you sure you want to mark this quote as 'Lost'?", :class => "btn"

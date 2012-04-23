@@ -9,17 +9,17 @@ class CustomerMailer < ActionMailer::Base
       mail(:to => @customer.email, :subject => "Thank-you for your interest in our store", :reply_to => "#{@customer.user.email}")
   end
   
-  def estimate(estimate)
-      @estimate = estimate
-      @customer = estimate.customer
-      @dealer = estimate.user.dealer
-      mail(:to => @customer.email, :subject => "Here is your estimate", :reply_to => "#{@customer.user.email}")
+  def quote(quote)
+      @quote = quote
+      @customer = quote.customer
+      @dealer = quote.user.dealer
+      mail(:to => @customer.email, :subject => "Here is your quote", :reply_to => "#{@customer.user.email}")
   end
   
-  def estimate_won(estimate)
-    @estimate = estimate
-    @customer = estimate.customer
-    @dealer = estimate.user.dealer
+  def quote_won(quote)
+    @quote = quote
+    @customer = quote.customer
+    @dealer = quote.user.dealer
     mail(:to => @customer.email, :subject => "Thank you for your purchase", :reply_to => "#{@customer.user.email}")
   end
   

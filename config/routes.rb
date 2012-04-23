@@ -15,14 +15,14 @@ DealerOnTheGo::Application.routes.draw do
 
   resources :appointments
   resources :customers do
-    resources :estimates
+    resources :quotes
     resources :notes
     resources :sample_checkouts do
       get :check_in
     end
   end
   resources :dealers
-  resources :estimates do
+  resources :quotes do
     resources :charges
     get :deliver_customer_mailer
     get :won

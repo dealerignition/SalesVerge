@@ -13,9 +13,9 @@
     = render 'info'
 
 .btn-group
-  =link_to new_customer_estimate_path(@customer), { :class => "btn btn-success btn-large" } do
+  =link_to new_customer_quote_path(@customer), { :class => "btn btn-success btn-large" } do
     %i.icon-plus-sign.icon-white
-    Estimate
+    Quote
   =link_to "#", { :class => "btn btn-success btn-large", :id => "expandSampleCheckout" } do
     %i.icon-plus-sign.icon-white
     = current_user.dealer.sample_name

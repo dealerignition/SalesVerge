@@ -6,9 +6,9 @@
   I just wanted to thank you for your recent purchase from our store.
 </p>
 
-<p><%= @estimate.user.message %></p>
+<p><%= @quote.user.message %></p>
 <div class="hr"></div>
 <p>
-	<%= @estimate.user.first_name %> <%= @estimate.user.last_name %><br />
-	<%= mail_to @estimate.user.email %>
+	<%= @quote.user.first_name %> <%= @quote.user.last_name %><br />
+	<%= mail_to @quote.user.email %>
 </p>

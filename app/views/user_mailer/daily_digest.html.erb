@@ -4,14 +4,14 @@
   <table width="100%" border="0" cellpadding="4">
     <tr align="left">
       <td>Samples Today</td>
-      <td>Estimates Today</td>
+      <td>Quotes Today</td>
     </tr>
     <tr>
       <td>
         <h1><%= @samples.count %></h1>
       </td>
       <td>
-        <h1><%= @estimates.count %></h1>
+        <h1><%= @quotes.count %></h1>
       </td>
     </tr>
   </table>
@@ -41,24 +41,24 @@
     </p>
   <% end %>
 
-  <%- if @estimates && @estimates.count > 0 %>
+  <%- if @quotes && @quotes.count > 0 %>
     <br />
     <p>
-      <h3>Estimates Today | <%= link_to "View All Estimates", url_for(:controller => "estimates", :action => "index", :only_path => false) %> &rarr;</h3>
+      <h3>Quotes Today | <%= link_to "View All Quotes", url_for(:controller => "quotes", :action => "index", :only_path => false) %> &rarr;</h3>
       <table cellspacing="0" cellpadding="0" width="100%" class="tablebordered">
         <thead>
           <th class="left">Customer</th>
           <th>Rep</th>
           <th>Total</th>
         </thead>
-        <%- @estimates.each do |estimate| %>
+        <%- @quotes.each do |quote| %>
           <tr>
-            <td class="left"><%= estimate.customer.first_name %> <%= estimate.customer.last_name %></td>
+            <td class="left"><%= quote.customer.first_name %> <%= quote.customer.last_name %></td>
             <td>
-              <%= estimate.user.first_name %>
-              <%= estimate.user.last_name[0] %>
+              <%= quote.user.first_name %>
+              <%= quote.user.last_name[0] %>
             </td>
-            <td><%= number_to_currency(estimate.total) %></td>
+            <td><%= number_to_currency(quote.total) %></td>
           </tr>
         <% end %>
       </table>
