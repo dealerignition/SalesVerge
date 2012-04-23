@@ -9,6 +9,7 @@ DealerOnTheGo::Application.routes.draw do
   get "account_settings/users/create" => "users#new"
   post "account_settings/users/create" => "users#create", :as => "create_user"
   match "account_settings/users/:id/update" => "users#update", :as => "update_user"
+  get "dashboard/big_screen" => "dashboard#big_screen", :as => "big_screen"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "dealers#new", :as => "signup"

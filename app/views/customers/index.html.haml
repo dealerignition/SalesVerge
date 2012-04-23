@@ -1,27 +1,13 @@
 .row
-  - if current_user.salesrep?
-    .span12
-      .well
-        .center
-          %p
-            = link_to new_customer_path, { :id => "newCustomer", :class => "btn btn-success btn-large" } do
-              %i{ :class => "icon-user icon-white" }
-              New Customer
-          %p
-            %input#customersearch.full{ :value => params[:query], :placeholder => "Find a customer..." }
-
-  - else
-    .hero-unit
-      %h1 Customers
-      %p
-        You have
-        = pluralize(@customers.count, "customer")
-      %p
-        = link_to new_customer_path, { :class => "btn btn-success btn-large" } do
-          %i{ :class => "icon-user icon-white" }
-          New Customer
-      %p
-        %input#customersearch.full{ :value => params[:query], :placeholder => "Find a customer...", :autocorrect => "off" }
+  .span12
+    .well
+      .center
+        %p
+          = link_to new_customer_path, { :id => "newCustomer", :class => "btn btn-success btn-large" } do
+            %i{ :class => "icon-user icon-white" }
+            New Customer
+        %p
+          %input#customersearch.full{ :value => params[:query], :placeholder => "Find a customer...", :autocorrect => "off" }
 
 #customers.row
   = render @customers

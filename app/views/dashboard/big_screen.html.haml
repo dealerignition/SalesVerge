@@ -1,0 +1,78 @@
+- unless current_user.salesrep?
+  .tabbable
+    %ul.nav.nav-tabs
+      %li= link_to "Timeline", dashboard_path
+      %li.active= link_to "Big Screen", big_screen_path
+.row
+  .span6
+    .page-header
+      %h1 New Customers
+    %table.table.table-striped
+      %thead
+        %th Name
+        %th Created
+        %th
+      - @customers.each do |customer|
+        %tr
+          %td
+            = link_to "#{customer.first_name} #{customer.last_name}", customer
+          %td
+            %i
+              = time_ago_in_words(customer.created_at)
+              ago
+          %td
+            = link_to customer, { :class => "btn btn-primary" } do
+              View
+  .span6
+    .page-header
+      %h1
+        Recent Quote
+    %table.table.table-striped
+      %thead
+        %th Customer
+        %th Total
+      - @quotes.each do |quote|
+        %tr
+          %td= link_to "#{quote.customer.first_name} #{quote.customer.last_name}", customer_path(quote.customer)
+          %td= number_to_currency(quote.total)
+          %td
+            = link_to "View", quote, { :class => "btn btn-primary" }
+.row
+  .span6
+    .page-header
+      %h1
+        Late Appointments
+        %small==(#{@late_appointments.count})
+    - if @late_appointments.count > 0
+      %table.table.table-striped
+        %thead
+          %th Type
+          %th Customer
+          %th
+        - @late_appointments.each do |appointment|
+          %tr
+            %td= appointment.appointment_type
+            %td
+              = link_to "#{appointment.customer.first_name} #{appointment.customer.last_name}", appointment.customer
+            %td
+              = link_to "View", appointments_path, { :class => "btn" }
+    - else
+      %span.label.label-success You have no late appointments.
+  .span6
+    .page-header
+      %h1
+        Checked-out Samples
+        %small==(#{@checked_out_samples.count})
+    %table{ :class => "table table-striped" }
+      %thead
+        %th Name
+        %th Customer
+        %th Out for
+      - @checked_out_samples.each do |checked_out_sample|
+        %tr
+          %td
+            = checked_out_sample.sample.name
+          %td
+            = link_to "#{checked_out_sample.customer.first_name if checked_out_sample.customer.first_name} #{checked_out_sample.customer.last_name if checked_out_sample.customer.last_name}", checked_out_sample.customer
+          %td
+            = distance_of_time_in_words(checked_out_sample.checkout_time, Time.now)

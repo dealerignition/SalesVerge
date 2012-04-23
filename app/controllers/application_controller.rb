@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   check_authorization
   protect_from_forgery
-  layout :setup_layout
+  layout 'main'
 
   def confirm_active
     if !current_user.active?
@@ -94,14 +94,6 @@ class ApplicationController < ActionController::Base
     end
 
     redirect_to :back, :flash => { :error => "You do not have permission to see this #{msg}." }
-  end
-
-  def setup_layout
-    if current_user && current_user.salesrep?
-      "sales_rep"
-    else
-      "main"
-    end
   end
 
 end

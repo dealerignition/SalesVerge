@@ -1,48 +1,16 @@
 -content_for :body do
-  %div{ :class => "navbar navbar-fixed-top" }
-    %div.navbar-inner
-      %div.container
-        %a{ :class => "btn btn-navbar", "data-toggle" => "collapse", "data-target" => ".nav-collapse" }
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %div.nav-collapse
-          %ul.nav
-            %li
-              = link_to dashboard_path do
-                %i{ :class => "icon-home icon-white" }
-                Dashboard
-            %li
-              = link_to customers_path do
-                %i{ :class => "icon-user icon-white" }
-                Customers
-            %li
-              = link_to appointments_path do
-                %i{ :class => "icon-calendar icon-white" }
-                Appointments
-            %li
-              = link_to sample_checkouts_path do
-                %i{ :class => "icon-th icon-white" }
-                -if current_user
-                  =current_user.dealer.sample_name.pluralize
-                -else
-                  Samples
-            %li
-              = link_to quotes_path do
-                %i{ :class => "icon-shopping-cart icon-white" }
-                Quotes
-          %ul.nav.pull-right
-            %li.divider-vertical
-            - if current_user
-              %li.dropdown
-                = link_to "#", { :class => "dropdown-toggle", "data-toggle" => "dropdown" } do
-                  ==#{current_user.first_name} #{current_user.last_name}
-                  %b.caret
-                %ul.dropdown-menu
-                  %li= link_to "Account Settings", account_settings_account_path
-                  %li= link_to "Sign out", logout_path
-            - else
-              %li= link_to "Sign in", login_path
+  .navbar-simple
+    %ul.nav.nav-pills
+      %li{ :class => "#{"active" if request.path.eql? "/"}" }
+        = link_to dashboard_path do
+          %i.icon_home_opt
+      %li{ :class => "#{"active" if request.path.include? "customers"}" }
+        = link_to customers_path do
+          %i.icon_user_opt
+      %li{ :class => "#{"active" if request.path.include? "settings"}" }
+        = link_to account_settings_account_path do
+          %i.icon_gear_opt
+              
   %div.container
     - if flash[:notice]
       %div.alert.alert-success

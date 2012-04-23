@@ -3,11 +3,6 @@ class SampleCheckoutsController < ApplicationController
   before_filter :confirm_active
   load_and_authorize_resource
 
-  def index
-    @checked_out_samples = SampleCheckout.accessible_by(current_ability).find_all_by_checkin_time(nil)
-    @sample_name = current_user.dealer.sample_name
-  end
-
   def new
     @sample_checkout = SampleCheckout.new
     @samples = Sample.accessible_by(current_ability)
@@ -45,10 +40,6 @@ class SampleCheckoutsController < ApplicationController
       end
 
     end
-  end
-
-  def edit
-    @sample_checkout = SampleCheckout.find(params[:id])
   end
 
   def update

@@ -3,11 +3,6 @@ class QuotesController < ApplicationController
   before_filter :confirm_active
   load_and_authorize_resource
 
-  def index
-    @quotes = Quote.accessible_by(current_ability).order("created_at DESC").find_all_by_status(nil)
-    @ended_quotes = Quote.accessible_by(current_ability).order("created_at DESC").where("status IS NOT null").all
-  end
-
   def show
     @quote = Quote.find(params[:id])
     @charge = Charge.new
