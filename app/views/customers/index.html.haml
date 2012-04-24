@@ -8,6 +8,15 @@
             New Customer
         %p
           %input#customersearch.full{ :value => params[:query], :placeholder => "Find a customer...", :autocorrect => "off" }
-
+        
+.row
+  .span12
+    %span#sample_present_legend
+    %h6
+      === has checked out a sample
+    %span#quote_present_legend
+    %h6.legend
+      === has an estimate
+      
 #customers.row
   = render @records || @customers
