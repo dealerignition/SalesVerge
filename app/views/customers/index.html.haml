@@ -10,4 +10,4 @@
           %input#customersearch.full{ :value => params[:query], :placeholder => "Find a customer...", :autocorrect => "off" }
 
 #customers.row
-  = render @customers
+  = render @records || @customers
