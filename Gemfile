@@ -19,6 +19,7 @@ group :development, :test do
   gem 'foreman'
   gem 'factory_girl_rails'
   gem 'mailcatcher'
+  gem 'rails-footnotes', '>= 3.7.5.rc4',
 end
 
 group :production, :test do
