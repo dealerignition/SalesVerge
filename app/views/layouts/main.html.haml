@@ -1,6 +1,7 @@
 -content_for :body do
   - if Rails.env.development?
-    %h3#developmentBanner Development
+    %h3#developmentBanner.hidden-phone development
+    %h3#developmentBannerphone.visible-phone dev
   .navbar-simple
     %ul.nav.nav-pills
       %li{ :class => "#{"active" if request.path.eql? "/"}" }
