@@ -11,16 +11,16 @@ class DashboardController < ApplicationController
     @date_range_string = DATE_RANGES[@date_range]
 
     @timeline_stream = Customer.accessible_by(current_ability)
-                          .where("customers." << @date_range_string)
+                          .where(@date_range_string.gsub("updated_at", "customers.updated_at"))
     @timeline_stream += Quote.accessible_by(current_ability)
                           .includes(:customer, :charges)
-                          .where("quotes." << @date_range_string)
+                          .where(@date_range_string.gsub("updated_at", "quotes.updated_at"))
     @timeline_stream += SampleCheckout.accessible_by(current_ability)
                           .includes(:customer, :sample)
-                          .where("sample_checkouts." << @date_range_string)
+                          .where(@date_range_string.gsub("updated_at", "sample_checkouts.updated_at"))
     @timeline_stream += Note.accessible_by(current_ability)
                           .includes(:customer)
-                          .where("notes." << @date_range_string)
+                          .where(@date_range_string.gsub("updated_at", "notes.updated_at"))
 
     @timeline_stream.sort! { |a,b| -(a.updated_at <=> b.updated_at) }
  end
