@@ -1,4 +1,6 @@
 -content_for :body do
+  - if Rails.env.development?
+    %h3#developmentBanner Development
   .navbar-simple
     %ul.nav.nav-pills
       %li{ :class => "#{"active" if request.path.eql? "/"}" }
@@ -10,7 +12,7 @@
       %li{ :class => "#{"active" if request.path.include? "settings"}" }
         = link_to account_settings_account_path do
           %i.icon_gear_opt
-              
+
   %div.container
     - if flash[:notice]
       %div.alert.alert-success
