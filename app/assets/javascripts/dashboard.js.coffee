@@ -13,7 +13,7 @@ $ ->
           $(".#{this.id}accordion").show()
           count = $(".#{this.id}accordion").length
 
-      word = if count > 1 then "Stories" else "Story"
+      word = if count > 1 then "Activities" else "Activity"
       $("#timelineStream h3").text("#{count} #{word}")
 
 
@@ -22,6 +22,6 @@ $ ->
 
   $("#dashboard select").change ->
       window.location = "?date_range=#{$(this).val()}"
-      
+
   $('.expandAddCharge').click ->
       $(".addChargeArea").slideToggle()
