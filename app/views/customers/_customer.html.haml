@@ -1,9 +1,9 @@
 .span4
   .customer_unit
     %div#activity_badges
-      -if customer.quotes.present?
+      -if customer.quotes.count.nonzero?
         %div.badge#quote_present
-      -if customer.sample_checkouts.present?
+      -if customer.sample_checkouts.count.nonzero?
         %div.badge#sample_present
     %h3
       = customer.full_name

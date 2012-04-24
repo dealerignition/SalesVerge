@@ -20,7 +20,7 @@
                   %i.icon-user
                   = customer.full_name
             - if activity.instance_of?(Quote)
-              - if activity.charges.count.nonzero?
+              - if activity.charges.length.nonzero?
                 %table{ :class => "table table-striped" }
                   - activity.charges.each do |charge|
                     %tr

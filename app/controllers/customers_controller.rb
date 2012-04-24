@@ -32,10 +32,11 @@ class CustomersController < ApplicationController
       @rapleaf_info = {}
     end
 
-    @timeline_stream = @customer.quotes + @customer.sample_checkouts + @customer.notes
-    @timeline_stream.sort! do |a,b|
-      -(a.updated_at <=> b.updated_at)
-    end
+    @timeline_stream = @customer.quotes.includes(:customer, :charges)
+    @timeline_stream += @customer.sample_checkouts.includes(:customer, :sample)
+    @timeline_stream += @customer.notes
+
+    @timeline_stream.sort! { |a,b| -(a.updated_at <=> b.updated_at) }
   end
 
   def new

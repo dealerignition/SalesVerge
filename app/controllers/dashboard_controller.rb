@@ -10,23 +10,23 @@ class DashboardController < ApplicationController
     @date_range = :all_time unless @date_range.in? @date_options
     @date_range_string = DATE_RANGES[@date_range]
 
-    @customers = Customer.accessible_by(current_ability).order("created_at ASC")
-    @customers = @customers.where(@date_range_string) if current_user.salesrep?
 
-    @late_appointments = Appointment.accessible_by(current_ability).where("date < TIMESTAMP 'today' AND status NOT LIKE 'Completed'").all
-    @checked_out_samples = SampleCheckout.accessible_by(current_ability).find_all_by_checkin_time(nil)
-    @quotes = Quote.accessible_by(current_ability).order("created_at DESC").last(5)
-
-    @timeline_stream = @customers
-    Customer.accessible_by(current_ability).each do |customer|
-      [:quotes, :sample_checkouts, :notes].each do |field|
-        @timeline_stream += customer.send(field).where(@date_range_string)
-      end
-    end
+    @timeline_stream = Customer.accessible_by(current_ability)
+                          .order("created_at ASC")
+                          .where(@date_range_string)
+    @timeline_stream += Quote.accessible_by(current_ability)
+                          .includes(:customer, :charges)
+                          .where(@date_range_string)
+    @timeline_stream += SampleCheckout.accessible_by(current_ability)
+                          .includes(:customer, :sample)
+                          .where(@date_range_string)
+    @timeline_stream += Note.accessible_by(current_ability)
+                          .includes(:customer)
+                          .where(@date_range_string)
 
     @timeline_stream.sort! { |a,b| -(a.updated_at <=> b.updated_at) }
  end
- 
+
  def big_screen
    @customers = Customer.accessible_by(current_ability).order("created_at ASC")
    @late_appointments = Appointment.accessible_by(current_ability).where("date < TIMESTAMP 'today' AND status NOT LIKE 'Completed'").all
