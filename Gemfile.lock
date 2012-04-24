@@ -103,6 +103,7 @@ GEM
       skinny (~> 0.2)
       sqlite3 (~> 1.3)
       thin (~> 1.2)
+    memcache-client (1.8.5)
     mime-types (1.18)
     multi_json (1.3.1)
     multipart-post (1.1.5)
@@ -222,6 +223,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails!
   mailcatcher
+  memcache-client
   pg
   rails (= 3.2.2)
   rails-footnotes (>= 3.7.5.rc4)
