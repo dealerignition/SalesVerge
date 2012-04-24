@@ -10,19 +10,17 @@ class DashboardController < ApplicationController
     @date_range = :all_time unless @date_range.in? @date_options
     @date_range_string = DATE_RANGES[@date_range]
 
-
     @timeline_stream = Customer.accessible_by(current_ability)
-                          .order("created_at ASC")
-                          .where(@date_range_string)
+                          .where("customers." << @date_range_string)
     @timeline_stream += Quote.accessible_by(current_ability)
                           .includes(:customer, :charges)
-                          .where(@date_range_string)
+                          .where("quotes." << @date_range_string)
     @timeline_stream += SampleCheckout.accessible_by(current_ability)
                           .includes(:customer, :sample)
-                          .where(@date_range_string)
+                          .where("sample_checkouts." << @date_range_string)
     @timeline_stream += Note.accessible_by(current_ability)
                           .includes(:customer)
-                          .where(@date_range_string)
+                          .where("notes." << @date_range_string)
 
     @timeline_stream.sort! { |a,b| -(a.updated_at <=> b.updated_at) }
  end
