@@ -13,7 +13,7 @@ $ ->
           $(".#{this.id}accordion").show()
           count = $(".#{this.id}accordion").length
 
-      word = if count > 1 then "Activities" else "Activity"
+      word = if count == 1 then "Activity" else "Activities"
       $("#timelineStream h3").text("#{count} #{word}")
 
 
