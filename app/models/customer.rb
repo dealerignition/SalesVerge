@@ -18,4 +18,13 @@ class Customer < ActiveRecord::Base
   def timeline_stream
     quotes + sample_checkouts + notes
   end
+
+  def has_quotes?
+    Rails.cache.fetch("customer_#{id}_has_quotes") { quotes.any? }
+  end
+
+  def has_sample_checkouts?
+    Rails.cache.fetch("customer_#{id}_has_sample_checkouts") { sample_checkouts.any? }
+  end
+
 end
