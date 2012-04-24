@@ -60,7 +60,7 @@ module DealerOnTheGo
 
     config.action_mailer.raise_delivery_errors = true
 
-    config.cache_store = :mem_cache_store
+    config.cache_store = :dalli_store
 
   end
 end

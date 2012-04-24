@@ -11,7 +11,7 @@ gem 'twitter-bootstrap-rails'
 gem 'cancan'
 gem 'pg'
 gem 'roadie'
-gem 'memcache-client'
+gem 'dalli'
 
 group :development, :test do
   gem 'rspec-rails'
