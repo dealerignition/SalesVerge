@@ -15,22 +15,6 @@ class CustomersController < ApplicationController
     @sample = Sample.new
     @store = current_user.dealer.stores.first
     @note = Note.new
-    rapleaf = RapleafApi::Api.new('c7e2c4cbcb32f1bf6d86b20551d48186')
-      # Justin's trial API key:       c7e2c4cbcb32f1bf6d86b20551d48186
-      # Steven's production API key:  22045e6e52abd5fd2ecaa0829be2217c
-    begin
-      # query_by_nap(first, last, street, city, state, options)
-      @rapleaf_info = rapleaf.query_by_nap(
-        @customer.first_name,
-        @customer.last_name,
-        @customer.address_1,
-        @customer.city,
-        @customer.state,
-        :email => @customer.email,
-        :show_availble => true )
-    rescue
-      @rapleaf_info = {}
-    end
 
     @timeline_stream = @customer.quotes.includes(:customer, :charges)
     @timeline_stream += @customer.sample_checkouts.includes(:customer, :sample)
@@ -41,11 +25,13 @@ class CustomersController < ApplicationController
 
   def new
     @customer = Customer.new
+    @extension = CustomerExtension.new
   end
 
   def create
     @customer = Customer.new(params[:customer])
     @customer.user = current_user
+    @extension = CustomerExtension.create
 
     if @customer.save
       redirect_to @customer
