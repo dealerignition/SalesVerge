@@ -30,7 +30,9 @@ class CustomerExtension < ActiveRecord::Base
       self.occupation           = @rapleaf_info["occupation"]
       self.save
     rescue
-      @rapleaf_info = {}
+      unless Rails.env == "development"
+        @rapleaf_info = {}
+      end
     end
   end
   
