@@ -31,3 +31,51 @@
     %td
       = @customer.state
       = @customer.zip
+  %tr
+    %td
+      %b Age
+    %td
+      - if @customer.customer_extension and @customer.customer_extension.age
+        = @customer.customer_extension.age
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Gender
+    %td
+      - if @customer.customer_extension and @customer.customer_extension.gender
+        = @customer.customer_extension.gender
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Income
+    %td
+      - if @customer.customer_extension and @customer.customer_extension.household_income
+        = @customer.customer_extension.household_income
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Married?
+    %td
+      - if @customer.customer_extension and @customer.customer_extension.marital_status
+        = @customer.customer_extension.marital_status
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Home Owner?
+    %td
+      - if @customer.customer_extension and @customer.customer_extension.home_owner_status
+        = @customer.customer_extension.home_owner_status
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Home Market Value
+    %td
+      - if @customer.customer_extension and @customer.customer_extension.home_market_value
+        = @customer.customer_extension.home_market_value
+      - else
+        %span.help-block N/A

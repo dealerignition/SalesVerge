@@ -11,7 +11,7 @@ class Customer < ActiveRecord::Base
   has_many :quotes, :dependent => :destroy
   has_many :notes, :dependent => :destroy
   
-  has_many :customer_extensions, :dependent => :destroy
+  has_one :customer_extension, :dependent => :destroy
 
   def full_name
     "#{ first_name } #{ last_name }"
