@@ -31,9 +31,9 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(params[:customer])
     @customer.user = current_user
-    @extension = CustomerExtension.create
 
     if @customer.save
+      @extension = CustomerExtension.create(:id => @customer.id)
       redirect_to @customer
       flash[:notice] = "Customer was successfully created."
     else

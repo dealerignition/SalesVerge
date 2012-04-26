@@ -1,5 +1,4 @@
 class CustomerExtensionsController < ApplicationController
-  belongs_to :customer
   # Justin's trial RapLeaf API key:       c7e2c4cbcb32f1bf6d86b20551d48186
   # Steven's production RapLeaf API key:  22045e6e52abd5fd2ecaa0829be2217c
   # query_by_nap(first, last, street, city, state, options)
