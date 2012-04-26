@@ -8,8 +8,10 @@ class Store < ActiveRecord::Base
   protected
 
   def smart_add_url_protocol
-    unless self.website[/^http:\/\//] || self.website[/^https:\/\//]
-      self.website = 'http://' + self.website
+    if self.website
+      unless self.website[/^http:\/\//] || self.website[/^https:\/\//]
+        self.website = 'http://' + self.website
+      end
     end
   end
   
