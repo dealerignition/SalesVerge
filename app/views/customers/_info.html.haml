@@ -31,92 +31,101 @@
     %td
       = @customer.state
       = @customer.zip
-  %tr
-    %td
-      %b Age
-    %td
-      - if @customer.customer_extension and @customer.customer_extension.age
-        = @customer.customer_extension.age
-      - else
-        %span.help-block N/A
-  %tr
-    %td
-      %b Gender
-    %td
-      - if @customer.customer_extension and @customer.customer_extension.gender
-        = @customer.customer_extension.gender
-      - else
-        %span.help-block N/A
-  %tr
-    %td
-      %b Education
-    %td
-      - if @customer.customer_extension and @customer.customer_extension.education
-        = @customer.customer_extension.education
-      - else
-        %span.help-block N/A
-  %tr
-    %td
-      %b Income
-    %td
-      - if @customer.customer_extension and @customer.customer_extension.household_income
-        = @customer.customer_extension.household_income
-      - else
-        %span.help-block N/A
-  %tr
-    %td
-      %b Married?
-    %td
-      - if @customer.customer_extension and @customer.customer_extension.marital_status
-        = @customer.customer_extension.marital_status
-      - else
-        %span.help-block N/A
-  %tr
-    %td
-      %b Home Owner?
-    %td
-      - if @customer.customer_extension and @customer.customer_extension.home_owner_status
-        = @customer.customer_extension.home_owner_status
-      - else
-        %span.help-block N/A
-  %tr
-    %td
-      %b Home Market Value
-    %td
-      - if @customer.customer_extension and @customer.customer_extension.home_market_value
-        = @customer.customer_extension.home_market_value
-      - else
-        %span.help-block N/A
-  %tr
-    %td
-      %b Home Property Value
-    %td
-      - if @customer.customer_extension and @customer.customer_extension.home_property_value
-        = @customer.customer_extension.home_property_value
-      - else
-        %span.help-block N/A
-  %tr
-    %td
-      %b Length of Residence
-    %td
-      - if @customer.customer_extension and @customer.customer_extension.length_of_residence
-        = @customer.customer_extension.length_of_residence
-      - else
-        %span.help-block N/A
-  %tr
-    %td
-      %b Zip
-    %td
-      - if @customer.customer_extension and @customer.customer_extension.zip
-        = @customer.customer_extension.zip
-      - else
-        %span.help-block N/A
-  %tr
-    %td
-      %b Length of Residence
-    %td
-      - if @customer.customer_extension and @customer.customer_extension.occupation
-        = @customer.customer_extension.occupation
-      - else
-        %span.help-block N/A
-        
+      
+      
+  - if @current_user.subscribes_to_customer_extensions?           
+    %tr.customer_extension
+      %td.top-border
+        %b Age
+      %td.top-border
+        - if @customer.customer_extension and @customer.customer_extension.age
+          = @customer.customer_extension.age
+        - else
+          %span.help-block N/A
+    %tr.customer_extension
+      %td
+        %b Gender
+      %td
+        - if @customer.customer_extension and @customer.customer_extension.gender
+          = @customer.customer_extension.gender
+        - else
+          %span.help-block N/A
+    %tr.customer_extension
+      %td
+        %b Education
+      %td.customer_extension
+        - if @customer.customer_extension and @customer.customer_extension.education
+          = @customer.customer_extension.education
+        - else
+          %span.help-block N/A
+    %tr.customer_extension
+      %td
+        %b Income
+      %td.customer_extension
+        - if @customer.customer_extension and @customer.customer_extension.household_income
+          = @customer.customer_extension.household_income
+        - else
+          %span.help-block N/A
+    %tr.customer_extension
+      %td
+        %b Married?
+      %td
+        - if @customer.customer_extension and @customer.customer_extension.marital_status
+          = @customer.customer_extension.marital_status
+        - else
+          %span.help-block N/A
+    %tr.customer_extension
+      %td
+        %b Home Owner?
+      %td
+        - if @customer.customer_extension and @customer.customer_extension.home_owner_status
+          = @customer.customer_extension.home_owner_status
+        - else
+          %span.help-block N/A
+    %tr.customer_extension
+      %td
+        %b Home Market Value
+      %td
+        - if @customer.customer_extension and @customer.customer_extension.home_market_value
+          = @customer.customer_extension.home_market_value
+        - else
+          %span.help-block N/A
+    %tr.customer_extension
+      %td
+        %b Home Property Value
+      %td
+        - if @customer.customer_extension and @customer.customer_extension.home_property_value
+          = @customer.customer_extension.home_property_value
+        - else
+          %span.help-block N/A
+    %tr.customer_extension
+      %td
+        %b Length of Residence
+      %td
+        - if @customer.customer_extension and @customer.customer_extension.length_of_residence
+          = @customer.customer_extension.length_of_residence
+        - else
+          %span.help-block N/A
+    %tr.customer_extension
+      %td
+        %b Zip
+      %td
+        - if @customer.customer_extension and @customer.customer_extension.zip
+          = @customer.customer_extension.zip
+        - else
+          %span.help-block N/A
+    %tr.customer_extension
+      %td
+        %b Length of Residence
+      %td
+        - if @customer.customer_extension and @customer.customer_extension.occupation
+          = @customer.customer_extension.occupation
+        - else
+          %span.help-block N/A
+  - else
+    %tr.customer_extension
+      %td.top-border
+        %b Get more info about this customer
+      %td.top-border
+        %a.btn.btn-success.btn-mini{:href => "#"}
+          SIGN-UP
