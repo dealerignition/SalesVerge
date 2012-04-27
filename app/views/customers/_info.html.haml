@@ -49,6 +49,14 @@
         %span.help-block N/A
   %tr
     %td
+      %b Education
+    %td
+      - if @customer.customer_extension and @customer.customer_extension.education
+        = @customer.customer_extension.education
+      - else
+        %span.help-block N/A
+  %tr
+    %td
       %b Income
     %td
       - if @customer.customer_extension and @customer.customer_extension.household_income
@@ -79,3 +87,36 @@
         = @customer.customer_extension.home_market_value
       - else
         %span.help-block N/A
+  %tr
+    %td
+      %b Home Property Value
+    %td
+      - if @customer.customer_extension and @customer.customer_extension.home_property_value
+        = @customer.customer_extension.home_property_value
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Length of Residence
+    %td
+      - if @customer.customer_extension and @customer.customer_extension.length_of_residence
+        = @customer.customer_extension.length_of_residence
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Zip
+    %td
+      - if @customer.customer_extension and @customer.customer_extension.zip
+        = @customer.customer_extension.zip
+      - else
+        %span.help-block N/A
+  %tr
+    %td
+      %b Length of Residence
+    %td
+      - if @customer.customer_extension and @customer.customer_extension.occupation
+        = @customer.customer_extension.occupation
+      - else
+        %span.help-block N/A
+        

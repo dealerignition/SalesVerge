@@ -24,7 +24,7 @@ class CustomerExtension < ActiveRecord::Base
       self.household_income     = @rapleaf_info["household_income"]
       self.home_owner_status    = @rapleaf_info["home_owner_status"]
       self.home_market_value    = @rapleaf_info["home_market_value"]
-      self.home_propery_value   = @rapleaf_info["home_property_value"]
+      self.home_property_value  = @rapleaf_info["home_property_value"]
       self.length_of_residence  = @rapleaf_info["length_of_residence"]
       self.zip                  = @rapleaf_info["zip"]
       self.occupation           = @rapleaf_info["occupation"]

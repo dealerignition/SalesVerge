@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20120425195825) do
     t.string   "household_income"
     t.string   "home_owner_status"
     t.string   "home_market_value"
-    t.string   "home_propery_value"
+    t.string   "home_property_value"
     t.string   "length_of_residence"
     t.string   "zip"
     t.string   "occupation"
