@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :customers, :dependent => :destroy
   has_many :notes, :dependent => :destroy
 
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :active, :phone, :message
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :active, :phone, :message, :subscribes_to_customer_extensions
 
   validates_presence_of :first_name
   validates_presence_of :last_name

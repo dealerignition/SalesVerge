@@ -1,6 +1,6 @@
 class AccountSettingsController < ApplicationController
   before_filter :require_login
-  before_filter :require_owner, :except => "account"
+  before_filter :require_owner, :except => ['account', 'extras']
   
   skip_authorization_check
   
@@ -21,6 +21,10 @@ class AccountSettingsController < ApplicationController
   def users
     @user = User.new
     @dealer = current_user.dealer
+  end
+  
+  def extras
+    @user = current_user
   end
 
 end
