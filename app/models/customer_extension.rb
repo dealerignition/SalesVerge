@@ -1,8 +1,13 @@
 class CustomerExtension < ActiveRecord::Base
   
-  # Justin's trial RapLeaf API key:       c7e2c4cbcb32f1bf6d86b20551d48186
-  # Steven's production RapLeaf API key:  22045e6e52abd5fd2ecaa0829be2217c
-  # query_by_nap(first, last, street, city, state, options)
+  API_KEY =
+    if Rails.env.development?
+      # Justin's trial RapLeaf API key:
+      "c7e2c4cbcb32f1bf6d86b20551d48186"
+    else
+      # Steven's production RapLeaf API key:
+      "22045e6e52abd5fd2ecaa0829be2217c"
+    end
   
   belongs_to :customer
   after_create :retrieve_data
@@ -10,7 +15,8 @@ class CustomerExtension < ActiveRecord::Base
   def retrieve_data
     @customer = Customer.find_by_id(self.customer_id)
     begin
-      @rapleaf_info = RapleafApi::Api.new('22045e6e52abd5fd2ecaa0829be2217c').query_by_nap( 
+      # query_by_nap(first, last, street, city, state, options)
+      @rapleaf_info = RapleafApi::Api.new(API_KEY).query_by_nap( 
         @customer.first_name, 
         @customer.last_name, 
         @customer.address_1, 
