@@ -32,7 +32,10 @@ class CustomersController < ApplicationController
     @customer.user = current_user
 
     if @customer.save
-      CustomerExtension.create(:customer_id => @customer.id)
+      if current_user.subscribes_to_customer_extensions?
+        CustomerExtension.create(:customer_id => @customer.id)
+      else
+      end
       redirect_to @customer
       flash[:notice] = "Customer was successfully created."
     else
