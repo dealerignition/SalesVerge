@@ -6,6 +6,7 @@ DealerOnTheGo::Application.routes.draw do
   get "account_settings/general"
   get "account_settings/dealer"
   get "account_settings/users"
+  get "account_settings/extras"
   get "account_settings/users/create" => "users#new"
   post "account_settings/users/create" => "users#create", :as => "create_user"
   match "account_settings/users/:id/update" => "users#update", :as => "update_user"

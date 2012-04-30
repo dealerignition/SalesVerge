@@ -1,0 +1,21 @@
+%div.page-header
+  %h1 Extras
+
+%div.row
+  = render 'navigation'
+  
+  %div.span9
+    .span9
+      %table.table.table-striped#users
+        %tr
+          %td 
+            Extended customer information
+            %a.btn.btn-mini{ :href => "#"} More Info
+          %td
+            = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id } do |f|
+              = f.error_messages :header_message => "There was a problem.",
+                :message => "",
+                :header_tag => :h3
+              = f.hidden_field :subscribes_to_customer_extensions, :value => true
+              = f.submit("Subscribe", :class => "btn btn-success" )
+            

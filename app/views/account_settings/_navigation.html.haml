@@ -2,11 +2,11 @@
   .well
     %ul.nav.nav-pills.nav-stacked
       - if current_user.role == "owner"
-        - ["Account", "Dealer", "General", "Users"].each do |tab|
+        - ["Account", "Dealer", "General", "Users", "Extras"].each do |tab|
           %li{ :class => "#{ "active" if tab.downcase.eql? request.path.split("/").last }" }
             = link_to tab, eval("account_settings_#{ tab.downcase }_path")
       - else
-        - ["Account"].each do |tab|
+        - ["Account", "Extras"].each do |tab|
           %li{ :class => "#{ "active" if tab.downcase.eql? request.path.split("/").last }" }
             = link_to tab, eval("account_settings_#{ tab.downcase }_path")
       %li
