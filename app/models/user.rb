@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :customers, :dependent => :destroy
   has_many :notes, :dependent => :destroy
 
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :active, :phone, :message, :subscribes_to_customer_extensions
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :active, :phone, :message, :subscribes_to_customer_extensions, :avatar
 
   validates_presence_of :first_name
   validates_presence_of :last_name
@@ -22,6 +22,14 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_presence_of :role
   validates_inclusion_of :role, :in => ROLES
+  validates_attachment_size :avatar, :in => 0..2000.kilobytes
+  validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']
+  
+  has_attached_file :avatar,
+    :styles => { :thumb => "100x100#" },
+    :storage => :s3,
+    :s3_credentials => "config/s3.yml",
+    :path => "/:style/:id/:filename"
 
   scope :is_owner, where(:role => 'owner')
 
