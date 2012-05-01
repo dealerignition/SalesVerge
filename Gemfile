@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
 
+gem 'aws-s3'
+gem 'aws-sdk'
 gem 'dynamic_form'
 gem 'haml-rails'
 gem 'jquery-rails', :git => "git@github.com:lukeseelenbinder/jquery-rails.git"
+gem 'paperclip', '~> 3.0'
 gem 'rails', '3.2.2'
 gem 'rake', '>= 0.9.2.2'
 gem 'rapleaf_api'

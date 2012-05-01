@@ -3,10 +3,17 @@
     :message => "",
     :header_tag => :h3
   %fieldset
-    %div.control-group
+    .control-group
       = f.label "Store name", { :class => "control-label" }
       %div.controls
         = f.text_field :name, :placeholder => "Your Store"
+    .control-group
+      = f.label :logo, { :class => "control-label" }
+      .controls
+        - if @dealer.logo_file_name
+          = image_tag @dealer.logo.url(:large)
+          %br
+        = f.file_field :logo
     = f.fields_for :stores do |builder|
       %div.control-group
         = builder.label "Address", { :class => "control-label" }

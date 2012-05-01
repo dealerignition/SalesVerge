@@ -1,0 +1,12 @@
+development:
+  bucket: dealerbookapp_development
+  access_key_id: 00WBDRTXYTWV1346XJ02
+  secret_access_key: MyL2VMuDlQXrOQjpx1bNX2uvMkKOUFJ8QRu3psgL
+test:
+  bucket: dealerbookapp_development
+  access_key_id: 00WBDRTXYTWV1346XJ02
+  secret_access_key: MyL2VMuDlQXrOQjpx1bNX2uvMkKOUFJ8QRu3psgL
+production:
+  bucket: dealerbookapp
+  access_key_id: 00WBDRTXYTWV1346XJ02
+  secret_access_key: MyL2VMuDlQXrOQjpx1bNX2uvMkKOUFJ8QRu3psgL

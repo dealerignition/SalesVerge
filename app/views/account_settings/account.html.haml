@@ -5,7 +5,7 @@
   = render 'navigation'
 
   %div.span9
-    = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id }, :html => { :class => "form-horizontal" } do |f|
+    = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id }, :html => { :class => "form-horizontal", :multipart => true } do |f|
       = f.error_messages :header_message => "There were problems with the following fields:",
         :message => "",
         :header_tag => :h3
@@ -34,6 +34,13 @@
           = f.label :phone, { :class => "control-label" }
           .controls
             = f.text_field :phone, { :placeholder => "(555) 123-4567" }
+        .control-group
+          = f.label :avatar, { :class => "control-label" }
+          .controls
+            - if @user.avatar_file_name
+              = image_tag @user.avatar.url(:thumb), :class => "avatar"
+              %br
+            = f.file_field :avatar
         .control-group
           = f.label "Signature message", { :class => "control-label" }
           .controls
