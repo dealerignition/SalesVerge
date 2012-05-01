@@ -3,9 +3,9 @@ class UserMailer < ActionMailer::Base
   default from: "notifications@dealerbookapp.com"
   
   def welcome_email(user)
-      @user = user
-      @url  = "http://floorstoreonthego.com"
-      mail(:to => @user.email, :subject => "Welcome to DealerOnTheGo")
+    @user = user
+    @url  = "http://floorstoreonthego.com"
+    mail(:to => @user.email, :subject => "Welcome to DealerOnTheGo")
   end
   
   def daily_digest(user)
@@ -15,6 +15,14 @@ class UserMailer < ActionMailer::Base
     @quotes = Quote.accessible_by(current_ability).where("quotes.created_at > ?", 1.day.ago).all
     @url       = login_path
     mail(:to => @user.email, :subject => "Your daily digest")
+  end
+  
+  def invitation(invitation)
+    @invitation = invitation
+    @token = invitation.token
+    mail(:to => @invitation.recipient_email, :subject => 'Invitation', :signup_url => @token)
+    
+    @invitation.update_attribute(:sent_at, Time.now)
   end
   
 end

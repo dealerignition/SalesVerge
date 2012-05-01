@@ -11,8 +11,8 @@
     .button-group
       = link_to "#newUserArea", { :class => "btn btn-large btn-success", :id => "expandNewUser", "data-toggle" => "button" } do
         %i.icon-plus-sign.icon-white
-        Create New User
+        Invite User to Join You
     %br
     #newUserArea.hide
       .well
-        = render 'users/form'
+        = render 'invite_user'
