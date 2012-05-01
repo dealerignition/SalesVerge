@@ -35,9 +35,5 @@
 </table>
 </p>
 <br />
-<p><%= @quote.user.message %></p>
-<div class="hr"></div>
-<p>
-	<%= @quote.user.first_name %> <%= @quote.user.last_name %><br />
-	<%= mail_to @quote.user.email %>
-</p>
+
+<%= render "signature" %>

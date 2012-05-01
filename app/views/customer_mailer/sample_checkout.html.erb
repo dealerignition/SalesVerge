@@ -5,10 +5,5 @@
     <li><%= sc.sample.name %></li>
   <% end %>
 </ul>
-<div class="hr"></div>
-<p><%= @salesrep.message %></p>
-<div class="hr"></div>
-<p>
-	<%= @salesrep.first_name %> <%= @salesrep.last_name %><br />
-	<%= mail_to @salesrep.email %>
-</p>
+
+<%= render "signature" %>
