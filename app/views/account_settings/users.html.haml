@@ -7,6 +7,13 @@
   .span9
     %table.table.table-striped#users
       = render @dealer.users
+      - @sent_invitations.each do |sent_invitation|
+        %tr
+          %td
+            %span
+              = sent_invitation.recipient_email
+          %td
+            = link_to "Invited", nil, :class => "btn", :disabled => "disabled"
 
     .button-group
       = link_to "#newUserArea", { :class => "btn btn-large btn-success", :id => "expandNewUser", "data-toggle" => "button" } do

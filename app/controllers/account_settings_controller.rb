@@ -19,8 +19,9 @@ class AccountSettingsController < ApplicationController
   end
   
   def users
-    @user = User.new
+    @user = current_user
     @dealer = current_user.dealer
+    @sent_invitations = @user.sent_invitations
   end
   
   def extras

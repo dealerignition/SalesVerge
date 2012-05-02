@@ -1,4 +1,4 @@
-= form_for @user, :url => create_user_from_invitation_path, :html => { :class => "form-horizontal" } do |f|
+= form_for @user, :url => create_user_path, :html => { :class => "form-horizontal" } do |f|
   = f.error_messages :header_message => "There were problems with the following fields:",
     :message => "",
     :header_tag => :h3
@@ -14,7 +14,10 @@
     .control-group
       = f.label :email, { :class => "control-label" }
       .controls
-        = f.text_field :email, :value => @invitation.recipient_email
+        - if @invitation
+          = f.text_field :email, :value => @invitation.recipient_email
+        - else
+          = f.text_field :email, :placeholder => "joe@email.com"
     .control-group
       = f.label :password, { :class => "control-label" }
       .controls
@@ -26,4 +29,5 @@
     .control-group
       .controls
         = f.submit(:class => "btn btn-primary btn-large" )
-    = f.hidden_field :dealer_id, :value => @invitation.sender.dealer_id
+        - if @invitation
+          = f.hidden_field :dealer_id, :value => @invitation.sender.dealer_id

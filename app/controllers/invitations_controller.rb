@@ -11,11 +11,11 @@ class InvitationsController < ApplicationController
     @invitation = Invitation.new(params[:invitation])
     if @invitation.save
       UserMailer.invitation(@invitation).deliver
-      flash[:notice] = "Thank you, invitation sent."
-      redirect_to :back
+      flash[:notice] = "Invitation sent to #{@invitation.recipient_email}."
     else
-      render :action => 'new'
+      flash[:notice] = "Didn't work"
     end
+    redirect_to :back
   end
   
 end

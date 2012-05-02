@@ -1,6 +1,5 @@
 You are invited!
 <br />
-<%= url_for(:controller => "users", :action => "new") %>
-<br />
-<br />
-<%= @new_user_url %>
+<h1>
+  <a href="<%= url_for(:controller => "users", :action => "new", :invitation_token => @token, :host => "localhost:3000") %>">Join now &rarr;</a>
+</h1>
