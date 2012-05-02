@@ -50,7 +50,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Thanks for subscribing!"
       redirect_to :back
     else
-      flash[:error] = "There was an error."
+      flash[:error] = "There was an error. Please try subscribing on the <a href=\"/account_settings/extras\">Account Settings > Extras</a> page.".html_safe
       redirect_to :back
     end
   end
