@@ -14,6 +14,8 @@ DealerOnTheGo::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "dealers#new", :as => "signup"
+  get "users/new/:invitation_token", :controller => 'users', :action => 'new'
+  put "users/create_from_invitation" => "users#create_from_invitation", :as => "create_user_from_invitation"
 
   resources :appointments
   resources :customers do

@@ -20,7 +20,8 @@ class UserMailer < ActionMailer::Base
   def invitation(invitation)
     @invitation = invitation
     @token = invitation.token
-    mail(:to => @invitation.recipient_email, :subject => 'Invitation', :signup_url => @token)
+    @new_user_url = new_user_url
+    mail(:to => @invitation.recipient_email, :subject => 'Invitation')
     
     @invitation.update_attribute(:sent_at, Time.now)
   end

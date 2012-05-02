@@ -1,13 +1,6 @@
-= form_for Invitation.new, :html => { :class => "form-horizontal" } do |f|
+= form_for Invitation.new, :html => { :class => "form-inline" } do |f|
   %fieldset
-    .control-group
-      = f.label :recipient_email, "Friend's email address"
-      .controls
-        = f.text_field :recipient_email
-    .control-group
-      .controls
-        = f.submit("Invite", :class => "btn btn-primary btn-large" )
-
-        
-        
-        
+    = f.hidden_field :sender_id, :value => current_user.id 
+    = f.label :recipient_email, "Enter email address to invite", { :class => "control-label" }
+    = f.text_field :recipient_email, :placeholder => "joe@mycarpet.com"
+    = f.submit( "Invite", :class => "btn btn-primary" )

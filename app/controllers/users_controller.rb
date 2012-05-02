@@ -4,32 +4,30 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.email = @user.invitation.recipient_email if @user.invitation
+    @invitation = Invitation.find_by_token(params[:invitation_token])
+    unless @invitation
+      flash[:error] = "That invitation is not valid."
+      redirect_to login_path
+    end
   end
 
-  # This will always be AJAX
+  def create_from_invitation
+    @user = User.new(params[:user])
+    @user.role = "salesrep"
+    if @user.save
+      flash[:notice] = "Yay"
+      redirect_to login_path
+    else
+      flash[:notice] = "Awww"
+    end
+    redirect_to login_path
+  end
+
   def create
     @user = User.new(params[:user])
     @user.role = "salesrep"
     @user.dealer = current_user.dealer
-
-    if @user.save
-      data = {
-        :success => true,
-        :data => render_to_string(:partial => "users/user",
-                                  :locals => { :user => @user })
-      }
-
-      @user = User.new
-    else
-      data = {
-        :success => false
-      }
-    end
-
-    data.merge!({
-      :form => render_to_string(:partial => "users/form")
-    })
-    render :json => data
   end
 
   def update
