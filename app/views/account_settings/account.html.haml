@@ -41,6 +41,15 @@
               = image_tag @user.avatar.url(:thumb), :class => "avatar"
               %br
             = f.file_field :avatar
+            .visible-desktop
+              %p.alert.alert-info
+                This image will be used in email messages sent to your customers.
+            .hidden-desktop
+              %br
+              %p.alert.alert-success
+                You can upload an image here from a
+                %strong non-mobile 
+                device. It will be used in email messages sent to your customers.
         .control-group
           = f.label "Signature message", { :class => "control-label" }
           .controls

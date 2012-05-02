@@ -64,7 +64,7 @@ a {
 #header #logo {
   width:180px;
 }
-#logo {
+#logo span {
   background-color: green;
   color: #ffffff;
   text-align: center;
@@ -128,6 +128,14 @@ table.tablebordered tfoot td {
 	font-size: 12px;
 	text-align: center;
 }
+.avatar {
+  width: 75px;
+}
+.subtle {
+  color: #888888;
+  font-size: 12px;
+  line-height: 16px;
+}
 </style>
 </head>
 <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
@@ -148,10 +156,13 @@ table.tablebordered tfoot td {
                   	
                   	<table border="0" cellpadding="20" cellspacing="0" width="100%" id="header">
                       <tr>
-                        <td valign="top">
+                        <td valign="top" width="200px" align="left">
                           <div id="logo">
-                            <%= @dealer.name %>
-                            <!--<img src="http://s3.amazonaws.com/dealer_ignition/dealer_ipad/sample_logo.png" width="150" height="46px" />-->
+                            <% if @dealer.logo_file_name? %>
+                              <%= image_tag @dealer.logo.url(:large) %>
+                            <% else %>
+                              <span><%= @dealer.name %></span>
+                            <% end %>
                           </div>
                         </td>
                         <td valign="top" id="name">
@@ -166,18 +177,20 @@ table.tablebordered tfoot td {
                               &nbsp;
                             </td>
                           <tr>
-                          <tr>
-                            <td valign="top" id="address">
+                          <tr class="subtle">
+                            <td valign="top">
                           	  <%= @dealer.stores.first.address_1 %><br>
                               <% if @dealer.stores.first.city.present? %>
                                 <%= @dealer.stores.first.city %>, 
                               <% end %>
-                              <%= @dealer.stores.first.state %>
-                              <br>
-                              <%= @dealer.stores.first.zip %>
-                          	</td>
-                          	<td valign="top" id="phoneweb">
-                          	  <% if @dealer.stores.first.phone? %>
+                              <% if @dealer.stores.first.state? %>
+                                <%= @dealer.stores.first.state %>
+                              <% end %>
+                              <% if @dealer.stores.first.zip? %>
+                                <%= @dealer.stores.first.zip %>
+                                <br>
+                              <% end %>
+                              <% if @dealer.stores.first.phone? %>
                           	    <%= number_to_phone(@dealer.stores.first.phone) %>
                           	    <br />
                           	  <% end %>
