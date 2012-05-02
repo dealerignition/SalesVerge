@@ -50,7 +50,7 @@ module DealerOnTheGo
     # parameters by using an attr_accessible or attr_protected declaration.
     # config.active_record.whitelist_attributes = true
 
-    config.action_mailer.default_url_options = { :host => "dealeronthego.heroku.com" }
+    # config.action_mailer.default_url_options = { :host => "dealeronthego.heroku.com" }
 
     # Enable the asset pipeline
     config.assets.enabled = true
