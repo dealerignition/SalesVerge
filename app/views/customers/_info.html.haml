@@ -127,5 +127,10 @@
       %td.top-border
         %b Get more info about this customer
       %td.top-border
-        = link_to account_settings_extras_path, {:class => "btn btn-success"} do 
-          Subscribe
+        = form_for @user, :url => { :controller => "users", :action => "update_user_and_look_up_customer", :current_user_id => @user.id, :customer_id => @customer.id } do |f|
+          = f.error_messages :header_message => "There was a problem.",
+            :message => "",
+            :header_tag => :h3
+          = f.hidden_field :subscribes_to_customer_extensions, :value => true
+          = f.submit("Subscribe", :class => "btn btn-success", :confirm => "Do you want to subscribe?")
+        
