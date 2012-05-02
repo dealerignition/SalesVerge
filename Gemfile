@@ -27,8 +27,12 @@ group :development, :test do
   gem 'heroku'
 end
 
+group :production do
+  gem 'newrelic_rpm'
+end
+
 group :production, :test do
-  gem 'thin'  
+  gem 'thin'
 end
 
 # Gems used only for assets and not required
