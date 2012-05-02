@@ -39,4 +39,18 @@ class UsersController < ApplicationController
       redirect_to :back
     end
   end
+  
+  def update_user_and_look_up_customer
+    @user = User.find(params[:current_user_id])
+    @customer = Customer.find_by_id(params[:customer_id])
+    @customer_extension = CustomerExtension.new(:customer_id => @customer.id)
+    if @customer_extension.save and @user.update_attributes(params[:user])
+      flash[:notice] = "Thanks for subscribing!"
+      redirect_to :back
+    else
+      flash[:error] = "There was an error. Please try subscribing on the <a href=\"/account_settings/extras\">Account Settings > Extras</a> page.".html_safe
+      redirect_to :back
+    end
+  end
+  
 end

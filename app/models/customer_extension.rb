@@ -11,6 +11,7 @@ class CustomerExtension < ActiveRecord::Base
   
   belongs_to :customer
   after_create :retrieve_data
+  validates_uniqueness_of :customer_id
   
   def retrieve_data
     @customer = Customer.find_by_id(self.customer_id)

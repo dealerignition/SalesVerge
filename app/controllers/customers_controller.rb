@@ -15,6 +15,8 @@ class CustomersController < ApplicationController
     @sample = Sample.new
     @store = current_user.dealer.stores.first
     @note = Note.new
+    
+    @user = User.find_by_id(current_user.id)
 
     @timeline_stream = @customer.quotes.includes(:customer, :charges)
     @timeline_stream += @customer.sample_checkouts.includes(:customer, :sample)
