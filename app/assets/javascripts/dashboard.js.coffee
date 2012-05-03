@@ -7,13 +7,26 @@ $ ->
               $(".#{this.id}accordion").show()
               count += $(".#{this.id}accordion").length
           count += $(".#{this.id}accordion").length
+          filtered = false
       else
+          filtered = true
           $(this).siblings().each ->
               $(".#{this.id}accordion").hide()
           $(".#{this.id}accordion").show()
           count = $(".#{this.id}accordion").length
+          type = $(this).text().trim()
 
-      word = if count == 1 then "Activity" else "Activities"
+      if filtered
+        if count == 1
+          if type.slice(-3) == "ies"
+            word = type.slice(0, -3) + "y"
+          else
+            word = type.slice(0, -1)
+        else
+          word = type
+      else
+        word = if count == 1 then "Activity" else "Activities"
+
       $("#timelineStream h3").text("#{count} #{word}")
 
 
