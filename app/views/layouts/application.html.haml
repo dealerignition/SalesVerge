@@ -17,6 +17,17 @@
     =javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
     =javascript_include_tag "application"
     =csrf_meta_tags
+    
+    :javascript
+          // unblock when ajax activity stops 
+          $(document).ajaxStop($.unblockUI); 
+
+          $(document).ready(function() { 
+              $('.nav_element').click(function() { 
+                  $.blockUI({ message: '<div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div>' }); 
+                  test(); 
+              });
+          }); 
 
   %body
     = content_for?(:body) ? yield(:body) : yield
