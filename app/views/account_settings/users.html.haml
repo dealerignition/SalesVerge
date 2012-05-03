@@ -5,6 +5,14 @@
   = render 'navigation'
 
   .span9
+    .button-group
+      = link_to "#newUserArea", { :class => "btn btn-large btn-success", :id => "expandNewUser", "data-toggle" => "button" } do
+        %i.icon-plus-sign.icon-white
+        Invite User to Join You
+    %br
+    #newUserArea.hide
+      .well
+        = render 'invite_user'
     %table.table.table-striped#users
       = render @dealer.users
       - @sent_invitations.each do |sent_invitation|
@@ -15,11 +23,3 @@
           %td
             = link_to "Invited", nil, :class => "btn", :disabled => "disabled"
 
-    .button-group
-      = link_to "#newUserArea", { :class => "btn btn-large btn-success", :id => "expandNewUser", "data-toggle" => "button" } do
-        %i.icon-plus-sign.icon-white
-        Invite User to Join You
-    %br
-    #newUserArea.hide
-      .well
-        = render 'invite_user'

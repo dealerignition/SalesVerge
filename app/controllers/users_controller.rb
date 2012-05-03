@@ -13,8 +13,11 @@ class UsersController < ApplicationController
     @user.role = "salesrep"
     if @user.save
       flash[:notice] = "Your account has been created! Your email address to log in is #{@user.email}."
+      redirect_to login_path
+    else
+      flash[:error] = "There were some problems creating your account."
+      redirect_to :back
     end
-    redirect_to login_path
   end
 
   def update

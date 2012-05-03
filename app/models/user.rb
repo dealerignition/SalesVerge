@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   validates_presence_of :email
   validates_uniqueness_of :email
+  validates :email, :email => { :mx => true }
   validates_presence_of :role
   validates_inclusion_of :role, :in => ROLES
   validates_attachment_size :avatar, :in => 0..2000.kilobytes

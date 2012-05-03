@@ -242,6 +242,9 @@ GEM
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
     uuidtools (2.1.2)
+    valid_email (0.0.4)
+      activemodel
+      mail
     xml-simple (1.1.1)
 
 PLATFORMS
@@ -276,3 +279,4 @@ DEPENDENCIES
   thin
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
+  valid_email

@@ -13,7 +13,7 @@ class InvitationsController < ApplicationController
       UserMailer.invitation(@invitation).deliver
       flash[:notice] = "Invitation sent to #{@invitation.recipient_email}."
     else
-      flash[:notice] = "Didn't work"
+      flash[:error] = "Invitation could not be sent."
     end
     redirect_to :back
   end
