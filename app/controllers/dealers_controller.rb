@@ -1,5 +1,6 @@
 class DealersController < ApplicationController
   load_and_authorize_resource
+  skip_authorize_resource :only => :detatch_logo
   layout "session"
 
   def new
@@ -37,6 +38,16 @@ class DealersController < ApplicationController
       flash[:notice] = "Account settings saved."
     end
     redirect_to :back
+  end
+  
+  def detatch_logo
+    @dealer = Dealer.find(params[:dealer_id])
+    authorize! :update, @dealer
+    @dealer.logo = nil
+    if @dealer.save
+      flash[:notice] = "Logo has been removed."
+    end
+    redirect_to account_settings_dealer_path
   end
 
 end

@@ -40,4 +40,13 @@ class UsersController < ApplicationController
     end
   end
   
+  def detatch_avatar
+    @user = current_user
+    @user.avatar = nil
+    if @user.save
+      flash[:notice] = "Avatar has been removed."
+    end
+    redirect_to account_settings_account_path
+  end
+  
 end

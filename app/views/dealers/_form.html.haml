@@ -10,10 +10,11 @@
     .control-group
       = f.label :logo, { :class => "control-label" }
       .controls
+        = f.file_field :logo   
         - if @dealer.logo_file_name
-          = image_tag @dealer.logo.url(:large)
           %br
-        = f.file_field :logo          
+          %p= image_tag @dealer.logo.url(:large)
+          %p= link_to "Remove Logo", dealer_detatch_logo_path(@dealer), :class => "btn btn-mini btn-danger", :confirm => "Are you sure you want to remove your logo?", :method => "put"
         .hidden-desktop
           %br
           %p.alert.alert-success
