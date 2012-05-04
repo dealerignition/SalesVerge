@@ -26,6 +26,8 @@ class UsersController < ApplicationController
       flash[:notice] = "User was successfully updated."
       redirect_to :back
     else
+      flash[:error] = "Account could not be updated."
+      #NOTE this needs to be a render for the form errors to get passed through.
       redirect_to :back
     end
   end

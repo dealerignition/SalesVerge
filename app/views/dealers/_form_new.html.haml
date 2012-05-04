@@ -1,13 +1,5 @@
 = form_for @dealer, :html => { :class => "form-horizontal" } do |f|
-  - unless @dealer.errors.empty? and @user.errors.empty?
-    - @dealer.valid?
-    - @user.valid?
-    #errorExplanation.errorExplanation
-      %h3 There were problems with the following fields:
-      %ul
-        - (@user.errors.to_a + @dealer.errors.to_a).each do |error|
-          %li
-            = error
+  = render "shared/error_messages", :target => @user
   %fieldset
     %h3 Store info
     %div.control-group

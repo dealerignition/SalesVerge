@@ -4,7 +4,6 @@ gem 'aws-s3'
 gem 'aws-sdk'
 gem 'cancan'
 gem 'dalli'
-gem 'dynamic_form'
 gem 'haml-rails'
 gem 'jquery-rails', :git => "git@github.com:lukeseelenbinder/jquery-rails.git"
 gem 'paperclip', '~> 3.0'

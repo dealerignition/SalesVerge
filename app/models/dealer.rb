@@ -5,6 +5,7 @@ class Dealer < ActiveRecord::Base
   has_many :stores, :dependent => :destroy
   
   validates_presence_of :name
+  validates_presence_of :sample_name
   accepts_nested_attributes_for :stores
   
   validates_attachment_size :logo, :in => 0..2000.kilobytes

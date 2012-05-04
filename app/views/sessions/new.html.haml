@@ -1,8 +1,7 @@
-%div.container
-  %div.row
-    %div.span6.offset3#login        
+.container
+  .row
+    .span6.offset3#login        
       = form_tag sessions_path, :class => "well" do
-        = error_messages_for :session
         %h1 Sign in
         %hr
         %fieldset

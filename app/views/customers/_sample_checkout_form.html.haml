@@ -12,6 +12,7 @@
     %ul.nav.nav-tabs.nav-stacked#js-selected-samples
 
     = form_for(@sample_checkout, :url => customer_sample_checkouts_path(@customer)) do |f|
+      = render "shared/error_messages", :target => @sample_checkout
       %fieldset
         %input{ :name => :sample_ids, :type => :hidden }
         = f.submit("Checkout #{current_user.dealer.sample_name}(s)", :class => "btn btn-primary btn-large hide", :id => "checkoutButton")

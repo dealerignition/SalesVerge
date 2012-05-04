@@ -1,14 +1,10 @@
-%div.page-header
+.page-header
   %h1 Account Settings
-
-%div.row
+.row
   = render 'navigation'
-
-  %div.span9
+  .span9
     = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id }, :html => { :class => "form-horizontal", :multipart => true } do |f|
-      = f.error_messages :header_message => "There were problems with the following fields:",
-        :message => "",
-        :header_tag => :h3
+      = render "shared/error_messages", :target => @user
       %fieldset
         .control-group
           = f.label :first_name, { :class => "control-label" }
@@ -60,4 +56,4 @@
               This message will appear above your signature in emails sent to your customers.
         .control-group
           .controls
-            = f.submit(:class => "btn btn-primary btn-large" )
+            = f.submit("Save", :class => "btn btn-primary btn-large" )

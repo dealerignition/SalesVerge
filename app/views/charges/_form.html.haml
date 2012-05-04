@@ -1,9 +1,5 @@
 = form_for @charge, :url => { :action => "create", :controller => "charges" }, :html => { :class => "form-horizontal" } do |f|
   %div.modal-body
-    = f.error_messages :header_message => "There were problems with the following fields:",
-      :message => "",
-      :header_tag => :h3
-
     %fieldset
       %div.control-group
         = f.label :description, "Description", { :class => "control-label" }
