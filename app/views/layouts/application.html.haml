@@ -20,7 +20,9 @@
 
   %body
     = content_for?(:body) ? yield(:body) : yield
-  %hr
-  %footer
+    %hr
+    - if Rails.env.production?
+      = render "shared/clicky_tracking"
   
-  = render "shared/loader"
+  %footer
+    = render "shared/loader"
