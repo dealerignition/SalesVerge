@@ -1,33 +1,34 @@
 =link_to :back, { :class => "btn" } do
   %i.icon-arrow-left
 .page-header
-  %h1 
+  %h1
     Quote for
     =@quote.customer.first_name
     =@quote.customer.last_name
-    
-= link_to "#", { :class => "btn btn-large btn-success", :id => "expandCharge", "data-toggle" => "button" } do
+
+%button.btn.btn-large.btn-success#expandCharge{ "data-toggle" => "button" }
   %i.icon-plus-sign.icon-white
   Add a Charge
-#chargearea.hide
+
+- samples = get_samples
+#chargearea.hide{ :autofill => autofill(samples).to_json, :samples => samples.to_json }
   = render 'charges/form'
 
-%p
-  %table{ :class => "table table-striped" }
-    - @quote.charges.each do |charge|
-      %tr
-        %td= charge.description
-        %td
-          %span.badge==#{"%g" % charge.quantity}&times;
-          = number_to_currency(charge.price)
-        %td
-          = link_to [@quote, charge], :confirm => "Are you sure you want to remove '#{charge.description}' from this quote?", :method => :delete, :class => "close" do
-            &times;
+%table.table.table-striped
+  - @quote.charges.each do |charge|
     %tr
+      %td= charge.description
       %td
-        %strong.pull-right
-          Total
+        %span.badge==#{"%g" % charge.quantity}&times;
+        = number_to_currency(charge.price)
       %td
-        %strong
-          %span.badge.badge-success= number_to_currency(@quote.total)
-      %td
+        = link_to [@quote, charge], :confirm => "Are you sure you want to remove '#{charge.description}' from this quote?", :method => :delete, :class => "close" do
+          &times;
+  %tr
+    %td
+      %strong.pull-right
+        Total
+    %td
+      %strong
+        %span.badge.badge-success= number_to_currency(@quote.total)
+    %td

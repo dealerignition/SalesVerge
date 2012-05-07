@@ -7,8 +7,11 @@ class ChargesController < ApplicationController
     @quote = Quote.find(params[:quote_id])
     @charge = Charge.new
   end
-  
+
   def create
+    if !params[:sample_id].empty?
+      params[:charge][:description] = Sample.find(params[:sample_id]).name
+    end
     @charge = Charge.new(params[:charge], :date => Time.now)
 
     if @charge.save
@@ -23,7 +26,7 @@ class ChargesController < ApplicationController
   def edit
     @charge = Charge.find(params[:id])
   end
-  
+
   def destroy
     @charge = Charge.find(params[:id])
     @quote = Quote.find(params[:quote_id])

@@ -1,22 +1,23 @@
 = form_for @charge, :url => { :action => "create", :controller => "charges" }, :html => { :class => "form-horizontal" } do |f|
-  %div.modal-body
-    %fieldset
-      %div.control-group
-        = f.label :description, "Description", { :class => "control-label" }
-        %div.controls
-          = f.text_field :description, :placeholder => "Carpet installation"
+  %fieldset
+    %div.control-group
+      = f.label :description, "Description", :class => "control-label"
+      %div.controls
+        = f.text_field :description, :id => "js-chargedescription"
 
-      %div.control-group
-        = f.label :price, { :class => "control-label" }
-        %div.controls
-          = f.text_field :price, :placeholder => "500"
+    %div.control-group
+      = f.label :price, { :class => "control-label" }
+      %div.controls
+        = f.text_field :price, :placeholder => "$500", :type => :number,
+          :step => "any", :id => "js-chargeprice"
 
     %div.control-group
       = f.label :quantity, { :class => "control-label" }
       %div.controls
-        = f.text_field :quantity, :placeholder => "1"
+        = f.text_field :quantity, :placeholder => "1", :type => :number
 
   .form-actions
-    = f.submit(:class => "btn btn-primary btn-large")
+    = f.submit("Add Charge", :class => "btn btn-primary btn-large")
     = f.hidden_field :date, :value => Time.now
     = f.hidden_field :quote_id, :value => @quote.id
+    %input{ :type => :hidden, :name => :sample_id, :value => nil, :id => "js-chargesampleid" }
