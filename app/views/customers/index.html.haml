@@ -1,15 +1,14 @@
 .row
   .span12
     .well
-      .center
-        %p
-          = link_to new_customer_path, { :id => "newCustomer", :class => "btn btn-success btn-large" } do
-            %i{ :class => "icon-user icon-white" }
-            New Customer
-        %p
-          %input#js-customersearch.search-query{ :type => :search,
-            :value => params[:query], :placeholder => "Find a customer...",
-            :autocorrect => :off }
+      %p
+        = link_to new_customer_path, { :id => "newCustomer", :class => "btn btn-success btn-large" } do
+          %i{ :class => "icon-user icon-white" }
+          New Customer
+      %p
+        %input#js-customersearch.search-query{ :type => :search,
+          :value => params[:query], :placeholder => "Find a customer...",
+          }
 
 .row
   .span12
