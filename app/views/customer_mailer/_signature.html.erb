@@ -9,7 +9,8 @@
     <td>
       <p><%= @user.message %></p>
       <span class="subtle">
-        <%= @user.first_name %> <%= @user.last_name %><br />
+        <%= @user.full_name %>,<br /> 
+        <%= @user.title %><br /> 
     	  <%= mail_to @user.email %>
     	</span>
     </td>
