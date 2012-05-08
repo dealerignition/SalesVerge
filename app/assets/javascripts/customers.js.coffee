@@ -40,7 +40,10 @@ $ ->
           url = "/customers"
 
         $.get(url, (data) ->
-          $('#customers').html(data)
+          if (data.trim() != "")
+            $('#customers').html(data)
+          else
+            $('#customers').html("<div class='row span12'><h3>No matching customers.</h1></div>")
           $(window).scrollTop($("#js-customersearch").offset().top-5)
         )
         customer_search = false
