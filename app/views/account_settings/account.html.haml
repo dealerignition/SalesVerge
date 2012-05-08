@@ -17,7 +17,7 @@
         .control-group
           = f.label :email, { :class => "control-label" }
           .controls
-            = f.text_field :email, :placeholder => "joe@mycarpet.com"
+            = f.text_field :email, :placeholder => "joe@mycarpet.com", :type => :email
         .control-group
           = f.label :password, { :class => "control-label" }
           .controls
@@ -29,7 +29,7 @@
         .control-group
           = f.label :phone, { :class => "control-label" }
           .controls
-            = f.text_field :phone, { :placeholder => "(555) 123-4567" }
+            = f.text_field :phone, :placeholder => "(555) 123-4567", :type => :tel
         .control-group
           = f.label :avatar, { :class => "control-label" }
           .controls
@@ -45,7 +45,7 @@
               %br
               %p.alert.alert-success
                 You can upload an image here from a
-                %strong non-mobile 
+                %strong non-mobile
                 device. It will be used in email messages sent to your customers.
         .control-group
           = f.label "Signature message", { :class => "control-label" }

@@ -20,7 +20,7 @@
             .control-group
               = f.label :email, { :class => "control-label" }
               .controls
-                = f.text_field :email, :placeholder => "janedoe@gmail.com", :autocapitalize => "off", :autocorrect => "off"
+                = f.text_field :email, :placeholder => "janedoe@gmail.com", :type => :email
       .accordion-group
         .accordion-heading
           = link_to "#collapseTwo", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#accordion" } do
@@ -51,7 +51,7 @@
             .control-group
               = f.label :phone, { :class => "control-label" }
               .controls
-                = f.text_field :phone, :placeholder => "555-123-4567"
+                = f.text_field :phone, :placeholder => "555-123-4567", :type => :tel
 
     .form-actions
       = f.submit("Save", :class => "btn btn-primary btn-large")

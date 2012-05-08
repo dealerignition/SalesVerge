@@ -38,6 +38,7 @@
     background-color:#3f57e6;
   }
 }
+
 span#quote_present_legend, span#sample_present_legend {
   float: left;
   margin: 6px 3px 0 3px;
@@ -64,12 +65,16 @@ span#quote_present_legend, span#sample_present_legend {
   z-index: 1
 }
 
-#samplesearch, #sampleid {
+#sampleid {
   margin-bottom: 0;
 }
 
-#js-samples .close {
-  display: none;
+#js-samples {
+  .close  {
+    display: none;
+  }
+  padding-top: 10px;
+  margin-bottom: 0px;
 }
 
 #js-selected-samples {
@@ -78,11 +83,10 @@ span#quote_present_legend, span#sample_present_legend {
   }
 }
 
-#samplearea {
-  input, text-area {
-    margin-bottom: 0px;
-  }
+#js-addsample, #js-selected-samples {
+  margin-top: 10px;
 }
+
 .legend {
   margin-bottom:5px;
 }

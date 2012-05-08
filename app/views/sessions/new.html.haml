@@ -1,11 +1,11 @@
 .container
   .row
-    .span6.offset3#login        
+    .span6.offset3#login
       = form_tag sessions_path, :class => "well" do
         %h1 Sign in
         %hr
         %fieldset
-          = text_field_tag :email, params[:email], :placeholder => "Email", :style => "width:98%", :autocapitalize => "off", :autocorrect => "off"
+          = text_field_tag :email, params[:email], :type => :email, :placeholder => "Email", :style => "width:98%"
           %br
           = password_field_tag :password, nil, :placeholder => "Password", :style => "width:98%"
           %br

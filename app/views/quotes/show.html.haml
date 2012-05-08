@@ -6,9 +6,10 @@
     =@quote.customer.first_name
     =@quote.customer.last_name
 
-%button.btn.btn-large.btn-success#expandCharge{ "data-toggle" => "button" }
-  %i.icon-plus-sign.icon-white
-  Add a Charge
+%p
+  %button.btn.btn-large.btn-success#expandCharge{ "data-toggle" => "button" }
+    %i.icon-plus-sign.icon-white
+    Add a Charge
 
 - samples = get_samples
 #chargearea.hide{ :autofill => autofill(samples).to_json, :samples => samples.to_json }

@@ -1,20 +1,23 @@
 = form_for @charge, :url => { :action => "create", :controller => "charges" }, :html => { :class => "form-horizontal" } do |f|
   %fieldset
-    %div.control-group
+    .control-group
       = f.label :description, "Description", :class => "control-label"
-      %div.controls
+      .controls
         = f.text_field :description, :id => "js-chargedescription"
 
-    %div.control-group
+    .control-group
       = f.label :price, { :class => "control-label" }
-      %div.controls
-        = f.text_field :price, :placeholder => "$500", :type => :number,
-          :step => "any", :id => "js-chargeprice"
+      .controls
+        .input-prepend
+          %span.add-on> $
+          = f.text_field :price, :placeholder => "500.00", :type => :number,
+            :step => "0.01", :id => "js-chargeprice"
 
-    %div.control-group
+    .control-group
       = f.label :quantity, { :class => "control-label" }
-      %div.controls
-        = f.text_field :quantity, :placeholder => "1", :type => :number
+      .controls
+        = f.text_field :quantity, :placeholder => "1", :type => :number,
+          :min => 0
 
   .form-actions
     = f.submit("Add Charge", :class => "btn btn-primary btn-large")

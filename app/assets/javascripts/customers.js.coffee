@@ -11,29 +11,28 @@ $ ->
         $(".js-areas:not(#notearea)").slideUp()
         $("#notearea").slideToggle()
 
-
-    # Search
-    customer_search = false
-    $('#customersearch').keyup ->
-        customer_search = true
-
-    sample_search = false
-    $('#samplesearch').keyup ->
-        sample_search = true
-
     # Only use this if we are on a phone.
     if (navigator.userAgent.toLowerCase().indexOf("iphone") > -1 ||
         navigator.userAgent.toLowerCase().indexOf("android") > -1)
-      $('#customersearch').focus ->
+      $('#js-customersearch #js-samplesearch').focus ->
         $(window).scrollTop($(this).offset().top-5)
         $(".navbar-simple").hide()
 
-      $('#customersearch').blur ->
+      $('#js-customersearch').blur ->
         $(".navbar-simple").fadeIn()
+
+    # Search
+    customer_search = false
+    $('#js-customersearch').keyup ->
+        customer_search = true
+
+    sample_search = false
+    $('#js-samplesearch').keyup ->
+        sample_search = true
 
     getCustomerResults = ->
       if customer_search
-        q = $('#customersearch').val()
+        q = $('#js-customersearch').val()
 
         if q
           url = "/customers?query=#{q}"
@@ -42,7 +41,7 @@ $ ->
 
         $.get(url, (data) ->
           $('#customers').html(data)
-          $(window).scrollTop($("#customersearch").offset().top-5)
+          $(window).scrollTop($("#js-customersearch").offset().top-5)
         )
         customer_search = false
     setInterval(getCustomerResults, 500)
@@ -52,7 +51,7 @@ $ ->
     getSampleResults = ->
       if sample_search
 
-        q = $('#samplesearch').val()
+        q = $('#js-samplesearch').val()
 
         if q
           $.getJSON("/samples.json?query=#{q}", (samples) ->
@@ -67,8 +66,8 @@ $ ->
         else
           $("#js-samples li").remove()
 
-        checkCreateSampleButton()
-        checkCheckoutButton()
+        checkOnQ()
+        checkSelected()
         sample_search = false
 
     setInterval(getSampleResults, 500)
@@ -77,14 +76,14 @@ $ ->
       selectedSamples.push($(this).data("id"))
       $(this).parent().detach().appendTo("#js-selected-samples")
 
-      checkCheckoutButton()
+      checkSelected()
     )
 
     $("#js-selected-samples").on('click', "a", ->
       selectedSamples.splice(selectedSamples.indexOf($(this).data("id")), 1)
       $(this).parent().detach().appendTo("#js-samples")
 
-      checkCheckoutButton()
+      checkSelected()
     )
 
     $("#customertable tr").click ->
@@ -96,11 +95,8 @@ $ ->
       $("#samplearea input[name='sample_ids']").val(sample_ids)
       $(this).closest("form").submit()
 
-    $("#js-addsample").click ->
-      checkCreateSampleButton(true)
-
     $("#js-createsample").click ->
-      sample_name = $("#samplesearch").val()
+      sample_name = $("#js-samplesearch").val()
       sample_id = $("#js-sampleid").val()
       $.post "/samples/create", {
         sample_name: sample_name,
@@ -112,40 +108,50 @@ $ ->
           $("#js-selected-samples a:last").data("id", data.id)
 
           selectedSamples.push(data.id)
-          $("#samplesearch").val("")
-          checkCreateSampleButton()
-          checkCheckoutButton()
+          $("#js-samplesearch").val("")
+          checkOnQ()
+          checkSelected()
         else
           alert("Unable to create sample.")
 
+    $("#js-addsample").click ->
+      $("#js-addsample").hide()
+      $("#js-samplesearch").removeClass("search-query")
+      $("#js-newSampleForm").slideDown ->
+        $("#js-sampleid").focus()
+
+    $("#js-cancelcreatesample").click ->
+      $("#js-newSampleForm").slideUp ->
+        $("#js-samplesearch").addClass("search-query")
+        $("#js-addsample").show()
+
     # Utilities
 
-    checkCheckoutButton = ->
+    checkSelected = ->
       button = $("#checkoutButton")
       if selectedSamples.length > 0
         button.show()
+        $("#js-selected-samples").show()
       else
         button.hide()
+        $("#js-selected-samples").hide()
 
-    checkCreateSampleButton = (click = false) ->
+      if $("#js-samples").children().length > 0
+        $("#js-samples").show()
+      else
+        $("#js-samples").hide()
+
+    checkOnQ = (click = false) ->
       button = $("#js-addsample")
-      q = $("#samplesearch").val()
+      q = $("#js-samplesearch").val()
 
       if q
         button.show()
         button.html("Create &ldquo;#{q}&rdquo;")
-
-        if button.hasClass("js-cancel") && click
-          button.parent().siblings("p.hide").hide()
-          button.removeClass("js-cancel")
-        else if click
-          button.html("Cancel")
-          button.parent().siblings("p.hide").show()
-          button.addClass("js-cancel")
       else
         button.hide()
-        button.parent().siblings("p.hide").hide()
-        button.removeClass("js-cancel")
+        $("#js-newSampleForm").slideUp()
+        $("#js-samplesearch").addClass("search-query")
 
     createSampleSearchItem = (id, name, dealer_sample_id) ->
       return """<li>

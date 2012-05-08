@@ -10,19 +10,19 @@
         %ul.customers.nav.nav-tabs.nav-stacked
           %li#keep
             =link_to "Not found? Add a new customer...", new_customer_path
-  
+
     %div.control-group
       = f.label :date, { :class => "control-label" }
       %div.controls
-        = f.text_field :date, { :value => Date.today, 
+        = f.text_field :date, { :value => Date.today,
           :id => "datepicker", :readonly => true, :type => "date" }
-  
+
     %div.control-group
       = f.label :time, { :class => "control-label" }
       %div.controls
         = f.text_field :time, { :placeholder => "12:00 PM",
           :type => "time" }
-    
+
     %div.control-group
       = f.label :appointment_type, "Appointment Type", { :class => "control-label" }
       %div.controls

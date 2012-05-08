@@ -16,16 +16,20 @@
   =link_to new_customer_quote_path(@customer), { :class => "btn btn-success btn-large" } do
     %i.icon-plus-sign.icon-white
     Quote
-  =link_to "#", { :class => "btn btn-success btn-large", :id => "expandSampleCheckout" } do
+  %button{ :class => "btn btn-success btn-large", :id => "expandSampleCheckout" }
     %i.icon-plus-sign.icon-white
     = current_user.dealer.sample_name
-  =link_to "#", { :class => "btn btn-success btn-large", :id => "expandNote" } do
+  %button{ :class => "btn btn-success btn-large", :id => "expandNote" }
     %i.icon-edit.icon-white
 
 #samplearea.hide.js-areas
-  = render "sample_checkout_form"
+  %br
+  .well
+    = render "sample_checkout_form"
 #notearea.hide.js-areas
-  = render "note_form"
+  %br
+  .well
+    = render "note_form"
 
 %br
 - if @timeline_stream.count > 0

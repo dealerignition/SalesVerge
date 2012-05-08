@@ -7,8 +7,10 @@
             %i{ :class => "icon-user icon-white" }
             New Customer
         %p
-          %input#customersearch.full{ :value => params[:query], :placeholder => "Find a customer...", :autocorrect => "off" }
-        
+          %input#js-customersearch.search-query{ :type => :search,
+            :value => params[:query], :placeholder => "Find a customer...",
+            :autocorrect => :off }
+
 .row
   .span12
     %span#sample_present_legend
@@ -17,6 +19,6 @@
     %span#quote_present_legend
     %h6.legend
       === has a quote
-      
+
 #customers.row
   = render @records || @customers

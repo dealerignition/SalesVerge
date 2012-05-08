@@ -1,18 +1,17 @@
-%p
-  .well
-    %p
-      %input#samplesearch.full{ :type => :text, :name => :sample_name, :placeholder => "Search for a #{current_user.dealer.sample_name}..." }
-      %a#js-addsample.btn.hide Create
+%input#js-samplesearch.search-query{ :autocorrect => :off, :autocapitalize => :off, :name => :sample_name, :placeholder => "Search for a #{current_user.dealer.sample_name}..." }
+%br
+%button#js-addsample.btn.hide Create
+#js-newSampleForm.hide
+  %p
+    %input#js-sampleid{ :type => :text, :name => :sample_id, :placeholder => "Sample id" }
+  %button#js-cancelcreatesample.btn.btn-danger Cancel
+  %button#js-createsample.btn.btn-primary Save &amp; Add
 
-    %p.hide#js-newSampleForm
-      %input#js-sampleid.full{ :type => :text, :name => :sample_id, :placeholder => "Sample id" }
-      %a#js-createsample.btn.btn-primary Save & Add
+%ul.nav.nav-tabs.nav-stacked.hide#js-samples
+%ul.nav.nav-tabs.nav-stacked.hide#js-selected-samples
 
-    %ul.nav.nav-tabs.nav-stacked#js-samples
-    %ul.nav.nav-tabs.nav-stacked#js-selected-samples
-
-    = form_for(@sample_checkout, :url => customer_sample_checkouts_path(@customer)) do |f|
-      = render "shared/error_messages", :target => @sample_checkout
-      %fieldset
-        %input{ :name => :sample_ids, :type => :hidden }
-        = f.submit("Checkout #{current_user.dealer.sample_name}(s)", :class => "btn btn-primary btn-large hide", :id => "checkoutButton")
+= form_for(@sample_checkout, :url => customer_sample_checkouts_path(@customer)) do |f|
+  = render "shared/error_messages", :target => @sample_checkout
+  %fieldset
+    %input{ :name => :sample_ids, :type => :hidden }
+    = f.submit("Checkout #{current_user.dealer.sample_name}(s)", :class => "btn btn-primary btn-large hide", :id => "checkoutButton")
