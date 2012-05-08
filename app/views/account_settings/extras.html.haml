@@ -17,7 +17,7 @@
             = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id } do |f|
               = render "shared/error_messages", :target => @user
               = f.hidden_field :subscribes_to_customer_extensions, :value => false
-              = f.submit("Unsubscribe", :class => "btn", :confirm => "Are you sure want to unsubscribe?") 
+              = f.submit("Unsubscribe", :class => "btn btn-danger", :confirm => "Are you sure want to unsubscribe?") 
         - else
           = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id } do |f|
             = render "shared/error_messages", :target => @user
