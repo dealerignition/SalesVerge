@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501153719) do
+ActiveRecord::Schema.define(:version => 20120508183212) do
 
   create_table "appointments", :force => true do |t|
     t.date     "date"
@@ -76,15 +76,6 @@ ActiveRecord::Schema.define(:version => 20120501153719) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
-  end
-
-  create_table "invitations", :force => true do |t|
-    t.integer  "sender_id"
-    t.string   "recipient_email"
-    t.string   "token"
-    t.datetime "sent_at"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
   end
 
   create_table "invitations", :force => true do |t|
@@ -166,6 +157,7 @@ ActiveRecord::Schema.define(:version => 20120501153719) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "invitation_id"
+    t.string   "title"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

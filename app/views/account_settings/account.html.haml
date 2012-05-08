@@ -48,6 +48,10 @@
                 %strong non-mobile 
                 device. It will be used in email messages sent to your customers.
         .control-group
+          = f.label "Title", { :class => "control-label" }
+          .controls
+            = f.text_field :title, { :placeholder => "Sales Consultant" }
+        .control-group
           = f.label "Signature message", { :class => "control-label" }
           .controls
             = f.text_area :message, { :rows => 8 }

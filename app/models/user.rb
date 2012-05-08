@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
   belongs_to :invitation
 
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :active, :phone, :message, :subscribes_to_customer_extensions, :avatar, :invitation_token, :dealer_id
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :active, :phone, :message, :subscribes_to_customer_extensions, :avatar, :invitation_token, :dealer_id, :title
 
   validates_presence_of :first_name
   validates_presence_of :last_name
