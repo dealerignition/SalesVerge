@@ -157,10 +157,10 @@ $ ->
         $("#js-samplesearch").addClass("search-query")
 
     createSampleSearchItem = (id, name, dealer_sample_id) ->
-      return """<li>
+      return "<li>
         <a href='##{id}'>
           #{name}
           <span class='help-block'>#{dealer_sample_id}</span>
           <span class='close'>&times;</span>
         </a>
-      </li>"""
+      </li>"
