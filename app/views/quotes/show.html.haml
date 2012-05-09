@@ -1,15 +1,8 @@
-=link_to :back, { :class => "btn" } do
-  %i.icon-arrow-left
 .page-header
   %h1
     Quote for
     =@quote.customer.first_name
     =@quote.customer.last_name
-
-%p
-  %button.btn.btn-large.btn-success#expandCharge{ "data-toggle" => "button" }
-    %i.icon-plus-sign.icon-white
-    Add a Charge
 
 - samples = get_samples
 #chargearea.hide{ :autofill => autofill(samples).to_json, :samples => samples.to_json }
@@ -33,3 +26,11 @@
       %strong
         %span.badge.badge-success= number_to_currency(@quote.total)
     %td
+
+.footer
+  .pull-right
+    =link_to customer_path(@quote.customer), { :class => "btn btn-large btn-inverse" } do
+      %i.icon-arrow-left.icon-white
+      = @quote.customer.first_name
+    %button.btn.btn-large.btn-success#expandCharge{ "data-toggle" => "button" }
+      Add a Charge
