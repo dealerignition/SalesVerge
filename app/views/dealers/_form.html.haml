@@ -35,10 +35,18 @@
         = builder.label "website", { :class => "control-label" }
         %div.controls
           = builder.text_field :website, :placeholder => "awesomeproducts.com"
+    %hr
+    .control-group
+      = f.label "Sample Name", { :class => "control-label" }
+      .controls
+        = f.text_field :sample_name, :placeholder => "Sample"
+        %p
+          .alert.alert-info
+            This term describes objects that can be checked in and out of your store. Some examples are "Demo", "Bike", "Trial".
+    %hr
     %div.alert.alert-info
       %h4.alert-heading
         Please note
       Entered information will be used in various automated emails that go out to your customers.
-
     %div.form-actions
       = f.submit( :class => "btn btn-primary btn-large" )
