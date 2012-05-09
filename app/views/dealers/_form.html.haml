@@ -8,7 +8,7 @@
     .control-group
       = f.label :logo, { :class => "control-label" }
       .controls
-        = f.file_field :logo   
+        = f.file_field :logo
         - if @dealer.logo_file_name
           %br
           %p= image_tag @dealer.logo.url(:large)
@@ -17,7 +17,7 @@
           %br
           %p.alert.alert-success
             You can upload a logo here from a
-            %strong non-mobile 
+            %strong non-mobile
             device.
     = f.fields_for :stores do |builder|
       %div.control-group

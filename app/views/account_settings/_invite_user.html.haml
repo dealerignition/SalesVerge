@@ -1,6 +1,4 @@
 = form_for Invitation.new, :html => { :class => "form-inline" } do |f|
-  %fieldset
-    = f.hidden_field :sender_id, :value => current_user.id 
-    = f.label :recipient_email, "Enter email address to invite", { :class => "control-label" }
-    = f.text_field :recipient_email, :placeholder => "joe@mycarpet.com"
-    = f.submit( "Invite", :class => "btn btn-primary", :confirm => "Are you sure you want to send this invitation?" )
+  = f.label :recipient_email, "Enter email address to invite"
+  = f.text_field :recipient_email, :placeholder => "joe@email.com", :type => :email
+  = f.submit( "Invite", :class => "btn btn-primary", :confirm => "Are you sure you want to send this invitation?" )
