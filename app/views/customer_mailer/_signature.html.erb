@@ -2,15 +2,17 @@
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
   <tr>
     <% if @user.avatar_file_name? %>
-      <td>
+      <td valign="top">
         <%= image_tag @user.avatar.url(:thumb), :class => "avatar" %>
       </td>
     <% end %>
-    <td>
+    <td width="465">
       <p><%= @user.message %></p>
       <span class="subtle">
-        <%= @user.full_name %>,<br /> 
-        <%= @user.title %><br /> 
+        <%= @user.full_name %><br /> 
+        <% if @user.title.present? %>
+          <%= @user.title %><br />
+        <% end %> 
     	  <%= mail_to @user.email %>
     	</span>
     </td>

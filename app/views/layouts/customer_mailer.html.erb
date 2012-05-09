@@ -62,7 +62,11 @@ a {
 	padding: 0;
 }
 #header #logo {
-  width:180px;
+  width:200px; 
+  text-align: center;
+}
+#header #logo img {
+  width:170px;
 }
 #logo span {
   background-color: green;
@@ -156,13 +160,15 @@ table.tablebordered tfoot td {
                   	
                   	<table border="0" cellpadding="20" cellspacing="0" width="100%" id="header">
                       <tr>
-                        <td valign="top" width="200px" align="left">
+                        <td valign="top" width="220px" align="left" cellpadding="0" style="padding:0">
                           <div id="logo">
+                            <a target="_blank" href="#{@dealer.stores.first.website}">
                             <% if @dealer.logo_file_name? %>
-                              <%= image_tag @dealer.logo.url(:large) %>
+                              <%= link_to image_tag(@dealer.logo.url(:large)), "#{@dealer.stores.first.website}" if @dealer.stores.first.website? %>
                             <% else %>
                               <span><%= @dealer.name %></span>
                             <% end %>
+                            </a>
                           </div>
                         </td>
                         <td valign="top" id="name">
