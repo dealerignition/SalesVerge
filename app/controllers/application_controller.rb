@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def search(model, query, query_fields)
-    @query = query.split().join("|")
+    @query = Regexp.escape(query).split.join("|")
 
     select_fields = query_fields.push(:id).collect do |field|
       "#{model.table_name}.#{field}"
