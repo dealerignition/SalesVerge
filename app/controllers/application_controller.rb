@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  check_authorization
+  check_authorization :except => :close_tutorial
   protect_from_forgery
   layout 'main'
 
@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "Your account has been deactivated. See your account administrator for details."
       redirect_to login_url
     end
+  end
+  
+  def close_tutorial
+    session[:close_tutorial] = true
+    redirect_to :back
   end
 
   def require_owner

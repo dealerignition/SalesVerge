@@ -23,7 +23,6 @@ class DealersController < ApplicationController
       @store.dealer_id = @dealer.id
       @store.save
 
-      flash[:notice] = "Account was successfully created! Welcome to your new dashboard."
       auto_login(@user)
       remember_me!
       redirect_to dashboard_path

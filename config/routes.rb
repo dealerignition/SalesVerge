@@ -9,6 +9,7 @@ DealerOnTheGo::Application.routes.draw do
   get "account_settings/users"
   get "account_settings/extras"
   match "account_settings/users/:id/update" => "users#update", :as => "update_user"
+  post "close_tutorial" => "application#close_tutorial", :as => 'close_tutorial'
   get "dashboard/big_screen" => "dashboard#big_screen", :as => "big_screen"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"

@@ -1,10 +1,11 @@
 - @title = "Big Screen"
 
 - unless current_user.salesrep?
-  .tabbable
-    %ul.nav.nav-tabs
-      %li= link_to "Timeline", dashboard_path
-      %li.active= link_to "Big Screen", big_screen_path
+  .hidden-phone
+    .tabbable
+      %ul.nav.nav-tabs
+        %li= link_to "Timeline", dashboard_path
+        %li.active= link_to "Big Screen", big_screen_path
 .row
   .span6
     .page-header

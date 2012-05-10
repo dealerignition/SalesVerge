@@ -20,3 +20,6 @@ $ ->
 
     $("#timeline").on 'show', ->
       $(shownElement).addClass "shown"
+
+    $("#alert-modal-background").css({ opacity: 0.75 })
+    $("#alert-modal").css({ opacity: 1 })

@@ -1,0 +1,12 @@
+- unless current_user.customers.count > 0 || session[:close_tutorial].present? 
+  .alert.alert-info#alert-modal
+    = link_to close_tutorial_path, { "data_dismiss" => "alert", :method => :post, :class => "close" } do
+      &times;
+    %h3 This is your customers page
+    %hr
+    %p All of your customers will be listed out here.
+    %p
+      = link_to account_settings_account_path, :class => "btn btn-success" do
+        Continue to Settings
+        %i.icon-arrow-right.icon-white
+  #alert-modal-background

@@ -7,6 +7,8 @@
   .pull-right
     = link_to new_customer_path, { :id => "newCustomer", :class => "btn btn-success btn-large" } do
       %i{ :class => "icon-plus icon-white" }
+      
+= render 'tutorial'
 
 #customers.row
   = render @records || @customers
