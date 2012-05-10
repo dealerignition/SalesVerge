@@ -1,8 +1,8 @@
 %div.span3
   .well{ :style => "padding: 8px 0;"}
     %ul.nav.nav-list
+    
       - options = ["Account", "Extras"]
-
       - if current_user.role == "owner"
         - options.insert 1, ["Password", "Dealer", "Users"]
         - options.flatten!
@@ -28,5 +28,10 @@
             - when "Extras"
               %i.icon-star{ :class => @white }
               Extras
+      %li.divider
+      %li
+        = link_to send_email_preview_account_settings_path, :confirm => "This will send a test email to #{@user.email}. Continue?" do
+          %i.icon-envelope
+          Email Preview
       %li.divider
       = link_to "Sign Out", logout_path, :confirm => "Are you sure you want to sign out?", :class => "btn"

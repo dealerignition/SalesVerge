@@ -1,4 +1,5 @@
 class UserMailer < ActionMailer::Base
+  layout "customer_mailer", :only => [:email_preview]
   include CanCan::Ability
   default from: "notifications@dealerbookapp.com"
   
@@ -26,4 +27,10 @@ class UserMailer < ActionMailer::Base
     @invitation.update_attribute(:sent_at, Time.now)
   end
   
+  def email_preview(user, dealer)
+    @user = user
+    @dealer = dealer
+    render :layout => 'customer_mailer'
+    mail(:to => @user.email, :subject => "Here is your preview")
+  end
 end

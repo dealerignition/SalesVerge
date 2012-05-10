@@ -4,18 +4,18 @@ class CustomerMailer < ActionMailer::Base
   # NOTE: Every mailer must have a @dealer variable defined as the customer_mailer layout is expecting one
   # NOTE: Every mailer must have a @user variable defined as the signature partial is expecting one
   def thank_you_email(customer, dealer)
-      @customer = customer
-      @dealer = dealer
-      @url  = "http://floorstoreonthego.com"
-      mail(:to => @customer.email, :subject => "Thank-you for your interest in our store", :reply_to => "#{@customer.user.email}")
+    @customer = customer
+    @dealer = dealer
+    @url  = "http://floorstoreonthego.com"
+    mail(:to => @customer.email, :subject => "Thank-you for your interest in our store", :reply_to => "#{@customer.user.email}")
   end
   
   def quote(quote)
-      @quote = quote
-      @user = quote.user
-      @customer = quote.customer
-      @dealer = quote.user.dealer
-      mail(:to => @customer.email, :subject => "Here is your quote", :reply_to => "#{@customer.user.email}")
+    @quote = quote
+    @user = quote.user
+    @customer = quote.customer
+    @dealer = quote.user.dealer
+    mail(:to => @customer.email, :subject => "Here is your quote", :reply_to => "#{@customer.user.email}")
   end
   
   def quote_won(quote)

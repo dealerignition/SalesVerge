@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+body {
+	background: #f5f5f5;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	text-rendering: optimizelegibility;
+	color: #333;
+	font-size: 15px;
+}
+h1, h2, h3 {
+	color: #333;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	text-rendering: optimizelegibility;
+}
+h1 {
+	font-size: 24px;
+	margin: 5px 0;
+}
+h2 {
+	font-size: 20px;
+	margin: 5px 0;
+}
+h3 {
+	font-size: 16px;
+}
+p {
+	color: #333;
+	font-size: 15px;
+	line-height: 18px;
+	margin-bottom: 9px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+}
+a {
+	color: #1855A0;
+	text-decoration: underline;
+}
+.hr {
+	border-top:1px solid #E5E5E5;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+#header {
+	background-color: #ffffff;
+	padding: 20px;
+	padding-bottom: 0;
+	border: 1px solid #DDDDDD;
+	border-bottom: none;
+	text-align: center;
+}
+#header #name, #header #address, #header #phoneweb {
+	text-align: left;
+	padding: 0;
+}
+#header #logo {
+  width:200px; 
+  text-align: center;
+}
+#header #logo img {
+  width:170px;
+}
+#logo span {
+  background-color: green;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 12px;
+  margin-top: -20px;
+  margin-left: -20px;
+}
+#header #name td.border-bottom {
+  padding-bottom:7px;
+  border-bottom: 1px solid #ddd;
+}
+#header #address {
+  width:140px;
+  padding-top:7px;
+}
+#header #phoneweb {
+	padding-left:30px;
+  padding-top:7px;
+}
+#content {
+	background: #ffffff;
+	border: 1px solid #DDDDDD;
+	border-top: none;
+	padding: 20px;
+	padding-top: 0;
+}
+table.tablebordered {
+	border: 1px solid #dddddd;
+  	border-collapse: separate;
+  	border-collapse: collapsed;
+  	font-size:14px;
+  	text-align: right;
+}
+table.tablebordered td.left, table.tablebordered th.left {
+  	text-align: left;
+}
+table.tablebordered td.price {
+  	width:70px;
+}
+table.tablebordered tr {
+  	border-bottom: 1px solid #dddddd;
+}
+table.tablebordered thead th, table.tablebordered tbody td, table.tablebordered tfoot td {
+  	padding:8px;
+}
+table.tablebordered thead th {
+  	background: #cfcfcf;
+  	border-bottom: 1px solid #dddddd;
+}
+table.tablebordered tbody td {
+  	border-bottom: 1px solid #dddddd;
+}
+table.tablebordered tfoot td {
+	background: #f5f5f5;
+}
+#footer {
+	font-size: 12px;
+	text-align: center;
+}
+.avatar {
+  width: 75px;
+}
+.subtle {
+  color: #888888;
+  font-size: 12px;
+  line-height: 16px;
+}
+</style>
+</head>
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+<center>
+  <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
+    <tr>
+      <td style="border-collapse: collapse;">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" style="border-collapse: collapse;">
+        
+        <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateContainer">
+          <tr>
+            <td align="center" valign="top" style="border-collapse: collapse;">
+              <table border="0" cellpadding="0" cellspacing="0" width="600">
+                <tr>
+                  <td valign="top" class="bodyContent">
+                  	
+                  	<table border="0" cellpadding="20" cellspacing="0" width="100%" id="header">
+                      <tr>
+                        <td valign="top" width="220px" align="left" cellpadding="0" style="padding:0">
+                          <div id="logo">
+                            <a target="_blank" href="#{@dealer.stores.first.website}">
+                            <% if @dealer.logo_file_name? %>
+                              <%= link_to image_tag(@dealer.logo.url(:large)), "#{@dealer.stores.first.website}" if @dealer.stores.first.website? %>
+                            <% else %>
+                              <span><%= @dealer.name %></span>
+                            <% end %>
+                            </a>
+                          </div>
+                        </td>
+                        <td valign="top" id="name">
+                          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                          <tr>
+                            <td class="border-bottom">
+                              <strong>
+                          	    <%= @dealer.name %>
+                              </strong>
+                            </td>
+                            <td class="border-bottom">
+                              &nbsp;
+                            </td>
+                          <tr>
+                          <tr class="subtle">
+                            <td valign="top">
+                          	  <%= @dealer.stores.first.address_1 %><br>
+                              <% if @dealer.stores.first.city.present? %>
+                                <%= @dealer.stores.first.city %>, 
+                              <% end %>
+                              <% if @dealer.stores.first.state? %>
+                                <%= @dealer.stores.first.state %>
+                              <% end %>
+                              <% if @dealer.stores.first.zip? %>
+                                <%= @dealer.stores.first.zip %>
+                                <br>
+                              <% end %>
+                              <% if @dealer.stores.first.phone? %>
+                          	    <%= number_to_phone(@dealer.stores.first.phone) %>
+                          	    <br />
+                          	  <% end %>
+                          	  <%= link_to "Visit our website", "#{@dealer.stores.first.website}" if @dealer.stores.first.website? %>
+                          	</td>
+                          </table>
+                        </td>
+                      </tr>
+                  	</table>
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%"  id="content">
+                      <tr>
+                        <td valign="top">
+                          <table cellpadding="0" cellspacing="0" border="0" width="555">
+                            <tr id="yield">
+                              <td>
+                              
+                              <br>  
+                              <h3>Email content preview</h3>
+                              <br>
+                              <p>Here is a preview of the emails that your customers will recieve.</p>
+                              <p>Quotes, samples and other things will go here.</p>
+                              <br>
+
+					                    <%= render 'customer_mailer/signature' %>
+					  
+                              </td>  
+                            </tr>
+                          </table>	
+                         </td>
+                         
+                      </tr>
+                   </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>  
+
+    <tr>
+      <td align="center" valign="top" >
+        <table border="0" cellpadding="10" cellspacing="0" width="600" id="footer">
+          <tr>
+            <td valign="top" class="footerContent" style="border-collapse: collapse;">
+              <!-- This is where footer content would go -->
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+  </table>
+</center>
+</body>
+</html>

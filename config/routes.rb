@@ -2,6 +2,12 @@ DealerOnTheGo::Application.routes.draw do
   root :to => 'dashboard#index', :as => "dashboard"
 
   get "about" => "about#index"
+  get "account_settings/account"
+  get "account_settings/password"
+  get "account_settings/general"
+  get "account_settings/dealer"
+  get "account_settings/users"
+  get "account_settings/extras"
   match "account_settings/users/:id/update" => "users#update", :as => "update_user"
   get "dashboard/big_screen" => "dashboard#big_screen", :as => "big_screen"
   get "logout" => "sessions#destroy", :as => "logout"
@@ -11,6 +17,9 @@ DealerOnTheGo::Application.routes.draw do
   post "users/create" => "users#create", :as => "create_user"
   put "users/detatch_avatar" => "users#detatch_avatar", :as => "user_detatch_avatar"
 
+  resource :account_settings do
+    get :send_email_preview
+  end
   resources :appointments
   resources :customers do
     resources :quotes
