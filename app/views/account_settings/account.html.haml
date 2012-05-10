@@ -6,6 +6,9 @@
   = render 'navigation'
   .span9
     = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id }, :html => { :class => "form-horizontal", :multipart => true } do |f|
+      - content_for :subnav do
+        .pull-right
+          = f.submit("Save", :class => "btn btn-primary btn-large" )
       = render "shared/error_messages", :target => @user
       %fieldset
         .control-group
@@ -52,6 +55,3 @@
             %p
             .alert.alert-info
               This message will appear above your signature in emails sent to your customers.
-        .control-group
-          .controls
-            = f.submit("Save", :class => "btn btn-primary btn-large" )

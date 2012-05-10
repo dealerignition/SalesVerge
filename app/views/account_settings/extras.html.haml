@@ -5,7 +5,7 @@
 
 %div.row
   = render 'navigation'
-  
+
   .span9
     .row
       .span5
@@ -13,18 +13,16 @@
       .span4
         - if @current_user.subscribes_to_customer_extensions?
           .btn-group
-            %button.btn.disabled 
+            %button.btn.disabled
               %i.icon-ok
               You are subscribed
             = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id } do |f|
               = render "shared/error_messages", :target => @user
               = f.hidden_field :subscribes_to_customer_extensions, :value => false
-              = f.submit("Unsubscribe", :class => "btn btn-danger", :confirm => "Are you sure want to unsubscribe?") 
+              = f.submit("Unsubscribe", :class => "btn btn-danger", :confirm => "Are you sure want to unsubscribe?")
         - else
           = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id } do |f|
             = render "shared/error_messages", :target => @user
             = f.hidden_field :subscribes_to_customer_extensions, :value => true
-            = f.submit("Subscribe", :class => "btn btn-success", :confirm => "Do you want to subscribe?") 
+            = f.submit("Subscribe", :class => "btn btn-success", :confirm => "Do you want to subscribe?")
     %hr
-              
-            

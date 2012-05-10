@@ -11,24 +11,24 @@ $ ->
         $(".js-areas:not(#notearea)").slideUp()
         $("#notearea").slideToggle()
 
-    # Only use this if we are on a phone.
-    if (navigator.userAgent.toLowerCase().indexOf("iphone") > -1 ||
-        navigator.userAgent.toLowerCase().indexOf("android") > -1)
-      $('#js-customersearch #js-samplesearch').focus ->
-        $(window).scrollTop($(this).offset().top-5)
-        $(".navbar-simple").hide()
-
-      $('#js-customersearch').blur ->
-        $(".navbar-simple").fadeIn()
 
     # Search
     customer_search = false
     $('#js-customersearch').keyup ->
-        customer_search = true
+      customer_search = true
 
     sample_search = false
     $('#js-samplesearch').keyup ->
-        sample_search = true
+      sample_search = true
+
+    $('#js-customersearch').focus ->
+      $(this).siblings().hide()
+      $(this).animate {
+        width: $(this).parent().width() - 28,
+      }
+
+    $('#js-customersearch').blur ->
+      $(this).siblings().show()
 
     getCustomerResults = ->
       if customer_search

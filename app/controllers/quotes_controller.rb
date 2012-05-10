@@ -69,8 +69,12 @@ class QuotesController < ApplicationController
 
   def deliver_customer_mailer
     @quote = Quote.find(params[:quote_id])
+
     CustomerMailer.quote(@quote).deliver
     flash[:notice] = "Quote was sucessfully sent to #{@quote.customer.email}."
+
+    @quote.status = "emailed"
+    @quote.save
 
     redirect_to :back
   end

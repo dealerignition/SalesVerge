@@ -1,17 +1,19 @@
 $ ->
-  $("#dashboard .btn-info").click ->
+  $("#timelinefilterbuttons button").click ->
       if $(this).hasClass("active")
           setTimeout(removeActive, 10)
           count = 0
           $(this).siblings().each ->
               $(".#{this.id}accordion").show()
               count += $(".#{this.id}accordion").length
+          $(".noteaccordion").show()
           count += $(".#{this.id}accordion").length
           filtered = false
       else
           filtered = true
           $(this).siblings().each ->
               $(".#{this.id}accordion").hide()
+          $(".noteaccordion").hide()
           $(".#{this.id}accordion").show()
           count = $(".#{this.id}accordion").length
           type = $(this).text().trim()
@@ -31,10 +33,7 @@ $ ->
 
 
   removeActive = ->
-      $("#dashboard button.active").removeClass("active")
+      $("#timelinefilterbuttons button.active").removeClass("active")
 
   $("#dashboard select").change ->
       window.location = "?date_range=#{$(this).val()}"
-
-  $('.expandAddCharge').click ->
-      $(".addChargeArea").slideToggle()

@@ -1,6 +1,6 @@
 @import "twitter/bootstrap/bootstrap";
 
-body { margin-top: 70px; }
+body { margin: 60px 0 70px; }
 
 @import "twitter/bootstrap/responsive";
 
@@ -81,7 +81,7 @@ form {
 
 .navbar-simple {
   position: fixed;
-  top: 0;
+  bottom: 0;
   right: 0;
   left: 0;
   color: #ffffff;
@@ -102,7 +102,7 @@ form {
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   .nav {
-    margin: -1px auto;
+    margin: 0 auto;
     width: 165px;
   }
   .nav-tabs > li > a, .nav-pills > li > a {
@@ -117,20 +117,13 @@ form {
 
 .navbar-simple .nav-pills .active a, .navbar-simple .nav-pills .active a:hover {
   background-color: #232323;
-  -webkit-box-shadow: inset 0px 0px 20px 2px #000;
-  -moz-box-shadow: inset 0px 0px 20px 2px #000;
-  box-shadow: inset 0px 0px 20px 2px #000;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
+  .box-shadow(inset 0px 0px 20px 2px #000);
+  .border-radius(0);
 }
 
 .navbar-simple .nav-pills li a {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-  margin-top: 0;
-  margin-bottom: 1px;
+  .border-radius(0);
+  margin: 0;
 }
 
 input.full, textarea.full {
@@ -154,9 +147,7 @@ h1 small.hidden-phone {
   }
 }
 .shown {
-  -webkit-box-shadow: 0px 0px 12px 0px #999;
-  -moz-box-shadow:    0px 0px 12px 0px #999;
-  box-shadow:         0px 0px 12px 0px #999;
+  .box-shadow(0px 0px 12px 0px #999);
   position: relative;
   z-index: 100;
   border: 1px solid #bbb;

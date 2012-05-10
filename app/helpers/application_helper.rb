@@ -9,8 +9,10 @@ module ApplicationHelper
         "#{model.customer.first_name} <span class='quote-won'>purchased a quote</span> for #{ number_to_currency(model.total) }.".html_safe
       elsif model.status == "lost"
         "#{model.customer.first_name} <span class='danger'>declined a quote</span> for #{ number_to_currency(model.total) }.".html_safe
+      elsif model.status == "emailed"
+        "#{ you_or_they(model.user_id) } emailed a <span class='quote'>quote</span> to #{model.customer.first_name} worth #{ number_to_currency(model.total) }.".html_safe
       else
-        "#{ you_or_they(model.user_id) } gave #{model.customer.first_name} a <span class='quote'>quote</span> for #{ number_to_currency(model.total) }.".html_safe
+        "#{ you_or_they(model.user_id) } started a <span class='quote'>quote</span> for #{model.customer.first_name} worth #{ number_to_currency(model.total) }.".html_safe
       end
     elsif model.instance_of? SampleCheckout
       if model.checkin_time?

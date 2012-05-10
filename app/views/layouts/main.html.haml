@@ -1,4 +1,28 @@
 -content_for :body do
+  #subnav
+    .container
+      .row
+        .span12
+          = yield :subnav
+
+  .container
+    - if flash[:notice]
+      .alert.alert-success
+        %a.close{ :href => "#", "data-dismiss" => "alert" }
+          &times;
+        = flash[:notice]
+    - if flash[:alert]
+      .alert.alert-info
+        %a.close{ :href => "#", "data-dismiss" => "alert" }
+          &times;
+        = flash[:alert]
+    - if flash[:error]
+      .alert.alert-error
+        %a.close{ :href => "#", "data-dismiss" => "alert" }
+          &times;
+        = flash[:error]
+    = yield
+
   - if Rails.env.development?
     %h3#developmentBanner.hidden-phone development
     %h3#developmentBannerphone.visible-phone dev
@@ -13,23 +37,5 @@
       %li{ :class => "#{"active" if request.path.include? "settings"}" }
         = link_to account_settings_account_path, :onclick => "return tog('load')" do
           %i.icon_gear_opt
-
-  %div.container
-    - if flash[:notice]
-      %div.alert.alert-success
-        %a.close{ :href => "#", "data-dismiss" => "alert" }
-          &times;
-        = flash[:notice]
-    - if flash[:alert]
-      %div.alert.alert-info
-        %a.close{ :href => "#", "data-dismiss" => "alert" }
-          &times;
-        = flash[:alert]
-    - if flash[:error]
-      %div.alert.alert-error
-        %a.close{ :href => "#", "data-dismiss" => "alert" }
-          &times;
-        = flash[:error]
-    = yield
 
 =render :template => "layouts/application"

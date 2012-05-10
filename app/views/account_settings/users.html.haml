@@ -7,11 +7,10 @@
   = render 'navigation'
 
   .span9
-    %button#expandNewUser{ :class => "btn btn-large btn-success", "data-toggle" => "button" }
-      %i.icon-plus-sign.icon-white
-      Invite User to Join You
-    %br
-    %br
+    %p
+      %button#expandNewUser{ :class => "btn btn-large btn-success", "data-toggle" => "button" }
+        %i.icon-plus-sign.icon-white
+        Invite User to Join You
     #newUserArea.hide
       .well
         = render 'invite_user'
