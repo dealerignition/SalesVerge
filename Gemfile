@@ -5,7 +5,7 @@ gem 'aws-sdk'
 gem 'cancan'
 gem 'dalli'
 gem 'haml-rails'
-gem 'jquery-rails', :git => "git@github.com:lukeseelenbinder/jquery-rails.git"
+gem 'jquery-rails'
 gem 'paperclip', '~> 3.0'
 gem 'pg'
 gem 'rails', '3.2.2'
@@ -13,7 +13,7 @@ gem 'rake', '>= 0.9.2.2'
 gem 'rapleaf_api'
 gem 'roadie'
 gem 'sorcery'
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'valid_email'
 
 group :development, :test do
