@@ -50,7 +50,7 @@
                 - if activity.checkin_time.blank?
                   = link_to sample_checkout_check_in_path(activity), :class => "btn btn-primary", :confirm => "Are you sure #{activity.sample.name} has been returned to your store?" do
                     Check-in
-            - if (activity.instance_of? Quote) && (activity.status.blank?)
+            - if activity.instance_of?(Quote) && (activity.status != "won" || activity.status != "lost")
               %p
                 .btn-group
                   = link_to quote_path(activity), :class => "btn" do
