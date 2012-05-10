@@ -14,8 +14,6 @@
         %li.active= link_to "Timeline", dashboard_path
         %li= link_to "Big Screen", big_screen_path
 
-= render 'tutorial'
-
 #dashboard
   .row
     .span12
@@ -39,3 +37,5 @@
         = render 'shared/timeline'
       - else
         %h3 No activities!
+
+= render 'tutorial'
