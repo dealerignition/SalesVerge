@@ -1,12 +1,11 @@
 - @title = "Customers"
 
-.row
-  .span12
-    %p
-      %input#js-customersearch.search-query{ :type => :search,
-        :value => params[:query], :placeholder => "Find a customer...",
-        }
-            
+- content_for :subnav do
+  %input#js-customersearch.search-query{ :type => :search,
+    :value => params[:query], :placeholder => "Find a customer..." }
+  = link_to new_customer_path, { :id => "newCustomer", :class => "btn btn-success btn-large" } do
+    %i{ :class => "icon-plus icon-white" }
+
 #customers.row
   = render @records || @customers
 
@@ -18,8 +17,3 @@
     %span#quote_present_legend
     %h6.legend
       === has a quote
-
-.footer
-  .pull-right
-    = link_to new_customer_path, { :id => "newCustomer", :class => "btn btn-success btn-large" } do
-      %i{ :class => "icon-plus icon-white" }

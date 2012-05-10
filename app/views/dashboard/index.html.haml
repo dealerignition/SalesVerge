@@ -1,46 +1,38 @@
 - @title = "Dashboard"
 
+- content_for :subnav do
+  #timelinefilterbuttons.btn-group{ "data-toggle" => "buttons-radio" }
+    %button.btn.btn-info#customer Customers
+    %button.btn.btn-info#samplecheckout
+      =current_user.dealer.sample_name.pluralize
+    %button.btn.btn-info#quote Quotes
+
 - unless current_user.salesrep?
   .tabbable
     %ul.nav.nav-tabs
       %li.active= link_to "Timeline", dashboard_path
       %li= link_to "Big Screen", big_screen_path
+
 #dashboard
-  %h2
-    Timeline
-    %small
-      for
-      %select
-        - @date_options.each do |o|
-          - name = o == :this_month ? Date.today.strftime("%B") : o.to_s.titleize
-          - if @date_range == o
-            %option{ :value => o, :selected => "selected" }=name
-          - else
-            %option{ :value => o}=name
-
-    .visible-phone
-      %p.btn-group{ "data-toggle" => "buttons-radio" }
-        %button.btn.btn-mini.btn-info#customer Customers
-        %button.btn.btn-mini.btn-info#samplecheckout
-          =current_user.dealer.sample_name.pluralize
-        %button.btn.btn-mini.btn-info#quote Quotes
-        %button.btn.btn-mini.btn-info#note Notes
-
-    .hidden-phone
-      %p.btn-group{ "data-toggle" => "buttons-radio" }
-        %button.btn.btn-large.btn-info#customer Customers
-        %button.btn.btn-large.btn-info#samplecheckout
-          =current_user.dealer.sample_name.pluralize
-        %button.btn.btn-large.btn-info#quote Quotes
-        %button.btn.btn-large.btn-info#note Notes
-
-.row
-  #timelineStream.span12
-    - if @timeline_stream
-      %h3
-        = @timeline_stream.count
-        = "Activity".pluralize(@timeline_stream.count)
-      = render 'shared/timeline'
-    - else
-      %h3 No activities!
-      %p Why don't you go sell to some customers?
+  .row
+    .span12
+      %h2
+        Timeline
+        %small
+          for
+          %select
+            - @date_options.each do |o|
+              - name = o == :this_month ? Date.today.strftime("%B") : o.to_s.titleize
+              - if @date_range == o
+                %option{ :value => o, :selected => "selected" }=name
+              - else
+                %option{ :value => o}=name
+  .row
+    #timelineStream.span12
+      - if @timeline_stream
+        %h3
+          = @timeline_stream.count
+          = "Activity".pluralize(@timeline_stream.count)
+        = render 'shared/timeline'
+      - else
+        %h3 No activities!
