@@ -1,3 +1,5 @@
+- @title = "Account Settings — Users"
+
 .page-header
   %h1 Account Settings
 
@@ -5,10 +7,10 @@
   = render 'navigation'
 
   .span9
-    .button-group
-      = link_to "#newUserArea", { :class => "btn btn-large btn-success", :id => "expandNewUser", "data-toggle" => "button" } do
-        %i.icon-plus-sign.icon-white
-        Invite User to Join You
+    %button#expandNewUser{ :class => "btn btn-large btn-success", "data-toggle" => "button" }
+      %i.icon-plus-sign.icon-white
+      Invite User to Join You
+    %br
     %br
     #newUserArea.hide
       .well

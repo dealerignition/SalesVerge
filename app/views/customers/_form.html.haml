@@ -4,7 +4,7 @@
     .accordion{ :id => "accordion" }
       .accordion-group
         .accordion-heading
-          = link_to "#collapseOne", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#accordion" } do
+          = link_to "#collapseOne", { :class => "accordion-toggle", "data-toggle" => "collapse" } do
             %i.icon-exclamation-sign
             Required
         #collapseOne{ :class => "accordion-body in" }
@@ -23,7 +23,7 @@
                 = f.text_field :email, :placeholder => "janedoe@gmail.com", :type => :email
       .accordion-group
         .accordion-heading
-          = link_to "#collapseTwo", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#accordion" } do
+          = link_to "#collapseTwo", { :class => "accordion-toggle", "data-toggle" => "collapse" } do
             %i.icon-plus-sign
             Additional
         #collapseTwo{ :class => "accordion-body collapse" }
