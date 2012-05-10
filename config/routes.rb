@@ -2,12 +2,6 @@ DealerOnTheGo::Application.routes.draw do
   root :to => 'dashboard#index', :as => "dashboard"
 
   get "about" => "about#index"
-  get "account_settings/account"
-  get "account_settings/change_password"
-  get "account_settings/general"
-  get "account_settings/dealer"
-  get "account_settings/users"
-  get "account_settings/extras"
   match "account_settings/users/:id/update" => "users#update", :as => "update_user"
   get "dashboard/big_screen" => "dashboard#big_screen", :as => "big_screen"
   get "logout" => "sessions#destroy", :as => "logout"
