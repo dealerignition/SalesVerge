@@ -1,13 +1,38 @@
 %div.span3
-  .well
-    %ul.nav.nav-pills.nav-stacked
+  .well{ :style => "padding: 8px 0;"}
+    %ul.nav.nav-list
       - if current_user.role == "owner"
-        - ["Account", "Dealer", "General", "Users", "Extras"].each do |tab|
+        - ["Account", "Password", "Dealer", "Users", "Extras"].each do |tab|
           %li{ :class => "#{ "active" if tab.downcase.eql? request.path.split("/").last }" }
-            = link_to tab, eval("account_settings_#{ tab.downcase }_path")
+            = link_to eval("account_settings_#{ tab.downcase }_path") do
+              - @white = tab.downcase == request.path.split("/").last ? "icon-white" : nil
+              - case tab
+              - when "Account"
+                %i.icon-cog{ :class => @white }
+                Your Account
+              - when "Password"
+                %i.icon-lock{ :class => @white }
+                Password
+              - when "Dealer"
+                %i.icon-home{ :class => @white }
+                Company Info
+              - when "Users"
+                %i.icon-user{ :class => @white }
+                Users
+              - when "Extras"
+                %i.icon-star{ :class => @white }
+                Extras
       - else
         - ["Account", "Extras"].each do |tab|
           %li{ :class => "#{ "active" if tab.downcase.eql? request.path.split("/").last }" }
-            = link_to tab, eval("account_settings_#{ tab.downcase }_path")
-      %li
-        = link_to "Sign Out", logout_path, :confirm => "Are you sure you want to sign out?"
+            = link_to eval("account_settings_#{ tab.downcase }_path") do
+              - @white = tab.downcase == request.path.split("/").last ? "icon-white" : nil
+              - case tab
+              - when "Account"
+                %i.icon-cog{ :class => @white }
+                Your Account
+              - when "Extras"
+                %i.icon-star{ :class => @white }
+                Extras
+      %li.divider
+      = link_to "Sign Out", logout_path, :confirm => "Are you sure you want to sign out?", :class => "btn"

@@ -8,6 +8,10 @@ class AccountSettingsController < ApplicationController
     @user = current_user
   end
   
+  def password
+    @user = current_user
+  end
+  
   def dealer
     @user = current_user
     @dealer = current_user.dealer
