@@ -7,10 +7,12 @@
 .row
   = render 'navigation'
   .span9
-    = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id }, :html => { :class => "form-horizontal", :multipart => true } do |f|
+    = form_for @user, :url => { :controller => "users", :action => "update", :id => @user.id }, :html => { :class => "form-horizontal",
+        :multipart => true, :id => "account_settings_user" } do |f|
       - content_for :subnav do
         .pull-right
-          = f.submit("Save", :class => "btn btn-primary btn-large" )
+          %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large", :form => "account_settings_user" }
+
       = render "shared/error_messages", :target => @user
       %fieldset
         .control-group
