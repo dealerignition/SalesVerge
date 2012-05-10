@@ -5,6 +5,7 @@
     =link_to customer_path(@quote.customer), { :class => "btn btn-large btn-inverse" } do
       %i.icon-arrow-left.icon-white
       = @quote.customer.first_name
+  .pull-right
     %button.btn.btn-large.btn-success#expandCharge{ "data-toggle" => "button" }
       Add a Charge
 

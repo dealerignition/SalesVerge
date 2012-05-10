@@ -2,10 +2,10 @@
 
 - content_for :subnav do
   #timelinefilterbuttons.btn-group{ "data-toggle" => "buttons-radio" }
-    %button.btn.btn-info#customer Customers
-    %button.btn.btn-info#samplecheckout
+    %button.btn.btn-large.btn-info#customer Customers
+    %button.btn.btn-large.btn-info#samplecheckout
       =current_user.dealer.sample_name.pluralize
-    %button.btn.btn-info#quote Quotes
+    %button.btn.btn-large.btn-info#quote Quotes
 
 - unless current_user.salesrep?
   .tabbable
