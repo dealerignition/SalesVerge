@@ -1,0 +1,8 @@
+<h1>Dear <%= @customer.first_name %>,</h1>
+<h3>According to our system you have these in your possession:</h3>
+<ul>
+  <% @sample_checkouts.each do |sc| %>
+    <li><%= sc.sample.name %></li>
+  <% end %>
+</ul>
+<h3>Could you return them to the store? Thanks!</h3>

@@ -47,4 +47,15 @@ class CustomerMailer < ActionMailer::Base
     @sent_email = SentEmail.new(:customer_id => @customer.id, :type => "sample_checkout")
     @sent_email.save
   end
+
+  def long_checkout_notification(sample_checkouts)
+    sample_checkouts = [sample_checkouts, ] unless sample_checkouts.instance_of? Array
+    @sample_checkouts = sample_checkouts
+    @customer = sample_checkouts.first.customer
+    @user = sample_checkouts.first.user
+    @dealer = @user.dealer
+    title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some samples"
+    mail(:to => @customer.email, :subject => "You still have #{title}. Can we get our stuff back?", :reply_to => "#{@customer.user.email}")
+  end
+
 end
