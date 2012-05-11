@@ -1,0 +1,22 @@
+# Inviting beta users
+### Follow the steps below to allow a beta user/tester to run the app on their own device.
+
+1. Send UDID email to tester.
+  
+  > To get DealerBook onto your iPhone/iPad I need some information about your device.
+  From your device, please click on the link below and install and then run the app. This app will provide us with information we need to send you a beta invitation.
+  http://itunes.apple.com/app/ad-hoc-helper/id285691333?mt=8
+  This app will create an email. Please send it to me.
+  
+2. Tester installs UDID and sends email back to you.
+3. Add their device ID to iOS provisioning portal and add their device to the Provisioning Profile.
+4. Build Xcode app for Testing.
+5. Archive for Ad-Hoc.
+6. Upload the new build into TestFlight.
+7. Send anonymous TestFlight link to tester's email address.
+
+  > Press the link below to install DealerBook on your device.
+  [TestFlight short link]
+  
+8. Tester opens link and registers device.
+9. Tester presses "Install"!
