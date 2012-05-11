@@ -9,6 +9,7 @@ class InvitationsController < ApplicationController
 
   def create
     @invitation = Invitation.new(params[:invitation])
+    @invitation.sender_id = current_user.id
     if @invitation.save
       UserMailer.invitation(@invitation).deliver
       flash[:notice] = "Invitation sent to #{@invitation.recipient_email}."

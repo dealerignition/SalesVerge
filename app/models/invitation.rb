@@ -4,6 +4,7 @@ class Invitation < ActiveRecord::Base
 
   validates :recipient_email, :presence => true, :email => { :mx => true }
   validate :recipient_is_not_registered
+  validates_presence_of :sender_id
 
   before_create :generate_token
 
