@@ -56,6 +56,13 @@ class CustomerMailer < ActionMailer::Base
     @dealer = @user.dealer
     title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some samples"
     mail(:to => @customer.email, :subject => "You still have #{title}. Can we get our stuff back?", :reply_to => "#{@customer.user.email}")
+    sample_checkouts.each do |s|
+      s.notifications_received = s.notifications_received + 1
+      s.save
+    end
+    
+    @sent_email = SentEmail.new(:customer_id => @customer.id, :type => "long_checkout")
+    @sent_email.save
   end
 
 end

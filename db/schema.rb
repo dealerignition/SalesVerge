@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120511132110) do
+ActiveRecord::Schema.define(:version => 20120511161818) do
 
   create_table "appointments", :force => true do |t|
     t.date     "date"
@@ -108,9 +108,10 @@ ActiveRecord::Schema.define(:version => 20120511132110) do
     t.integer  "sample_id"
     t.datetime "checkout_time"
     t.datetime "checkin_time"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "user_id"
+    t.integer  "notifications_received", :default => 0
   end
 
   create_table "samples", :force => true do |t|
