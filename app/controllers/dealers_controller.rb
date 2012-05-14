@@ -46,7 +46,7 @@ class DealersController < ApplicationController
     if @dealer.save
       flash[:notice] = "Logo has been removed."
     end
-    redirect_to account_settings_dealer_path
+    redirect_to settings_dealer_path
   end
 
 end
