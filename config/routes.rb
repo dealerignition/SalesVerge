@@ -17,7 +17,6 @@ DealerOnTheGo::Application.routes.draw do
   get "users/new/:invitation_token" => "users#new", :as => "new_user"
   post "users/create" => "users#create", :as => "create_user"
   put "users/detatch_avatar" => "users#detatch_avatar", :as => "user_detatch_avatar"
-  #post "create_customer_extension" => "customer_extensions#create", :as => "create_customer_extension"
 
   resource :account_settings do
     get :send_email_preview
