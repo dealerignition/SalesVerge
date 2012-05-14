@@ -1,7 +1,8 @@
 class CustomerMailer < ActionMailer::Base
+  default from: "notifications@dealerbookapp.com"
+  
   # NOTE: Every mailer must have a @dealer variable defined as the customer_mailer layout is expecting one
   # NOTE: Every mailer must have a @user variable defined as the signature partial is expecting one
-  
   def thank_you_email(customer)
     @customer = customer
     @user = @customer.user
