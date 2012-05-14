@@ -3,6 +3,7 @@ class DashboardController < ApplicationController
   before_filter :confirm_active
   # TODO: Change this when dashboard is finished.
   skip_authorization_check
+ 
 
   def index
     @date_options = DATE_RANGES.keys
@@ -26,10 +27,11 @@ class DashboardController < ApplicationController
  end
 
  def big_screen
-   @customers = Customer.accessible_by(current_ability).order("created_at ASC")
-   @late_appointments = Appointment.accessible_by(current_ability).where("date < TIMESTAMP 'today' AND status NOT LIKE 'Completed'").all
-   @checked_out_samples = SampleCheckout.accessible_by(current_ability).find_all_by_checkin_time(nil)
-   @quotes = Quote.accessible_by(current_ability).order("created_at DESC").last(5)
+   limiter = 12
+   @customers = Customer.accessible_by(current_ability).order("created_at ASC").last(limiter)
+   @checked_out_samples = SampleCheckout.accessible_by(current_ability).find_all_by_checkin_time(nil).last(limiter)
+   @quotes = Quote.accessible_by(current_ability).order("created_at DESC").last(limiter)
+   render :layout => 'big_screen'
  end
 
 end
