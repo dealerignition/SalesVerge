@@ -8,7 +8,7 @@ FactoryGirl.define do
     password "test"
     role "salesrep"
 
-    dealer
+    company
 
     factory :owner do
       first_name "Owner"

@@ -62,7 +62,7 @@ a {
 	padding: 0;
 }
 #header #logo {
-  width:200px; 
+  width:200px;
   text-align: center;
 }
 #header #logo img {
@@ -150,23 +150,23 @@ table.tablebordered tfoot td {
     </tr>
     <tr>
       <td align="center" valign="top" style="border-collapse: collapse;">
-        
+
         <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateContainer">
           <tr>
             <td align="center" valign="top" style="border-collapse: collapse;">
               <table border="0" cellpadding="0" cellspacing="0" width="600">
                 <tr>
                   <td valign="top" class="bodyContent">
-                  	
+
                   	<table border="0" cellpadding="20" cellspacing="0" width="100%" id="header">
                       <tr>
                         <td valign="top" width="220px" align="left" cellpadding="0" style="padding:0">
                           <div id="logo">
-                            <a target="_blank" href="#{@dealer.stores.first.website}">
-                            <% if @dealer.logo_file_name? %>
-                              <%= link_to image_tag(@dealer.logo.url(:large)), "#{@dealer.stores.first.website}" if @dealer.stores.first.website? %>
+                            <a target="_blank" href="#{@company.website}">
+                            <% if @company.logo_file_name? %>
+                              <%= link_to image_tag(@company.logo.url(:large)), "#{@company.website}" if @company.website? %>
                             <% else %>
-                              <span><%= @dealer.name %></span>
+                              <span><%= @company.name %></span>
                             <% end %>
                             </a>
                           </div>
@@ -176,7 +176,7 @@ table.tablebordered tfoot td {
                           <tr>
                             <td class="border-bottom">
                               <strong>
-                          	    <%= @dealer.name %>
+                          	    <%= @company.name %>
                               </strong>
                             </td>
                             <td class="border-bottom">
@@ -185,22 +185,22 @@ table.tablebordered tfoot td {
                           <tr>
                           <tr class="subtle">
                             <td valign="top">
-                          	  <%= @dealer.stores.first.address_1 %><br>
-                              <% if @dealer.stores.first.city.present? %>
-                                <%= @dealer.stores.first.city %>, 
+                          	  <%= @company.address_1 %><br>
+                              <% if @company.city.present? %>
+                                <%= @company.city %>,
                               <% end %>
-                              <% if @dealer.stores.first.state? %>
-                                <%= @dealer.stores.first.state %>
+                              <% if @company.state? %>
+                                <%= @company.state %>
                               <% end %>
-                              <% if @dealer.stores.first.zip? %>
-                                <%= @dealer.stores.first.zip %>
+                              <% if @company.zip? %>
+                                <%= @company.zip %>
                                 <br>
                               <% end %>
-                              <% if @dealer.stores.first.phone? %>
-                          	    <%= number_to_phone(@dealer.stores.first.phone) %>
+                              <% if @company.phone? %>
+                          	    <%= number_to_phone(@company.phone) %>
                           	    <br />
                           	  <% end %>
-                          	  <%= link_to "Visit our website", "#{@dealer.stores.first.website}" if @dealer.stores.first.website? %>
+                          	  <%= link_to "Visit our website", "#{@company.website}" if @company.website? %>
                           	</td>
                           </table>
                         </td>
@@ -214,12 +214,12 @@ table.tablebordered tfoot td {
                               <td>
 
 					                    <%= yield %>
-					  
-                              </td>  
+
+                              </td>
                             </tr>
-                          </table>	
+                          </table>
                          </td>
-                         
+
                       </tr>
                    </table>
                   </td>
@@ -227,7 +227,7 @@ table.tablebordered tfoot td {
               </table>
             </td>
           </tr>
-        </table>  
+        </table>
 
     <tr>
       <td align="center" valign="top" >

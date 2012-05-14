@@ -10,14 +10,14 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
-  
+
   def close_tutorial
     session[:close_tutorial] = true
     redirect_to :back
   end
 
   def require_owner
-    if current_user.role != "owner"
+    unless current_user.owner?
       flash[:error] = "Only account owners can see that."
       redirect_to account_settings_account_path
     end
@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
       msg = "page"
     end
 
-    redirect_to :back, :flash => { :error => "You do not have permission to see this #{msg}." }
+    redirect_to :back, :flash => { :error => "You do not have permission to #{ exception.action } this #{ msg }." }
   end
 
 end

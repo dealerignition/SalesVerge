@@ -9,7 +9,7 @@ class SamplesController < ApplicationController
 
   def new
     @sample = Sample.new
-    @sample_name = current_user.dealer.sample_name
+    @sample_name = current_user.company.sample_name
   end
 
   def create
@@ -17,7 +17,7 @@ class SamplesController < ApplicationController
       @sample = Sample.new({
         :name => params[:sample_name],
         :dealer_sample_id => params[:sample_id],
-        :store => current_user.dealer.stores.first
+        :company => current_user.company
       })
       render :json => { :success => @sample.save ? true : false,
                         :id => @sample.id

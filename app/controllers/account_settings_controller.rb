@@ -1,48 +1,48 @@
 class AccountSettingsController < ApplicationController
   before_filter :require_login
-  before_filter :require_owner, :except => ['account', 'extras']
-  
+  before_filter :require_owner, :only => [:company, :general, :users]
+
   skip_authorization_check
-  
+
   def account
     @user = current_user
   end
-  
+
   def password
     @user = current_user
   end
-  
-  def dealer
+
+  def company
     @user = current_user
-    @dealer = current_user.dealer
+    @company = @user.company
   end
-  
+
   def general
     @user = current_user
-    @dealer = current_user.dealer
+    @company = @user.company
   end
-  
+
   def users
     @user = current_user
-    @dealer = current_user.dealer
+    @company = @user.company
     @sent_invitations = @user.sent_invitations
   end
-  
+
   def extras
     @user = current_user
   end
-  
+
   def send_email_preview
     @user = current_user
-    @dealer = current_user.dealer
-    UserMailer.email_preview(@user, @dealer).deliver
+    @company = @user.company
+    UserMailer.email_preview(@user, @company).deliver
     flash[:notice] = "Check your email for the preview."
     redirect_to :back
   end
-  
+
   def email_preview_source
     @user = current_user
-    @dealer = current_user.dealer
+    @company = @user.company
     render :layout => false
   end
 

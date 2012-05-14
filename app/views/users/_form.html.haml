@@ -1,7 +1,5 @@
 = form_for @user, :url => create_user_path, :html => { :class => "form-horizontal" } do |f|
-  = f.error_messages :header_message => "There were problems with the following fields:",
-    :message => "",
-    :header_tag => :h3
+  = render "shared/error_messages", :target => @user
   %fieldset
     .control-group
       = f.label :first_name, { :class => "control-label" }
@@ -14,10 +12,8 @@
     .control-group
       = f.label :email, { :class => "control-label" }
       .controls
-        - if @invitation
-          = f.text_field :email, :value => @invitation.recipient_email
-        - else
-          = f.text_field :email, :placeholder => "joe@email.com"
+        = f.text_field :email, :value => "#{ @invitation.recipient_email if @invitation }",
+          :placeholder => "joe@email.com"
     .control-group
       = f.label :password, { :class => "control-label" }
       .controls
@@ -28,6 +24,7 @@
         = f.password_field :password_confirmation
     .control-group
       .controls
-        = f.submit(:class => "btn btn-primary btn-large" )
         - if @invitation
-          = f.hidden_field :dealer_id, :value => @invitation.sender.dealer_id
+          %input{ :type => :hidden, :name => :invitation_token,
+            :value => @invitation.token }
+        = f.submit(:class => "btn btn-primary btn-large" )

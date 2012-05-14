@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DealersController do
+describe CompanysController do
 
   describe "GET 'new'" do
     before do
@@ -9,7 +9,7 @@ describe DealersController do
 
     it do
       should respond_with :success
-      should assign_to(:dealer).with_kind_of(Dealer)
+      should assign_to(:company).with_kind_of(Company)
       should assign_to(:user).with_kind_of(User)
     end
   end
@@ -22,8 +22,8 @@ describe DealersController do
         @email = owner_attributes[:email]
 
         post :create,
-          :dealer => {
-            :name => "Awesome Dealer"
+          :company => {
+            :name => "Awesome Company"
           },
           :user => owner_attributes
       end
@@ -33,8 +33,8 @@ describe DealersController do
 
         owner = User.find_by_email(@email)
         owner.owner?.should be_true
-        dealer = Dealer.find_by_name("Awesome Dealer")
-        owner.dealer.should == dealer
+        company = Company.find_by_name("Awesome Dealer")
+        owner.company.should == dealer
       end
     end
   end

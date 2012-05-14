@@ -6,17 +6,29 @@ class UsersController < ApplicationController
     @user = User.new
     @user.email = @user.invitation.recipient_email if @user.invitation
     @invitation = Invitation.find_by_token(params[:invitation_token])
+    redirect_to :signup unless @invitation
   end
 
   def create
-    @user = User.new(params[:user])
-    @user.role = "salesrep"
+    @user = User.new params[:user]
+    @user.role = "user"
+
+    @invitation = Invitation.find_by_token params[:invitation_token]
+    redirect_to :signup unless @invitation
+
     if @user.save
-      flash[:notice] = "Your account has been created! Your email address to log in is #{@user.email}."
-      redirect_to login_path
+
+      CompanyUser.create(
+        :user => @user,
+        :company => @invitation.sender.company,
+        :role => :salesrep
+      )
+
+      auto_login(@user)
+      remember_me!
+      redirect_to :dashboard
     else
-      flash[:error] = "There were some problems creating your account."
-      redirect_to :back
+      render :new
     end
   end
 
@@ -31,7 +43,7 @@ class UsersController < ApplicationController
       redirect_to :back
     end
   end
-  
+
   def update_user_and_look_up_customer
     @user = User.find(params[:current_user_id])
     @customer = Customer.find_by_id(params[:customer_id])
@@ -44,7 +56,7 @@ class UsersController < ApplicationController
       redirect_to :back
     end
   end
-  
+
   def detatch_avatar
     @user = current_user
     @user.avatar = nil
@@ -53,5 +65,5 @@ class UsersController < ApplicationController
     end
     redirect_to account_settings_account_path
   end
-  
+
 end

@@ -24,9 +24,9 @@ describe CustomersController do
         @user = FactoryGirl.create :owner
         login_user @user
         @customers = FactoryGirl.create_list :customer, 5, 
-          :user => FactoryGirl.create(:salesrep, :dealer => @user.dealer)
+          :user => FactoryGirl.create(:salesrep, :company => @user.dealer)
         @more_customers = FactoryGirl.create_list :customer, 5,
-          :user => FactoryGirl.create(:salesrep, :dealer => @user.dealer)
+          :user => FactoryGirl.create(:salesrep, :company => @user.dealer)
         @others = FactoryGirl.create_list :customer, 5
 
         @all = @customers + @more_customers

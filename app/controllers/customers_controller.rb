@@ -11,11 +11,9 @@ class CustomersController < ApplicationController
   def show
     @customer = Customer.find_by_id(params[:id])
     @charge = Charge.new
-    @sample_checkout = SampleCheckout.new
     @sample = Sample.new
-    @store = current_user.dealer.stores.first
     @note = Note.new
-    
+
     @user = User.find_by_id(current_user.id)
 
     @timeline_stream = @customer.quotes.includes(:customer, :charges)

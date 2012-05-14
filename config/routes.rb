@@ -5,7 +5,7 @@ DealerOnTheGo::Application.routes.draw do
   get "account_settings/account"
   get "account_settings/password"
   get "account_settings/general"
-  get "account_settings/dealer"
+  get "account_settings/company"
   get "account_settings/users"
   get "account_settings/extras"
   match "account_settings/users/:id/update" => "users#update", :as => "update_user"
@@ -13,7 +13,7 @@ DealerOnTheGo::Application.routes.draw do
   get "dashboard/big_screen" => "dashboard#big_screen", :as => "big_screen"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
-  get "signup" => "dealers#new", :as => "signup"
+  get "signup" => "companies#new", :as => "signup"
   get "users/new/:invitation_token" => "users#new", :as => "new_user"
   post "users/create" => "users#create", :as => "create_user"
   put "users/detatch_avatar" => "users#detatch_avatar", :as => "user_detatch_avatar"
@@ -29,7 +29,7 @@ DealerOnTheGo::Application.routes.draw do
       get :check_in
     end
   end
-  resources :dealers do
+  resources :companies do
     put "detatch_logo", :as => "detatch_logo"
   end
   resources :quotes do

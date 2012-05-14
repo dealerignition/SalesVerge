@@ -1,21 +1,20 @@
 class User < ActiveRecord::Base
-  ROLES = ["owner", "admin", "salesrep"]
+  ROLES = ["admin", "user"]
   before_validation :downcase_email
 
   authenticates_with_sorcery!
 
-  belongs_to :dealer
+  has_many :company_users
+  has_many :companies, :through => :company_users
 
   has_many :appointments, :dependent => :destroy
   has_many :quotes, :dependent => :destroy
   has_many :sample_checkouts, :dependent => :destroy
   has_many :customers, :dependent => :destroy
   has_many :notes, :dependent => :destroy
-  
+
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
   belongs_to :invitation
-
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :active, :phone, :message, :subscribes_to_customer_extensions, :avatar, :invitation_token, :dealer_id, :title
 
   validates_presence_of :first_name
   validates_presence_of :last_name
@@ -28,25 +27,27 @@ class User < ActiveRecord::Base
   validates_inclusion_of :role, :in => ROLES
   validates_attachment_size :avatar, :in => 0..2000.kilobytes
   validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']
-  
+
   has_attached_file :avatar,
     :styles => { :thumb => "100x100#" },
     :storage => :s3,
     :s3_credentials => "config/s3.yml",
     :path => "/:style/:id/:filename"
 
-  scope :is_owner, where(:role => 'owner')
-
   def admin?
     role == "admin"
   end
 
   def owner?
-    role == "owner"
+    company_users.first.role == "owner"
   end
 
   def salesrep?
-    role == "salesrep"
+    company_users.first.role == "salesrep"
+  end
+
+  def company
+    companies.first
   end
 
   def full_name
@@ -64,7 +65,7 @@ class User < ActiveRecord::Base
       UserMailer.daily_digest(user).deliver
     end
   end
-  
+
   def invitation_token
     invitation.token if invitation
   end

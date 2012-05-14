@@ -15,7 +15,7 @@
       .well
         = render 'invite_user'
     %table.table.table-striped#users
-      = render @dealer.users
+      = render @company.users
       - @sent_invitations.each do |sent_invitation|
         %tr
           %td

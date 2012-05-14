@@ -1,7 +1,7 @@
 class InvitationsController < ApplicationController
   layout false
   skip_authorization_check
-  
+
   def new
     @invitation = Invitation.new
     @user = User.new
@@ -9,6 +9,8 @@ class InvitationsController < ApplicationController
 
   def create
     @invitation = Invitation.new(params[:invitation])
+    @invitation.sender = current_user
+
     if @invitation.save
       UserMailer.invitation(@invitation).deliver
       flash[:notice] = "Invitation sent to #{@invitation.recipient_email}."
@@ -17,5 +19,5 @@ class InvitationsController < ApplicationController
     end
     redirect_to :back
   end
-  
+
 end

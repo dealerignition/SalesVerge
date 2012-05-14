@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe "dealers/new.html.haml" do
+describe Company do
   pending "add some examples to (or delete) #{__FILE__}"
 end

@@ -20,7 +20,7 @@ describe Quote do
       pending
     end
 
-    it "should be sent to the dealer" do
+    it "should be sent to the company" do
       pending
     end
   end

@@ -1,10 +1,10 @@
 %div.span3
   .well{ :style => "padding: 8px 0;"}
     %ul.nav.nav-list
-    
-      - options = ["Account", "Extras"]
-      - if current_user.role == "owner"
-        - options.insert 1, ["Password", "Dealer", "Users"]
+
+      - options = ["Account", "Password", "Extras"]
+      - if current_user.owner?
+        - options.insert 2, ["Company", "Users"]
         - options.flatten!
 
       - options.each do |tab|
@@ -19,7 +19,7 @@
             - when "Password"
               %i.icon-lock{ :class => @white }
               Password
-            - when "Dealer"
+            - when "Company"
               %i.icon-home{ :class => @white }
               Company Info
             - when "Users"

@@ -4,7 +4,7 @@
   #timelinefilterbuttons.btn-group{ "data-toggle" => "buttons-radio" }
     %button.btn.btn-large.btn-info#customer Customers
     %button.btn.btn-large.btn-info#samplecheckout
-      =current_user.dealer.sample_name.pluralize
+      =current_user.company.sample_name.pluralize
     %button.btn.btn-large.btn-info#quote Quotes
 
 - unless current_user.salesrep?

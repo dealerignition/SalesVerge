@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Dealer do
+describe Company do
   it { should validate_presence_of :name }
 end

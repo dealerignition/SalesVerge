@@ -3,15 +3,6 @@ class SampleCheckoutsController < ApplicationController
   before_filter :confirm_active
   load_and_authorize_resource
 
-  def new
-    @sample_checkout = SampleCheckout.new
-    @samples = Sample.accessible_by(current_ability)
-    @customers = Customer.accessible_by(current_ability)
-    @sample = Sample.new
-    @store = current_user.dealer.stores.first
-    @sample_name = current_user.dealer.sample_name
-  end
-
   def create
     if params[:customer_id] && params[:sample_ids]
       @customer = Customer.find(params[:customer_id])
@@ -25,7 +16,7 @@ class SampleCheckoutsController < ApplicationController
       end
       CustomerMailer.sample_checkout(sample_checkouts).deliver
 
-      flash[:notice] = "#{current_user.dealer.sample_name.pluralize} were successfully checked-out. An email was sent to #{@customer.email}."
+      flash[:notice] = "#{current_user.company.sample_name.pluralize} were successfully checked-out. An email was sent to #{@customer.email}."
       redirect_to :back
     else
       @sample_checkout = SampleCheckout.new(params[:sample_checkout])

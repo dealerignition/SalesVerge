@@ -7,12 +7,12 @@
   = render 'navigation'
 
   .span9
-    = form_for @dealer, :html => { :class => "form-horizontal", :id => "account_settings_general" } do |f|
+    = form_for @company, :html => { :class => "form-horizontal", :id => "account_settings_general" } do |f|
       - content_for :subnav do
         .pull-right
           %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large",
             :form => "account_settings_general" }
-      = render "shared/error_messages", :target => @dealer
+      = render "shared/error_messages", :target => @company
       %fieldset
         .control-group
           = f.label "Sample Name", { :class => "control-label" }
