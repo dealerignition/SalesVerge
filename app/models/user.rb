@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   has_many :company_users
   has_many :companies, :through => :company_users
 
-  has_many :appointments, :dependent => :destroy
   has_many :quotes, :dependent => :destroy
   has_many :sample_checkouts, :dependent => :destroy
   has_many :customers, :dependent => :destroy

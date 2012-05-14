@@ -21,7 +21,7 @@ DealerOnTheGo::Application.routes.draw do
   resource :account_settings do
     get :send_email_preview
   end
-  resources :appointments
+
   resources :customers do
     resources :quotes
     resources :notes
@@ -29,15 +29,18 @@ DealerOnTheGo::Application.routes.draw do
       get :check_in
     end
   end
+
   resources :companies do
     put "detatch_logo", :as => "detatch_logo"
   end
+
   resources :quotes do
     resources :charges
     get :deliver_customer_mailer
     get :won
     get :lost
   end
+
   resources :samples
   resources :sample_checkouts do
     get :check_in

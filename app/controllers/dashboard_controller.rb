@@ -27,7 +27,6 @@ class DashboardController < ApplicationController
 
  def big_screen
    @customers = Customer.accessible_by(current_ability).order("created_at ASC")
-   @late_appointments = Appointment.accessible_by(current_ability).where("date < TIMESTAMP 'today' AND status NOT LIKE 'Completed'").all
    @checked_out_samples = SampleCheckout.accessible_by(current_ability).find_all_by_checkin_time(nil)
    @quotes = Quote.accessible_by(current_ability).order("created_at DESC").last(5)
  end

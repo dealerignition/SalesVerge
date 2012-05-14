@@ -44,26 +44,6 @@
   .span6
     .page-header
       %h1
-        Late Appointments
-        %small==(#{@late_appointments.count})
-    - if @late_appointments.count > 0
-      %table.table.table-striped
-        %thead
-          %th Type
-          %th Customer
-          %th
-        - @late_appointments.each do |appointment|
-          %tr
-            %td= appointment.appointment_type
-            %td
-              = link_to "#{appointment.customer.first_name} #{appointment.customer.last_name}", appointment.customer
-            %td
-              = link_to "View", appointments_path, { :class => "btn" }
-    - else
-      %span.label.label-success You have no late appointments.
-  .span6
-    .page-header
-      %h1
         Checked-out Samples
         %small==(#{@checked_out_samples.count})
     %table{ :class => "table table-striped" }

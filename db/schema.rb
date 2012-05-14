@@ -11,18 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120511161818) do
-
-  create_table "appointments", :force => true do |t|
-    t.date     "date"
-    t.time     "time"
-    t.integer  "customer_id"
-    t.string   "appointment_type"
-    t.string   "status"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-    t.integer  "user_id"
-  end
+ActiveRecord::Schema.define(:version => 20120514215058) do
 
   create_table "charges", :force => true do |t|
     t.datetime "date"
