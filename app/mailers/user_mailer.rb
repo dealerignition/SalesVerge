@@ -33,4 +33,14 @@ class UserMailer < ActionMailer::Base
     render :layout => 'customer_mailer'
     mail(:to => @user.email, :subject => "Here is your preview")
   end
+  
+  def long_checkout_notification(sample_checkouts)
+    sample_checkouts = [sample_checkouts, ] unless sample_checkouts.instance_of? Array
+    @sample_checkouts = sample_checkouts
+    @customer = sample_checkouts.first.customer
+    @user = sample_checkouts.first.user
+    @dealer = @user.dealer
+    mail(:to => @user.email, :subject => "FYI, #{@customer.full_name} has had some #{@dealer.sample_name}(s) out for a while")
+  end
+  
 end

@@ -32,8 +32,7 @@
       = @customer.state
       = @customer.zip
       
-      
-  - if @current_user.subscribes_to_customer_extensions?           
+  - if @current_user.subscribes_to_customer_extensions? and @customer.customer_extension       
     %tr.customer_extension
       %td.top-border
         %b Age
@@ -122,6 +121,16 @@
           = @customer.customer_extension.occupation
         - else
           %span.help-block N/A
+          
+  - elsif @current_user.subscribes_to_customer_extensions? and !@customer.customer_extension
+    %tr.customer_extension
+      %td.top-border
+        %b Get more info about this customer
+      %td.top-border
+        = link_to customer_create_customer_extension_path(@customer), :method => "post", :class => "btn btn-info" do
+          %i.icon-plus.icon-white
+          Check
+          
   - else
     %tr.customer_extension
       %td.top-border

@@ -16,7 +16,7 @@
     .control-group
       = f.label :quantity, { :class => "control-label" }
       .controls
-        = f.text_field :quantity, :placeholder => "1", :type => :number,
+        = f.text_field :quantity, :value => 1, :type => :number,
           :min => 0
 
   %p

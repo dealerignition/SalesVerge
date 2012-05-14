@@ -52,7 +52,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Thanks for subscribing!"
       redirect_to :back
     else
-      flash[:error] = "There was an error. Please try subscribing on the <a href=\"/account_settings/extras\">Account Settings > Extras</a> page.".html_safe
+      flash[:error] = "There was an error. Please try subscribing on the <a href=\"/settings/extras\">Account Settings > Extras</a> page.".html_safe
       redirect_to :back
     end
   end
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     if @user.save
       flash[:notice] = "Avatar has been removed."
     end
-    redirect_to account_settings_account_path
+    redirect_to settings_account_path
   end
 
 end

@@ -10,7 +10,7 @@
       - options.each do |tab|
         - @active = tab.downcase.eql? request.path.split("/").last
         %li{ :class => "#{ "active" if @active }" }
-          = link_to eval("account_settings_#{ tab.downcase }_path") do
+          = link_to eval("settings_#{ tab.downcase }_path") do
             - @white = @active ? "icon-white" : nil
             - case tab
             - when "Account"
@@ -30,7 +30,7 @@
               Extras
       %li.divider
       %li
-        = link_to send_email_preview_account_settings_path, :confirm => "This will send a test email to #{@user.email}. Continue?" do
+        = link_to send_email_preview_settings_path, :confirm => "This will send a test email to #{@user.email}. Continue?" do
           %i.icon-envelope
           Email Preview
       %li.divider

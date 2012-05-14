@@ -35,7 +35,7 @@
         = link_to customers_path, :onclick => "return tog('load')" do
           %i.icon_user_opt
       %li{ :class => "#{"active" if request.path.include? "settings"}" }
-        = link_to account_settings_account_path, :onclick => "return tog('load')" do
+        = link_to settings_account_path, :onclick => "return tog('load')" do
           %i.icon_gear_opt
 
 =render :template => "layouts/application"

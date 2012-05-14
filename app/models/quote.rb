@@ -7,13 +7,7 @@ class Quote < ActiveRecord::Base
   validates_presence_of :user_id
 
   def total
-    total = 0
-
-    charges.each do |c|
-      total += c.total
-    end
-
-    total.round 2
+    charges.select("SUM(quantity * price) as sum").first.sum
   end
 
 end

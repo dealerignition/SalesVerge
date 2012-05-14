@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   def require_owner
     unless current_user.owner?
       flash[:error] = "Only account owners can see that."
-      redirect_to account_settings_account_path
+      redirect_to settings_account_path
     end
   end
 

@@ -1,4 +1,4 @@
-class AccountSettingsController < ApplicationController
+class SettingsController < ApplicationController
   before_filter :require_login
   before_filter :require_owner, :only => [:company, :general, :users]
 
