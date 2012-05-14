@@ -7,6 +7,6 @@ class Charge < ActiveRecord::Base
   belongs_to :quote
 
   def total
-    (quantity * price).round 2
+    quantity * price
   end
 end
