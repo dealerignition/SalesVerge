@@ -31,7 +31,7 @@ class CustomerMailer < ActionMailer::Base
     @customer = quote.customer
     @dealer = quote.user.dealer
     set_display_name
-    mail(:from => address.format, :sender => @user.email, :to => @customer.email, :subject => "Thank you for your purchase", :reply_to => @user.email)
+    mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "Thank you for your purchase", :reply_to => @user.email)
     
     @sent_email = SentEmail.new(:customer_id => @customer.id, :type => "quote_won")
     @sent_email.save
@@ -45,7 +45,7 @@ class CustomerMailer < ActionMailer::Base
     @dealer = @user.dealer
     title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some samples"
     set_display_name
-    mail(:from => address.format, :sender => @user.email, :to => @customer.email, :subject => "Thank you for checking out #{title}!", :reply_to => @user.email)
+    mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "Thank you for checking out #{title}!", :reply_to => @user.email)
     
     @sent_email = SentEmail.new(:customer_id => @customer.id, :type => "sample_checkout")
     @sent_email.save
@@ -59,7 +59,7 @@ class CustomerMailer < ActionMailer::Base
     @dealer = @user.dealer
     title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some samples"   
     set_display_name
-    mail(:from => address.format, :sender => @user.email, :to => @customer.email, :subject => "You still have #{title}. Can we get our stuff back?", :reply_to => @user.email)
+    mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "You still have #{title}. Can we get our stuff back?", :reply_to => @user.email)
     
     sample_checkouts.each do |s|
       s.notifications_received = s.notifications_received + 1
