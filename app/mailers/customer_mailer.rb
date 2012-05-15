@@ -1,5 +1,5 @@
 class CustomerMailer < ActionMailer::Base
-  default from: "notifications@dealerbookapp.com"
+  # default from: "notifications@dealerbookapp.com"
   
   # NOTE: Every mailer must have a @dealer variable defined as the customer_mailer layout is expecting one
   # NOTE: Every mailer must have a @user variable defined as the signature partial is expecting one
@@ -19,7 +19,11 @@ class CustomerMailer < ActionMailer::Base
     @user = quote.user
     @customer = quote.customer
     @dealer = quote.user.dealer
-    mail(:sender => @user.email, :to => @customer.email, :subject => "Here is your quote", :reply_to => @user.email)
+    
+    # Set the FROM header to include the user's name
+    address = Mail::Address.new "notifications@dealerbookapp.com"
+    address.display_name = @user.full_name
+    mail(:from => address.format, :sender => @user.email, :to => @customer.email, :subject => "Here is your quote", :reply_to => @user.email)
     
     @sent_email = SentEmail.new(:customer_id => @customer.id, :type => "quote")
     @sent_email.save
@@ -43,7 +47,12 @@ class CustomerMailer < ActionMailer::Base
     @user = sample_checkouts.first.user
     @dealer = @user.dealer
     title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some samples"
-    mail(:sender => @user.email, :to => @customer.email, :subject => "Thank you for checking out #{title}!", :reply_to => @user.email)
+    
+    # Set the FROM header to include the user's name
+    address = Mail::Address.new "notifications@dealerbookapp.com"
+    address.display_name = @user.full_name
+    
+    mail(:from => address.format, :sender => @user.email, :to => @customer.email, :subject => "Thank you for checking out #{title}!", :reply_to => @user.email)
     
     @sent_email = SentEmail.new(:customer_id => @customer.id, :type => "sample_checkout")
     @sent_email.save
@@ -56,7 +65,12 @@ class CustomerMailer < ActionMailer::Base
     @user = sample_checkouts.first.user
     @dealer = @user.dealer
     title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some samples"
-    mail(:sender => @user.email, :to => @customer.email, :subject => "You still have #{title}. Can we get our stuff back?", :reply_to => @user.email)
+    
+    # Set the FROM header to include the user's name
+    address = Mail::Address.new "notifications@dealerbookapp.com"
+    address.display_name = @user.full_name
+    
+    mail(:from => address.format, :sender => @user.email, :to => @customer.email, :subject => "You still have #{title}. Can we get our stuff back?", :reply_to => @user.email)
     sample_checkouts.each do |s|
       s.notifications_received = s.notifications_received + 1
       s.save
