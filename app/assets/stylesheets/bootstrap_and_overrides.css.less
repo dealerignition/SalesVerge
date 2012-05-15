@@ -1,6 +1,12 @@
 @import "twitter/bootstrap/bootstrap";
 
+//for mobile view:
 body { margin: 60px 0 70px; }
+
+//for desktop view: 
+@media screen and (min-width: 1025px) {
+  body { margin: 109px 0 70px; }
+}
 
 @import "twitter/bootstrap/responsive";
 
@@ -112,10 +118,6 @@ form {
 }
 
 .navbar-simple {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
   color: #ffffff;
   z-index: 1030;
   margin-bottom: 0;
@@ -158,6 +160,45 @@ form {
   margin: 0;
 }
 
+#main_nav_top_bottom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1035;
+}
+
+#subnav {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  padding: 10px 0;
+  z-index: 1000;
+  background-color: #ccc;
+  width: auto;
+  #gradient > .vertical(#d7d9df, #bbbec8);
+  border-bottom: 1px solid #8c91a2;
+  .btn-large {
+    padding: 3px 14px;
+  }
+  #js-customersearch {
+    border: 1px solid #a5adbe;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  #main_nav_top_bottom {
+    bottom: 0;
+    top: inherit;
+  }
+  #subnav {
+    padding: 10px 20px;
+    top: 0;
+  }
+}
+
+//OTHER/////////////////////////////////////
 input.full, textarea.full {
   font-size: 20px;
   padding: 8px;

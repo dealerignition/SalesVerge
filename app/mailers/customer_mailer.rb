@@ -18,7 +18,8 @@ class CustomerMailer < ActionMailer::Base
     @user = quote.user
     @customer = quote.customer
     @company = quote.user.company
-    mail(:sender => @user.email, :to => @customer.email, :subject => "Here is your quote", :reply_to => @user.email)
+    set_display_name
+    mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "Here is your quote", :reply_to => @user.email)
 
     SentEmail.create(:customer_id => @customer.id, :type => "quote")
   end
@@ -28,7 +29,8 @@ class CustomerMailer < ActionMailer::Base
     @user = quote.user
     @customer = quote.customer
     @company = quote.user.company
-    mail(:sender => @user.email, :to => @customer.email, :subject => "Thank you for your purchase", :reply_to => @user.email)
+    set_display_name
+    mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "Thank you for your purchase", :reply_to => @user.email)
 
     SentEmail.create(:customer_id => @customer.id, :type => "quote_won")
   end
@@ -40,7 +42,9 @@ class CustomerMailer < ActionMailer::Base
     @user = sample_checkouts.first.user
     @company = @user.company
     title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some samples"
-    mail(:sender => @user.email, :to => @customer.email, :subject => "Thank you for checking out #{title}!", :reply_to => @user.email)
+
+    set_display_name
+    mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "Thank you for checking out #{title}!", :reply_to => @user.email)
 
     SentEmail.create(:customer_id => @customer.id, :type => "sample_checkout")
   end
@@ -52,13 +56,23 @@ class CustomerMailer < ActionMailer::Base
     @user = sample_checkouts.first.user
     @company = @user.company
     title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some samples"
-    mail(:sender => @user.email, :to => @customer.email, :subject => "You still have #{title}. Can we get our stuff back?", :reply_to => @user.email)
+    set_display_name
+    mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "You still have #{title}. Can we get our stuff back?", :reply_to => @user.email)
+
     sample_checkouts.each do |s|
       s.notifications_received = s.notifications_received + 1
       s.save
     end
 
     SentEmail.create(:customer_id => @customer.id, :type => "long_checkout")
+  end
+
+  private
+
+  def set_display_name
+    # Set the FROM header to include the user's name
+    @address = Mail::Address.new "notifications@dealerbookapp.com"
+    @address.display_name = @user.full_name
   end
 
 end
