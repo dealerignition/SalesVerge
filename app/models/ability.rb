@@ -39,6 +39,9 @@ class Ability
           # Can update the information for the company.
           can :update, Company, :id => user.company.id
 
+          # Can manage user connections for the company.
+          can :manage, CompanyUser, :company_id => user.company.id
+
           # Can manage charges for company's quotes.
           can :manage, Charge, :quote => { :customer_id => customer_ids }
 

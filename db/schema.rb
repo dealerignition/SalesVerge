@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515150348) do
+ActiveRecord::Schema.define(:version => 20120515201910) do
 
   create_table "charges", :force => true do |t|
     t.datetime "date"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20120515150348) do
     t.string   "role"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "active"
   end
 
   create_table "customer_extensions", :force => true do |t|
@@ -147,7 +148,6 @@ ActiveRecord::Schema.define(:version => 20120515150348) do
     t.datetime "updated_at",                                                                                                :null => false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
-    t.boolean  "active",                            :default => true
     t.string   "role"
     t.string   "phone"
     t.text     "message",                           :default => "Please contact me at any time if you have any questions."

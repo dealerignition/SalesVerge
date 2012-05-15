@@ -7,21 +7,20 @@
     %span{ :class => !user.active? && "help-block" }
       = user.email
   %td
-    = form_for user, :url => update_user_path(user) do |f|
-      - if current_user == user
-        = f.submit("This is you", :class => "btn disabled", :disabled => "disabled")
-      - elsif current_user.company.users.exists?(user)
-        - if user.active?
-          = f.hidden_field :active, :value => false
-          = f.submit("Deactivate", :class => "btn btn-danger", :confirm => "Are you sure you want to deactivate #{user.first_name}?")
-        - else
-          = f.hidden_field :active, :value => true
-          = f.submit("Reactivate", :class => "btn", :confirm => "Are you sure you want to reactivate #{user.first_name}?")
+    - if current_user == user
+      %button.btn.disabled This is you
+    - elsif current_user.company.users.exists?(user)
+      - if user.active?
+        = link_to "Deactivate", user_deactivate_path(user), :method => :put,
+          :class => "btn btn-danger", :confirm => "Are you sure you want to deactivate #{user.first_name}?"
       - else
-        - invitation = Invitation.find_by_recipient_id user.id
-        %button.btn.disabled
-          - case invitation.status
-          - when "sent"
-            Invited
-          - when "rejected"
-            Declined
+        = link_to "Reactivate", user_activate_path(user), :method => :put,
+          :class => "btn", :confirm => "Are you sure you want to activate #{user.first_name}?"
+    - else
+      - invitation = Invitation.find_by_recipient_id user.id
+      %button.btn.disabled
+        - case invitation.status
+        - when "sent"
+          Invited
+        - when "rejected"
+          Declined

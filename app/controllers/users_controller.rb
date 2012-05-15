@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
+  skip_authorize_resource :only => [:activate, :deactivate]
   layout "session"
 
   def new
@@ -71,4 +72,26 @@ class UsersController < ApplicationController
     redirect_to settings_account_path
   end
 
+  def activate
+    set_active_user params[:id], true
+    redirect_to :back
+  end
+
+  def deactivate
+    set_active_user params[:id], false
+    redirect_to :back
+  end
+
+  private
+
+  def set_active_user(cu, active)
+    cu = current_user.company.company_users.find_by_user_id(params[:id])
+
+    authorize! :update, cu
+    if cu.update_attribute :active, active
+      flash[:notice] = "#{cu.user.full_name} was successfully #{"de" unless active}activated."
+    else
+      flash[:error] = "#{cu.user.full_name} was not successfully #{"de" unless active}activated."
+    end
+  end
 end

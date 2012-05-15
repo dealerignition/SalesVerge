@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     :s3_credentials => "config/s3.yml",
     :path => "/:style/:id/:filename"
 
+  def active?
+    company_users.first.active?
+  end
+
   def admin?
     role == "admin"
   end
