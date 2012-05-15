@@ -4,7 +4,7 @@ development:
   adapter: postgresql
   encoding: unicode
   host: 10.0.1.43
-  database: dotg_development_backup
+  database: dotg_development
   pool: 5
   username: postgres
   password: kudzu123
