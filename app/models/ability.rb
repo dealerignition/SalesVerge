@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    @models = [Customer, Quote, SampleCheckout, Appointment, Note]
+    @models = [Quote, SampleCheckout, Note]
 
     # Cannot do anything by default
     cannot :manage, :all
@@ -12,40 +12,44 @@ class Ability
       when "admin"
         can :manage, :all
       when "user"
-        role = user.company_users.find_by_company_id(user.company).role
+        customer_ids = user.company.customers.pluck("customers.id")
 
-        # Has control of own user.
+        # Can manage of own user.
         can :manage, User, :id => user.id
 
-        # Has control of samples for the whole company.
+        # Can manage samples for the whole company.
         can :manage, Sample, :company_id => user.company.id
 
-        # Can create anything.
-        can :create, @models
+        # Can manage customers for the whole company.
+        can :manage, Customer, :id => customer_ids
 
+        # Can manage company checkouts.
+        can :manage, SampleCheckout, :customer_id => customer_ids
+
+        # Can create anything.
+        can :create, @models + [Customer, Sample, Charge]
+
+        role = user.company_users.find_by_company_id(user.company).role
         case role
         when "owner"
           # Can update the information for the company.
           can :update, Company, :id => user.company.id
 
           # Can manage charges for company's quotes.
-          can :manage, Charge, :quote => { :user_id => user.company.users.pluck("users.id") }
+          can :manage, Charge, :quote => { :customer_id => customer_ids }
 
-          # Can manage all the whole company.
-          can :manage, @models, :user_id => user.company.users.pluck("users.id")
+          # Can manage the whole company.
+          can :manage, @models, :customer_id => customer_ids
         when "salesrep"
           # Can modify charges for own quotes.
           can :manage, Charge, :quote => { :user_id => user.id }
           # Can view charges for the whole company's quotes.
-          can :read, Charge, :quote => { :user_id => user.company.users.pluck("users.id") }
+          can :read, Charge, :quote => { :customer_id => customer_ids }
 
-          # Can read all the company information.
-          can :read, @models, :user_id => user.company.users.pluck("users.id")
           # Can manage own information.
           can :manage, @models, :user_id => user.id
-
-          # Can manage company checkouts.
-          can :manage, SampleCheckout, :user_id => user.company.users.pluck("users.id")
+          # Can read all the company information.
+          can :read, @models, :customer_id => customer_ids
         end
       end
     else
