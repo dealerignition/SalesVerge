@@ -46,7 +46,12 @@ DealerOnTheGo::Application.routes.draw do
   resources :sample_checkouts do
     get :check_in
   end
-  resources :invitations
+  resources :invitations do
+    put :accept
+    put :reject
+  end
+  get "invitation/connect/:invitation_token" => "invitations#connect", :as => "invitation_connect"
+
   resources :sessions
 
   match ":controller(/:action(/:id))(.:format)"

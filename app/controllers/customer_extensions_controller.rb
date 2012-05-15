@@ -1,10 +1,10 @@
 class CustomerExtensionsController < ApplicationController
-  
+
   skip_authorization_check
-  
+
   def new
   end
-  
+
   def create
     @extension = CustomerExtension.new
     @extension.customer_id = params[:customer_id]
@@ -15,5 +15,5 @@ class CustomerExtensionsController < ApplicationController
       redirect_to :back
     end
   end
-    
+
 end

@@ -27,13 +27,21 @@ class UserMailer < ActionMailer::Base
     @invitation.update_attribute(:sent_at, Time.now)
   end
 
+  def connection_invitation(invitation)
+    @invitation = invitation
+    @url = invitation_connect_url(:invitation_token => @invitation.token)
+    mail(:to => @invitation.recipient_email, :subject => 'Invitation')
+
+    @invitation.update_attribute(:sent_at, Time.now)
+  end
+
   def email_preview(user, company)
     @user = user
     @company = company
     render :layout => 'customer_mailer'
     mail(:to => @user.email, :subject => "Here is your preview")
   end
-  
+
   def long_checkout_notification(sample_checkouts)
     sample_checkouts = [sample_checkouts, ] unless sample_checkouts.instance_of? Array
     @sample_checkouts = sample_checkouts
@@ -42,5 +50,5 @@ class UserMailer < ActionMailer::Base
     @dealer = @user.dealer
     mail(:to => @user.email, :subject => "FYI, #{@customer.full_name} has had some #{@dealer.sample_name}(s) out for a while")
   end
-  
+
 end

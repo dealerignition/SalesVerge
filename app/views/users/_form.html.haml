@@ -12,8 +12,7 @@
     .control-group
       = f.label :email, { :class => "control-label" }
       .controls
-        = f.text_field :email, :value => "#{ @invitation.recipient_email if @invitation }",
-          :placeholder => "joe@email.com"
+        = f.text_field :email, :placeholder => "joe@email.com"
     .control-group
       = f.label :password, { :class => "control-label" }
       .controls
@@ -24,7 +23,4 @@
         = f.password_field :password_confirmation
     .control-group
       .controls
-        - if @invitation
-          %input{ :type => :hidden, :name => :invitation_token,
-            :value => @invitation.token }
         = f.submit(:class => "btn btn-primary btn-large" )

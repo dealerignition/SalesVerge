@@ -25,7 +25,9 @@ class SettingsController < ApplicationController
   def users
     @user = current_user
     @company = @user.company
+    @invitation = Invitation.new
     @sent_invitations = @user.sent_invitations
+      .where("status = 'sent' OR status = 'rejected'")
   end
 
   def extras

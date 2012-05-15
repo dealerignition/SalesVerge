@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120514215058) do
+ActiveRecord::Schema.define(:version => 20120515150348) do
 
   create_table "charges", :force => true do |t|
     t.datetime "date"
@@ -88,8 +88,10 @@ ActiveRecord::Schema.define(:version => 20120514215058) do
     t.string   "recipient_email"
     t.string   "token"
     t.datetime "sent_at"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "recipient_id"
+    t.string   "status",          :default => "sent"
   end
 
   create_table "notes", :force => true do |t|
@@ -154,7 +156,6 @@ ActiveRecord::Schema.define(:version => 20120514215058) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.integer  "invitation_id"
     t.string   "title"
   end
 

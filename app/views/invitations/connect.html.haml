@@ -1,0 +1,11 @@
+%h2
+  Connect to #{ @invitation.sender.company.name }
+.alert.alert-error
+  All your customers' information, your quotes, and your samples will be transfered to #{ @invitation.sender.company.name }. Your current company information will be discarded. You cannot undo this.
+
+%p
+  = link_to invitation_accept_path(@invitation), { :class => "btn btn-large btn-success", :method => :put } do
+    Accept #{ @invitation.sender.full_name }'s invite (you cannot undo this).
+%p
+  = link_to invitation_reject_path(@invitation), { :class => "btn btn-large btn-warning", :method => :put } do
+    Reject #{ @invitation.sender.full_name }'s invite.

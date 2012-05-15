@@ -4,16 +4,19 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @user.email = @user.invitation.recipient_email if @user.invitation
+
     @invitation = Invitation.find_by_token(params[:invitation_token])
     redirect_to :signup unless @invitation
+
+    session[:invitation_token] = @invitation.token
+    @user.email = @invitation.recipient_email
   end
 
   def create
     @user = User.new params[:user]
     @user.role = "user"
 
-    @invitation = Invitation.find_by_token params[:invitation_token]
+    @invitation = Invitation.find_by_token session[:invitation_token]
     redirect_to :signup unless @invitation
 
     if @user.save
@@ -23,6 +26,8 @@ class UsersController < ApplicationController
         :company => @invitation.sender.company,
         :role => :salesrep
       )
+
+      @invitation.update_attribute :status, "accepted"
 
       auto_login(@user)
       remember_me!

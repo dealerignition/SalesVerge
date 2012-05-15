@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :notes, :dependent => :destroy
 
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
-  belongs_to :invitation
+  has_many :recieved_invitations, :class_name => 'Invitation', :foreign_key => 'recipient_id'
 
   validates_presence_of :first_name
   validates_presence_of :last_name
@@ -63,14 +63,6 @@ class User < ActiveRecord::Base
     User.is_owner.all.each do |user|
       UserMailer.daily_digest(user).deliver
     end
-  end
-
-  def invitation_token
-    invitation.token if invitation
-  end
-
-  def invitation_token=(token)
-    self.invitation = Invitation.find_by_token(token)
   end
 
 end
