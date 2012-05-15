@@ -5,7 +5,7 @@ DealerOnTheGo::Application.routes.draw do
   get "settings/account"
   get "settings/password"
   get "settings/general"
-  get "settings/dealer"
+  get "settings/company"
   get "settings/users"
   get "settings/extras"
   match "settings/users/:id/update" => "users#update", :as => "update_user"
