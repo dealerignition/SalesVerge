@@ -6,17 +6,27 @@
       %i.icon-arrow-left.icon-white
       = @quote.customer.first_name
   .pull-right
-    %button.btn.btn-large.btn-success#expandCharge{ "data-toggle" => "button" }
-      Add a Charge
+    - if can? :update, @quote
+      %button.btn.btn-large.btn-success#expandCharge{ "data-toggle" => "button" }
+        Add a Charge
+    - else
+      %button.btn.btn-large.btn-success.disabled
+        Add a Charge
 
 .page-header
   %h1
     Quote for
     =@quote.customer.full_name
+    %small== by #{ you_or_they(@quote.user).titlecase }
 
-- samples = get_samples
-#chargearea.hide{ :autofill => autofill(samples).to_json, :samples => samples.to_json }
-  = render 'charges/form'
+- if can? :update, @quote
+  - samples = get_samples
+  #chargearea.hide{ :autofill => autofill(samples).to_json, :samples => samples.to_json }
+    = render 'charges/form'
+- else
+  #chargearea.alert
+    Since you do not own this quote, you do not have permission to add charges.
+
 
 %table.table.table-striped
   - @quote.charges.each do |charge|
@@ -26,8 +36,9 @@
         %span.badge==#{"%g" % charge.quantity}&times;
         = number_to_currency(charge.price)
       %td
-        = link_to [@quote, charge], :confirm => "Are you sure you want to remove '#{charge.description}' from this quote?", :method => :delete, :class => "close" do
-          &times;
+        - if can? :update, charge
+          = link_to [@quote, charge], :confirm => "Are you sure you want to remove '#{charge.description}' from this quote?", :method => :delete, :class => "close" do
+            &times;
   %tr
     %td
       %strong.pull-right
