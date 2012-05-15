@@ -1,3 +1,17 @@
+# Fake models for migration.
+#
+class User < ActiveRecord::Base
+end
+
+class Store < ActiveRecord::Base
+  has_many :samples
+end
+
+class Dealer < ActiveRecord::Base
+  has_many :stores
+  has_many :users
+end
+
 class MergeDealersAndStoresToCompanies < ActiveRecord::Migration
   def quote_string(v)
       v.to_s.gsub(/\\/, '\&\&').gsub(/'/, "''")
@@ -52,7 +66,8 @@ class MergeDealersAndStoresToCompanies < ActiveRecord::Migration
           )
 
           u.role = "user"
-          u.save
+          puts u.email
+          u.save!
         when "admin"
         end
       end

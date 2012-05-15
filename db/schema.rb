@@ -133,23 +133,6 @@ ActiveRecord::Schema.define(:version => 20120514215058) do
     t.string   "type"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-<<<<<<< HEAD
-=======
-  end
-
-  create_table "stores", :force => true do |t|
-    t.string   "name"
-    t.string   "address_1"
-    t.string   "address_2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "dealer_id"
-    t.string   "phone"
-    t.string   "website"
->>>>>>> master
   end
 
   create_table "users", :force => true do |t|
