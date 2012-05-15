@@ -1,6 +1,12 @@
 module ApplicationHelper
-  def you_or_they(user_id)
-    current_user.id == user_id ? "you" : User.find(user_id).full_name
+  def you_or_they(user)
+    if user.instance_of? User
+      # We were passed a User
+      current_user == user ? "you" : user.full_name
+    else
+      # We were passed a user id.
+      current_user.id == user ? "you" : User.find(user).full_name
+    end
   end
 
   def to_sentence(model)
