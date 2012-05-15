@@ -7,7 +7,7 @@ class Quote < ActiveRecord::Base
   validates_presence_of :user_id
 
   def total
-    charges.select("SUM(quantity * price) as sum").first.sum
+    charges.select("SUM(quantity * price) as sum").first.sum.to_f
   end
 
 end
