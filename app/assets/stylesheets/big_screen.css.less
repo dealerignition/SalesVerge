@@ -1,32 +1,45 @@
-.rounded-corners (@radius: 20px) {
+.rounded-corners (@radius: 10px) {
   border-radius: @radius;
   -webkit-border-radius: @radius;
   -moz-border-radius: @radius;
 }
+
+.box-shadow (@x: 0, @y: 0, @blur: 12px, @color: #999) {
+  box-shadow: @arguments;
+  -webkit-box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+}
+
 body#big_screen {
   margin: 60px 0 70px;
   background: url("/assets/fabric_plaid.png");
   font-size:12px;
+  
   .span4 {
     background:#ffffff;
+    min-height:615px;
     .rounded-corners;
+    .box-shadow;
+    
     .innerspan4 {
       width:95%;
       margin:10px;
-      padding:0;
-      .page-header {
-        text-align: center;
-      }
+      padding:0;      
     }
-    -webkit-box-shadow: 0px 0px 12px 0px #999999;
-    -moz-box-shadow: 0px 0px 12px 0px #999999;
-    box-shadow: 0px 0px 12px 0px #999999;
-    -webkit-box-shadow: 0px 0px 12px 0px #999999;
-    -moz-box-shadow: 0px 0px 12px 0px #999999;
-    box-shadow: 0px 0px 12px 0px #999999;
-    min-height:615px;
   }
+  
+  .span6 {
+    .rounded-corners;
+    .box-shadow;
+    background:#ffffff;
+  }
+  
   .navbar .navbar-inner .container a.brand {
     color: #fff;
   }
+  
+  .page-header {
+    text-align: center;
+  }
+  
 }
