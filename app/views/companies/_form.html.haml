@@ -38,7 +38,10 @@
       = f.label "website", { :class => "control-label" }
       .controls
         = f.text_field :website, :placeholder => "awesomeproducts.com"
-    %hr
+    .control-group
+      = f.label "Facebook page", { :class => "control-label" }
+      .controls
+        = f.text_field :facebook, :placeholder => "http://facebook.com/YourPage"
     .control-group
       = f.label "Sample Name", { :class => "control-label" }
       .controls
@@ -47,7 +50,3 @@
           .alert.alert-info
             This term describes objects that can be checked in and out of your store. Some examples are "Demo", "Bike", "Trial".
     %hr
-    .alert.alert-info
-      %h4.alert-heading
-        Please note
-      Entered information will be used in various automated emails that go out to your customers.

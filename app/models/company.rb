@@ -2,7 +2,8 @@ class Company < ActiveRecord::Base
   has_many :company_users, :dependent => :destroy
   has_many :users, :through => :company_users
   has_many :customers, :through => :users
-
+  
+  before_validation :smart_add_url_protocol
   before_save :singularize_sample_name
 
   validates_presence_of :name
@@ -20,4 +21,18 @@ class Company < ActiveRecord::Base
   def singularize_sample_name
     self.sample_name = sample_name.singularize if self.sample_name
   end
+  
+  def smart_add_url_protocol
+    if self.website
+      unless self.website[/^http:\/\//] || self.website[/^https:\/\//]
+        self.website = 'http://' + self.website
+      end
+    end
+    if self.facebook
+      unless self.facebook[/^http:\/\//] || self.facebook[/^https:\/\//]
+        self.facebook = 'http://' + self.facebook
+      end
+    end
+  end
+  
 end
