@@ -47,7 +47,7 @@ class CompaniesController < ApplicationController
     if @company.save
       flash[:notice] = "Logo has been removed."
     end
-    redirect_to account_settings_company_path
+    redirect_to settings_company_path
   end
 
 end
