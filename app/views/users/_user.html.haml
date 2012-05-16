@@ -1,21 +1,20 @@
 %tr
   %td
-    %b
-      %span{ :class => !user.active? && "help-block" }
-        = user.full_name
-    %br
-    %span{ :class => !user.active? && "help-block" }
+    %span{ :class => "#{ user.active? ? "" : "help-block" } js-user-info" }
+      %b= user.full_name
+      %br
       = user.email
   %td
     - if current_user == user
       %button.btn.disabled This is you
     - elsif current_user.company.users.exists?(user)
-      - if user.active?
-        = link_to "Deactivate", user_deactivate_path(user), :method => :put,
-          :class => "btn btn-danger", :confirm => "Are you sure you want to deactivate #{user.first_name}?"
-      - else
-        = link_to "Reactivate", user_activate_path(user), :method => :put,
-          :class => "btn", :confirm => "Are you sure you want to activate #{user.first_name}?"
+      %select.js-userRole{ "data-id" => user.id }
+        - roles = CompanyUser::ROLES.dup.concat ["inactive"]
+        - if user.active?
+          - selected = user.company_users.first.role
+        - else
+          - selected = "Inactive"
+        = options_for_select roles.collect { |r| r.titlecase }, :selected => selected
     - else
       - invitation = Invitation.find_by_recipient_id user.id
       %button.btn.disabled

@@ -1,3 +1,0 @@
-$ ->
-  $('#expandNewUser').click ->
-    $("#newUserArea").slideToggle()

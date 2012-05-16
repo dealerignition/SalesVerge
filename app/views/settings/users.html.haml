@@ -15,15 +15,20 @@
       .well
         = render 'invite_user'
     %table.table.table-striped#users
-      = render @company.users
-      - @sent_invitations.each do |sent_invitation|
-        - if sent_invitation.recipient
-          = render sent_invitation.recipient
-        - else
-          %tr
-            %td
-              %span
-                = sent_invitation.recipient_email
-            %td
-              = link_to "Invited", nil, :class => "btn", :disabled => "disabled"
+      %thead
+        %th
+        %th
+          Role
+      %tbody
+        = render @company.users
+        - @sent_invitations.each do |sent_invitation|
+          - if sent_invitation.recipient
+            = render sent_invitation.recipient
+          - else
+            %tr
+              %td
+                %span
+                  = sent_invitation.recipient_email
+              %td
+                = link_to "Invited", nil, :class => "btn", :disabled => "disabled"
 

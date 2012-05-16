@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
-  skip_authorize_resource :only => [:activate, :deactivate]
+  skip_authorize_resource :only => [:activate, :deactivate, :change_role]
   layout "session"
 
   def new
@@ -79,6 +79,14 @@ class UsersController < ApplicationController
 
   def deactivate
     set_active_user params[:id], false
+    redirect_to :back
+  end
+
+  def change_role
+    @user = User.find params[:id]
+    cu = @user.company_users.first
+    authorize! :update, cu
+    cu.update_attribute :role,  params[:role]
     redirect_to :back
   end
 

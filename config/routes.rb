@@ -19,6 +19,7 @@ DealerOnTheGo::Application.routes.draw do
   put "users/detatch_avatar" => "users#detatch_avatar", :as => "user_detatch_avatar"
   put "users/:id/deactivate" => "users#deactivate", :as => "user_deactivate"
   put "users/:id/activate" => "users#activate", :as => "user_activate"
+  put "users/:id/role" => "users#change_role"
 
   resource :settings do
     get :send_email_preview
@@ -36,6 +37,8 @@ DealerOnTheGo::Application.routes.draw do
   resources :companies do
     put "detatch_logo", :as => "detatch_logo"
   end
+
+  resources :company_users
 
   resources :quotes do
     resources :charges
