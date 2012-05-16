@@ -140,6 +140,14 @@ table.tablebordered tfoot td {
   font-size: 12px;
   line-height: 16px;
 }
+.subtle p.facebook {
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 2px;
+}
+#fbimg {
+  vertical-align: text-bottom;
+}
 </style>
 </head>
 <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
@@ -201,6 +209,11 @@ table.tablebordered tfoot td {
                           	    <br />
                           	  <% end %>
                           	  <%= link_to "Visit our website", "#{@company.website}" if @company.website? %>
+                          	  <br>
+                          	  <p class="facebook">
+                          	    <%= link_to image_tag("facebook.jpg", :id => "fbimg"), "#{@company.facebook}" if @company.facebook? %>
+                          	    <%= link_to "Visit us on Facebook", "#{@company.facebook}" if @company.facebook? %>
+                          	  </p>
                           	</td>
                           </table>
                         </td>
