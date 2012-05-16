@@ -1,11 +1,13 @@
 class Customer < ActiveRecord::Base
   belongs_to :user
+  has_one :company, :through => :user
 
   validates_presence_of :email
   validates :email, :email => { :mx => true }
   validates_presence_of :first_name
   validates_presence_of :last_name
   validates_presence_of :user_id
+  validates_uniqueness_of :email, :for => :company
 
   has_many :sample_checkouts, :dependent => :destroy
   has_many :quotes, :dependent => :destroy
