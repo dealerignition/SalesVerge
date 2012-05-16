@@ -12,6 +12,14 @@ class QuotesController < ApplicationController
     @quote = Quote.new
 
     if params[:customer_id] and @customer = Customer.find(params[:customer_id]) and can? :read, @customer
+      # Check for an existing empty quote.
+      @customer.quotes.where(:user_id => current_user.id).each do |q|
+        if q.charges.count == 0
+          q.touch
+          return redirect_to q
+        end
+      end
+
       @quote.customer = @customer
       @quote.user = current_user
       @quote.save
