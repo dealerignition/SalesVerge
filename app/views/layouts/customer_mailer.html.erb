@@ -47,26 +47,30 @@ a {
 .hr {
 	border-top:1px solid #E5E5E5;
 	margin-top: 10px;
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 }
-#header {
-	background-color: #ffffff;
+#masthead {
+	background-color: #e1e1e1;
 	padding: 20px;
 	padding-bottom: 0;
 	border: 1px solid #DDDDDD;
-	border-bottom: none;
+	border-top: none;
 	text-align: center;
 }
-#header #name, #header #address, #header #phoneweb {
+#masthead #name, #masthead #address, #masthead #phoneweb {
 	text-align: left;
 	padding: 0;
 }
-#header #logo {
+#masthead #logo {
   width:200px;
   text-align: center;
+  background: #ffffff;
+  margin: 10px 0;
+  padding: 10px 0;
+  margin-bottom: 25px;
 }
-#header #logo img {
-  width:170px;
+#masthead #logo img {
+  width:150px;
 }
 #logo span {
   background-color: green;
@@ -80,24 +84,26 @@ a {
   margin-top: -20px;
   margin-left: -20px;
 }
-#header #name td.border-bottom {
+#masthead #name td.border-bottom {
   padding-bottom:7px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #555;
 }
-#header #address {
+#masthead #name td.contact {
+  padding-top: 10px;
+}
+#masthead #address {
   width:140px;
   padding-top:7px;
 }
-#header #phoneweb {
+#masthead #phoneweb {
 	padding-left:30px;
   padding-top:7px;
 }
 #content {
 	background: #ffffff;
 	border: 1px solid #DDDDDD;
-	border-top: none;
+	border-bottom: none;
 	padding: 20px;
-	padding-top: 0;
 }
 table.tablebordered {
 	border: 1px solid #dddddd;
@@ -136,14 +142,12 @@ table.tablebordered tfoot td {
   width: 75px;
 }
 .subtle {
-  color: #888888;
-  font-size: 12px;
-  line-height: 16px;
+  color: #333333;
+  font-size: 13px;
 }
 .subtle p.facebook {
-  font-size: 12px;
-  line-height: 16px;
   margin-top: 2px;
+  font-size: 13px;
 }
 #fbimg {
   vertical-align: text-bottom;
@@ -165,60 +169,7 @@ table.tablebordered tfoot td {
               <table border="0" cellpadding="0" cellspacing="0" width="600">
                 <tr>
                   <td valign="top" class="bodyContent">
-
-                  	<table border="0" cellpadding="20" cellspacing="0" width="100%" id="header">
-                      <tr>
-                        <td valign="top" width="220px" align="left" cellpadding="0" style="padding:0">
-                          <div id="logo">
-                            <a target="_blank" href="#{@company.website}">
-                            <% if @company.logo_file_name? %>
-                              <%= link_to image_tag(@company.logo.url(:large)), "#{@company.website}" if @company.website? %>
-                            <% else %>
-                              <span><%= @company.name %></span>
-                            <% end %>
-                            </a>
-                          </div>
-                        </td>
-                        <td valign="top" id="name">
-                          <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                          <tr>
-                            <td class="border-bottom">
-                              <strong>
-                          	    <%= @company.name %>
-                              </strong>
-                            </td>
-                            <td class="border-bottom">
-                              &nbsp;
-                            </td>
-                          <tr>
-                          <tr class="subtle">
-                            <td valign="top">
-                          	  <%= @company.address_1 %><br>
-                              <% if @company.city.present? %>
-                                <%= @company.city %>,
-                              <% end %>
-                              <% if @company.state? %>
-                                <%= @company.state %>
-                              <% end %>
-                              <% if @company.zip? %>
-                                <%= @company.zip %>
-                                <br>
-                              <% end %>
-                              <% if @company.phone? %>
-                          	    <%= number_to_phone(@company.phone) %>
-                          	    <br />
-                          	  <% end %>
-                          	  <%= link_to "Visit our website", "#{@company.website}" if @company.website? %>
-                          	  <br>
-                          	  <p class="facebook">
-                          	    <%= link_to image_tag("facebook.jpg", :id => "fbimg"), "#{@company.facebook}" if @company.facebook? %>
-                          	    <%= link_to "Visit us on Facebook", "#{@company.facebook}" if @company.facebook? %>
-                          	  </p>
-                          	</td>
-                          </table>
-                        </td>
-                      </tr>
-                  	</table>
+                  	
                     <table border="0" cellpadding="0" cellspacing="0" width="100%"  id="content">
                       <tr>
                         <td valign="top">
@@ -232,9 +183,65 @@ table.tablebordered tfoot td {
                             </tr>
                           </table>
                          </td>
-
                       </tr>
                    </table>
+                   
+                   <table border="0" cellpadding="20" cellspacing="0" width="100%" id="masthead">
+                     <tr>
+                       <td valign="top" width="220px" align="left" cellpadding="0" style="padding:0">
+                         <div id="logo">
+                           <a target="_blank" href="#{@company.website}">
+                           <% if @company.logo_file_name? %>
+                             <%= link_to image_tag(@company.logo.url(:large)), "#{@company.website}" if @company.website? %>
+                           <% else %>
+                             <span><%= @company.name %></span>
+                           <% end %>
+                           </a>
+                         </div>
+                       </td>
+                       <td valign="top" id="name">
+                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 25px;">
+                         <tr>
+                           <td class="border-bottom">
+                             <h2>
+                         	    <%= @company.name %>
+                             </h2>
+                           </td>
+                           <td class="border-bottom">
+                             &nbsp;
+                           </td>
+                         <tr>
+                         <tr class="subtle">
+                           <td valign="top" class="contact">
+                         	  <%= @company.address_1 %><br />
+                             <% if @company.city.present? %>
+                               <%= @company.city %>,
+                             <% end %>
+                             <% if @company.state? %>
+                               <%= @company.state %>
+                             <% end %>
+                             <% if @company.zip? %>
+                               <%= @company.zip %>
+                               <br />
+                             <% end %>
+                             <% if @company.phone? %>
+                         	    <br />
+                         	    <%= number_to_phone(@company.phone) %>
+                         	    <br />
+                         	  <% end %>
+                         	  <br />
+                         	  <%= link_to "Visit our website", "#{@company.website}" if @company.website? %>
+                         	  <br />
+                         	  <p class="facebook">
+                         	    <%= link_to image_tag("facebook.jpg", :id => "fbimg"), "#{@company.facebook}" if @company.facebook? %>
+                         	    <%= link_to "Visit us on Facebook", "#{@company.facebook}" if @company.facebook? %>
+                         	  </p>
+                         	</td>
+                         </table>
+                       </td>
+                     </tr>
+                 	</table>
+                   
                   </td>
                 </tr>
               </table>
