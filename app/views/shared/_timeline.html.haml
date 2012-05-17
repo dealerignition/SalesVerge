@@ -4,21 +4,17 @@
       .accordion-heading
         - id = "#{activity.class}#{activity.id}"
         = link_to "#collapse#{id}", { :class => "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#timeline" } do
-          %strong
-            =time_ago_in_words(activity.updated_at).capitalize
-            ago
           = to_sentence(activity)
       %div{ :class => "accordion-body collapse", :id => "collapse#{id}" }
         .accordion-inner
           .control-group
             %p
               %i.help-block==#{activity.updated_at.to_formatted_s(:long_ordinal)}
+            %p
+              = you_or_they(activity.user_id)
+              did this
             - unless @customer
               - customer = activity.instance_of?(Customer) ? activity : activity.customer
-              %p
-                = link_to customer_path(customer), :class => "btn" do
-                  %i.icon-user
-                  = customer.full_name
             - if activity.instance_of?(Quote)
               - if activity.charges.length.nonzero?
                 %table{ :class => "table table-striped" }
@@ -64,3 +60,9 @@
                   = link_to "Email", quote_deliver_customer_mailer_path(activity), { :confirm => "Are you sure you want to email this quote to #{activity.customer.full_name} (#{activity.customer.email})?", :class => "btn btn-primary" }
                   /= link_to "Won", quote_won_path(activity), :confirm => "Are you sure you want to mark this quote as 'Won'?", :class => "btn"
                   /= link_to "Lost", quote_lost_path(activity), :confirm => "Are you sure you want to mark this quote as 'Lost'?", :class => "btn"
+            - if customer
+              %hr
+              %p.center
+                = link_to customer_path(customer), :class => "btn btn-large" do
+                  %i.icon-user
+                  = customer.full_name
