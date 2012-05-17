@@ -4,14 +4,17 @@
   .pull-left
     =link_to customer_path(@quote.customer), { :class => "btn btn-large btn-inverse" } do
       %i.icon-arrow-left.icon-white
-      = @quote.customer.first_name
   .pull-right
     - if can? :update, @quote
       %button.btn.btn-large.btn-success#expandCharge{ "data-toggle" => "button" }
-        Add a Charge
+        Add Charge
     - else
       %button.btn.btn-large.btn-success.disabled
-        Add a Charge
+        Add Charge
+    - if @quote.charges.count > 0
+      = link_to "Send", quote_deliver_customer_mailer_path(@quote), { :confirm => "Are you sure you want to email this quote to #{@quote.customer.full_name} (#{@quote.customer.email})?", :class => "btn btn-large btn-primary" }
+    - else
+      = link_to "Send", "#", :class => "btn btn-large btn-disabled disabled"
 
 .page-header
   %h1
