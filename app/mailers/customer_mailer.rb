@@ -10,7 +10,7 @@ class CustomerMailer < ActionMailer::Base
     @url  = "http://floorstoreonthego.com"
     mail(:sender => @user.email, :to => @customer.email, :subject => "Thank-you for your interest in our store", :reply_to => @customer.user.email)
 
-    SentEmail.create(:customer_id => @customer.id, :type => "thank_you")
+    SentEmail.create(:customer_id => @customer.id, :notification_type => "thank_you")
   end
 
   def quote(quote)
@@ -21,7 +21,7 @@ class CustomerMailer < ActionMailer::Base
     set_display_name
     mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "Here is your quote", :reply_to => @user.email)
 
-    SentEmail.create(:customer_id => @customer.id, :type => "quote")
+    SentEmail.create(:customer_id => @customer.id, :notification_type => "quote")
   end
 
   def quote_won(quote)
@@ -32,7 +32,7 @@ class CustomerMailer < ActionMailer::Base
     set_display_name
     mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "Thank you for your purchase", :reply_to => @user.email)
 
-    SentEmail.create(:customer_id => @customer.id, :type => "quote_won")
+    SentEmail.create(:customer_id => @customer.id, :notification_type => "quote_won")
   end
 
   def sample_checkout(sample_checkouts)
@@ -46,7 +46,7 @@ class CustomerMailer < ActionMailer::Base
     set_display_name
     mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "Thank you for checking out #{title}!", :reply_to => @user.email)
 
-    SentEmail.create(:customer_id => @customer.id, :type => "sample_checkout")
+    SentEmail.create(:customer_id => @customer.id, :notification_type => "sample_checkout")
   end
 
   def long_checkout_notification(sample_checkouts)
@@ -64,7 +64,7 @@ class CustomerMailer < ActionMailer::Base
       s.save
     end
 
-    SentEmail.create(:customer_id => @customer.id, :type => "long_checkout")
+    SentEmail.create(:customer_id => @customer.id, :notification_type => "long_checkout")
   end
 
   private
