@@ -1,6 +1,6 @@
 $ ->
     $('#expandInfo').click ->
-        $("#edit").toggle()
+        $("#show").toggle()
         $("#customerinformation").slideToggle()
 
     $('#expandSampleCheckout').click ->

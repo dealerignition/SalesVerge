@@ -43,18 +43,14 @@ class CustomersController < ApplicationController
     end
   end
 
-  def edit
-    @customer = Customer.find(params[:id])
-  end
-
   def update
     @customer = Customer.find(params[:id])
     if @customer.update_attributes(params[:customer])
-      redirect_to @customer
       flash[:notice] = "Customer was successfully updated."
     else
-      render 'edit'
+      flash[:error] = "Customer could not be updated."
     end
+    redirect_to @customer
   end
 
 end
