@@ -7,13 +7,13 @@
     .navbar-simple
       %ul.nav.nav-pills
         %li{ :class => "#{"active" if request.path.eql? "/"}" }
-          = link_to dashboard_path, :onclick => "return tog('load')" do
+          = link_to dashboard_path, :title => "Dashboard", :onclick => "return tog('load')" do
             %i.icon_home_opt
         %li{ :class => "#{"active" if request.path.include? "customers"}" }
-          = link_to customers_path, :onclick => "return tog('load')" do
+          = link_to customers_path, :title => "Customers", :onclick => "return tog('load')" do
             %i.icon_user_opt
         %li{ :class => "#{"active" if request.path.include? "settings"}" }
-          = link_to settings_account_path, :onclick => "return tog('load')" do
+          = link_to settings_account_path, :title => "Settings", :onclick => "return tog('load')" do
             %i.icon_gear_opt
 
   #subnav
