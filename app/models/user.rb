@@ -64,8 +64,10 @@ class User < ActiveRecord::Base
   end
 
   def self.send_daily_digest
-    User.is_owner.all.each do |user|
-      UserMailer.daily_digest(user).deliver
+    User.all.each do |user|
+      if user.owner?
+        UserMailer.daily_digest(user).deliver
+      end
     end
   end
 
