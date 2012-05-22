@@ -21,6 +21,8 @@ class CustomersController < ApplicationController
     @timeline_stream += @customer.notes
 
     @timeline_stream.sort! { |a,b| -(a.updated_at <=> b.updated_at) }
+    
+    @email_stream = SentEmail.accessible_by(current_ability).order("created_at DESC")
   end
 
   def new
