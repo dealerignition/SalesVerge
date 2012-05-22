@@ -16,6 +16,6 @@ class CompanyUser < ActiveRecord::Base
   # TODO Add scope for roles
 
   def downcase_role
-    self.role.downcase!
+    self.role.downcase
   end
 end

@@ -20,7 +20,7 @@ class CompaniesController < ApplicationController
       CompanyUser.create(
         :company => @company,
         :user => @user,
-        :role => :owner
+        :role => "owner"
       )
 
       auto_login(@user)
