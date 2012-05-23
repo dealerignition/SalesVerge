@@ -213,39 +213,25 @@ h1 small.hidden-phone {
   display: inline;
 }
 
-@media screen and (max-width: 767px) {
-  h1 small.hidden-phone {
-    display: none;
-  }
-}
-
 .well {
   .nav-stacked > li {
     background-color: #fff;
   }
 }
-.shown {
-  .box-shadow(0px 0px 12px 0px #999);
-  position: relative;
-  z-index: 100;
-  border: 1px solid #bbb;
-  border-radius: 0px;
-}
-.accordion-inner {
-  background-color: #FFF5D6;
-  .help-block {
-    color: #CFAB3F;
+
+//PHONE-ONLY MEDIA/////////////////////////////////////
+@media screen and (max-width: 767px) {
+  body { 
+    padding-left:10px;
+    padding-right:10px;
   }
-  blockquote {
-    border-left: 5px solid #CFAB3F;
-  }
-  .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
-    background-color: #FFEBAD;
-  }
-  .table th, .table td {
-    border-top: 1px solid #cfcfcf;
+
+  h1 small.hidden-phone {
+    display: none;
   }
 }
+
+//TABLET-ONLY MEDIA/////////////////////////////////////
 @media screen and (max-width: 979px) {
   body#big_screen {
     .navbar .brand {
