@@ -10,9 +10,6 @@
           .control-group
             %p
               %i.help-block==#{activity.updated_at.to_formatted_s(:long_ordinal)}
-            %p
-              = you_or_they(activity.user_id)
-              did this
             - unless @customer
               - customer = activity.instance_of?(Customer) ? activity : activity.customer
               %p
