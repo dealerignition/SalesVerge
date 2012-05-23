@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521191244) do
+ActiveRecord::Schema.define(:version => 20120523184610) do
 
   create_table "charges", :force => true do |t|
     t.datetime "date"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20120521191244) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "title"
+    t.boolean  "display_tutorial",                  :default => true
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

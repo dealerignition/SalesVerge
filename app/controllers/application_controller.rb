@@ -12,7 +12,9 @@ class ApplicationController < ActionController::Base
   end
 
   def close_tutorial
-    session[:close_tutorial] = true
+    @user = current_user
+    @user.display_tutorial = false
+    @user.save
     redirect_to :back
   end
 

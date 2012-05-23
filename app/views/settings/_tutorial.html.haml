@@ -1,10 +1,11 @@
-- unless current_user.customers.count > 0 || session[:close_tutorial].present? 
+- if current_user.display_tutorial == true
   .alert.alert-info#alert-modal
     = link_to close_tutorial_path, { "data_dismiss" => "alert", :method => :post, :class => "close" } do
       &times;
     %h3 Account Settings
     %hr
-    %p This is the last stop. Here you can customize all of your info including personalizing the emails that will be automatically sent to your customers.
+    %p This is the last stop. Here you can do everything from customizing your info to adding new features.
+    %p Customized info will be used to personalize emails that will be sent to your customers.
     %p
       = link_to close_tutorial_path, :method => :post, :class => "btn btn-success" do
         Got it!
