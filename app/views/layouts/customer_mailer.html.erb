@@ -72,18 +72,6 @@ a {
 #masthead #logo img {
   width:150px;
 }
-#logo span {
-  background-color: green;
-  color: #ffffff;
-  text-align: center;
-  padding: 10px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  font-size: 12px;
-  margin-top: -20px;
-  margin-left: -20px;
-}
 #masthead #name td.border-bottom {
   padding-bottom:7px;
   border-bottom: 1px solid #555;
@@ -188,17 +176,15 @@ table.tablebordered tfoot td {
                    
                    <table border="0" cellpadding="20" cellspacing="0" width="100%" id="masthead">
                      <tr>
-                       <td valign="top" width="220px" align="left" cellpadding="0" style="padding:0">
-                         <div id="logo">
-                           <a target="_blank" href="#{@company.website}">
-                           <% if @company.logo_file_name? %>
-                             <%= link_to image_tag(@company.logo.url(:large)), "#{@company.website}" if @company.website? %>
-                           <% else %>
-                             <span><%= @company.name %></span>
-                           <% end %>
-                           </a>
-                         </div>
-                       </td>
+                       <% if @company.logo_file_name? %>
+                         <td valign="top" width="220px" align="left" cellpadding="0" style="padding:0">
+                           <div id="logo">
+                             <a target="_blank" href="#{@company.website}">
+                               <%= link_to image_tag(@company.logo.url(:large)), "#{@company.website}" if @company.website? %>
+                             </a>
+                           </div>
+                         </td>
+                       <% end %>
                        <td valign="top" id="name">
                          <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 25px;">
                          <tr>

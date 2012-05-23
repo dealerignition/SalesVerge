@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516141913) do
+ActiveRecord::Schema.define(:version => 20120521191244) do
 
   create_table "charges", :force => true do |t|
     t.datetime "date"
@@ -133,9 +133,10 @@ ActiveRecord::Schema.define(:version => 20120516141913) do
 
   create_table "sent_emails", :force => true do |t|
     t.integer  "customer_id"
-    t.string   "type"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "notification_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.integer  "notification_type_id"
   end
 
   create_table "users", :force => true do |t|

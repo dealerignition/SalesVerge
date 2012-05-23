@@ -3,16 +3,6 @@ class CustomerMailer < ActionMailer::Base
 
   # NOTE: Every mailer must have a @company variable defined as the customer_mailer layout is expecting one
   # NOTE: Every mailer must have a @user variable defined as the signature partial is expecting one
-  def thank_you_email(customer, company)
-    @customer = customer
-    @user = @customer.user
-    @company = company
-    @url  = "http://floorstoreonthego.com"
-    mail(:sender => @user.email, :to => @customer.email, :subject => "Thank-you for your interest in our store", :reply_to => @customer.user.email)
-
-    SentEmail.create(:customer_id => @customer.id, :type => "thank_you")
-  end
-
   def quote(quote)
     @quote = quote
     @user = quote.user
@@ -21,7 +11,7 @@ class CustomerMailer < ActionMailer::Base
     set_display_name
     mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "Here is your quote", :reply_to => @user.email)
 
-    SentEmail.create(:customer_id => @customer.id, :type => "quote")
+    SentEmail.create(:customer_id => @customer.id, :notification_type => "quote", :notification_type_id => @quote.id)
   end
 
   def quote_won(quote)
@@ -32,7 +22,7 @@ class CustomerMailer < ActionMailer::Base
     set_display_name
     mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "Thank you for your purchase", :reply_to => @user.email)
 
-    SentEmail.create(:customer_id => @customer.id, :type => "quote_won")
+    SentEmail.create(:customer_id => @customer.id, :notification_type => "quote_won", :notification_type_id => @quote.id)
   end
 
   def sample_checkout(sample_checkouts)
@@ -46,7 +36,7 @@ class CustomerMailer < ActionMailer::Base
     set_display_name
     mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "Thank you for checking out #{title}!", :reply_to => @user.email)
 
-    SentEmail.create(:customer_id => @customer.id, :type => "sample_checkout")
+    SentEmail.create(:customer_id => @customer.id, :notification_type => "sample_checkout", :notification_type_id => @sample_checkouts.first.id)
   end
 
   def long_checkout_notification(sample_checkouts)
@@ -64,7 +54,7 @@ class CustomerMailer < ActionMailer::Base
       s.save
     end
 
-    SentEmail.create(:customer_id => @customer.id, :type => "long_checkout")
+    SentEmail.create(:customer_id => @customer.id, :notification_type => "long_checkout", :notification_type_id => @sample_checkout.id)
   end
 
   private

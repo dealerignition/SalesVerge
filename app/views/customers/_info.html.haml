@@ -1,36 +1,38 @@
 %br
 %table.table.table-striped
-  %tr
-    %td
-      %b Name
-    %td= @customer.full_name
-  %tr
-    %td
-      %b Email
-    %td
-      .truncate-email
-        = mail_to @customer.email
-  %tr
-    %td
-      %b Phone
-    %td
-      = number_to_phone(@customer.phone)
-  %tr
-    %td
-      %strong Address
-    %td
-      = @customer.address_1
-  %tr
-    %td
-      %strong City
-    %td
-      = @customer.city
-  %tr
-    %td
-      %strong State &amp; Zip
-    %td
-      = @customer.state
-      = @customer.zip
+  = form_for(@customer, :html => { :id => "customer_form" }) do |f|
+    %tr
+      %td
+        %b Name
+      %td
+        %p= f.text_field :first_name, :value => @customer.first_name, :class => "quick_edit"
+        = f.text_field :last_name, :value => @customer.last_name, :class => "quick_edit"
+    %tr
+      %td
+        %b Email
+      %td
+        = f.text_field :email, :value => @customer.email, :type => :email, :class => "quick_edit"
+    %tr
+      %td
+        %b Phone
+      %td
+        = f.text_field :phone, :value => number_to_phone(@customer.phone), :type => :tel, :class => "quick_edit"
+    %tr
+      %td
+        %strong Address
+      %td
+        = f.text_field :address_1, :value =>  @customer.address_1, :class => "quick_edit"
+    %tr
+      %td
+        %strong City
+      %td
+        = f.text_field :city, :value => @customer.city, :class => "quick_edit"
+    %tr
+      %td
+        %strong State &amp; Zip
+      %td
+        %p= f.text_field :state, :value => @customer.state, :class => "quick_edit"
+        = f.text_field :zip, :value => @customer.zip, :class => "quick_edit"
       
   - if @current_user.subscribes_to_customer_extensions? and @customer.customer_extension       
     %tr.customer_extension
@@ -125,19 +127,18 @@
   - elsif @current_user.subscribes_to_customer_extensions? and !@customer.customer_extension
     %tr.customer_extension
       %td.top-border
-        %b Get more info about this customer
+        %b Check for more info
       %td.top-border
         = link_to customer_create_customer_extension_path(@customer), :method => "post", :class => "btn btn-info" do
           %i.icon-plus.icon-white
           Check
-          
+
   - else
     %tr.customer_extension
       %td.top-border
-        %b Get more info about this customer
+        %b Check for more info
       %td.top-border
         = form_for @user, :url => { :controller => "users", :action => "update_user_and_look_up_customer", :current_user_id => @user.id, :customer_id => @customer.id } do |f|
           = render "shared/error_messages", :target => @user
           = f.hidden_field :subscribes_to_customer_extensions, :value => true
           = f.submit("Subscribe", :class => "btn btn-success", :confirm => "Do you want to subscribe?")
-        

@@ -6,28 +6,26 @@
       %i.icon-arrow-left.icon-white
       Customers
   .pull-right
-    = link_to "Edit", edit_customer_path, { :id => "edit", :class => "btn btn-large hide" }
+    %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large hide", :form => "customer_form", :id => "show" }
     %button#expandInfo.btn.btn-large.btn-info{ "data-toggle" => "button" }
       %i.icon-white.icon-info-sign
-
 
 .page-header
   %h1
     = @customer.first_name
     = @customer.last_name
     %small
-      = @customer.email
+      .truncate-long
+        = @customer.email
 
   %br
   .btn-group
     =link_to new_customer_quote_path(@customer), { :class => "btn btn-success btn-large" } do
-      %i.icon-plus-sign.icon-white
       Quote
     %button{ :class => "btn btn-success btn-large", :id => "expandSampleCheckout" }
-      %i.icon-plus-sign.icon-white
       = current_user.company.sample_name
     %button{ :class => "btn btn-success btn-large", :id => "expandNote" }
-      %i.icon-edit.icon-white
+      Note
 
   #samplearea.hide.js-areas
     %br

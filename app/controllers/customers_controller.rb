@@ -21,6 +21,8 @@ class CustomersController < ApplicationController
     @timeline_stream += @customer.notes
 
     @timeline_stream.sort! { |a,b| -(a.updated_at <=> b.updated_at) }
+    
+    @email_stream = SentEmail.accessible_by(current_ability).order("created_at DESC")
   end
 
   def new
@@ -43,18 +45,14 @@ class CustomersController < ApplicationController
     end
   end
 
-  def edit
-    @customer = Customer.find(params[:id])
-  end
-
   def update
     @customer = Customer.find(params[:id])
     if @customer.update_attributes(params[:customer])
-      redirect_to @customer
       flash[:notice] = "Customer was successfully updated."
     else
-      render 'edit'
+      flash[:error] = "Customer could not be updated."
     end
+    redirect_to @customer
   end
 
 end

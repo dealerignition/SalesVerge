@@ -32,6 +32,9 @@ class Ability
         # Can send and modify invitations.
         can :manage, Invitation, :sender_id => user.id
         can :manage, Invitation, :recipient_id => user.id
+        
+        #Can see sent email history
+        can :read, SentEmail
 
         role = user.company_users.find_by_company_id(user.company).role
         case role

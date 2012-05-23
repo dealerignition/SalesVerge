@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   ROLES = ["admin", "user"]
   before_validation :downcase_email
+  after_create :add_dummy_data
 
   authenticates_with_sorcery!
 
@@ -56,6 +57,46 @@ class User < ActiveRecord::Base
   def full_name
     "#{ first_name } #{ last_name }"
   end
+  
+  def add_dummy_data
+    first_customer = Customer.create(
+      :first_name   =>    "Jane",
+      :last_name    =>    "Doe",
+      :email        =>    self.email,
+      :user_id      =>    self.id
+    )
+    Customer.create(
+      :first_name   =>    "John",
+      :last_name    =>    "Smith",
+      :email        =>    (self.email.split('@')).join("+test@"),
+      :user_id      =>    self.id
+    )
+    quote = Quote.create(
+      :customer_id  =>    first_customer.id,
+      :user_id      =>    self.id,
+    )
+    Charge.create(
+      :quote_id     =>    quote.id,
+      :date         =>    Date.today,
+      :description  =>    "Product 1",
+      :quantity     =>    1,
+      :price        =>    350
+    )
+    Charge.create(
+      :quote_id     =>    quote.id,
+      :date         =>    Date.today,
+      :description  =>    "Product 2",
+      :quantity     =>    1,
+      :price        =>    450
+    )
+    Charge.create(
+      :quote_id     =>    quote.id,
+      :date         =>    Date.today,
+      :description  =>    "Product 3",
+      :quantity     =>    3,
+      :price        =>    12.95
+    )
+  end
 
   private
 
@@ -64,8 +105,10 @@ class User < ActiveRecord::Base
   end
 
   def self.send_daily_digest
-    User.is_owner.all.each do |user|
-      UserMailer.daily_digest(user).deliver
+    User.all.each do |user|
+      if user.owner?
+        UserMailer.daily_digest(user).deliver
+      end
     end
   end
 
