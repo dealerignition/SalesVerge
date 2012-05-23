@@ -12,24 +12,24 @@ module ApplicationHelper
   def to_sentence(model)
     if model.instance_of? Quote
       if model.status == "won"
-        "#{model.customer.full_name} <span class='quote-won'>purchased a quote</span> for <strong>#{ number_to_currency(model.total) }</strong>".html_safe
+        "#{model.customer.first_name} <span class='quote-won'>purchased a quote</span> for #{ number_to_currency(model.total) }.".html_safe
       elsif model.status == "lost"
-        "#{model.customer.full_name} <span class='danger'>declined a quote</span> for <strong>#{ number_to_currency(model.total) }</strong>".html_safe
+        "#{model.customer.first_name} <span class='danger'>declined a quote</span> for #{ number_to_currency(model.total) }.".html_safe
       elsif model.status == "emailed"
-        "<h4>#{model.customer.full_name}</h4> Emailed quote worth <strong>#{ number_to_currency(model.total) }</strong>".html_safe
+        "#{ you_or_they(model.user_id) } emailed a <span class='quote'>quote</span> to #{model.customer.first_name} worth #{ number_to_currency(model.total) }.".html_safe
       else
-        "<h4>#{model.customer.full_name}</h4> Started quote for worth <strong>#{ number_to_currency(model.total) }</strong>".html_safe
+        "#{ you_or_they(model.user_id) } started a <span class='quote'>quote</span> for #{model.customer.first_name} worth #{ number_to_currency(model.total) }.".html_safe
       end
     elsif model.instance_of? SampleCheckout
       if model.checkin_time?
-        "<h4>#{model.customer.full_name}</h4> <span class='sample'>checked-<span class='sample_in'>in</span></span> #{ model.sample.name }".html_safe
+        "#{model.customer.first_name} <span class='sample'>checked-<span class='sample_in'>in</span></span> #{ model.sample.name }.".html_safe
       else
-        "<h4>#{model.customer.full_name}</h4> <span class='sample'>checked-<span class='sample_out'>out</span></span> #{ model.sample.name }".html_safe
+        "#{model.customer.first_name} <span class='sample'>checked-<span class='sample_out'>out</span></span> #{ model.sample.name }.".html_safe
       end
     elsif model.instance_of? Note
-      "<h4>#{ model.customer.full_name }</h4> New <span class='note'>note</span> about ".html_safe
+      "#{ you_or_they(model.user_id) } created a <span class='note'>note</span> about #{ model.customer.first_name }.".html_safe
     elsif model.instance_of? Customer
-      "<h4>#{ model.full_name }</h4> New customer".html_safe
+      "#{ you_or_they(model.user_id) } added #{ model.full_name } as a <span class='customer'>customer</span>.".html_safe
     else
     end
   end
