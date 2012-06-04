@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       CompanyUser.create(
         :user => @user,
         :company => @invitation.sender.company,
-        :role => :salesrep
+        :role => "salesrep"
       )
 
       @invitation.update_attribute :status, "accepted"
