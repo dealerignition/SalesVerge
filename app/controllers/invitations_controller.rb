@@ -51,7 +51,7 @@ class InvitationsController < ApplicationController
     @invitation.recipient.company_users.delete_all
     @invitation.recipient.company_users.create(
       :company => @invitation.sender.company,
-      :role => :salesrep
+      :role => "salesrep"
     )
 
     @invitation.update_attribute :status, :accepted

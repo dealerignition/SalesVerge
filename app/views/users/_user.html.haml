@@ -14,7 +14,7 @@
           - selected = user.company_users.first.role
         - else
           - selected = "Inactive"
-        = options_for_select roles.collect { |r| r.titlecase }, :selected => selected
+        = options_for_select roles.collect { |r| r }, :selected => selected
     - else
       - invitation = Invitation.find_by_recipient_id user.id
       %button.btn.disabled
