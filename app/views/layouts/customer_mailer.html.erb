@@ -26,7 +26,7 @@ h1 {
 }
 h2 {
 	font-size: 20px;
-	margin: 5px 0;
+	margin: 0px;
 }
 h3 {
 	font-size: 16px;
@@ -61,20 +61,28 @@ a {
 	text-align: left;
 	padding: 0;
 }
-#masthead #logo {
-  width:200px;
-  text-align: center;
-  background: #ffffff;
-  margin: 10px 0;
-  padding: 10px 0;
-  margin-bottom: 25px;
+#logo {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 5px;
 }
-#masthead #logo img {
-  width:150px;
+#logo img {
+  height: 120px;
+}
+#logo span {
+  background-color: #396A61;
+  color: #ffffff;
+  font-size: 18px;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  padding-left: 13px;
 }
 #masthead #name td.border-bottom {
   padding-bottom:7px;
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #888;
 }
 #masthead #name td.contact {
   padding-top: 10px;
@@ -95,29 +103,29 @@ a {
 }
 table.tablebordered {
 	border: 1px solid #dddddd;
-  	border-collapse: separate;
-  	border-collapse: collapsed;
-  	font-size:14px;
-  	text-align: right;
+  border-collapse: separate;
+  border-collapse: collapsed;
+  font-size:14px;
+  text-align: right;
 }
 table.tablebordered td.left, table.tablebordered th.left {
-  	text-align: left;
+  text-align: left;
 }
 table.tablebordered td.price {
-  	width:70px;
+  width:70px;
 }
 table.tablebordered tr {
-  	border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
 }
 table.tablebordered thead th, table.tablebordered tbody td, table.tablebordered tfoot td {
-  	padding:8px;
+  padding:8px;
 }
 table.tablebordered thead th {
-  	background: #cfcfcf;
-  	border-bottom: 1px solid #dddddd;
+  background: #cfcfcf;
+  border-bottom: 1px solid #dddddd;
 }
 table.tablebordered tbody td {
-  	border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
 }
 table.tablebordered tfoot td {
 	background: #f5f5f5;
@@ -133,9 +141,9 @@ table.tablebordered tfoot td {
   color: #333333;
   font-size: 13px;
 }
-.subtle p.facebook {
-  margin-top: 2px;
+.subtle p.contactinfo {
   font-size: 13px;
+  line-height: 15px;
 }
 #fbimg {
   vertical-align: text-bottom;
@@ -164,8 +172,22 @@ table.tablebordered tfoot td {
                           <table cellpadding="0" cellspacing="0" border="0" width="555">
                             <tr id="yield">
                               <td>
-
-					                    <%= yield %>
+                                <div id="logo">
+                                  <% if @company.logo_file_name? %>
+                                    <a target="_blank" href="#{@company.website}">
+                                      <%= link_to image_tag(@company.logo.url(:large)), "#{@company.website}" if @company.website? %>
+                                    </a>
+                                  <% else %>
+                                    <br />
+                                    <span><%= @company.name %></span>
+                                    <br /><br />
+                                  <% end %>
+                                </div>
+                                <div class="hr"></div>
+                                 
+                                 <!-- YIELD -->
+					                       <%= yield %>
+					                       <!-- END YIELD -->
 
                               </td>
                             </tr>
@@ -176,15 +198,8 @@ table.tablebordered tfoot td {
                    
                    <table border="0" cellpadding="20" cellspacing="0" width="100%" id="masthead">
                      <tr>
-                       <% if @company.logo_file_name? %>
-                         <td valign="top" width="220px" align="left" cellpadding="0" style="padding:0">
-                           <div id="logo">
-                             <a target="_blank" href="#{@company.website}">
-                               <%= link_to image_tag(@company.logo.url(:large)), "#{@company.website}" if @company.website? %>
-                             </a>
-                           </div>
-                         </td>
-                       <% end %>
+                         
+                       
                        <td valign="top" id="name">
                          <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 25px;">
                          <tr>
@@ -196,31 +211,32 @@ table.tablebordered tfoot td {
                            <td class="border-bottom">
                              &nbsp;
                            </td>
-                         <tr>
+                         </tr>
                          <tr class="subtle">
                            <td valign="top" class="contact">
-                         	  <%= @company.address_1 %><br />
-                             <% if @company.city.present? %>
-                               <%= @company.city %>,
-                             <% end %>
-                             <% if @company.state? %>
-                               <%= @company.state %>
-                             <% end %>
-                             <% if @company.zip? %>
-                               <%= @company.zip %>
-                               <br />
-                             <% end %>
-                             <% if @company.phone? %>
+                         	  <p class="contactinfo">
+                         	    <%= @company.address_1 %><br />
+                               <% if @company.city.present? %>
+                                 <%= @company.city %>,
+                               <% end %>
+                               <% if @company.state? %>
+                                 <%= @company.state %>
+                               <% end %>
+                               <% if @company.zip? %>
+                                 <%= @company.zip %>
+                               <% end %>
+                             </p>
+                            </td>
+                           <td valign="top" class="contact">
+                            <p class="contactinfo">
+                              <% if @company.phone? %>
+                         	      Phone: <%= number_to_phone(@company.phone) %>
+                         	    <% end %>
                          	    <br />
-                         	    <%= number_to_phone(@company.phone) %>
-                         	    <br />
-                         	  <% end %>
-                         	  <br />
-                         	  <%= link_to "Visit our website", "#{@company.website}" if @company.website? %>
-                         	  <br />
-                         	  <p class="facebook">
-                         	    <%= link_to image_tag("facebook.jpg", :id => "fbimg"), "#{@company.facebook}" if @company.facebook? %>
+                         	    <%= link_to "Visit our website", "#{@company.website}" if @company.website? %> 
+                         	    | 
                          	    <%= link_to "Visit us on Facebook", "#{@company.facebook}" if @company.facebook? %>
+                         	    <%= link_to image_tag("facebook.jpg", :id => "fbimg"), "#{@company.facebook}" if @company.facebook? %>
                          	  </p>
                          	</td>
                          </table>
