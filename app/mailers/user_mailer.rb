@@ -1,7 +1,7 @@
 class UserMailer < ActionMailer::Base
   layout "customer_mailer", :only => [:email_preview]
   include CanCan::Ability
-  default from: "notifications@dealerbookapp.com"
+  default from: "notifications@dealeronthego.com"
 
   def welcome_email(user)
     @user = user
