@@ -59,3 +59,11 @@
             %p
             .alert.alert-info
               This message will appear above your signature in emails sent to your customers.
+        .control-group
+          = f.label "Reminder Interval", { :class => "control-label" }
+          .controls
+            = f.select :reminder_interval_days, [3, 5, 7, 10, 14, 21, 30]
+            == days
+            %p
+            .alert.alert-info
+              This setting will determine when we will send email reminders about samples, test drives, etc.

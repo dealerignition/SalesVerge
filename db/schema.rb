@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523184610) do
+ActiveRecord::Schema.define(:version => 20120606150711) do
 
   create_table "charges", :force => true do |t|
     t.datetime "date"
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(:version => 20120523184610) do
     t.datetime "avatar_updated_at"
     t.string   "title"
     t.boolean  "display_tutorial",                  :default => true
+    t.integer  "reminder_interval_days",            :default => 7
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

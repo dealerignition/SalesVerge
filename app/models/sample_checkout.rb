@@ -9,8 +9,7 @@ class SampleCheckout < ActiveRecord::Base
   def self.send_long_checkout_notification
     Customer.where("id in (?)", SampleCheckout.where(:checkin_time => nil).pluck(:customer_id).uniq).find_each do |c|
       sample_checkouts = c.sample_checkouts.where(
-        "checkout_time < ?", 14.days.ago).where(
-        :checkin_time => nil).where(
+        "checkout_time < ?", c.sample_checkouts.last.user.reminder_interval_days.days.ago).where(
         "notifications_received < ?", 1).all
       CustomerMailer.long_checkout_notification(sample_checkouts).deliver unless sample_checkouts.empty?
       UserMailer.long_checkout_notification(sample_checkouts).deliver unless sample_checkouts.empty?

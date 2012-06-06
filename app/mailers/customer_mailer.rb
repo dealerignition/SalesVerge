@@ -31,7 +31,7 @@ class CustomerMailer < ActionMailer::Base
     @customer = sample_checkouts.first.customer
     @user = sample_checkouts.first.user
     @company = @user.company
-    title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some samples"
+    title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some #{@company.sample_name.pluralize}"
 
     set_display_name
     mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "Thank you for checking out #{title}!", :reply_to => @user.email)
@@ -45,16 +45,16 @@ class CustomerMailer < ActionMailer::Base
     @customer = sample_checkouts.first.customer
     @user = sample_checkouts.first.user
     @company = @user.company
-    title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some samples"
+    title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some #{@company.sample_name.pluralize}"
     set_display_name
-    mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "You still have #{title}. Can we get our stuff back?", :reply_to => @user.email)
+    mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "You still have #{title}. Would you please bring it back to the store?", :reply_to => @user.email)
 
     sample_checkouts.each do |s|
       s.notifications_received = s.notifications_received + 1
       s.save
     end
 
-    SentEmail.create(:customer_id => @customer.id, :notification_type => "long_checkout", :notification_type_id => @sample_checkout.id)
+    SentEmail.create(:customer_id => @customer.id, :notification_type => "long_checkout", :notification_type_id => @sample_checkouts.first.id)
   end
 
   private

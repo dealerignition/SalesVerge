@@ -1,6 +1,6 @@
 <br>
 <h1>Dear <%= @user.first_name %>,</h1>
-<p>Just wanted to let you know that your customer, <b><%= @customer.full_name %></b>, has had the following <%= @dealer.sample_name.downcase %>(s) out for 14 days:</p> 
+<p>Just wanted to let you know that your customer, <b><%= @customer.full_name %></b>, has had the following <%= @company.sample_name.downcase %>(s) out for <%= @user.reminder_interval_days %> days:</p> 
 <ul>
   <% @sample_checkouts.each do |sc| %>
     <li><%= sc.sample.name %></li>

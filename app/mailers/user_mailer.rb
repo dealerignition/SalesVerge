@@ -47,8 +47,8 @@ class UserMailer < ActionMailer::Base
     @sample_checkouts = sample_checkouts
     @customer = sample_checkouts.first.customer
     @user = sample_checkouts.first.user
-    @dealer = @user.dealer
-    mail(:to => @user.email, :subject => "FYI, #{@customer.full_name} has had some #{@dealer.sample_name}(s) out for a while")
+    @company = @user.company
+    mail(:to => @user.email, :subject => "FYI, #{@customer.full_name} has had some #{@company.sample_name}(s) out for a while")
   end
 
 end
