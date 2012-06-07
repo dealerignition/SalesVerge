@@ -22,7 +22,6 @@ DealerOnTheGo::Application.routes.draw do
   put "users/:id/role" => "users#change_role"
   put "users/yes_receive_nightly_digest" => "users#yes_receive_nightly_digest"
   put "users/no_receive_nightly_digest" => "users#no_receive_nightly_digest"
-  
 
   resource :settings do
     get :send_email_preview
