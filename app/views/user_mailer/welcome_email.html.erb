@@ -1,8 +1,18 @@
 <br>
-<h1>Hello, Person</h1>
-
-<h2>So-and-so has invited you to join DealerOnTheGo!</h2>
-  
-<p>DealerOnTheGo is a new tool made for the iPad. We're building it to help you manage your customers, sales prospects, and other company assets.</p>
-  
-<h3><a href="http://">Log-in to see &rarr;</a></h3>
+<h1>Hello, <%= @user.first_name if @user.first_name %></h1>
+<h2>Welcome to DealerOnTheGo!</h2>
+<p>DealerOnTheGo is a new tool we're building to help you manage your customers, sales prospects, and other company things.</p>
+<hr class="hr" />
+<p>For your records here your information:</p>
+<table cellspacing="0" cellpadding="0" width="100%" class="">
+  <tr>
+    <td>Login email:</td>
+    <td><b><%= @user.email %></b></td>
+  </tr>
+  <tr>
+    <td>Store name:</td>
+    <td><b><%= @user.company.name %></b></td>
+  </tr>
+</table>
+<hr class="hr" />
+<h2><%= link_to "Sign in here", url_for(:controller => "sessions", :action => "new", :only_path => false) %> &rarr;</h2>

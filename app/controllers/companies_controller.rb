@@ -13,7 +13,6 @@ class CompaniesController < ApplicationController
     @company = Company.new(params[:company])
     @user = User.new(params[:user])
     @user.role = "user"
-
     if @user.valid? and @company.valid?
       @user.save
       @company.save
@@ -22,7 +21,7 @@ class CompaniesController < ApplicationController
         :user => @user,
         :role => "owner"
       )
-
+      UserMailer.welcome_email(@user).deliver
       auto_login(@user)
       remember_me!
       redirect_to dashboard_path
@@ -41,7 +40,6 @@ class CompaniesController < ApplicationController
 
   def detatch_logo
     @company = Company.find(params[:company_id])
-
     authorize! :update, @company
     @company.logo = nil
     if @company.save
