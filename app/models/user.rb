@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
 
   def self.send_daily_digest
     User.all.each do |user|
-      if user.owner?
+      if user.owner? && user.receives_nightly_digest
         UserMailer.daily_digest(user).deliver
       end
     end

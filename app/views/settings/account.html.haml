@@ -15,6 +15,19 @@
 
       = render "shared/error_messages", :target => @user
       %fieldset
+        -if @user.owner?
+          .control-group
+            = f.label "Get daily digest?", { :class => "control-label" }
+            .controls
+              .btn-group.radio_yes_no{ "data-toggle" => "buttons-radio" }
+                - if @user.receives_nightly_digest
+                  = link_to "Yes", nil, :class => "btn active"
+                  = link_to "No", users_no_receive_nightly_digest_path, :class => "btn"
+                - elsif !@user.receives_nightly_digest
+                  = link_to "Yes", users_yes_receive_nightly_digest_path, :class => "btn"
+                  = link_to "No", nil, :class => "btn active"
+              .alert.alert-info
+                Setting 'Yes' will give you a daily summary email of company activities.
         .control-group
           = f.label :first_name, { :class => "control-label" }
           .controls

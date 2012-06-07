@@ -5,10 +5,8 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-
     @invitation = Invitation.find_by_token(params[:invitation_token])
     redirect_to :signup unless @invitation
-
     session[:invitation_token] = @invitation.token
     @user.email = @invitation.recipient_email
   end
@@ -16,20 +14,17 @@ class UsersController < ApplicationController
   def create
     @user = User.new params[:user]
     @user.role = "user"
+    @user.receives_nightly_digest = false
 
     @invitation = Invitation.find_by_token session[:invitation_token]
     redirect_to :signup unless @invitation
-
     if @user.save
-
       CompanyUser.create(
         :user => @user,
         :company => @invitation.sender.company,
         :role => "salesrep"
       )
-
       @invitation.update_attribute :status, "accepted"
-
       auto_login(@user)
       remember_me!
       redirect_to :dashboard
@@ -89,12 +84,23 @@ class UsersController < ApplicationController
     cu.update_attribute :role,  params[:role]
     redirect_to :back
   end
+  
+  def yes_receive_nightly_digest
+    @user = current_user
+    @user.update_attributes(:receives_nightly_digest => true)
+    redirect_to :back
+  end
+  
+  def no_receive_nightly_digest
+    @user = current_user
+    @user.update_attributes(:receives_nightly_digest => false)
+    redirect_to :back
+  end
 
   private
 
   def set_active_user(cu, active)
     cu = current_user.company.company_users.find_by_user_id(params[:id])
-
     authorize! :update, cu
     if cu.update_attribute :active, active
       flash[:notice] = "#{cu.user.full_name} was successfully #{"de" unless active}activated."
