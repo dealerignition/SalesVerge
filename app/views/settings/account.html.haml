@@ -3,7 +3,9 @@
 = render 'tutorial'
 
 .page-header
-  %h1 Account Settings
+  %h1 
+    %i.icon-cogs.icon-large
+    Settings
 .row
   = render 'navigation'
   .span9
@@ -21,11 +23,19 @@
             .controls
               .btn-group.radio_yes_no{ "data-toggle" => "buttons-radio" }
                 - if @user.receives_nightly_digest
-                  = link_to "Yes", nil, :class => "btn active"
-                  = link_to "No", users_no_receive_nightly_digest_path, :class => "btn", :method => :put
+                  = link_to nil, :class => "btn active" do
+                    %i.icon-ok
+                    Yes
+                  = link_to users_no_receive_nightly_digest_path, :class => "btn", :method => :put do
+                    %i.icon-remove
+                    No
                 - elsif !@user.receives_nightly_digest
-                  = link_to "Yes", users_yes_receive_nightly_digest_path, :class => "btn", :method => :put
-                  = link_to "No", nil, :class => "btn active"
+                  = link_to users_yes_receive_nightly_digest_path, :class => "btn", :method => :put do
+                    %i.icon-ok
+                    Yes
+                  = link_to nil, :class => "btn active" do
+                    %i.icon-remove
+                    No
               .alert.alert-info
                 Setting 'Yes' will give you a daily summary email of company activities.
         .control-group

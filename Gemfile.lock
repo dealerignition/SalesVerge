@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/bokmann/font-awesome-rails
+  revision: ef6a5049e789a127e0c602f8b727533cf9ee05e9
+  specs:
+    font-awesome-rails (0.2.1)
+      railties (~> 3.1)
+
+GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: 720e90afffc700ba1d6e73a051877ab82872868f
   specs:
@@ -257,6 +264,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   dalli
   factory_girl_rails
+  font-awesome-rails!
   foreman
   haml-rails
   heroku

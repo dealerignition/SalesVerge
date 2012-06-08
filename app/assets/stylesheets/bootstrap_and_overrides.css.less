@@ -10,9 +10,9 @@ body { margin: 60px 0 70px; }
 
 @import "twitter/bootstrap/responsive";
 
-// Set the correct sprite paths
-@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
-@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
+// Set the correct sprite paths (commented out for use with Font Awesome)
+//  @iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
+//  @iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
 
 // Your custom LESS stylesheets goes here
 //
@@ -24,6 +24,15 @@ body { margin: 60px 0 70px; }
 //
 // Example:
 // @linkColor: #ff0000;
+
+.nav-list [class^="icon-"], [class*=" icon-"] {
+  vertical-align: bottom;
+  width: inherit;
+  height: inherit;
+}
+.nav-list > li > a {
+  padding: 5px 15px 4px 15px;
+}
 
 @baseFontSize: 15px;
 

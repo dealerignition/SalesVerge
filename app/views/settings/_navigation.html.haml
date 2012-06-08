@@ -14,24 +14,26 @@
             - @white = @active ? "icon-white" : nil
             - case tab
             - when "Account"
-              %i.icon-cog{ :class => @white }
+              %i.icon-cog.icon-large{ :class => @white }
               Your Account
             - when "Password"
-              %i.icon-lock{ :class => @white }
+              %i.icon-lock.icon-large{ :class => @white }
               Password
             - when "Company"
-              %i.icon-home{ :class => @white }
+              %i.icon-home.icon-large{ :class => @white }
               Company Info
             - when "Users"
-              %i.icon-user{ :class => @white }
+              %i.icon-user.icon-large{ :class => @white }
               Users
             - when "Extras"
-              %i.icon-star{ :class => @white }
+              %i.icon-star.icon-large{ :class => @white }
               Extras
       %li.divider
       %li
         = link_to send_email_preview_settings_path, :confirm => "This will send a test email to #{@user.email}. Continue?" do
-          %i.icon-envelope
+          %i.icon-envelope.icon-large
           Email Preview
       %li.divider
-      = link_to "Sign Out", logout_path, :confirm => "Are you sure you want to sign out?", :class => "btn"
+      = link_to logout_path, :confirm => "Are you sure you want to sign out?", :class => "btn" do
+        %i.icon-signout.icon-large
+        Sign Out
