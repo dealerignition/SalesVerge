@@ -5,31 +5,30 @@
     %div.control-group
       = f.label "Company name", { :class => "control-label" }
       %div.controls
-        = f.text_field :name, :placeholder => "Your Company"
+        = f.text_field :name, :placeholder => "Your Company", :class => "span3"
   %hr
   %fieldset
     %h3 Personal info
     %div.control-group
       = label :user, :first_name, { :class => "control-label" }
       %div.controls
-        = text_field :user, :first_name, :placeholder => "Joe"
+        = text_field :user, :first_name, :placeholder => "Joe", :class => "span3"
     %div.control-group
       = label :user, :last_name, { :class => "control-label" }
       %div.controls
-        = text_field :user, :last_name, :placeholder => "Smith"
+        = text_field :user, :last_name, :placeholder => "Smith", :class => "span3"
     %div.control-group
       = label :user, :email, { :class => "control-label" }
       %div.controls
-        = text_field :user, :email, :placeholder => "joe@mycarpet.com"
+        = text_field :user, :email, :placeholder => "joe@mycarpet.com", :class => "span3"
     %div.control-group
       = label :user, :password, { :class => "control-label" }
       %div.controls
-        = password_field :user, :password
+        = password_field :user, :password, :class => "span3", :class => "span3"
     %div.control-group
       = label :user, :password_confirmation, { :class => "control-label" }
       %div.controls
-        = password_field :user, :password_confirmation
+        = password_field :user, :password_confirmation, :class => "span3"
     %hr
-    %div.control-group
-      %div.controls
-        = f.submit( "Create Account", :class => "btn btn-primary btn-large" )
+    %div.center
+      = f.submit( "Create Account", :class => "btn btn-primary btn-large" )
