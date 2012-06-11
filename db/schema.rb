@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120607143316) do
+ActiveRecord::Schema.define(:version => 20120608160935) do
 
   create_table "charges", :force => true do |t|
     t.datetime "date"
@@ -79,9 +79,10 @@ ActiveRecord::Schema.define(:version => 20120607143316) do
     t.string   "zip"
     t.string   "email"
     t.string   "phone"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "user_id"
+    t.boolean  "marketable", :default => false
   end
 
   create_table "invitations", :force => true do |t|

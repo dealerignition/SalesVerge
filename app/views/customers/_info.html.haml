@@ -33,6 +33,15 @@
       %td
         %p= f.text_field :state, :value => @customer.state, :class => "quick_edit"
         = f.text_field :zip, :value => @customer.zip, :class => "quick_edit"
+    %tr
+      %td
+        %strong Stay informed about future deals?
+      %td
+        = f.radio_button :marketable, true
+        Yes
+        &nbsp;
+        = f.radio_button :marketable, false
+        No
       
   - if @current_user.subscribes_to_customer_extensions? and @customer.customer_extension
     %tr.customer_extension

@@ -9,26 +9,26 @@
 
   = render "shared/error_messages", :target => @customer
   %fieldset
+    .control-group
+      = f.label :first_name, { :class => "control-label" }
+      .controls
+        = f.text_field :first_name, :placeholder => "Jane"
+    .control-group
+      = f.label :last_name, { :class => "control-label" }
+      .controls
+        = f.text_field :last_name, :placeholder => "Doe"
+    .control-group
+      = f.label :email, { :class => "control-label" }
+      .controls
+        = f.text_field :email, :placeholder => "janedoe@gmail.com", :type => :email
+    .control-group
+      = f.label "Stay informed about future deals?", { :class => "control-label" }
+      .controls
+        .btn-group{ "data-toggle" => "buttons-radio", "data-toggle-name" => "customer[marketable]" }
+          %button.btn.btn-large{ :type => "button", :value => 1, "data-toggle" => "button" } Yes
+          %button.btn.btn-large.active{ :type => "button", :value => 0, "data-toggle" => "button" } No
+        = f.hidden_field :marketable, :value => "0"
     .accordion{ :id => "accordion" }
-      .accordion-group
-        .accordion-heading
-          = link_to "#collapseOne", { :class => "accordion-toggle", "data-toggle" => "collapse" } do
-            %i.icon-exclamation-sign
-            Required
-        #collapseOne{ :class => "accordion-body in" }
-          .accordion-inner
-            .control-group
-              = f.label :first_name, { :class => "control-label" }
-              .controls
-                = f.text_field :first_name, :placeholder => "Jane"
-            .control-group
-              = f.label :last_name, { :class => "control-label" }
-              .controls
-                = f.text_field :last_name, :placeholder => "Doe"
-            .control-group
-              = f.label :email, { :class => "control-label" }
-              .controls
-                = f.text_field :email, :placeholder => "janedoe@gmail.com", :type => :email
       .accordion-group
         .accordion-heading
           = link_to "#collapseTwo", { :class => "accordion-toggle", "data-toggle" => "collapse" } do
