@@ -1,12 +1,11 @@
 .container
   .row
-    .span6.offset3.well
+    .span4.offset8.well{ :style => "background: rgba(255, 255, 255, 0.9); box-shadow: 0px 6px 5px rgba(16, 16, 16, 0.3);" }
       %h1 
         Register
-        %small.hidden-phone.hidden-tablet Setup your account to get started
+        %small.hidden-phone.hidden-tablet to get started
       %p 
         Already Registered?
         = link_to "Sign in", login_path, :class => "btn"
-      %hr
 
       = render 'form_new'

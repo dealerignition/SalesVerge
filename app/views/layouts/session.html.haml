@@ -1,22 +1,23 @@
 -content_for :body do
-  %div.container
-    %div.row
-      %div.span6.offset3
+  .session-background
+  .container
+    .row
+      .span6.offset3
         - if flash[:notice]
-          %div.alert.alert-success
+          .alert.alert-success
             %a.close{ :href => "#", "data-dismiss" => "alert" }
               &times;
             = flash[:notice]
         - if flash[:alert]
-          %div.alert.alert-info
+          .alert.alert-info
             %a.close{ :href => "#", "data-dismiss" => "alert" }
               &times;
             = flash[:alert]
         - if flash[:error]
-          %div.alert.alert-error
+          .alert.alert-error
             %a.close{ :href => "#", "data-dismiss" => "alert" }
               &times;
             = flash[:error]          
     = content_for?(:body) ? yield(:body) : yield
-  
+
 =render :template => "layouts/application"
