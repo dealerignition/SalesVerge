@@ -1,6 +1,5 @@
 DealerOnTheGo::Application.routes.draw do
-  root :to => 'dashboard#index', :as => "dashboard"
-
+  
   get "about" => "about#index"
   get "settings/account"
   get "settings/password"
@@ -60,6 +59,11 @@ DealerOnTheGo::Application.routes.draw do
   get "invitation/connect/:invitation_token" => "invitations#connect", :as => "invitation_connect"
 
   resources :sessions
-
+  
+  match '', to: 'about#dealeronthego', constraints: { subdomain: 'mk1' }
+  match '', to: 'about#floorstoreonthego', constraints: { subdomain: 'mk2' }
+  match '', to: 'about#salesups', constraints: { subdomain: 'mk3' }
+  
+  root :to => 'dashboard#index', :as => "dashboard"
   match ":controller(/:action(/:id))(.:format)"
 end
