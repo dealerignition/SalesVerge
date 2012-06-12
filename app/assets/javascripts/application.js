@@ -20,3 +20,9 @@ Array.prototype.remove = function(from, to) {
           return this.push.apply(this, rest);
 };
 
+function AutoScrollOnload() { var x = 0; var y = 0; window.scrollTo(x,y); }
+function AddOnloadEvent(f) {
+if(typeof window.onload != 'function') { window.onload = f; }
+else { var cache = window.onload; window.onload = function() { if(cache) { cache(); } f(); }; }
+}
+AddOnloadEvent(AutoScrollOnload);
