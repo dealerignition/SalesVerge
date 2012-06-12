@@ -1,6 +1,54 @@
 %body#salesups
+  #hero
+    #leather_bar
+      .container
+        %h3
+          SalesUps
+    .container
+      .row
+        .span6
+          %h1{ :style => "margin-top: 50px;" }
+            We are building the next way to help retail sales people sell more.
+          %br
+          %h4
+            Sign-up be invited to join
+          .controls
+            .input-append
+              = form_for @request, :url => create_app_requests_path do |f|
+                = render "shared/error_messages", :target => @request
+                = f.text_field :email, :placeholder => "Email address", :style => "margin-right: -4px;height: 30px;"
+                = f.submit("Sign-Up", :class => "btn btn-large btn-success")
+            - if flash[:notice]
+              %div.alert.alert-success
+                %a.close{ :href => "#", "data-dismiss" => "alert" }
+                  &times;
+                = flash[:notice]
+            - if flash[:error]
+              %div.alert.alert-error
+                %a.close{ :href => "#", "data-dismiss" => "alert" }
+                  &times;
+                = flash[:error]
+        .span6
+          %img.pull-right{:src => "assets/iphone-screen-2.png", :width => "275px", :style => "margin:50px 0 0 0;margin-right:2%"}
+  %br
   .container
     .row
-      .span12
-        %h1
-          SalesUps.com
+      %ul.thumbnails
+        %li.span4
+          .thumbnail
+            = image_tag("landing_page_2.jpg")
+            .caption
+              %h3 Automation
+              %p Automatically keep in touch with customers
+        %li.span4
+          .thumbnail
+            = image_tag("landing_page_1.jpg")
+            .caption
+              %h3 Learn
+              %p Learn more about your customers, without having to ask
+        %li.span4  
+          .thumbnail
+            = image_tag("landing_page_3.jpg")
+            .caption
+              %h3 Sell More
+              %p Sell more to the "ups" you get each day

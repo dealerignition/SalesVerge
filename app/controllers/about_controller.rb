@@ -7,5 +7,13 @@ class AboutController < ApplicationController
   def dealeronthego
     @request = AppRequest.new
   end
+  
+  def floorstoreonthego
+    @request = AppRequest.new
+  end
+  
+  def salesups
+    @request = AppRequest.new
+  end
 
 end
