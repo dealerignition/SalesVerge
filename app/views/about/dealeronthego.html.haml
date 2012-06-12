@@ -10,13 +10,24 @@
           %h1
             We are building the next way to help retail sales people sell more.
           %br
-          %h3
+          %h4
             Sign-up be invited to join
           .controls
             .input-append
-              %input.span3{:style => "margin-right: -4px;height: 30px;"}
-              %button.btn.btn-success.btn-large
-                SIGN-UP
+              = form_for @request, :url => create_app_requests_path do |f|
+                = render "shared/error_messages", :target => @request
+                = f.text_field :email, :placeholder => "Email address", :style => "margin-right: -4px;height: 30px;"
+                = f.submit("Sign-Up", :class => "btn btn-large btn-success")
+            - if flash[:notice]
+              %div.alert.alert-success
+                %a.close{ :href => "#", "data-dismiss" => "alert" }
+                  &times;
+                = flash[:notice]
+            - if flash[:error]
+              %div.alert.alert-error
+                %a.close{ :href => "#", "data-dismiss" => "alert" }
+                  &times;
+                = flash[:error]
         .span6
           %img.pull-right{:src => "assets/iphone-screen-2.png", :width => "275px", :style => "margin:50px 0 0 0;margin-right:2%"}
   %br
@@ -26,30 +37,18 @@
         %li.span4
           .thumbnail
             %img{:src => "http://placehold.it/370x150", :width => "370"}
-            %br
-            .span3
-              %h3 AUTOMATION
-              Automatically keep in touch with customers
-            .clearfix
-            %br
-            %br
+            .caption
+              %h3 Automation
+              %p Automatically keep in touch with customers
         %li.span4
           .thumbnail
             %img{:src => "http://placehold.it/370x150", :width => "370"}
-            %br
-            .span3
-              %h3 LEARN
-              Learn more about your customers, without having to ask
-            .clearfix
-            %br
+            .caption
+              %h3 Learn
+              %p Learn more about your customers, without having to ask
         %li.span4  
           .thumbnail
             %img{:src => "http://placehold.it/370x150", :width => "370"}
-            %br
-            .span3
-              %h3 SELL MORE
-              Sell more to the "ups" you get each day
-            .clearfix
-            %br
-            %br
-  %hr
+            .caption
+              %h3 Sell More
+              %p Sell more to the "ups" you get each day

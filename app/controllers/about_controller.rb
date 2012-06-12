@@ -3,5 +3,9 @@ class AboutController < ApplicationController
   
   def index
   end
+  
+  def dealeronthego
+    @request = AppRequest.new
+  end
 
 end

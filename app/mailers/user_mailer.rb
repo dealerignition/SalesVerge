@@ -50,5 +50,10 @@ class UserMailer < ActionMailer::Base
     @company = @user.company
     mail(:to => @user.email, :subject => "FYI, #{@customer.full_name} has had some #{@company.sample_name}(s) out for a while")
   end
+  
+  def app_request(app_request)
+    @app_request = app_request
+    mail(:to => @app_request.email, :subject => "Thank you for your interest in DealerOnTheGo")
+  end
 
 end
