@@ -10,11 +10,12 @@
   
 2. Tester installs UDID and sends email back to you.
 3. Add their device ID to iOS provisioning portal and add their device to the Provisioning Profile.
-4. Open Xcode and change the build number
-5. In Xcode refresh the Organizer > Devices page (not sure if this step is actually necessary or not)
+4. Open Xcode and change the build number.
+5. In Xcode refresh the Organizer > Devices page (not sure if this step is actually necessary or not).
 6. Build Xcode app for Testing.
-7. Archive for Ad-Hoc.
+7. Archive and Distribute for Ad-Hoc.
 8. Upload the new build into TestFlight.
+9. Under "Anonymous Devices in Provision Profile" locate and check the device you are inviting and press "Update and Notify".
 9. Send anonymous TestFlight link to tester's email address.
 
   > Tap the link below to install DealerBook on your device.
