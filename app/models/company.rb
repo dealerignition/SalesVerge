@@ -5,6 +5,7 @@ class Company < ActiveRecord::Base
   
   before_validation :smart_add_url_protocol
   before_save :singularize_sample_name
+  before_save :check_configuration
 
   validates_presence_of :name
   validates_presence_of :sample_name
@@ -34,5 +35,24 @@ class Company < ActiveRecord::Base
       end
     end
   end
-  
+
+  def check_configuration
+    valid = true
+    if self.description_type == nil or ["",nil].include? self.description_location
+      valid = false
+    end
+    if self.name_type == nil or ["",nil].include? self.name_location
+      valid = false
+    end
+    if self.price_type == nil or ["",nil].include? self.price_location
+      valid = false
+    end
+    if self.product_number_type == nil or ["",nil].include? self.product_number_location
+      valid = false
+    end
+    if self.website == nil 
+      valid = false
+    end
+    self.scraping_configured = valid
+  end
 end

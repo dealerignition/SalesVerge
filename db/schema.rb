@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612183907) do
+ActiveRecord::Schema.define(:version => 20120613205235) do
 
   create_table "app_requests", :force => true do |t|
     t.string   "name"
     t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "app_name"
   end
 
   create_table "charges", :force => true do |t|
@@ -40,14 +41,25 @@ ActiveRecord::Schema.define(:version => 20120612183907) do
     t.string   "phone"
     t.string   "website"
     t.string   "facebook"
-    t.string   "sample_name",       :default => "Sample"
+    t.string   "sample_name",             :default => "Sample"
     t.string   "logo"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.string   "description_location"
+    t.string   "description_type"
+    t.string   "name_location"
+    t.string   "name_type"
+    t.string   "price_location"
+    t.string   "price_type"
+    t.string   "product_number_location"
+    t.string   "product_number_type"
+    t.boolean  "scraping_configured",     :default => false
+    t.boolean  "currently_scraping",      :default => false
+    t.datetime "last_scrape"
   end
 
   create_table "company_users", :force => true do |t|
@@ -134,9 +146,13 @@ ActiveRecord::Schema.define(:version => 20120612183907) do
     t.string   "dealer_sample_id"
     t.string   "name"
     t.string   "sample_type"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "company_id"
+    t.text     "description"
+    t.string   "price"
+    t.string   "url"
+    t.string   "creator",          :default => "User"
   end
 
   create_table "sent_emails", :force => true do |t|
