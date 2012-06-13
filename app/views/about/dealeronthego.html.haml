@@ -9,8 +9,7 @@
           %h1{ :style => "margin-top: 50px;" }
             We are building the next way to help retail sales people sell more.
           %br
-          %h4
-            Sign-up be invited to join
+          %h4 Sign-up be invited to join
           .controls
             .input-append
               = form_for @request, :url => create_app_requests_path do |f|
@@ -29,7 +28,7 @@
                   &times;
                 = flash[:error]
         .span6
-          %img.pull-right{:src => "assets/iphone-screen-2.png", :width => "275px", :style => "margin:50px 0 0 0;margin-right:2%"}
+          .pull-right= image_tag "iphone-screen-2.png", :width => "275px", :style => "margin:50px 0 0 0;margin-right:2%"
   %br
   .container
     .row
