@@ -2,13 +2,12 @@
   #hero
     #leather_bar
       .container
-        %h3
-          FloorStoreOnTheGo
+        %h3= @app_name
     .container
       .row
         .span6
           %h1{ :style => "margin-top: 50px;" }
-            We are building the next way to help retail sales people sell more.
+            No more lost opportunities. Connect with your potential customers.
           %br
           %h4
             Sign-up be invited to join
@@ -18,6 +17,7 @@
                 = render "shared/error_messages", :target => @request
                 = f.text_field :email, :placeholder => "Email address", :style => "margin-right: -4px;height: 30px;"
                 = f.submit("Sign-Up", :class => "btn btn-large btn-success")
+                = f.hidden_field :app_name, :value => @app_name
             - if flash[:notice]
               %div.alert.alert-success
                 %a.close{ :href => "#", "data-dismiss" => "alert" }
@@ -29,7 +29,7 @@
                   &times;
                 = flash[:error]
         .span6
-          %img.pull-right{:src => "assets/iphone-screen-2.png", :width => "275px", :style => "margin:50px 0 0 0;margin-right:2%"}
+          .pull-right= image_tag "iphone-screen-2.png", :width => "275px", :style => "margin:50px 0 0 0;margin-right:2%"
   %br
   .container
     .row

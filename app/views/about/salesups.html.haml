@@ -2,22 +2,21 @@
   #hero
     #leather_bar
       .container
-        %h3
-          SalesUps
+        %h3= @app_name
     .container
       .row
         .span6
           %h1{ :style => "margin-top: 50px;" }
             We are building the next way to help retail sales people sell more.
           %br
-          %h4
-            Sign-up be invited to join
+          %h4 Sign-up be invited to join
           .controls
             .input-append
               = form_for @request, :url => create_app_requests_path do |f|
                 = render "shared/error_messages", :target => @request
                 = f.text_field :email, :placeholder => "Email address", :style => "margin-right: -4px;height: 30px;"
                 = f.submit("Sign-Up", :class => "btn btn-large btn-success")
+                = f.hidden_field :app_name, :value => @app_name
             - if flash[:notice]
               %div.alert.alert-success
                 %a.close{ :href => "#", "data-dismiss" => "alert" }
