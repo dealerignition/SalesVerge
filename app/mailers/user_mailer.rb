@@ -53,7 +53,7 @@ class UserMailer < ActionMailer::Base
   
   def app_request(app_request)
     @app_request = app_request
-    mail(:to => @app_request.email, :subject => "Thank you for your interest in DealerOnTheGo")
+    mail(:to => @app_request.email, :subject => "Thank you for your interest in #{@app_request.app_name}")
   end
 
 end

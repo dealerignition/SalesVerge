@@ -3,7 +3,7 @@ class AdminMailer < ActionMailer::Base
 
   def app_request(app_request)
     @app_request = app_request
-    mail(:to => "demo@dealeronthego.com", :subject => "Someone requested an invite")
+    mail(:to => "support@dealerignition.com", :subject => "Invite request for #{@app_request.app_name}")
   end
   
 end
