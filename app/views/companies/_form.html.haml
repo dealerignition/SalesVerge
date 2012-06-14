@@ -38,6 +38,52 @@
       = f.label "website", { :class => "control-label" }
       .controls
         = f.text_field :website, :placeholder => "awesomeproducts.com"
+        %button#toggle_scraping_config{ :onclick => "return false;", :class => "btn", "data-toggle" => "button" }
+          Configure Scraping
+        %div.scraping_config
+          %h3
+            Scraping Configuration
+            - if @company.scraping_configured
+              %small.label.label-success
+                - if @company.currently_scraping == true
+                  = "Currently Scraping" 
+                - elsif @company.scraping_configured == true and @company.last_scrape == nil
+                  = "Scrape Scheduled"
+                - elsif @company.last_scrape != nil
+                  = "#{Sample.where(['company_id = ?', @company.id]).length} Products Scraped"
+          %br
+          .control-group
+            = f.label "Description Type", { :class => "control-label" }
+            .controls
+              = f.select :description_type, ['id', 'class', 'custom']
+          .control-group
+            = f.label "Description Location", { :class => "control-label" }
+            .controls
+              = f.text_field :description_location
+          .control-group
+            = f.label "Name Type", { :class => "control-label" }
+            .controls
+              = f.select :name_type, ['id', 'class', 'custom']
+          .control-group
+            = f.label "Name Location", { :class => "control-label" }
+            .controls
+              = f.text_field :name_location
+          .control-group
+            = f.label "Price Type", { :class => "control-label" }
+            .controls
+              = f.select :price_type, ['id', 'class', 'custom']
+          .control-group
+            = f.label "Price Location", { :class => "control-label" }
+            .controls
+              = f.text_field :price_location
+          .control-group
+            = f.label "Skew Type", { :class => "control-label" }
+            .controls
+              = f.select :product_number_type, ['id', 'class', 'custom']
+          .control-group
+            = f.label "Skew Location", { :class => "control-label" }
+            .controls
+              = f.text_field :product_number_location
     .control-group
       = f.label "Facebook page", { :class => "control-label" }
       .controls
