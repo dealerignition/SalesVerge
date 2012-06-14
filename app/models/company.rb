@@ -38,21 +38,22 @@ class Company < ActiveRecord::Base
 
   def check_configuration
     valid = true
-    if self.description_type == nil or ["",nil].include? self.description_location
+    if self.description_type == nil or self.description_location.blank?
       valid = false
     end
-    if self.name_type == nil or ["",nil].include? self.name_location
+    if self.name_type == nil or self.name_location.blank?
       valid = false
     end
-    if self.price_type == nil or ["",nil].include? self.price_location
+    if self.price_type == nil or self.price_location.blank?
       valid = false
     end
-    if self.product_number_type == nil or ["",nil].include? self.product_number_location
+    if self.product_number_type == nil or self.product_number_location.blank?
       valid = false
     end
-    if self.website == nil 
+    if self.website.blank?
       valid = false
     end
     self.scraping_configured = valid
+    true
   end
 end
