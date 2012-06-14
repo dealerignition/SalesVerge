@@ -19,7 +19,7 @@ class SettingsController < ApplicationController
 
   def general
     @user = current_user
-    @company = @user.company
+    @company = Company.find(@user.company.id)
   end
 
   def users
