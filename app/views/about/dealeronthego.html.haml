@@ -35,19 +35,20 @@
       %ul.thumbnails
         %li.span4
           .thumbnail
-            = image_tag("landing_page_2.jpg")
+            = image_tag 'landing_page_2.jpg'
             .caption
               %h3 Automation
               %p Automatically keep in touch with customers
         %li.span4
           .thumbnail
-            = image_tag("landing_page_1.jpg")
+            = image_tag 'landing_page_1.jpg'
             .caption
               %h3 Learn
               %p Learn more about your customers, without having to ask
         %li.span4  
           .thumbnail
-            = image_tag("landing_page_3.jpg")
+            = image_tag 'landing_page_3.jpg'
             .caption
               %h3 Sell More
               %p Sell more to the "ups" you get each day
+  = render 'net_results_script'
