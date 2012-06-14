@@ -16,11 +16,11 @@ class DashboardController < ApplicationController
                           .where(@date_range_string.gsub("updated_at", "quotes.updated_at"))
     @timeline_stream += SampleCheckout.accessible_by(current_ability)
                           .includes(:customer, :sample)
-                          .where(@date_range_string.gsub("updated_at", "sample_checkouts.updated_at"))
+                          .where(@date_range_string.gsub("checkin_time", "sample_checkouts.checkin_time"))
     @timeline_stream += Note.accessible_by(current_ability)
                           .includes(:customer)
                           .where(@date_range_string.gsub("updated_at", "notes.updated_at"))
-    @timeline_stream.sort! { |a,b| -(a.updated_at <=> b.updated_at) }
+    @timeline_stream.sort! { |a,b| -((a.is_a?(SampleCheckout) ? a.checktime : a.updated_at) <=> (b.is_a?(SampleCheckout) ? b.checktime : b.updated_at)) }
     @email_stream = SentEmail.accessible_by(current_ability).order("created_at DESC")
  end
 

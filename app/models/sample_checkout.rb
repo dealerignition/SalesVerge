@@ -16,5 +16,13 @@ class SampleCheckout < ActiveRecord::Base
     end
   end
   
+  def checktime
+    if self.checkin_time.present?
+      checktime = self.checkin_time
+    else
+      checktime = self.checkout_time
+    end
+  end
+  
 end
 
