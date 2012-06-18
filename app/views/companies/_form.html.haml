@@ -84,6 +84,10 @@
             = f.label "Skew Location", { :class => "control-label" }
             .controls
               = f.text_field :product_number_location
+          .control-group
+            = f.label "Scrape Frequency", { :class => "control-label" }
+            .controls
+              = f.select :run_every_x_days, [['Daily',1],['Weekly',7],['Monthly',30]]            
     .control-group
       = f.label "Facebook page", { :class => "control-label" }
       .controls

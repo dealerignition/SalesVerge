@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120613205235) do
+ActiveRecord::Schema.define(:version => 20120618105856) do
 
   create_table "app_requests", :force => true do |t|
     t.string   "name"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20120613205235) do
     t.boolean  "scraping_configured",     :default => false
     t.boolean  "currently_scraping",      :default => false
     t.datetime "last_scrape"
+    t.integer  "run_every_x_days",        :default => 7
   end
 
   create_table "company_users", :force => true do |t|
