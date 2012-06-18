@@ -29,21 +29,24 @@ class ScrapyJob
       products = @scraper.retrieve_products
       @scraper.cleanup
       
+      puts "Got #{products.length} Product(s)"
+      
       Sample.where(["company_id = ? and creator = 'System'", company.id]).destroy_all
       
       products.each do |product|
+        puts product
         sample = Sample.new
-        sample.dealer_sample_id = product[:Skew]
-        sample.name = product[:Name]
+        sample.dealer_sample_id = product["Skew"]
+        sample.name = product["Name"]
         sample.creator = 'System'
-        sample.sample_type = company.something
+        sample.sample_type = company.sample_name
         sample.created_at = DateTime::now
         sample.updated_at = DateTime::now
-        sample.price = product[:Price].to_f
-        sample.url = product[:page_url]
-        sample.description = product[:Description]
+        sample.price = product["Price"].to_f
+        sample.url = product[:page_url].to_s
+        sample.description = product["Description"]
         sample.company_id = company.id
-        sample.save
+        sample.save!
       end
       
       @success = true
