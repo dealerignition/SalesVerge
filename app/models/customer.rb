@@ -7,7 +7,7 @@ class Customer < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :last_name
   validates_presence_of :user_id
-  validates_uniqueness_of :email, :for => :company
+  before_save :verify_uniqueness_of_email_within_company
 
   has_many :sample_checkouts, :dependent => :destroy
   has_many :quotes, :dependent => :destroy
@@ -32,4 +32,15 @@ class Customer < ActiveRecord::Base
     Rails.cache.fetch("customer_#{id}_has_sample_checkouts") { sample_checkouts.any? }
   end
 
+  def verify_uniqueness_of_email_within_company
+    ids = self.user.company.users.collect { |user| user.id }
+    taken_emails = Customer.where("user_id in (?)", ids).collect { |cust| cust.email }
+
+    if taken_emails.include?(self.email)
+      errors.add(:base, "Email already taken")
+      false
+    else
+      true
+    end
+  end
 end
