@@ -36,11 +36,12 @@ class Customer < ActiveRecord::Base
     ids = self.user.company.users.collect { |user| user.id }
     taken_emails = Customer.where("user_id in (?)", ids).collect { |cust| cust.email }
 
-    if taken_emails.include?(self.email)
-      errors.add(:base, "Email already taken")
-      false
-    else
-      true
+    if email_changed?
+      if taken_emails.include?(self.email)
+        errors.add(:base, "Email already taken")
+        return false
+      end
     end
+    nil
   end
 end
