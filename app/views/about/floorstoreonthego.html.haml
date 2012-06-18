@@ -14,7 +14,7 @@
             .input-append
               = form_for @request, :url => create_app_requests_path do |f|
                 = render "shared/error_messages", :target => @request
-                = f.text_field :email, :placeholder => "Email address", :style => "margin-right: -4px;height: 30px;"
+                = f.text_field :email, :placeholder => "Email address", :style => "margin-right: -4px; height: 30px;"
                 = f.submit("Sign-Up", :class => "btn btn-large btn-success")
                 = f.hidden_field :app_name, :value => @app_name
             - if flash[:notice]
@@ -27,6 +27,7 @@
                 %a.close{ :href => "#", "data-dismiss" => "alert" }
                   &times;
                 = flash[:error]
+          .pull-left= image_tag "coming_soon_app_store.png", :style => "margin:15px 0 0 0"
         .span6
           .pull-right= image_tag "iphone-screen-2.png", :width => "275px", :style => "margin:50px 0 0 0;margin-right:2%"
   %br
@@ -35,19 +36,20 @@
       %ul.thumbnails
         %li.span4
           .thumbnail
-            = image_tag("landing_page_2.jpg")
+            = image_tag 'landing_page_2.jpg'
             .caption
               %h3 Automation
               %p Automatically keep in touch with customers
         %li.span4
           .thumbnail
-            = image_tag("landing_page_1.jpg")
+            = image_tag 'landing_page_1.jpg'
             .caption
               %h3 Learn
               %p Learn more about your customers, without having to ask
         %li.span4  
           .thumbnail
-            = image_tag("landing_page_3.jpg")
+            = image_tag 'landing_page_3.jpg'
             .caption
               %h3 Sell More
               %p Sell more to the "ups" you get each day
+  = render 'net_results_script'

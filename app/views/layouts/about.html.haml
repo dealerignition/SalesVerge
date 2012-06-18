@@ -9,4 +9,5 @@
     =javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
     =javascript_include_tag "application"
     =csrf_meta_tags
-    = content_for?(:body) ? yield(:body) : yield
+    %script{ :src => "//cdn.optimizely.com/js/10244520.js" }
+  = content_for?(:body) ? yield(:body) : yield

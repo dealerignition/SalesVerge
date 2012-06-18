@@ -27,27 +27,29 @@
                 %a.close{ :href => "#", "data-dismiss" => "alert" }
                   &times;
                 = flash[:error]
+          .pull-left= image_tag "coming_soon_app_store.png", :style => "margin:15px 0 0 0"
         .span6
-          .pull-right= image_tag "iphone-screen-2.png", :width => "275px", :style => "margin:50px 0 0 0;margin-right:2%"
+          .pull-right= image_tag "iphone-screen-2.png", :width => "275px", :style => "margin:50px 0 0 0;margin-right:18px"
   %br
   .container
     .row
       %ul.thumbnails
         %li.span4
           .thumbnail
-            = image_tag("landing_page_2.jpg")
+            = image_tag 'landing_page_2.jpg'
             .caption
               %h3 Automation
               %p Automatically keep in touch with customers
         %li.span4
           .thumbnail
-            = image_tag("landing_page_1.jpg")
+            = image_tag 'landing_page_1.jpg'
             .caption
               %h3 Learn
               %p Learn more about your customers, without having to ask
         %li.span4  
           .thumbnail
-            = image_tag("landing_page_3.jpg")
+            = image_tag 'landing_page_3.jpg'
             .caption
               %h3 Sell More
               %p Sell more to the "ups" you get each day
+  = render 'net_results_script'
