@@ -15,7 +15,7 @@
               = form_for @request, :url => create_app_requests_path do |f|
                 = render "shared/error_messages", :target => @request
                 = f.text_field :email, :placeholder => "Email address", :style => "margin-right: -4px;height: 30px;"
-                = f.submit("Sign-Up", :class => "btn btn-large btn-success")
+                = f.submit("Sign-Up", :class => "btn btn-large btn-success round-override")
                 = f.hidden_field :app_name, :value => @app_name
             - if flash[:notice]
               %div.alert.alert-success
