@@ -33,13 +33,15 @@ class Customer < ActiveRecord::Base
   end
 
   def verify_uniqueness_of_email_within_company
-    ids = self.user.company.users.collect { |user| user.id }
-    taken_emails = Customer.where("user_id in (?)", ids).collect { |cust| cust.email }
-
-    if email_changed?
-      if taken_emails.include?(self.email)
-        errors.add(:base, "Email already taken")
-        return false
+    if self.user.company != nil
+      ids = self.user.company.users.collect { |user| user.id }
+      taken_emails = Customer.where("user_id in (?)", ids).collect { |cust| cust.email }
+      
+      if email_changed?
+        if taken_emails.include?(self.email)
+          errors.add(:base, "Email already taken")
+          return false
+        end
       end
     end
     nil
