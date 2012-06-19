@@ -4,9 +4,9 @@
       .container
         %h3= @app_name
     .container
-      .row
+      .row{ :style => "margin-top: 50px;" }
         .span6
-          %h1{ :style => "margin-top: 50px;" }
+          %h1
             We are building the next way to help retail sales people sell more.
           %br
           %h4 Sign-up be invited to join
@@ -29,7 +29,8 @@
                 = flash[:error]
           .pull-left= image_tag "coming_soon_app_store.png", :style => "margin:15px 0 0 0"
         .span6
-          .pull-right= image_tag "iphone-screen-2.png", :width => "275px", :style => "margin:50px 0 0 0;margin-right:18px"
+          .hidden-phone
+            %iframe{ :src => "http://player.vimeo.com/video/44335339", :width => "400", :height => "230", "frameborder" => "0" }
   %br
   .container
     .row
