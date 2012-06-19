@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'anemone'
-gem 'aws-s3'
 gem 'aws-sdk'
 gem 'cancan'
 gem 'dalli'

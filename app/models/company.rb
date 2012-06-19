@@ -16,7 +16,7 @@ class Company < ActiveRecord::Base
   has_attached_file :logo,
     :styles => { :large => "200x200>" },
     :storage => :s3,
-    :s3_credentials => "config/s3.yml",
+    :s3_credentials => "config/aws.yml",
     :path => "/:style/:id/:filename"
 
   def singularize_sample_name

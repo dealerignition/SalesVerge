@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar,
     :styles => { :thumb => "100x100#" },
     :storage => :s3,
-    :s3_credentials => "config/s3.yml",
+    :s3_credentials => "config/aws.yml",
     :path => "/:style/:id/:filename"
 
   def active?

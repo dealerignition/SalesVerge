@@ -53,10 +53,6 @@ GEM
     arel (3.0.2)
     autotest-rails (4.1.2)
       ZenTest (~> 4.5)
-    aws-s3 (0.6.3)
-      builder
-      mime-types
-      xml-simple
     aws-sdk (1.5.3)
       httparty (~> 0.7)
       json (~> 1.4)
@@ -257,7 +253,6 @@ GEM
     valid_email (0.0.4)
       activemodel
       mail
-    xml-simple (1.1.1)
 
 PLATFORMS
   ruby
@@ -265,7 +260,6 @@ PLATFORMS
 DEPENDENCIES
   anemone
   autotest-rails
-  aws-s3
   aws-sdk
   cancan
   coffee-rails (~> 3.2.1)
