@@ -2,8 +2,7 @@
 
 - content_for :subnav do
   .pull-left
-    %input#js-customersearch.search-query{ :type => :search,
-      :value => params[:query], :placeholder => "Find a customer..." }
+    %input#js-customersearch.search-query{ :type => :search, :value => params[:query], :placeholder => "Find a customer..." }
   .pull-right
     = link_to new_customer_path, { :id => "newCustomer", :class => "btn btn-success btn-large" } do
       %i{ :class => "icon-plus icon-white" }
