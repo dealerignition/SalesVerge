@@ -1,9 +1,9 @@
 development:
-  bucket: dealeronthego_development
+  bucket: dealeronthego
   access_key_id: 00WBDRTXYTWV1346XJ02
   secret_access_key: MyL2VMuDlQXrOQjpx1bNX2uvMkKOUFJ8QRu3psgL
 test:
-  bucket: dealeronthego_development
+  bucket: dealeronthego
   access_key_id: 00WBDRTXYTWV1346XJ02
   secret_access_key: MyL2VMuDlQXrOQjpx1bNX2uvMkKOUFJ8QRu3psgL
 production:
