@@ -85,6 +85,14 @@
             .controls
               = f.text_field :product_number_location
           .control-group
+            = f.label "Image Type", { :class => "control-label" }
+            .controls
+              = f.select :image_type, ['id', 'class', 'custom']
+          .control-group
+            = f.label "Image Location", { :class => "control-label" }
+            .controls
+              = f.text_field :image_location
+          .control-group
             = f.label "Scrape Frequency", { :class => "control-label" }
             .controls
               = f.select :run_every_x_days, [['Daily',1],['Weekly',7],['Monthly',30]]            

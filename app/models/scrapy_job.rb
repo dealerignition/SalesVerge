@@ -17,7 +17,8 @@ class ScrapyJob
     options = [{:type=>"#{company.description_type}",:name=>"Description",:location=>"#{company.description_location}"},
                {:type=>"#{company.name_type}",:name=>"Name",:location=>"#{company.name_location}"},
                {:type=>"#{company.price_type}",:name=>"Price",:location=>"#{company.price_location}"},
-               {:type=>"#{company.product_number_type}",:name=>"Skew",:location=>"#{company.product_number_location}"}]
+               {:type=>"#{company.product_number_type}",:name=>"Skew",:location=>"#{company.product_number_location}"},
+               {:type=>"#{company.image_type}",:name=>"Image",:location=>"#{company.image_location}"}]
 
     @success = nil
     @scraper = Scrapy::Crawler.new(company.website, options)
@@ -38,6 +39,7 @@ class ScrapyJob
         sample = Sample.new
         sample.dealer_sample_id = product["Skew"]
         sample.name = product["Name"]
+        sample.image_url = product["Image"]
         sample.creator = 'System'
         sample.sample_type = company.sample_name
         sample.created_at = DateTime::now

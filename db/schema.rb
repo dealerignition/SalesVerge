@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120618105856) do
+ActiveRecord::Schema.define(:version => 20120620190039) do
 
   create_table "app_requests", :force => true do |t|
     t.string   "name"
@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(:version => 20120618105856) do
     t.boolean  "currently_scraping",      :default => false
     t.datetime "last_scrape"
     t.integer  "run_every_x_days",        :default => 7
+    t.string   "image_location"
+    t.string   "image_type"
   end
 
   create_table "company_users", :force => true do |t|
@@ -154,6 +156,7 @@ ActiveRecord::Schema.define(:version => 20120618105856) do
     t.string   "price"
     t.string   "url"
     t.string   "creator",          :default => "User"
+    t.string   "image_url"
   end
 
   create_table "sent_emails", :force => true do |t|
