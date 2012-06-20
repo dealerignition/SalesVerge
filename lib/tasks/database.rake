@@ -15,4 +15,18 @@ namespace :db do
     end
     puts `PGPASSWORD='#{db["development"]["password"]}' /Library/PostgreSQL/9.1/bin/pg_restore -h #{db["development"]["host"]} -U #{db["development"]["username"]} -d dotg_development --clean #{Date.today.to_s}.dump`
   end
+
+  task :mirror_current_prod do
+    APPLICATION_NAME = "dealeronthego"
+    db = YAML.load_file('config/database.yml')
+    `heroku pgbackups:capture --expire --app #{APPLICATION_NAME}`
+    ids = `heroku pgbackups --app #{APPLICATION_NAME}`
+    cur_id = ids.match(/b\d{3}/)[1]
+    url = `heroku pgbackups:url #{cur_id} --app #{APPLICATION_NAME}`
+    url = url.slice!(0,url.length-1)
+    today = Date.today
+    `curl "#{url}" > #{today.to_s}.dump`
+    puts `PGPASSWORD='#{db["development"]["password"]}' /Library/PostgreSQL/9.1/bin/pg_restore -h #{db["development"]["host"]} -U #{db["development"]["username"]} -d dotg_development --clean #{Date.today.to_s}.dump`
+    `rm #{today.to_s}.dump`
+  end
 end
