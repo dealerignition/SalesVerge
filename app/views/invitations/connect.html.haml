@@ -1,3 +1,7 @@
+- if @invitation.recipient 
+  - @sample_name = @invitation.recipient.company.sample_name.pluralize
+- else
+  - @sample_name = "Sample"
 - unless @invitation.status == "accepted"
   .row
     .span6.offset3
@@ -7,7 +11,7 @@
         .alert.alert-info
           %h2 Important
           %p 
-            All your customers' information, your quotes, and your samples will be transfered to #{ @invitation.sender.company.name }. Your current company information will be discarded. 
+            All your customers' information, your quotes, and your #{@sample_name} will be transferred to #{@invitation.sender.company.name}. Your current company information will be discarded. 
             %em You cannot undo this.
 
         %p.center

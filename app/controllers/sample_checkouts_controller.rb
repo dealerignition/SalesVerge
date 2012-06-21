@@ -11,22 +11,19 @@ class SampleCheckoutsController < ApplicationController
         sample_checkouts.push(SampleCheckout.create :customer => @customer,
                                   :user => current_user,
                                   :sample => Sample.find(id),
-                                  :checkout_time => Time.now
-                              )
+                                  :checkout_time => Time.now)
       end
       CustomerMailer.sample_checkout(sample_checkouts).deliver
-
       flash[:notice] = "#{current_user.company.sample_name.pluralize} were successfully checked-out. An email was sent to #{@customer.email}."
       redirect_to :back
     else
       @sample_checkout = SampleCheckout.new(params[:sample_checkout])
-
       if @sample_checkout.save
         CustomerMailer.sample_checkout(@sample_checkout).deliver
-        flash[:notice] = "#{@sample_checkout.sample.name} was successfully checked-out. An email was sent to #{@sample_checkout.customer.email}."
+        flash[:notice] = "#{current_user.company.sample_name} was successfully checked-out. An email was sent to #{@sample_checkout.customer.email}."
         redirect_to sample_checkouts_path
       else
-        flash[:error] = "Sample was not checked-out."
+        flash[:error] = "#{current_user.company.sample_name} was not checked-out."
         render "new"
       end
 
@@ -35,13 +32,11 @@ class SampleCheckoutsController < ApplicationController
 
   def update
     @sample_checkout = SampleCheckout.find(params[:id])
-
     if @sample_checkout.update_attributes(params[:sample_checkout])
       flash[:notice] = "#{@sample_checkout.sample.name} was successfully checked-in."
     else
-      flash[:error] = "Sample was not updated."
+      flash[:error] = "#{current_user.company.sample_name} was not updated."
     end
-
     redirect_to sample_checkouts_path
   end
 
@@ -49,9 +44,9 @@ class SampleCheckoutsController < ApplicationController
     @sample_checkout = SampleCheckout.find(params[:sample_checkout_id])
     @sample_checkout.checkin_time = Time.now
     if @sample_checkout.save
-      flash[:notice] = "Sample has been checked-in."
+      flash[:notice] = "#{current_user.company.sample_name} has been checked-in."
     else
-      flash[:error] = "Sample has not been checked-in."
+      flash[:error] = "#{current_user.company.sample_name} has not been checked-in."
     end
     redirect_to :back
   end

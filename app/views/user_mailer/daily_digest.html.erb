@@ -3,7 +3,7 @@
 <p>
   <table width="100%" border="0" cellpadding="4">
     <tr align="left">
-      <td>Samples Today</td>
+      <td><%= @user.company.sample_name.capitalize.pluralize %> Today</td>
       <td>Quotes Today</td>
     </tr>
     <tr>
@@ -20,7 +20,7 @@
 <p>
   <%- if @samples && @samples.count > 0 %>
     <p>
-      <h3>Samples Today | <%= link_to "View All Samples", url_for(:controller => "sample_checkouts", :action => "index", :only_path => false) %> &rarr;</h3>
+      <h3><%= @user.company.sample_name.capitalize.pluralize %> Today | <%= link_to "View All Samples", url_for(:controller => "sample_checkouts", :action => "index", :only_path => false) %> &rarr;</h3>
       <table cellspacing="0" cellpadding="0" width="100%" class="tablebordered">
         <thead>
           <th class="left">Name</th>

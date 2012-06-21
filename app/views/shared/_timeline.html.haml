@@ -82,6 +82,6 @@
                       = time_ago_in_words(email.created_at)
                       ago
                     - if email.notification_type = "sample_checkout"
-                      ==- Sample notification was emailed to #{customer.email}
+                      ==- #{current_user.company.sample_name} check-out notification was emailed to #{customer.email}
                     - elsif email.notification_type = "long_checkout"
                       ==- Long checkout notification was emailed to #{customer.email}

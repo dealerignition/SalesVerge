@@ -28,7 +28,7 @@ class SamplesController < ApplicationController
         flash[:notice] = "#{@sample.name} was successfully created."
         redirect_to :back
       else
-        flash[:error] = "Sample was not successfully created."
+        flash[:error] = "#{current_user.company.sample_name} was not successfully created."
         redirect_to :back
       end
     end

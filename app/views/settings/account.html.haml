@@ -89,4 +89,4 @@
             == days
             %p
             .alert.alert-info
-              This setting will determine when we will send email reminders about samples, test drives, etc.
+              This setting will determine when we will send email reminders about #{current_user.company.sample_name.downcase.pluralize}.
