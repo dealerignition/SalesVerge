@@ -10,7 +10,7 @@
 = render 'tutorial'
 
 #customers.row
-  = render @records || @customers
+  = render @records.order('updated_at DESC') || @customers
 
 .row
   .span12
