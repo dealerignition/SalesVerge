@@ -10,4 +10,6 @@
     =javascript_include_tag "application"
     =csrf_meta_tags
     %script{ :src => "//cdn.optimizely.com/js/10244520.js" }
+    - unless Rails.env == "development"
+      = render "shared/google_analytics"
   = content_for?(:body) ? yield(:body) : yield
