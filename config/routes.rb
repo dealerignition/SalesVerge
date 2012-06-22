@@ -38,6 +38,7 @@ DealerOnTheGo::Application.routes.draw do
 
   resources :companies do
     put "detatch_logo", :as => "detatch_logo"
+    put "set_wants_website_scraped", :as => "set_wants_website_scraped"
   end
 
   resources :company_users

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120620190039) do
+ActiveRecord::Schema.define(:version => 20120622184637) do
 
   create_table "app_requests", :force => true do |t|
     t.string   "name"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20120620190039) do
     t.integer  "run_every_x_days",        :default => 7
     t.string   "image_location"
     t.string   "image_type"
+    t.boolean  "wants_website_scraped"
   end
 
   create_table "company_users", :force => true do |t|
