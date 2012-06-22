@@ -1,0 +1,34 @@
+.row
+  .span8.offset2
+    = link_to settings_company_path, :class => "btn" do
+      %i.icon-arrow-left
+      Back to Settings
+    %hr
+    %h1 Help Configuring the Website Scraper
+    %p You can set this app to scrape your website for products to automatically upload items to your samples. This is an advanced feature. Bellow is some help documentation on how to configure your the app to scrape your website
+    %br
+    %h2 The id option
+    %p For the <code>id</code> option, input the name of the id of the HTML element that contains the value.
+    %h6 example
+    %pre
+      = preserve do
+        :escaped
+          <h1 id="productTitle">Your Product Name</h1>
+    %p In this case the you would need to enter <code>productTitle</code> into the box after the "id" selection
+    %br
+    %h2 The class option
+    %p The <code>class</code> option is the same as the <code>id</code>, but using the class attribute instead.
+    %h6 example
+    %pre
+      = preserve do
+        :escaped
+          <p class="desc">This is the description of a product.</p>
+    %p In this case the you would need to enter <code>desc</code> into the box after the "class" selection
+    %br
+    %h2 The custom option
+    %p This is the most confusing of the three.
+    %h6 example
+    %pre
+      = preserve do
+        :escaped
+          div[@class='imageViewer']/li

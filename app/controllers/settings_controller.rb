@@ -42,10 +42,9 @@ class SettingsController < ApplicationController
     redirect_to :back
   end
 
-  def email_preview_source
+  def scraper_help
     @user = current_user
     @company = @user.company
-    render :layout => false
   end
 
 end

@@ -38,7 +38,7 @@
       = f.label "website", { :class => "control-label" }
       .controls
         = f.text_field :website, :placeholder => "awesomeproducts.com"
-        %button#toggle_scraping_config{ :onclick => "return false;", :class => "btn", "data-toggle" => "button" }
+        %button#toggle_scraping_config.hidden-phone{ :onclick => "return false;", :class => "btn", "data-toggle" => "button" }
           Configure Scraping
         %div.scraping_config.well
           %h3
