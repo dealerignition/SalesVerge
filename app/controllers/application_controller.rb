@@ -100,7 +100,7 @@ class ApplicationController < ActionController::Base
       msg = "page"
     end
 
-    redirect_to :back, :flash => { :error => "You do not have permission to #{ exception.action } this#{ " " + msg }." }
+    redirect_to :back, :flash => { :error => "You do not have permission to #{ exception.action } this #{ msg }." }
   end
 
 end
