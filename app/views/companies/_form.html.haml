@@ -38,9 +38,9 @@
       = f.label "website", { :class => "control-label" }
       .controls
         = f.text_field :website, :placeholder => "awesomeproducts.com"
-        %button#toggle_scraping_config.hidden-phone{ :onclick => "return false;", :class => "btn", "data-toggle" => "button" }
+        %a#toggle_scraping_config{ :class => "btn", "data-toggle" => "button" }
           Website Product Grabber
-        %div.scraping_config.alert.alert-success
+        %div#scraping_config.alert.alert-success.hide
           %h3 We'll search your website for you
           %p If you want, we'll send our gnomes to search through your website and grab product information for you to use.
           - unless @company.wants_website_scraped

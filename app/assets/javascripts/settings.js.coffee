@@ -1,6 +1,9 @@
 $ ->
   $("#expandNewUser").click ->
     $("#newUserArea").slideToggle()
+  
+  $("#toggle_scraping_config").click ->
+    $("#scraping_config").slideToggle()
 
   $(".js-userRole").change ->
     name = $(this).closest("tr").find("b").text().trim()

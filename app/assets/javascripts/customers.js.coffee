@@ -164,7 +164,3 @@ $ ->
           <span class='close'>&times;</span>
         </a>
       </li>"
-
-    $("#toggle_scraping_config").click ->
-      $(".scraping_config").slideToggle()
-      
