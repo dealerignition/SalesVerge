@@ -33,7 +33,7 @@
         Suggestions?
       %p.terms
         %small
-          = link_to "Terms/Conditions", "../terms"
+          = link_to "Terms/Conditions", "../terms", :target => "_blank"
     - if Rails.env.production?
       = render "shared/clicky_tracking"
   
