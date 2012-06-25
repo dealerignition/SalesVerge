@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
   before_filter :require_login
-  before_filter :require_owner, :only => [:company, :general, :users]
+  before_filter :require_owner, :only => [:general, :users]
 
   skip_authorization_check
 

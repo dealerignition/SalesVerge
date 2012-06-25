@@ -9,4 +9,7 @@
   = render 'navigation'
     
   .span9
+    - if current_user.salesrep?
+      .alert
+        Since you are not the account owner, you don't have permission to update the company settings. 
     = render 'companies/form'

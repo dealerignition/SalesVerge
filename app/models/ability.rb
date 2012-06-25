@@ -35,7 +35,7 @@ class Ability
         
         #Can see sent email history
         can :read, SentEmail
-
+        
         role = user.company_users.find_by_company_id(user.company).role.downcase
         case role
         when "owner"
@@ -50,16 +50,21 @@ class Ability
 
           # Can manage the whole company.
           can :manage, @models, :customer_id => customer_ids
-        when "salesrep" 
+        when "salesrep"
           # Can modify charges for own quotes.
           can :manage, Charge, :quote => { :user_id => user.id }
+          
           # Can view charges for the whole company's quotes.
           can :read, Charge, :quote => { :customer_id => customer_ids }
 
           # Can manage own information.
           can :manage, @models, :user_id => user.id
-          # Can read all the company information.
+          
+          # Can read all the customer information.
           can :read, @models, :customer_id => customer_ids
+          
+          # Can read the information for the company.
+          can :read, Company, :id => user.company.id
         end
       end
     else

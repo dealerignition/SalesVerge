@@ -1,7 +1,10 @@
 = form_for @company, :html => { :class => "form-horizontal", :id => "company_form" } do |f|
   - content_for :subnav do
     .pull-right
-      %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large", :form => "company_form" }
+      - if current_user.owner?
+        %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large", :form => "company_form" }
+      - else   
+        %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large disabled" }
 
   = render "shared/error_messages", :target => @company
   %fieldset
@@ -38,19 +41,20 @@
       = f.label "website", { :class => "control-label" }
       .controls
         = f.text_field :website, :placeholder => "awesomeproducts.com"
-        %a#toggle_scraping_config{ :class => "btn", "data-toggle" => "button" }
-          Website Product Grabber
-        %div#scraping_config.alert.alert-success.hide
-          %h3 We'll search your website for you
-          %p If you want, we'll send our gnomes to search through your website and grab product information for you to use.
-          - unless @company.wants_website_scraped
-            = link_to company_set_wants_website_scraped_path(@company), :class => "btn btn-success", :method => :put do
-              %i.icon-chevron-right
-              Submit my site!
-          - else
-            = link_to nil, :class => "btn btn-success disabled" do
-              %i.icon-ok
-              Thanks! your site has been submitted!
+        - if current_user.owner?
+          %a#toggle_scraping_config{ :class => "btn", "data-toggle" => "button" }
+            Website Product Grabber
+          %div#scraping_config.alert.alert-success.hide
+            %h3 We'll search your website for you
+            %p If you want, we'll send our gnomes to search through your website and grab product information for you to use.
+            - unless @company.wants_website_scraped
+              = link_to company_set_wants_website_scraped_path(@company), :class => "btn btn-success", :method => :put do
+                %i.icon-chevron-right
+                Submit my site!
+            - else
+              = link_to nil, :class => "btn btn-success disabled" do
+                %i.icon-ok
+                Thanks! your site has been submitted!
     .control-group
       = f.label "Facebook page", { :class => "control-label" }
       .controls

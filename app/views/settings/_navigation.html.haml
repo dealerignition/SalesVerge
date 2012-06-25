@@ -2,9 +2,9 @@
   .well{ :style => "padding: 8px 0;"}
     %ul.nav.nav-list
 
-      - options = ["Account", "Password", "Extras"]
+      - options = ["Account", "Password", "Company", "Extras"]
       - if current_user.owner?
-        - options.insert 2, ["Company", "Users"]
+        - options.insert 4, ["Users"]
         - options.flatten!
 
       - options.each do |tab|
