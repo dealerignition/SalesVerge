@@ -25,12 +25,15 @@
   %body
     = content_for?(:body) ? yield(:body) : yield
     %hr
-    .center
+    .container.center
       %h5
         Have a suggestion for DealerOnTheGo?
       %a.btn{:href => "http://salesups.uservoice.com/", :target => "_blank"}
         %i.icon-bullhorn
         Suggestions?
+      %p.terms
+        %small
+          = link_to "Terms/Conditions", "../terms"
     - if Rails.env.production?
       = render "shared/clicky_tracking"
   
