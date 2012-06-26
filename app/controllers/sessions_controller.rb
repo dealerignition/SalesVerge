@@ -22,5 +22,19 @@ class SessionsController < ApplicationController
     flash[:alert] = "Come back soon!"
     redirect_to login_path
   end
+  
+  def login_as
+    if !current_user.admin?
+      flash[:alert] = 'You must be an admin to do that'
+    else
+      if user = User.find_by_email(params[:email])
+        auto_login(user)
+        flash[:notice] = "Logged in as #{params[:email]}"
+      else
+        flash[:alert] = "No such user"
+      end
+    end
+    redirect_to dashboard_path
+  end
 
 end

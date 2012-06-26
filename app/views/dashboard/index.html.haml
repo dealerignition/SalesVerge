@@ -8,6 +8,9 @@
     %button.btn.btn-large.btn-info#quote Quotes
   - unless current_user.salesrep?
     .hidden-phone.pull-right
+      - if current_user.admin?
+        %a#login_as_button.btn.btn-inverse{ :href => "#" }
+          Login as...
       = link_to big_screen_path, :class => "btn border-fix" do
         %i.icon-eye-open
         Big Screen

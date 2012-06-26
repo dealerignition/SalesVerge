@@ -26,3 +26,10 @@ if(typeof window.onload != 'function') { window.onload = f; }
 else { var cache = window.onload; window.onload = function() { if(cache) { cache(); } f(); }; }
 }
 AddOnloadEvent(AutoScrollOnload);
+
+$(document).ready(function() {
+  $("#login_as_button").click( function() {
+    var email = prompt("Login as what e-mail address?", "example@example.com");
+    window.location = "/login_as?email=" + email
+  })
+});

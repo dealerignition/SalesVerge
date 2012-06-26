@@ -23,6 +23,8 @@ DealerOnTheGo::Application.routes.draw do
   put "users/yes_receive_nightly_digest" => "users#yes_receive_nightly_digest"
   put "users/no_receive_nightly_digest" => "users#no_receive_nightly_digest"
 
+  match '/login_as' => "sessions#login_as"
+
   resource :settings do
     get :send_email_preview
   end
