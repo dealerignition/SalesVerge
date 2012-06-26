@@ -17,6 +17,8 @@ gem 'sorcery'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'font-awesome-rails', :git => 'git://github.com/bokmann/font-awesome-rails'
 gem 'valid_email'
+gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-bootstrap'
 
 group :development, :test do
   gem 'rspec-rails'

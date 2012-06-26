@@ -21,6 +21,9 @@ class DashboardController < ApplicationController
                           .includes(:customer)
                           .where(@date_range_string.gsub("updated_at", "notes.updated_at"))
     @timeline_stream.sort! { |a,b| -((a.is_a?(SampleCheckout) ? a.checktime : a.updated_at) <=> (b.is_a?(SampleCheckout) ? b.checktime : b.updated_at)) }
+    if current_user.admin?
+      @timeline_stream = @timeline_stream.paginate(:page => params[:page], :per_page => 30)
+    end
     @email_stream = SentEmail.accessible_by(current_ability).order("created_at DESC")
  end
 

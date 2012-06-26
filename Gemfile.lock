@@ -253,6 +253,9 @@ GEM
     valid_email (0.0.4)
       activemodel
       mail
+    will_paginate (3.0.3)
+    will_paginate-bootstrap (0.2.1)
+      will_paginate (>= 3.0.3)
 
 PLATFORMS
   ruby
@@ -288,3 +291,5 @@ DEPENDENCIES
   twitter-bootstrap-rails!
   uglifier (>= 1.0.3)
   valid_email
+  will_paginate (~> 3.0)
+  will_paginate-bootstrap
