@@ -2,21 +2,5 @@
 <p>We will be following up with you shortly.</p>
 <p>Please take a minute to fill out our <a href="<%= @survey_link %>">short survey</a> so we can learn a little bit about you and your store.</p>
 
-<!--
-<h2><a href="http://www.dealeronthego.com/signup">Access your personal DealerOnTheGo account</a></h2>
-<p>Please remember that the app is still in development, so it must be accessed in Safari. Any information stored in DealerOnTheGo will automatically transfer to your account once the app is available in the App Store.</p>
--->
-
 <hr />
-
-<a href="http://www.facebook.com/sharer.php?u=www.dealeronthego.com&amp;src=sp">
-  <%= image_tag('share_fb.gif') %>
-</a>
-
-<a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Ftwitter.com%2Fabout%2Fresources%2Fbuttons&source=tweetbutton&text=Check%20out%20&url=http%3A%2F%2Fwww.dealeronthego.com">
-  <%= image_tag('share_twitter.gif') %>
-</a>
-
-<a href="mailto:enteryour@friendsaddress.com?subject=DealerOnTheGo&body=Check out DealerOnTheGo. www.dealeronthego.com">
-  <%= image_tag('share_email.gif') %>
-</a>
+<%= render 'share_buttons' %>
