@@ -2,6 +2,13 @@ class UserMailer < ActionMailer::Base
   layout "customer_mailer", :only => [:email_preview]
   include CanCan::Ability
   default from: "notifications@dealeronthego.com"
+  
+  DID_YOU_KNOW = [
+    "You can see extended information about your customers by going into Extras inside your Settings and subscribing to the Extended customer information feature.",
+    "You can invite co-workers to join your company under the Users section in your Settings.", 
+    "You can have us pull in the latest products from your website by tapping the Website Product Grabber under your Company Info settings.",
+    "You can upload your own avatar/photo in your Account Settings that will be used in email messages sent to your customers."
+  ]
 
   def welcome_email(user)
     @user = user
@@ -54,6 +61,13 @@ class UserMailer < ActionMailer::Base
   def app_request(app_request)
     @app_request = app_request
     mail(:to => @app_request.email, :subject => "Thank you for your interest in #{@app_request.app_name}")
+  end
+  
+  def low_activity(user)
+    @user = user
+    r = Random.new
+    @did_you_know = DID_YOU_KNOW[r.rand(0..3)]
+    mail(:to => @user.email, :subject => "Getting started")
   end
 
 end

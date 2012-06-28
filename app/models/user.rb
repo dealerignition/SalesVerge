@@ -111,5 +111,15 @@ class User < ActiveRecord::Base
       end
     end
   end
+  
+  def self.send_low_activity_mailer
+    User.all.each do |user|
+      if user.created_at >= 4.days.ago && user.customers.count <= 2 && user.receive_low_activity_mailer == true
+        UserMailer.low_activity(user).deliver
+        user.receive_low_activity_mailer = false
+        user.save
+      end
+    end
+  end
 
 end
