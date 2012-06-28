@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
     user = login(params[:email], params[:password], params[:remember_me])
     @user = User.find_by_email(params[:email])
     if user
-      flash[:notice] = "Welcome, #{@user.first_name}!"
+      @user.increase_sign_in_count
+      flash[:notice] = "Welcome, #{@user.first_name}!"      
       redirect_back_or_to dashboard_path
     else
       flash[:error] = "Email or password was invalid."

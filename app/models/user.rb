@@ -34,6 +34,12 @@ class User < ActiveRecord::Base
     :s3_credentials => "config/aws.yml",
     :path => "/:style/:id/:filename"
 
+  def increase_sign_in_count
+    self.sign_in_count += 1
+    self.save
+    self
+  end
+  
   def active?
     company_users.first.active?
   end
