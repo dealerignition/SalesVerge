@@ -34,10 +34,10 @@ class User < ActiveRecord::Base
     :s3_credentials => "config/aws.yml",
     :path => "/:style/:id/:filename"
 
-  def increase_sign_in_count
+  def increase_sign_in_count_and_update_last_sign_in
     self.sign_in_count += 1
+    self.last_sign_in = Time.now
     self.save
-    self
   end
   
   def active?

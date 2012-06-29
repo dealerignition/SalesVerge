@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120628142306) do
+ActiveRecord::Schema.define(:version => 20120629193434) do
 
   create_table "app_requests", :force => true do |t|
     t.string   "name"
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(:version => 20120628142306) do
     t.boolean  "receives_nightly_digest",           :default => true
     t.boolean  "receive_low_activity_mailer",       :default => true
     t.integer  "sign_in_count",                     :default => 0
+    t.datetime "last_sign_in"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
