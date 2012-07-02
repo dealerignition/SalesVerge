@@ -1,5 +1,5 @@
 class AnonymousMailer < ActionMailer::Base
-  default from: "notifications@dealeronthego.com"
+  default from: "notifications@salesverge.com"
   
   def app_request(app_request)
     @app_request = app_request

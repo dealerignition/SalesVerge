@@ -27,7 +27,7 @@ class Invitation < ActiveRecord::Base
 
   def owner_status
     if recipient && recipient.salesrep?
-      errors.add :recipient, "is a sales rep for another company. We don't support importing sales reps at present. Please <a href='mailto://support@dealeronthego.com'>email us</a>."
+      errors.add :recipient, "is a sales rep for another company. We don't support importing sales reps at present. Please <a href='mailto://support@salesverge.com'>email us</a>."
     end
   end
 

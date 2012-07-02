@@ -1,5 +1,5 @@
 class CustomerMailer < ActionMailer::Base
-  default from: "notifications@dealeronthego.com"
+  default from: "notifications@salesverge.com"
 
   # NOTE: Every mailer must have a @company variable defined as the customer_mailer layout is expecting one
   # NOTE: Every mailer must have a @user variable defined as the signature partial is expecting one
@@ -61,7 +61,7 @@ class CustomerMailer < ActionMailer::Base
 
   def set_display_name
     # Set the FROM header to include the user's name
-    @address = Mail::Address.new "notifications@dealeronthego.com"
+    @address = Mail::Address.new "notifications@salesverge.com"
     @address.display_name = @user.full_name
   end
 

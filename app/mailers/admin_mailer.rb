@@ -1,9 +1,9 @@
 class AdminMailer < ActionMailer::Base
-  default from: "notifications@dealeronthego.com"
+  default from: "notifications@salesverge.com"
 
   def app_request(app_request)
     @app_request = app_request
-    mail(:to => "support@dealerignition.com", :subject => "Invite request for #{@app_request.app_name}")
+    mail(:to => "support@salesverge.com", :subject => "Invite request for #{@app_request.app_name}")
   end
   
 end

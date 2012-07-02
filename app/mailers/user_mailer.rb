@@ -1,7 +1,7 @@
 class UserMailer < ActionMailer::Base
   layout "customer_mailer", :only => [:email_preview]
   include CanCan::Ability
-  default from: "notifications@dealeronthego.com"
+  default from: "notifications@salesverge.com"
   
   DID_YOU_KNOW = [
     "You can see extended information about your customers by going into Extras inside your Settings and subscribing to the Extended customer information feature.",
@@ -13,7 +13,7 @@ class UserMailer < ActionMailer::Base
   def welcome_email(user)
     @user = user
     @url = login_path
-    mail(:to => @user.email, :subject => "Welcome to DealerOnTheGo")
+    mail(:to => @user.email, :subject => "Welcome to SalesVerge")
   end
 
   def daily_digest(user)
