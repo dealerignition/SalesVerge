@@ -1,6 +1,6 @@
 require File.expand_path('../boot', __FILE__)
-
 require 'rails/all'
+require 'totango'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -62,6 +62,8 @@ module DealerOnTheGo
     config.action_mailer.raise_delivery_errors = true
 
     config.cache_store = :dalli_store
+    
+    Totango.srv_id 'SP-2236-01'
 
   end
 end

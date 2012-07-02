@@ -1,6 +1,10 @@
 class NotesController < ApplicationController
   load_and_authorize_resource
-
+  
+  track :new, "started a new note"
+  track :create, "created a new note"
+  track :destroy, "deleted a note"
+  
   def new
     @note = Note.new
 

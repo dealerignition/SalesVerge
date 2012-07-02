@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
+  include Totango::Adapters::Rails
   check_authorization :except => :close_tutorial
   protect_from_forgery
+  
+  # Pass in identifiers for Totango
+  sp_default :user, proc { current_user.full_name }
+  sp_default :organization, proc { current_user.company.name }
+  
   layout 'main'
 
   def confirm_active
