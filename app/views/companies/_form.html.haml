@@ -62,7 +62,14 @@
     .control-group
       = f.label "Sample Name", { :class => "control-label" }
       .controls
-        = f.text_field :sample_name, :placeholder => "Sample"
+        = f.text_field :sample_name, :placeholder => "Sample"      
         %p
           .alert.alert-info
             This term describes objects that can be checked in and out of your store. Some examples are "Demo", "Bike", "Trial".
+= form_for @company, :html => { :class => "form-horizontal", :id => "products_form" } do |f|
+  .control-group
+    = f.label "Upload #{@company.sample_name.pluralize}", { :class => "control-label" }
+    .controls
+      = f.file_field :file
+      %input{ :type => :submit, :value => "Upload", :class => "btn btn-success", :form => "products_form" }
+      

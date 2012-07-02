@@ -1,3 +1,5 @@
+require 'csv'
+
 class CompaniesController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource :only => [:detatch_logo, :set_wants_website_scraped]
@@ -32,8 +34,16 @@ class CompaniesController < ApplicationController
 
   def update
     @company = Company.find(params[:id])
-    if @company.update_attributes(params[:company])
-      flash[:notice] = "Account settings saved."
+    if params[:company][:file] == nil
+      if @company.update_attributes(params[:company])
+        flash[:notice] = "Account settings saved."
+      end
+    else 
+      if upload_products(params[:company][:file])
+        flash[:notice] = "Products saved successfully."
+      else
+        flash[:error] = "An error occurred while saving your products.  Are you sure your file is in the correct format?"
+      end
     end
     redirect_to :back
   end
@@ -56,6 +66,26 @@ class CompaniesController < ApplicationController
       flash[:notice] = "Thank you for submitting your website. We will get our gnomes working on it within 24 hours."
     end
     redirect_to settings_company_path
+  end
+
+  def upload_products(file)
+    begin
+      CSV.foreach(file.tempfile, {:headers=>true}) do |row|
+        s = Sample.new
+        s.dealer_sample_id = row["SKU#"]
+        s.name = row["Name"]
+        s.company = @company
+        s.description = row["Description"]
+        s.price = row["Price"]
+        s.url = row["URL"]
+        s.creator = "CSV"
+        s.save!
+      end
+    rescue => e
+      logger.error e
+      return false
+    end
+    true
   end
 
 end
