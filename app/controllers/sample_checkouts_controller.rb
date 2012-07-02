@@ -3,6 +3,9 @@ class SampleCheckoutsController < ApplicationController
   before_filter :confirm_active
   load_and_authorize_resource
 
+  track :create, "checked out a sample"
+  track :check_in, "checked a sample back in"
+  
   def create
     if params[:customer_id] && params[:sample_ids]
       @customer = Customer.find(params[:customer_id])
@@ -30,6 +33,7 @@ class SampleCheckoutsController < ApplicationController
     end
   end
 
+  #FIXME Do we even use this?
   def update
     @sample_checkout = SampleCheckout.find(params[:id])
     if @sample_checkout.update_attributes(params[:sample_checkout])

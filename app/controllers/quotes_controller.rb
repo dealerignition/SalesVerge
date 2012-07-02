@@ -2,6 +2,12 @@ class QuotesController < ApplicationController
   before_filter :require_login
   before_filter :confirm_active
   load_and_authorize_resource
+  
+  track :show, "viewed a quote" 
+  track :new, "started a new quote"
+  track :create, "created a new quote"
+  track :update, "updated a quote"
+  track :deliver_customer_mailer, "sent a quote to a customer"
 
   def show
     @quote = Quote.find(params[:id])

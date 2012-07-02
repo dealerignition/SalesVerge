@@ -3,6 +3,15 @@ class SettingsController < ApplicationController
   before_filter :require_owner, :only => [:general, :users]
 
   skip_authorization_check
+  
+  track :account, "visited account settings"
+  track :password, "visited password settings"
+  track :company, "visited company settings"
+  track :general, "visited general settings"
+  track :users, "visited users"
+  track :extras, "visited extras"
+  track :send_email_preview, "sent an email preview"
+  track :scraper_help
 
   def account
     @user = current_user

@@ -1,8 +1,10 @@
 class InvitationsController < ApplicationController
   before_filter :require_login, :only => [:connect, :accept, :reject]
   layout "session"
-
   skip_authorization_check
+  
+  track :new, "started a new invitation"
+  track :create, "created a new invitation"
 
   def new
     @invitation = Invitation.new

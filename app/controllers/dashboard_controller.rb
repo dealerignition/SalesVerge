@@ -4,6 +4,9 @@ class DashboardController < ApplicationController
   # TODO: Change this when dashboard is finished.
   skip_authorization_check
 
+  track :index, "visited the dashboard"
+  track :big_screen, "visited the big screen"
+  
   def index
     @date_options = DATE_RANGES.keys
     @date_range = params[:date_range].to_s.to_sym

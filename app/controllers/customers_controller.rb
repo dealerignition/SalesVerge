@@ -1,8 +1,13 @@
 class CustomersController < ApplicationController
   before_filter :require_login
   before_filter :confirm_active
-
   load_and_authorize_resource
+  
+  track :index, "visited the customer index page"
+  track :show, "viewed a customer"
+  track :new, "started a new customer"
+  track :create, "created a new customer"
+  track :update, "updated a customer"
 
   def index
     searchable_index(Customer, [:first_name, :last_name, :email])
