@@ -3,7 +3,7 @@ class AnonymousMailer < ActionMailer::Base
   
   def app_request(app_request)
     @app_request = app_request
-    if @app_request.app_name == 'DealerOnTheGo'
+    if @app_request.app_name == 'SalesVerge'
       @survey_link = 'https://dealerignition.wufoo.com/forms/dealeronthego-request/'
     elsif @app_request.app_name == 'FloorStoreOnTheGo'
       @survey_link = 'https://dealerignition.wufoo.com/forms/floorstoreonthego-request/'
@@ -15,7 +15,7 @@ class AnonymousMailer < ActionMailer::Base
   
   def app_invite(app_request)
     @app_request = app_request
-    if @app_request.app_name == 'DealerOnTheGo'
+    if @app_request.app_name == 'SalesVerge'
       @survey_link = 'https://dealerignition.wufoo.com/forms/dealeronthego-request/'
     elsif @app_request.app_name == 'FloorStoreOnTheGo'
       @survey_link = 'https://dealerignition.wufoo.com/forms/floorstoreonthego-request/'

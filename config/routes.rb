@@ -1,4 +1,4 @@
-DealerOnTheGo::Application.routes.draw do
+SalesVerge::Application.routes.draw do
   
   get "about" => "about#index"
   put "app_requests/create" => "app_requests#create", :as => "create_app_requests"
@@ -64,7 +64,7 @@ DealerOnTheGo::Application.routes.draw do
 
   resources :sessions
   
-  match '', to: 'about#dealeronthego', constraints: { subdomain: 'mk1' }
+  match '', to: 'about#salesverge', constraints: { subdomain: 'mk1' }
   match '', to: 'about#floorstoreonthego', constraints: { subdomain: 'mk2' }
   match '', to: 'about#salesups', constraints: { subdomain: 'mk3' }
   

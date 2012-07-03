@@ -4,9 +4,9 @@ class AboutController < ApplicationController
   def index
   end
   
-  def dealeronthego
+  def salesverge
     @request = AppRequest.new
-    @app_name = "DealerOnTheGo"
+    @app_name = "SalesVerge"
   end
   
   def floorstoreonthego

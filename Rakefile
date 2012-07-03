@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-DealerOnTheGo::Application.load_tasks
+SalesVerge::Application.load_tasks
