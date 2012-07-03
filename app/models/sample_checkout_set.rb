@@ -17,7 +17,8 @@ class SampleCheckoutSet < ActiveRecord::Base
                         where sample_checkouts.checkin_time is null 
                           and (sample_checkout_sets.notifications_received is null or sample_checkout_sets.notifications_received < 1) 
                           and (current_date - sample_checkouts.checkout_time::date) > users.reminder_interval_days
-                        group by sample_checkout_sets.id, users.id;')
+                        group by sample_checkout_sets.id, sample_checkout_sets.notifications_received, sample_checkout_sets.created_at, 
+                          sample_checkout_sets.updated_at, sample_checkout_sets.customer_id, sample_checkout_sets.user_id')
     sample_sets_out.each do |s|
       sample_checkouts = s.sample_checkouts
       CustomerMailer.long_checkout_notification(sample_checkouts).deliver unless sample_checkouts.empty?
