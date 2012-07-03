@@ -7,41 +7,20 @@ class SampleCheckoutsController < ApplicationController
   track :check_in, "checked a sample back in"
   
   def create
-    if params[:customer_id] && params[:sample_ids]
-      @customer = Customer.find(params[:customer_id])
-      sample_checkouts = []
-      params[:sample_ids].split("|").each do |id|
-        sample_checkouts.push(SampleCheckout.create :customer => @customer,
-                                  :user => current_user,
-                                  :sample => Sample.find(id),
-                                  :checkout_time => Time.now)
-      end
-      CustomerMailer.sample_checkout(sample_checkouts).deliver
-      flash[:notice] = "#{current_user.company.sample_name.pluralize} were successfully checked-out. An email was sent to #{@customer.email}."
-      redirect_to :back
-    else
-      @sample_checkout = SampleCheckout.new(params[:sample_checkout])
-      if @sample_checkout.save
-        CustomerMailer.sample_checkout(@sample_checkout).deliver
-        flash[:notice] = "#{current_user.company.sample_name} was successfully checked-out. An email was sent to #{@sample_checkout.customer.email}."
-        redirect_to sample_checkouts_path
-      else
-        flash[:error] = "#{current_user.company.sample_name} was not checked-out."
-        render "new"
-      end
-
+    @customer = Customer.find(params[:customer_id])
+    @sample_checkout_set = SampleCheckoutSet.create(:customer_id => @customer.id, :user_id => current_user.id)
+    sample_checkouts = []
+    params[:sample_ids].split("|").each do |id|
+      sample_checkouts.push(SampleCheckout.create :customer => @customer,
+                                                  :user => current_user,
+                                                  :sample => Sample.find(id),
+                                                  :checkout_time => Time.now,
+                                                  :sample_checkout_set_id => @sample_checkout_set.id)
     end
-  end
-
-  #FIXME Do we even use this?
-  def update
-    @sample_checkout = SampleCheckout.find(params[:id])
-    if @sample_checkout.update_attributes(params[:sample_checkout])
-      flash[:notice] = "#{@sample_checkout.sample.name} was successfully checked-in."
-    else
-      flash[:error] = "#{current_user.company.sample_name} was not updated."
-    end
-    redirect_to sample_checkouts_path
+    sample_checkout_set = @sample_checkout_set
+    CustomerMailer.sample_checkout(sample_checkout_set).deliver
+    flash[:notice] = "#{current_user.company.sample_name}(s) were successfully checked-out. An email was sent to #{@customer.email}."
+    redirect_to :back
   end
 
   def check_in

@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :sample_checkouts, :dependent => :destroy
   has_many :customers, :dependent => :destroy
   has_many :notes, :dependent => :destroy
+  
+  has_many :sample_checkouts_sets, :dependent => :destroy
 
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
   has_many :recieved_invitations, :class_name => 'Invitation', :foreign_key => 'recipient_id'

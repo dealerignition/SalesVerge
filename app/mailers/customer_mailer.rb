@@ -25,11 +25,11 @@ class CustomerMailer < ActionMailer::Base
     SentEmail.create(:customer_id => @customer.id, :notification_type => "quote_won", :notification_type_id => @quote.id)
   end
 
-  def sample_checkout(sample_checkouts)
+  def sample_checkout(sample_checkout_set)
     sample_checkouts = [sample_checkouts, ] unless sample_checkouts.instance_of? Array
-    @sample_checkouts = sample_checkouts
-    @customer = sample_checkouts.first.customer
-    @user = sample_checkouts.first.user
+    @sample_checkouts = sample_checkout_set.sample_checkouts
+    @customer = @sample_checkouts.first.customer
+    @user = @sample_checkouts.first.user
     @company = @user.company
     title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some #{@company.sample_name.pluralize}"
 
@@ -47,13 +47,9 @@ class CustomerMailer < ActionMailer::Base
     @company = @user.company
     title = @sample_checkouts.count == 1 ? @sample_checkouts.first.sample.name : "some #{@company.sample_name.pluralize}"
     set_display_name
-    mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "You still have #{title}. Would you please bring it back to the store?", :reply_to => @user.email)
+    mail(:from => @address.format, :sender => @user.email, :to => @customer.email, :subject => "You still have #{title}. Would you please return what you have back to the store?", :reply_to => @user.email)
 
-    sample_checkouts.each do |s|
-      s.notifications_received = s.notifications_received + 1
-      s.save
-    end
-
+    SampleCheckoutSet.find_by_id(@sample_checkouts.first.sample_checkout_set_id).update_attributes(:notifications_received => 1)
     SentEmail.create(:customer_id => @customer.id, :notification_type => "long_checkout", :notification_type_id => @sample_checkouts.first.id)
   end
 

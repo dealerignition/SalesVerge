@@ -13,6 +13,8 @@ class Customer < ActiveRecord::Base
   has_many :quotes, :dependent => :destroy
   has_many :notes, :dependent => :destroy
   has_many :sent_emails, :dependent => :destroy
+  
+  has_many :sample_checkouts_sets, :dependent => :destroy
 
   has_one :customer_extension, :dependent => :destroy
 

@@ -18,15 +18,11 @@ class CustomersController < ApplicationController
     @charge = Charge.new
     @sample = Sample.new
     @note = Note.new
-
     @user = User.find_by_id(current_user.id)
-
     @timeline_stream = @customer.quotes.includes(:customer, :charges)
     @timeline_stream += @customer.sample_checkouts.includes(:customer, :sample)
     @timeline_stream += @customer.notes
-
-    @timeline_stream.sort! { |a,b| -(a.updated_at <=> b.updated_at) }
-    
+    @timeline_stream.sort! { |a,b| -((a.is_a?(SampleCheckout) ? a.checktime : a.updated_at) <=> (b.is_a?(SampleCheckout) ? b.checktime : b.updated_at)) }
     @email_stream = SentEmail.accessible_by(current_ability).order("created_at DESC")
   end
 
@@ -37,7 +33,6 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(params[:customer])
     @customer.user = current_user
-
     if @customer.save
       if current_user.subscribes_to_customer_extensions?
         CustomerExtension.create(:customer_id => @customer.id)

@@ -17,7 +17,7 @@ namespace :db do
   end
 
   task :mirror_current_prod do
-    APPLICATION_NAME = "dealeronthego"
+    APPLICATION_NAME = "salesverge"
     db = YAML.load_file('config/database.yml')
     `heroku pgbackups:capture --expire --app #{APPLICATION_NAME}`
     ids = `heroku pgbackups --app #{APPLICATION_NAME}`
