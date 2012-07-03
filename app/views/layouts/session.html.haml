@@ -19,4 +19,5 @@
             = flash[:error]          
     = content_for?(:body) ? yield(:body) : yield
   
-=render :template => "layouts/application"
+= render :template => "layouts/application"
+= render 'shared/net_results_script'
