@@ -1,12 +1,12 @@
 development:
-  bucket: dealeronthego
+  bucket: salesverge
   access_key_id: 00WBDRTXYTWV1346XJ02
   secret_access_key: MyL2VMuDlQXrOQjpx1bNX2uvMkKOUFJ8QRu3psgL
 test:
-  bucket: dealeronthego
+  bucket: salesverge
   access_key_id: 00WBDRTXYTWV1346XJ02
   secret_access_key: MyL2VMuDlQXrOQjpx1bNX2uvMkKOUFJ8QRu3psgL
 production:
-  bucket: dealeronthego
+  bucket: salesverge
   access_key_id: 00WBDRTXYTWV1346XJ02
   secret_access_key: MyL2VMuDlQXrOQjpx1bNX2uvMkKOUFJ8QRu3psgL
