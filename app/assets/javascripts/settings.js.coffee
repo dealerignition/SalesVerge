@@ -4,6 +4,10 @@ $ ->
   
   $("#toggle_scraping_config").click ->
     $("#scraping_config").slideToggle()
+    
+  $("#toggleProductUploader").click ->
+    $("#productUploader").slideToggle()
+  
 
   $(".js-userRole").change ->
     name = $(this).closest("tr").find("b").text().trim()

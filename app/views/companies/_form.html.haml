@@ -44,7 +44,7 @@
         - if current_user.owner?
           %a#toggle_scraping_config{ :class => "btn", "data-toggle" => "button" }
             Website Product Grabber
-          %div#scraping_config.alert.alert-success.hide
+          #scraping_config.alert.alert-success.hide
             %h3 We'll search your website for you
             %p If you want, we'll send our gnomes to search through your website and grab product information for you to use.
             - unless @company.wants_website_scraped
@@ -60,16 +60,28 @@
       .controls
         = f.text_field :facebook, :placeholder => "http://facebook.com/YourPage"
     .control-group
-      = f.label "Sample Name", { :class => "control-label" }
+      = f.label "Product Name", { :class => "control-label" }
       .controls
-        = f.text_field :sample_name, :placeholder => "Sample"      
+        = f.text_field :sample_name, :placeholder => "Sample"
+        %a#toggleProductUploader{ :class => 'btn', "data-toggle" => 'button' }
+          Upload
+          = @company.sample_name.pluralize
+        %p
+        #productUploader.alert.alert-success.hide
+          = form_for @company, :html => { :class => "form-horizontal", :id => "products_form" } do |f|
+            %h3 Upload your products using our csv template
+            %p Follow these 3 steps
+            %p
+              %span.badge 1
+              = link_to '/salesverge_product_uploader.csv', :target => "_blank", :class => 'btn btn-success' do
+                %i.icon-download-alt.icon-white
+                Download template
+            %p
+              %span.badge 2
+              = f.file_field :file
+            %p
+              %span.badge 3
+              %input{ :type => :submit, :value => "Upload", :class => "btn btn-success", :form => "products_form" }
         %p
           .alert.alert-info
             This term describes objects that can be checked in and out of your store. Some examples are "Demo", "Bike", "Trial".
-= form_for @company, :html => { :class => "form-horizontal", :id => "products_form" } do |f|
-  .control-group
-    = f.label "Upload #{@company.sample_name.pluralize}", { :class => "control-label" }
-    .controls
-      = f.file_field :file
-      %input{ :type => :submit, :value => "Upload", :class => "btn btn-success", :form => "products_form" }
-      
