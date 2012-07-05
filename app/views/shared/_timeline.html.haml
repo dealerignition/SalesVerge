@@ -86,4 +86,4 @@
                     - elsif email.notification_type = "long_checkout"
                       ==- Long checkout notification was emailed to #{customer.email}
   - if current_user.admin?
-    = will_paginate @timeline_stream, :renderer => BootstrapPagination::Rails 
+    = will_paginate @timeline_stream, :renderer => BootstrapPagination::Rails

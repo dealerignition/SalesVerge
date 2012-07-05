@@ -23,6 +23,9 @@ class CustomersController < ApplicationController
     @timeline_stream += @customer.sample_checkouts.includes(:customer, :sample)
     @timeline_stream += @customer.notes
     @timeline_stream.sort! { |a,b| -((a.is_a?(SampleCheckout) ? a.checktime : a.updated_at) <=> (b.is_a?(SampleCheckout) ? b.checktime : b.updated_at)) }
+    if current_user.admin?
+      @timeline_stream = @timeline_stream.paginate(:page => params[:page], :per_page => 30)
+    end
     @email_stream = SentEmail.accessible_by(current_ability).order("created_at DESC")
   end
 
