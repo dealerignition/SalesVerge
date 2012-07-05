@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   # Pass in identifiers for Totango
-  sp_default :user, proc { current_user.full_name }
-  sp_default :organization, proc { current_user.company.name }
-  
+  sp_default :user, proc { current_user.full_name if current_user.present? }
+  sp_default :organization, proc { current_user.company.name if current_user.present? }
+    
   layout 'main'
 
   def confirm_active

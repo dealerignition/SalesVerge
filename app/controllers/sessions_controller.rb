@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   skip_authorization_check
   layout "session"
+  
+  track :create, "logged in"
 
   def new
   end
