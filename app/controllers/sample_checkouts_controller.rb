@@ -4,11 +4,10 @@ class SampleCheckoutsController < ApplicationController
   load_and_authorize_resource
 
   track :create, "checked out a sample"
-  track :check_in, "checked a sample back in"
   
   def create
     @customer = Customer.find(params[:customer_id])
-    @sample_checkout_set = SampleCheckoutSet.create(:customer_id => @customer.id, :user_id => current_user.id)
+    @sample_checkout_set = SampleCheckoutSet.create(:customer_id => @customer.id, :user_id => current_user.id, :checkout_time => Time.now)
     sample_checkouts = []
     params[:sample_ids].split("|").each do |id|
       sample_checkouts.push(SampleCheckout.create :customer => @customer,
@@ -20,20 +19,6 @@ class SampleCheckoutsController < ApplicationController
     sample_checkout_set = @sample_checkout_set
     CustomerMailer.sample_checkout(sample_checkout_set).deliver
     flash[:notice] = "#{current_user.company.sample_name}(s) were successfully checked-out. An email was sent to #{@customer.email}."
-    redirect_to :back
-  end
-
-  def check_in
-    @sample_checkout_set = SampleCheckoutSet.find(params[:sample_checkout_set_id])
-    time = Time.now
-    @sample_checkout_set.sample_checkouts.each do |s|
-      s.checkin_time = time
-    end
-    if save
-      flash[:notice] = "#{current_user.company.sample_name} has been checked-in."
-    else
-      flash[:error] = "#{current_user.company.sample_name} has not been checked-in."
-    end
     redirect_to :back
   end
 

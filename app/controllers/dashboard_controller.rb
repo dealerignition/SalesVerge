@@ -19,7 +19,7 @@ class DashboardController < ApplicationController
                           .where(@date_range_string.gsub("updated_at", "quotes.updated_at"))
     @timeline_stream += SampleCheckoutSet.accessible_by(current_ability)
                           .includes(:customer, :sample_checkouts)
-                          .where(@date_range_string.gsub("checkin_time", "sample_checkout_sets.sample_checkouts.checkin_time"))
+                          .where(@date_range_string.gsub("checkin_time", "sample_checkout_set.checkin_time"))
     @timeline_stream += Note.accessible_by(current_ability)
                           .includes(:customer)
                           .where(@date_range_string.gsub("updated_at", "notes.updated_at"))

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120703124233) do
+ActiveRecord::Schema.define(:version => 20120706170233) do
 
   create_table "app_requests", :force => true do |t|
     t.string   "name"
@@ -141,6 +141,8 @@ ActiveRecord::Schema.define(:version => 20120703124233) do
     t.datetime "updated_at",             :null => false
     t.integer  "customer_id"
     t.integer  "user_id"
+    t.datetime "checkout_time"
+    t.datetime "checkin_time"
   end
 
   create_table "sample_checkouts", :force => true do |t|
@@ -148,10 +150,9 @@ ActiveRecord::Schema.define(:version => 20120703124233) do
     t.integer  "sample_id"
     t.datetime "checkout_time"
     t.datetime "checkin_time"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.integer  "user_id"
-    t.integer  "notifications_received", :default => 0
     t.integer  "sample_checkout_set_id"
   end
 

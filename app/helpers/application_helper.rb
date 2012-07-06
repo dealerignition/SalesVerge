@@ -34,7 +34,7 @@ module ApplicationHelper
         "#{ you_or_they(model.user_id) } started a <span class='quote'>quote</span> for #{model.customer.first_name} worth #{ number_to_currency(model.total) }".html_safe
       end
     elsif model.instance_of? SampleCheckoutSet
-      if model.sample_checkouts.first.checkin_time?
+      if model.checkin_time?
         "#{model.customer.first_name} <span class='sample'>checked-<span class='sample_in'>in</span></span> #{ sample_name_stream(model.sample_checkouts) }".html_safe
       else
         "#{model.customer.first_name} <span class='sample'>checked-<span class='sample_out'>out</span></span> #{ sample_name_stream(model.sample_checkouts) }".html_safe
