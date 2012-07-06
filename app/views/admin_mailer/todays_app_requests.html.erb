@@ -1,0 +1,24 @@
+<h1>App requests in the past 24 hours</h1>
+<h2>Ending at <%= Time.now.strftime("%m/%d at %l:%M %P") %>
+<% if @todays_app_requests.count > 0 %>
+  <table border="1" cellpadding="10" style="width:100%">
+    <tbody>
+      <tr>
+        <th>Email</th>
+        <th>Date / Time</th>
+        <th>App Name</th>
+      </tr>
+      <% @todays_app_requests.each do |r| %>
+        <tr>
+          <td><%= r.email %></td>
+          <td><%= r.created_at.strftime("%m/%d at %l:%M %P") %></td>
+          <td><%= r.app_name %></td>
+        </tr>
+      <% end %>  
+    </tbody>
+  </table>
+<% else %>
+  <hr>
+  <h2>No new app requests during this time period</h2>
+  <hr>
+<% end %>

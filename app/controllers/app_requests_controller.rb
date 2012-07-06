@@ -8,7 +8,6 @@ class AppRequestsController < ApplicationController
   def create
     @app_request = AppRequest.new(params[:app_request])
     if @app_request.save
-      AdminMailer.app_request(@app_request).deliver
       AnonymousMailer.app_request(@app_request).deliver
       flash[:notice] = "Thank you!"
     else

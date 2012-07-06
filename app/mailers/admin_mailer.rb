@@ -1,9 +1,9 @@
 class AdminMailer < ActionMailer::Base
   default from: "notifications@salesverge.com"
 
-  def app_request(app_request)
-    @app_request = app_request
-    mail(:to => "support@salesverge.com", :subject => "Invite request for #{@app_request.app_name}")
+  def todays_app_requests(todays_app_requests)
+    @todays_app_requests = todays_app_requests
+    mail(:to => "support@salesverge.com", :subject => "Daily invite requests in the last 24 hours")
   end
   
 end
