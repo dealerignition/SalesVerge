@@ -25,6 +25,7 @@ class Ability
 
         # Can manage company checkouts.
         can :manage, SampleCheckout, :customer_id => customer_ids
+        can :manage, SampleCheckoutSet, :customer_id => customer_ids
 
         # Can create anything.
         can :create, @models + [Customer, Sample, Charge]

@@ -24,9 +24,12 @@ class SampleCheckoutsController < ApplicationController
   end
 
   def check_in
-    @sample_checkout = SampleCheckout.find(params[:sample_checkout_id])
-    @sample_checkout.checkin_time = Time.now
-    if @sample_checkout.save
+    @sample_checkout_set = SampleCheckoutSet.find(params[:sample_checkout_set_id])
+    time = Time.now
+    @sample_checkout_set.sample_checkouts.each do |s|
+      s.checkin_time = time
+    end
+    if save
       flash[:notice] = "#{current_user.company.sample_name} has been checked-in."
     else
       flash[:error] = "#{current_user.company.sample_name} has not been checked-in."
