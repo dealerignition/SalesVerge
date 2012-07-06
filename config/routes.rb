@@ -54,7 +54,7 @@ SalesVerge::Application.routes.draw do
   end
 
   resources :samples
-  resources :sample_checkouts do
+  resources :sample_checkout_sets do
     get :check_in
   end
   resources :invitations do

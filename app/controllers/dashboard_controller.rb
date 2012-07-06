@@ -17,13 +17,13 @@ class DashboardController < ApplicationController
     @timeline_stream += Quote.accessible_by(current_ability)
                           .includes(:customer, :charges)
                           .where(@date_range_string.gsub("updated_at", "quotes.updated_at"))
-    @timeline_stream += SampleCheckout.accessible_by(current_ability)
-                          .includes(:customer, :sample)
-                          .where(@date_range_string.gsub("checkin_time", "sample_checkouts.checkin_time"))
+    @timeline_stream += SampleCheckoutSet.accessible_by(current_ability)
+                          .includes(:customer, :sample_checkouts)
+                          .where(@date_range_string.gsub("checkin_time", "sample_checkout_set.checkin_time"))
     @timeline_stream += Note.accessible_by(current_ability)
                           .includes(:customer)
                           .where(@date_range_string.gsub("updated_at", "notes.updated_at"))
-    @timeline_stream.sort! { |a,b| -((a.is_a?(SampleCheckout) ? a.checktime : a.updated_at) <=> (b.is_a?(SampleCheckout) ? b.checktime : b.updated_at)) }
+    @timeline_stream.sort! { |a,b| -((a.is_a?(SampleCheckoutSet) ? a.checktime : a.updated_at) <=> (b.is_a?(SampleCheckoutSet) ? b.checktime : b.updated_at)) }
     if current_user.admin?
       @timeline_stream = @timeline_stream.paginate(:page => params[:page], :per_page => 30)
     end

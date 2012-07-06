@@ -36,17 +36,17 @@
                         %span.badge.badge-success= number_to_currency(activity.total)
             - elsif activity.instance_of? Note
               %blockquote= activity.content
-            - elsif activity.instance_of? SampleCheckout
+            - elsif activity.instance_of? SampleCheckoutSet
               - if activity.checkin_time?
-                %p==#{activity.sample.name} has now been returned. It was checked-out for <strong>#{distance_of_time_in_words(activity.created_at, activity.checkin_time)}</strong>.
+                %p #{sample_name_stream(activity.sample_checkouts)} has now been returned. It was checked-out for <strong>#{distance_of_time_in_words(activity.checkout_time, activity.checkin_time)}</strong>.
             .btn-group
               - if activity.instance_of?(Note) && can?(:destroy, activity)
                 = link_to customer_note_path(activity.customer, activity.id), :class => "btn btn-danger", :confirm => "Are you sure you want to delete this note?", :method => :delete do
                   %i.icon-remove-circle.icon-white
                   Delete
-              - elsif activity.instance_of? SampleCheckout
+              - elsif activity.instance_of? SampleCheckoutSet
                 - if activity.checkin_time.blank?
-                  = link_to sample_checkout_check_in_path(activity), :class => "btn btn-primary", :confirm => "Are you sure #{activity.sample.name} has been returned to your store?" do
+                  = link_to sample_checkout_set_check_in_path(activity), :class => "btn btn-primary", :confirm => "Are you sure #{sample_name_stream(activity.sample_checkouts)} has been returned to your store?" do
                     Check-in
             - if activity.instance_of?(Quote) && (activity.status != "won" || activity.status != "lost")
               %p
@@ -60,8 +60,6 @@
                       View
                     Quote
                   = link_to "Email", quote_deliver_customer_mailer_path(activity), { :confirm => "Are you sure you want to email this quote to #{activity.customer.full_name} (#{activity.customer.email})?", :class => "btn btn-primary", :title => "Email this quote to the customer" }
-                  /= link_to "Won", quote_won_path(activity), :confirm => "Are you sure you want to mark this quote as 'Won'?", :class => "btn"
-                  /= link_to "Lost", quote_lost_path(activity), :confirm => "Are you sure you want to mark this quote as 'Lost'?", :class => "btn"
 
             - if @customer
               - customer = @customer
