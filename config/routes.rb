@@ -24,6 +24,7 @@ SalesVerge::Application.routes.draw do
   put "users/no_receive_nightly_digest" => "users#no_receive_nightly_digest"
 
   match '/login_as' => "sessions#login_as"
+  match '/mobile_infographic' => "about#mobile_infographic"
 
   resource :settings do
     get :send_email_preview
