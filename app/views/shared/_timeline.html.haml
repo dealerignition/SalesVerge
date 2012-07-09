@@ -9,7 +9,10 @@
         .accordion-inner
           .control-group
             %p
-              %i.help-block==#{activity.updated_at.to_formatted_s(:long_ordinal)}
+              - unless activity.instance_of? SampleCheckoutSet
+                %i.help-block==#{activity.updated_at.strftime("%B %e, %Y %l:%M %P")} EST
+              - else
+                %i.help-block==#{activity.checktime.strftime("%B %e, %Y %l:%M %P")} EST
             - unless @customer
               - customer = activity.instance_of?(Customer) ? activity : activity.customer
               %p

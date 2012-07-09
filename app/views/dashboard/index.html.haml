@@ -3,7 +3,7 @@
 - content_for :subnav do
   #timelinefilterbuttons.btn-group.pull-left{ "data-toggle" => "buttons-radio" }
     %button.btn.btn-large.btn-info#customer Customers
-    %button.btn.btn-large.btn-info#samplecheckout
+    %button.btn.btn-large.btn-info#samplecheckoutset
       =current_user.company.sample_name.pluralize
     %button.btn.btn-large.btn-info#quote Quotes
   - unless current_user.salesrep?
