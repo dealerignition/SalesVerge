@@ -9,7 +9,7 @@ namespace :db do
     db = YAML.load_file('config/database.yml')
     AWS.config(:access_key_id => aws["development"]["access_key_id"],:secret_access_key => aws["development"]["secret_access_key"])
     s3 = AWS::S3.new
-    backup = s3.buckets['dealeronthego_backups'].objects[Date.today.to_s + '.dump'].read
+    backup = s3.buckets['salesverge_backups'].objects[Date.today.to_s + '.dump'].read
     File.open("#{Date.today.to_s}.dump", 'wb') do |file|
       file.write(backup)
     end
