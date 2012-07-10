@@ -1,2 +1,61 @@
-%h1 Companys#edit
-%p Find me in app/views/companies/edit.html.haml
+- @title = "Scraping Configuration"
+
+- content_for :subnav do
+  .pull-left
+    - if current_user.admin?
+      = link_to admin_path, :class => "btn btn-inverse" do
+        %i.icon-arrow-left
+        Back to Admin
+.page-header
+  %h1 
+    Scraping Configuration for
+    = @company.name
+.row
+  .span12
+    = form_for @company, :html => { :class => "form-horizontal", :id => "company_form" } do |f|
+      %fieldset
+      %div.well
+        .control-group
+          .controls
+            - if @company.scraping_configured
+              - if @company.currently_scraping == true
+                %small.label.label-success
+                  Currently Scraping
+              - elsif @company.scraping_configured == true and @company.last_scrape == nil
+                %small.label.label-info
+                  Scrape Scheduled
+              - elsif @company.last_scrape != nil
+                %small.label.label-success
+                  = "#{Sample.where(['company_id = ?', @company.id]).length} Products Scraped"
+        .control-group
+          = f.label "Description", { :class => "control-label" }
+          .controls.selector
+            = f.select :description_type, ['id', 'class', 'custom']
+            = f.text_field :description_location, { :class => "span3" }
+        .control-group
+          = f.label "Name", { :class => "control-label" }
+          .controls.selector
+            = f.select :name_type, ['id', 'class', 'custom']
+            = f.text_field :name_location, { :class => "span3" }
+        .control-group
+          = f.label "Price", { :class => "control-label" }
+          .controls.selector
+            = f.select :price_type, ['id', 'class', 'custom']
+            = f.text_field :price_location, { :class => "span3" }
+        .control-group
+          = f.label "SKU #", { :class => "control-label" }
+          .controls.selector
+            = f.select :product_number_type, ['id', 'class', 'custom']
+            = f.text_field :product_number_location, { :class => "span3" }
+        .control-group
+          = f.label "Image", { :class => "control-label" }
+          .controls.selector
+            = f.select :image_type, ['id', 'class', 'custom']
+            = f.text_field :image_location, { :class => "span3" }
+        .control-group
+          = f.label "Scrape Frequency", { :class => "control-label" }
+          .controls.selector
+            = f.select :run_every_x_days, [['daily',1],['weekly',7],['monthly',30]]
+        .control-group
+          .controls
+            %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large", :form => "company_form" }

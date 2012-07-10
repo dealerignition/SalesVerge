@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
   before_filter :require_login
   before_filter :confirm_active
+  before_filter :admin_required, :only => :admin
   # TODO: Change this when dashboard is finished.
   skip_authorization_check
 
@@ -28,14 +29,26 @@ class DashboardController < ApplicationController
       @timeline_stream = @timeline_stream.paginate(:page => params[:page], :per_page => 30)
     end
     @email_stream = SentEmail.accessible_by(current_ability).order("created_at DESC")
- end
+  end
 
- def big_screen
-   limiter = 12
-   @customers = Customer.accessible_by(current_ability).order("created_at ASC").last(limiter)
-   @checked_out_samples = SampleCheckout.accessible_by(current_ability).find_all_by_checkin_time(nil).last(limiter)
-   @quotes = Quote.accessible_by(current_ability).order("created_at DESC").last(limiter)
-   render :layout => 'big_screen'
- end
+  def big_screen
+    limiter = 12
+    @customers = Customer.accessible_by(current_ability).order("created_at ASC").last(limiter)
+    @checked_out_samples = SampleCheckout.accessible_by(current_ability).find_all_by_checkin_time(nil).last(limiter)
+    @quotes = Quote.accessible_by(current_ability).order("created_at DESC").last(limiter)
+    render :layout => 'big_screen'
+  end
+
+  def admin
+    @users = User.find(:all, :order => 'last_sign_in ASC')
+  end
+ 
+  private
+ 
+  def admin_required
+    unless current_user.admin? 
+      redirect_to dashboard_path
+    end
+  end
 
 end

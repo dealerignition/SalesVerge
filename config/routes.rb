@@ -69,6 +69,8 @@ SalesVerge::Application.routes.draw do
   match '', to: 'about#floorstoreonthego', constraints: { subdomain: 'mk2' }
   match '', to: 'about#salesups', constraints: { subdomain: 'mk3' }
   
+  match "/admin" => "dashboard#admin"
+  
   root :to => 'dashboard#index', :as => "dashboard"
   match ":controller(/:action(/:id))(.:format)"
 end

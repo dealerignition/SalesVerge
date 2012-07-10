@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
     else
       if user = User.find_by_email(params[:email])
         auto_login(user)
-        flash[:notice] = "Logged in as #{params[:email]}"
+        flash[:notice] = "Logged in as #{params[:email]}. You will need to sign-out and log back in to return to your admin user."
       else
         flash[:alert] = "No such user"
       end
