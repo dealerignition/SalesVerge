@@ -55,7 +55,7 @@
           .controls
             = f.text_field :phone, :placeholder => "(555) 123-4567", :type => :tel
         .control-group
-          = f.label :avatar, { :class => "control-label" }
+          = f.label "Add Your Profile Picture", { :class => "control-label" }
           .controls
             = f.file_field :avatar
             - if @user.avatar_file_name

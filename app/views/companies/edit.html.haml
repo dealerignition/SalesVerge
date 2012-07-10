@@ -17,6 +17,8 @@
       %div.well
         .control-group
           .controls
+            %h3
+              = @company.website
             - if @company.scraping_configured
               - if @company.currently_scraping == true
                 %small.label.label-success
@@ -59,3 +61,7 @@
         .control-group
           .controls
             %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large", :form => "company_form" }
+            %br
+            %br
+            =link_to "Guide", "/settings/scraper_help", {:target => "_blank"}
+
