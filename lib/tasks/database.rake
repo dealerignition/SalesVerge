@@ -15,7 +15,10 @@ namespace :db do
     end
     puts `PGPASSWORD='#{db["development"]["password"]}' /Library/PostgreSQL/9.1/bin/pg_restore -h #{db["development"]["host"]} -U #{db["development"]["username"]} -d dotg_development --clean #{Date.today.to_s}.dump`
   end
+end
 
+namespace :db do
+  desc "Mirrors the database that is currently in production"
   task :mirror_current_prod do
     APPLICATION_NAME = "salesverge"
     db = YAML.load_file('config/database.yml')
