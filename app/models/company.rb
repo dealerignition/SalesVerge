@@ -26,7 +26,7 @@ class Company < ActiveRecord::Base
   def smart_add_url_protocol
     if self.website.present?
       unless self.website.downcase[/^http:\/\/[a-z]+\./] || self.website.downcase[/^https:\/\/[a-z]+\./]
-        self.website = 'http://www.' + self.website
+        self.website = 'http://' + self.website
       end
     end
     if self.facebook.present?
