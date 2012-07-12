@@ -1,5 +1,3 @@
-require 'csv'
-
 class CompaniesController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource :only => [:detatch_logo, :set_wants_website_scraped]

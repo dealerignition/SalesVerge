@@ -4,8 +4,10 @@
   .pull-left
     %input#js-customersearch.search-query{ :type => :search, :value => params[:query], :placeholder => "Find a customer..." }
   .pull-right
+    = link_to customers_getcsv_path, :class => 'btn btn-large border-fix', :target => '_blank' do
+      %i.icon-download-alt
     = link_to new_customer_path, { :id => "newCustomer", :class => "btn btn-success btn-large" } do
-      %i{ :class => "icon-plus icon-white" }
+      %i.icon-plus.icon-white
 
 = render 'tutorial'
 

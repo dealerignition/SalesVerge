@@ -48,4 +48,5 @@ class Customer < ActiveRecord::Base
     end
     nil
   end
+  
 end

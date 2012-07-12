@@ -1,6 +1,7 @@
 SalesVerge::Application.routes.draw do
   
   get "about" => "about#index"
+  get 'customers/getcsv' => 'customers#getcsv'
   put "app_requests/create" => "app_requests#create", :as => "create_app_requests"
   get "settings/account"
   get "settings/password"
