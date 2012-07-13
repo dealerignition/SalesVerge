@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
     "You can see extended information about your customers by going into Extras inside your Settings and subscribing to the Extended customer information feature.",
     "You can invite co-workers to join your company under the Users section in your Settings.", 
     "You can have us pull in the latest products from your website by tapping the Website Product Grabber under your Company Info settings.",
-    "You can upload your own avatar/photo in your Account Settings that will be used in email messages sent to your customers."
+    "You can upload your own profile picture in your Account Settings that will be used in email messages sent to your customers."
   ]
 
   def welcome_email(user)
