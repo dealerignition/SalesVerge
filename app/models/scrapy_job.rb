@@ -2,11 +2,11 @@ require 'redis'
 
 class ScrapyJob
   def self.run
-    if File.exists('scraper_running.rb')
+    if File::exists?('scraper_running.rb')
       return
     end
 
-    file = File.new('scraper_running.rb', 'r')
+    file = File.new('scraper_running.rb', 'w')
     file.close
 
     companies = Company.where("scraping_configured = true and (last_scrape is null or (date_part('day', age(now(), last_scrape)) > run_every_x_days))")
@@ -15,7 +15,7 @@ class ScrapyJob
       scrape(company)
     end
 
-    File.delete('scraper_running.rb')
+    File::delete('scraper_running.rb')
   end
 
   def self.scrape(company)
