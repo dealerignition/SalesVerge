@@ -1,6 +1,5 @@
 SalesVerge::Application.routes.draw do
   
-  get "about" => "about#index"
   get 'customers/getcsv' => 'customers#getcsv'
   put "app_requests/create" => "app_requests#create", :as => "create_app_requests"
   get "settings/account"
@@ -65,10 +64,6 @@ SalesVerge::Application.routes.draw do
   get "invitation/connect/:invitation_token" => "invitations#connect", :as => "invitation_connect"
 
   resources :sessions
-  
-  match '', to: 'about#salesverge', constraints: { subdomain: 'mk1' }
-  match '', to: 'about#floorstoreonthego', constraints: { subdomain: 'mk2' }
-  match '', to: 'about#salesups', constraints: { subdomain: 'mk3' }
   
   match "/admin" => "dashboard#admin"
   
