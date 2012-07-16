@@ -1,6 +1,7 @@
 SalesVerge::Application.routes.draw do
   
   get "about" => "about#index"
+  get 'customers/getcsv' => 'customers#getcsv'
   put "app_requests/create" => "app_requests#create", :as => "create_app_requests"
   get "settings/account"
   get "settings/password"
@@ -68,6 +69,8 @@ SalesVerge::Application.routes.draw do
   match '', to: 'about#salesverge', constraints: { subdomain: 'mk1' }
   match '', to: 'about#floorstoreonthego', constraints: { subdomain: 'mk2' }
   match '', to: 'about#salesups', constraints: { subdomain: 'mk3' }
+  
+  match "/admin" => "dashboard#admin"
   
   root :to => 'dashboard#index', :as => "dashboard"
   match ":controller(/:action(/:id))(.:format)"

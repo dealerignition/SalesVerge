@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     @user = current_user
     @user.avatar = nil
     if @user.save
-      flash[:notice] = "Avatar has been removed."
+      flash[:notice] = "Profile picture has been removed."
     end
     redirect_to settings_account_path
   end

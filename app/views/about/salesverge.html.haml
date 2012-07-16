@@ -2,13 +2,20 @@
   #hero
     #leather_bar
       .container
-        %h3= @app_name
+        .pull-left
+          = link_to image_tag('salesverge.png', :height => 40, :class => "logo"), "/"
+        .pull-right{ :style => ""}
+          %ul.nav.nav-pills{ :style => "margin-bottom: 0px" }
+            %li.active
+              = link_to "What is SalesVerge?", "/"
+            %li
+              = link_to "Blog", "http://salesvergemarketing.herokuapp.com/blog"
     .container
       .row{ :style => "margin-top: 50px;" }
-        .span6
+        %div.pull-left{ :style => "width: 500px; margin-left: 20px;" }
           %h1
-            We are building the next way to help retail sales people sell more.
-          %br
+            Turn in-store browsers into buyers.
+          %br  
           %h4 Sign-up be invited to join
           .controls
             .input-append
@@ -27,13 +34,13 @@
                 %a.close{ :href => "#", "data-dismiss" => "alert" }
                   &times;
                 = flash[:error]
-        .span6
+        %div.pull-right{ :style => "width: 400px" }
           .hidden-phone
             %iframe{ :src => "http://player.vimeo.com/video/44335339", :width => "400", :height => "230", "frameborder" => "0" }
   %br
   .container
     .row
-      .span12
+      .span12.center
         = image_tag "screens.png", :style => "margin:-60px 0 0 0;position: relative;"
     %br
     .row

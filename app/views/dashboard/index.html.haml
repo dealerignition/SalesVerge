@@ -9,8 +9,9 @@
   - unless current_user.salesrep?
     .hidden-phone.pull-right
       - if current_user.admin?
-        %a#login_as_button.btn.btn-inverse{ :href => "#" }
-          Login as...
+        = link_to admin_path, :class => "btn btn-inverse admin" do
+          %i.icon-bolt
+          Admin
       = link_to big_screen_path, :class => "btn border-fix" do
         %i.icon-eye-open
         Big Screen

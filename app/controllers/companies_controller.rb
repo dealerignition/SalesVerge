@@ -1,13 +1,15 @@
-require 'csv'
-
 class CompaniesController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource :only => [:detatch_logo, :set_wants_website_scraped]
   layout "session"
+  layout "main", :only => :edit
 
   def new
     @company = Company.new
     @user = User.new
+  end
+  
+  def edit
   end
 
   # Signing Up
@@ -42,7 +44,7 @@ class CompaniesController < ApplicationController
       if upload_products(params[:company][:file])
         flash[:notice] = "Products saved successfully."
       else
-        flash[:error] = "An error occurred while saving your products.  Are you sure your file is in the correct format?"
+        flash[:error] = "An error occurred while saving your products. Are you sure your file is in the correct format?"
       end
     end
     redirect_to :back

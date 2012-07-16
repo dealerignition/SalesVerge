@@ -1,0 +1,34 @@
+- @title = "Admin Dashboard"
+
+- content_for :subnav do
+  .pull-left
+    - if current_user.admin?
+      = link_to dashboard_path, :class => "btn btn-inverse" do
+        %i.icon-arrow-left
+        Back to Dashboard
+
+.page-header
+  %h1 
+    Admin
+.row
+  .span12
+    %h3 Users
+    %table.table.table-bordered.table-striped
+      %tr
+        %th Name
+        %th Email
+        %th Sign-in Count
+        %th Actions
+      - @users.each do |u|
+        %tr
+          %td= u.full_name
+          %td= u.email
+          %td= u.sign_in_count
+          %td
+            .btn-group
+              = link_to "/companies/#{u.company.id}/edit", :class => "btn" do
+                %i.icon-cogs
+                Configure Scraper
+              = link_to "/login_as?email=#{u.email}", :confirm => "Do you really want to login as #{u.full_name}", :class => "btn" do
+                %i.icon-user
+                Become User

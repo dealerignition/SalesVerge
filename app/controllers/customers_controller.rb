@@ -2,7 +2,7 @@ class CustomersController < ApplicationController
   before_filter :require_login
   before_filter :confirm_active
   load_and_authorize_resource
-  
+
   track :index, "visited the customer index page"
   track :show, "viewed a customer"
   track :new, "started a new customer"
@@ -10,7 +10,28 @@ class CustomersController < ApplicationController
   track :update, "updated a customer"
 
   def index
-    searchable_index(Customer, [:first_name, :last_name, :email])
+    respond_to do |format|
+      format.html {
+        searchable_index(Customer, [:first_name, :last_name, :email])
+      }
+      format.csv { 
+        @customers = Customer.accessible_by(current_ability).all
+        render text: @customers.export_to_csv
+      }
+    end
+  end
+  
+  def getcsv
+    @customers = Customer.accessible_by(current_ability).all
+    csv_string = CSV.generate do |csv|
+      csv << ['First Name', 'Last Name', 'Address 1', 'Address 2', 'City', 'State', 'Zip', 'Email', 'Phone']
+      @customers.each do |c|
+        csv << [c.first_name, c.last_name, c.address_1, c.address_2, c.city, c.state, c.zip, c.email, c.phone]
+      end
+    end
+    send_data csv_string, :type => "text/plain",
+   :filename => "customers.csv",
+   :disposition => 'attachment'
   end
 
   def show

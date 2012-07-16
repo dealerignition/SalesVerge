@@ -55,13 +55,13 @@
           .controls
             = f.text_field :phone, :placeholder => "(555) 123-4567", :type => :tel
         .control-group
-          = f.label :avatar, { :class => "control-label" }
+          = f.label "Add Your Profile Picture", { :class => "control-label" }
           .controls
             = f.file_field :avatar
             - if @user.avatar_file_name
               %br
               %p= image_tag @user.avatar.url(:thumb), :class => "avatar"
-              %p= link_to "Remove Avatar", user_detatch_avatar_path, :class => "btn btn-mini btn-danger", :confirm => "Are you sure you want to remove your avatar?", :method => "put"
+              %p= link_to "Remove Profile Picture", user_detatch_avatar_path, :class => "btn btn-mini btn-danger", :confirm => "Are you sure you want to remove your profile picture?", :method => "put"
             .visible-desktop
               %p.alert.alert-info
                 This image will be used in email messages sent to your customers.
