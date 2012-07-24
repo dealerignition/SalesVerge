@@ -4,11 +4,10 @@
       = image_tag('logo.png', :width => 227, :height => 81, :id => "logo")
     .span6.offset3.well
       %h1 
-        Register
-        %small.hidden-phone.hidden-tablet Setup your account to get started
+        Create your SalesVerge account
       %p 
-        Already Registered?
-        = link_to "Sign in", login_path, :class => "btn"
+        Already registered?
+        = link_to "Sign in", login_path
       %hr
 
       = render 'form_new'
