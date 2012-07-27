@@ -40,7 +40,9 @@ class DashboardController < ApplicationController
   end
 
   def admin
-    @users = User.find(:all, :order => 'last_sign_in ASC')
+    users_never_logged_in = User.where('sign_in_count = ?', 0).find(:all, :order => 'created_at DESC')
+    users_logged_in = User.where('sign_in_count > ?', 0).find(:all, :order => 'last_sign_in DESC')
+    @users = users_logged_in + users_never_logged_in
   end
  
   private

@@ -18,12 +18,17 @@
         %th Name
         %th Email
         %th Sign-in Count
+        %th Last Sign-in
         %th Actions
       - @users.each do |u|
         %tr
           %td= u.full_name
           %td= u.email
           %td= u.sign_in_count
+          - if u.last_sign_in
+            %td= time_ago_in_words(u.last_sign_in) + " ago"
+          - else
+            %td.muted never
           %td
             .btn-group
               = link_to "/companies/#{u.company.id}/edit", :class => "btn" do
