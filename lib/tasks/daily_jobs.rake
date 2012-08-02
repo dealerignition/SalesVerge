@@ -1,7 +1,5 @@
 desc "Daily jobs-Typically email summaries."
   task :daily_jobs => :environment do
-    
-    ScrapyJob.run
 
     puts "About to send daily_digest"
     User.send_daily_digest
