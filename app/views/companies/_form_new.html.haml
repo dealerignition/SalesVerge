@@ -22,6 +22,10 @@
       %div.controls
         = text_field :user, :email, :placeholder => "joe@mycarpet.com", :class => "span3"
     %div.control-group
+      = label :user, :phone, { :class => "control-label" }
+      %div.controls
+        = text_field :user, :phone, :placeholder => "321-555-1234", :class => "span3"    
+    %div.control-group
       = label :user, :password, { :class => "control-label" }
       %div.controls
         = password_field :user, :password, :class => "span3", :class => "span3"
