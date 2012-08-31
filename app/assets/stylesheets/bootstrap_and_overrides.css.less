@@ -7,7 +7,18 @@ body { margin: 60px 0 70px; }
 @media screen and (min-width: 1025px) {
   body { margin: 109px 0 70px; }
 }
-
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  margin-bottom: 5px;
+  line-height: inherit;
+}
+h3 {
+  font-size: 18px;
+}
+h6 {
+  text-transform: uppercase;
+  color: #999;
+}
 @import "twitter/bootstrap/responsive";
 
 // Set the correct sprite paths (commented out for use with Font Awesome)
@@ -41,7 +52,6 @@ body { margin: 60px 0 70px; }
 .table th, .table td {
   vertical-align: middle;
 }
-
 #alert-modal {
   position: fixed;
   z-index: 1029;
@@ -61,7 +71,6 @@ body { margin: 60px 0 70px; }
     border-bottom: 1px solid #f5fafd;
   }
 }
-
 #alert-modal-background {
   position: fixed;
   z-index: 500;
@@ -73,30 +82,24 @@ body { margin: 60px 0 70px; }
   .opacity(0);
   .transition(opacity 0.5s linear 0.5s);
 }
-
 [class^="icon-"], [class*=" icon-"] {
   margin-top: 3px !important;
 }
-
 form {
   margin: 0px;
 }
-
 .hero-unit {
   overflow: hidden;
 }
-
 .docs-input-sizes select, .docs-input-sizes input[type="text"] {
   display: block;
   margin-bottom: 9px;
 }
-
 .help-block {
   color:#c9c9c9;
   margin-bottom: 0;
   display: inline-block;
 }
-
 .dashboard {
   .nav {
     margin-bottom: 0px;
@@ -118,7 +121,6 @@ form {
 .modal {
   display: none;
 }
-
 .modal-body {
   max-height: 480px;
 }
@@ -127,7 +129,6 @@ form {
 .navbar-fixed-top {
   position: fixed;
 }
-
 .navbar-simple {
   color: #ffffff;
   z-index: 1030;
@@ -163,18 +164,15 @@ form {
     background-color: #000000;
   }
 }
-
 .navbar-simple .nav-pills .active a, .navbar-simple .nav-pills .active a:hover {
   background-color: #232323;
   .box-shadow(inset 0px 0px 20px 2px #000);
   .border-radius(0);
 }
-
 .navbar-simple .nav-pills li a {
   .border-radius(0);
   margin: 0;
 }
-
 #main_nav_top_bottom {
   position: fixed;
   top: 0;
@@ -182,7 +180,6 @@ form {
   right: 0;
   z-index: 1035;
 }
-
 #subnav {
   position: fixed;
   top: 50px;
@@ -195,7 +192,7 @@ form {
   #gradient > .vertical(#d7d9df, #bbbec8);
   border-bottom: 1px solid #8c91a2;
   .btn-large {
-    padding: 3px 14px;
+    padding: 5px 14px;
   }
   #js-customersearch {
     border: 1px solid #a5adbe;
@@ -221,16 +218,13 @@ input.full, textarea.full {
   font-size: 20px;
   padding: 8px;
 }
-
 .quick_edit {
   margin-bottom: 0px;
   width: 96%;
 }
-
 h1 small.hidden-phone {
   display: inline;
 }
-
 .well {
   .nav-stacked > li {
     background-color: #fff;

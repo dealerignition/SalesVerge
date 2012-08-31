@@ -5,7 +5,7 @@ div.spinner {
   display: inline-block;
 }
 div.spinner div {
-  width: 12%;
+  width: 11%;
   height: 26%;
   background: #000;
   position: absolute;
