@@ -6,19 +6,18 @@
       %i.icon-arrow-left.icon-white
       Customers
   .pull-right
-    %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large hide", :form => "customer_form", :id => "show" }
+    %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large hide", :form => "customer_form", :id => "show", :onclick => "return tog('load')" }
     %button#expandInfo.btn.btn-large.btn-info{ "data-toggle" => "button" }
       %i.icon-white.icon-info-sign
 
 .page-header
-  %h1
+  %h1.customer-details
     = @customer.first_name
     = @customer.last_name
     %small
       .truncate-long
         = @customer.email
 
-  %br
   .btn-group
     =link_to new_customer_quote_path(@customer), { :class => "btn btn-success btn-large" } do
       Quote

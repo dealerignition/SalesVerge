@@ -2,7 +2,7 @@
   - content_for :subnav do
     .pull-right
       - if current_user.owner?
-        %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large", :form => "company_form" }
+        %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large", :form => "company_form", :onclick => "return tog('load')" }
       - else   
         %input{ :type => :submit, :value => "Save", :class => "btn btn-primary btn-large disabled" }
 
@@ -42,7 +42,7 @@
       .controls
         = f.text_field :website, :placeholder => "awesomeproducts.com"
         - if current_user.owner?
-          %a#toggle_scraping_config{ :class => "btn", "data-toggle" => "button" }
+          %a#toggle_scraping_config.hide{ :class => "btn", "data-toggle" => "button" }
             Website Product Grabber
           #scraping_config.alert.alert-success.hide
             %h3 We'll search your website for you
