@@ -13,4 +13,4 @@
 = form_for(SampleCheckout.new, :url => customer_sample_checkouts_path(@customer)) do |f|
   %fieldset
     %input{ :name => :sample_ids, :type => :hidden }
-    = f.submit("Checkout #{current_user.company.sample_name}(s)", :class => "btn btn-primary btn-large hide", :id => "checkoutButton")
+    = f.submit("Checkout #{current_user.company.sample_name}(s)", :class => "btn btn-primary btn-large hide", :id => "checkoutButton", :onclick => "return tog('load')")
