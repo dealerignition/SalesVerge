@@ -44,7 +44,7 @@
   <%- if @quotes && @quotes.count > 0 %>
     <br />
     <p>
-      <h3>Quotes Today | <%= link_to "View All Quotes", url_for(:controller => "quotes", :action => "index", :only_path => false) %> &rarr;</h3>
+      <h3>Quotes Today | <%= link_to "View Dashboard", url_for(:controller => "dashboard", :action => "index", :only_path => false) %> &rarr;</h3>
       <table cellspacing="0" cellpadding="0" width="100%" class="tablebordered">
         <thead>
           <th class="left">Customer</th>
