@@ -14,6 +14,10 @@
       .controls
         = f.text_field :email, :placeholder => "joe@email.com"
     .control-group
+      = f.label :phone, { :class => "control-label" }
+      .controls
+        = f.text_field :phone, :placeholder => "321-555-1234"
+    .control-group
       = f.label :password, { :class => "control-label" }
       .controls
         = f.password_field :password
