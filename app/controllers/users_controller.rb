@@ -6,30 +6,41 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @invitation = Invitation.find_by_token(params[:invitation_token])
-    redirect_to :signup unless @invitation
-    session[:invitation_token] = @invitation.token
-    @user.email = @invitation.recipient_email
+    if !@invitation.present?
+      flash[:error] = "Could not find that invitation."
+      redirect_to login_url
+    elsif
+      @invitation.status == "accepted"
+      flash[:error] = "This invitation is no longer valid. Please try to login or request another invite."
+      redirect_to login_url      
+    else
+      session[:invitation_token] = @invitation.token
+      @user.email = @invitation.recipient_email
+    end
   end
 
   def create
-    @user = User.new params[:user]
-    @user.role = "user"
-    @user.receives_nightly_digest = false
-
-    @invitation = Invitation.find_by_token session[:invitation_token]
-    redirect_to :signup unless @invitation
-    if @user.save
-      CompanyUser.create(
-        :user => @user,
-        :company => @invitation.sender.company,
-        :role => "salesrep"
-      )
-      @invitation.update_attribute :status, "accepted"
-      auto_login(@user)
-      remember_me!
-      redirect_to :dashboard
+    @invitation = Invitation.find_by_token(session[:invitation_token])
+    unless @invitation
+      flash[:error] = "Could not find that invitation."
+      redirect_to login_url
     else
-      render :new
+      @user = User.new params[:user]
+      @user.role = "user"
+      @user.receives_nightly_digest = false
+      if @user.save
+        CompanyUser.create(
+          :user => @user,
+          :company => @invitation.sender.company,
+          :role => "salesrep"
+        )
+        @invitation.update_attribute :status, "accepted"
+        auto_login(@user)
+        remember_me!
+        redirect_to :dashboard
+      else
+        render :new
+      end
     end
   end
 
