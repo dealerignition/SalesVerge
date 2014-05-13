@@ -56,15 +56,15 @@ module SalesVerge
 
     # Enable the asset pipeline
     config.assets.enabled = true
-    config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
+    config.assets.version = '1.1'
 
     config.action_mailer.raise_delivery_errors = true
 
     config.cache_store = :dalli_store
-    
+
     Totango.srv_id 'SP-2236-01'
 
   end
